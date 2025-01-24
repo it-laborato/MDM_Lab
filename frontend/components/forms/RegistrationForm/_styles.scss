@@ -4,17 +4,30 @@
   align-items: stretch;
   margin-top: $pad-large;
   min-height: 950px;
+  position: relative; // Added for proper container positioning
 
   &__container {
     @include size(500px auto);
-    @include position(absolute, 49% 0 null null);
-    transition: left 300ms ease, opacity 300ms ease;
+    position: fixed; // Changed from absolute
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 300ms ease;
     border-radius: 10px;
     background-color: $ui-off-white;
     box-sizing: border-box;
     padding: $pad-xxlarge;
     z-index: 1;
-    transform: translateY(-50%);
+    width: 500px;
+    margin: 0 auto;
+    opacity: 0;
+    visibility: hidden;
+
+    // Active state for visible container
+    &--active {
+      opacity: 1;
+      visibility: visible;
+    }
 
     h2 {
       font-size: $large;
@@ -31,28 +44,15 @@
       margin: 0;
     }
 
-    &--admin {
-      left: 0;
-      top: unquote("max(60%, 625px)");
-      margin: auto;
-    }
-
-    &--org {
-      left: calc(100% + 220px);
-      top: unquote("max(60%, 480px)");
-      display: none;
-    }
-
-    &--fleet {
-      left: calc(150% + 220px);
-      top: unquote("max(60%, 480px)");
-      display: none;
-    }
-
+    // Modified position classes
+    &--admin,
+    &--org,
+    &--mdmlab,
     &--confirmation {
-      left: calc(200% + 220px);
-      top: unquote("max(60%, 480px)");
-      display: none;
+      // Reset individual positioning
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     &--complete {
@@ -76,84 +76,50 @@
       transform: translateY(-100px);
     }
 
+    // Updated transition states
+    &--step1-active {
+      .user-registration__container--admin {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
     &--step1-complete {
       .user-registration__container--admin {
-        left: -600px;
-        display: none;
+        opacity: 0;
+        visibility: hidden;
       }
-
       .user-registration__container--org {
-        left: 0;
-        margin: auto;
-        display: block;
-      }
-
-      .user-registration__container--fleet {
-        left: calc(100% + 220px);
-        display: none;
-      }
-
-      .user-registration__container--confirmation {
-        left: calc(150% + 220px);
-        display: none;
+        opacity: 1;
+        visibility: visible;
       }
     }
 
     &--step2-complete {
-      .user-registration__container--admin {
-        left: calc(-50% - 600px);
-        display: none;
-      }
-
       .user-registration__container--org {
-        left: -600px;
-        display: none;
+        opacity: 0;
+        visibility: hidden;
       }
-
-      .user-registration__container--fleet {
-        left: 0;
-        margin: auto;
-        display: block;
-      }
-
-      .user-registration__container--confirmation {
-        left: calc(100% + 220px);
-        display: none;
+      .user-registration__container--mdmlab {
+        opacity: 1;
+        visibility: visible;
       }
     }
 
     &--step3-complete {
-      .user-registration__container--admin {
-        left: calc(-100% - 600px);
-        display: none;
+      .user-registration__container--mdmlab {
+        opacity: 0;
+        visibility: hidden;
       }
-
-      .user-registration__container--org {
-        left: calc(-50% - 600px);
-        display: none;
-      }
-
-      .user-registration__container--fleet {
-        left: -600px;
-        display: none;
-      }
-
       .user-registration__container--confirmation {
-        left: 0;
-        margin: auto;
-        display: block;
+        opacity: 1;
+        visibility: visible;
       }
     }
 
     &::before {
       left: auto;
       right: 50%;
-    }
-
-    &--step1-active {
-      &::before {
-        display: none;
-      }
     }
   }
 
@@ -181,7 +147,7 @@
 
     .button {
       width: 160px;
-      margin-top: $pad-medium; // 40px total (24px gap + 16px more)
+      margin-top: $pad-medium;
     }
   }
 }
