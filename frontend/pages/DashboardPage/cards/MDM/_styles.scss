@@ -1,0 +1,45 @@
+.home-mdm {
+  margin-top: $pad-large;
+  position: relative;
+  height: 100%; // centers loading spinner
+
+  .component__tabs-wrapper .table-container__header {
+    display: none;
+  }
+
+  &__mdm-status-table {
+    .data-table-block {
+      .data-table__table {
+        thead {
+          .status__header {
+            width: 30%;
+          }
+
+          .hosts__header {
+            border-right: 0;
+            padding-right: 0;
+            width: 60px;
+          }
+
+          .linkToFilteredHosts__header {
+            width: 140px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      .mdm-solution-link {
+        opacity: 0;
+        transition: 250ms;
+        text-overflow: none;
+      }
+      tr:hover {
+        .mdm-solution-link {
+          opacity: 1;
+        }
+      }
+    }
+
+  }
+}

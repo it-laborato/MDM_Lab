@@ -1,0 +1,211 @@
+.target-select {
+  &__label {
+    font-size: $x-small;
+    color: $core-fleet-black;
+    display: block;
+    margin: 0;
+    text-align: right;
+
+    &--error {
+      .target-select__select-targets {
+        color: $ui-error;
+      }
+    }
+  }
+
+  &__select-targets {
+    float: left;
+    font-weight: $bold;
+  }
+
+  &__targets-count {
+    font-size: $x-small;
+    font-weight: $regular;
+    color: $core-fleet-black;
+  }
+
+  &.Select {
+    border-radius: $border-radius;
+    border: 1px solid $ui-fleet-black-10;
+
+    &.is-focused,
+    &:hover {
+      border: 1px solid $core-vibrant-blue;
+    }
+
+    .Select-control {
+      min-height: 48px;
+      background-color: $ui-light-grey;
+    }
+
+    .Select-arrow {
+      content: url("../assets/images/icon-chevron-black-16x16@2x.png");
+      height: 16px;
+      width: 16px;
+      margin-left: 6px;
+      border: none;
+
+      .Select-arrow-zone {
+        &:hover {
+          .Select-arrow {
+            border-top-color: transparent;
+          }
+        }
+      }
+    }
+
+    &:hover,
+    &.is-open {
+      .Select-arrow {
+        content: url("../assets/images/icon-chevron-blue-16x16@2x.png");
+        margin-left: 6px;
+      }
+    }
+
+    .Select-input {
+      height: 53px;
+      margin: 0;
+      padding: 0 0 0 10px;
+
+      > input {
+        line-height: 53px;
+        color: $core-fleet-black;
+        font-size: $small;
+      }
+    }
+
+    .Select-placeholder {
+      line-height: 53px;
+      font-size: $small;
+      color: $ui-fleet-black-50;
+    }
+
+    &.Select--multi {
+      .Select-option {
+        padding: 0;
+
+        &.is-disabled {
+          &.is-focused {
+            background-color: $ui-vibrant-blue-10;
+            border-radius: 8px;
+          }
+        }
+
+        &:last-child {
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+  }
+
+  .Select-menu-outer {
+    max-height: 500px;
+    height: 500px;
+    overflow: hidden;
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.15);
+
+    .Select-menu {
+      height: 498px;
+      max-height: 498px;
+      overflow: scroll;
+      position: relative;
+
+      &::after {
+        @extend %fleeticon;
+        content: "\f03c";
+        font-size: 150px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -75px;
+        opacity: 0.25;
+        width: 50%;
+        text-align: center;
+      }
+    }
+
+    .target-list {
+      height: 100%;
+    }
+  }
+
+  .Select-value {
+    border-radius: $border-radius;
+    background-color: $core-white;
+
+    .Select-value-icon {
+      height: 100%;
+
+      &::after {
+        content: url("../assets/images/icon-close-mdmlab-blue-16x16@2x.png");
+        transform: scale(0.5);
+        border-radius: 0px;
+        margin-top: 4px;
+      }
+
+      &:hover {
+        &::after {
+          content: url("../assets/images/icon-close-vibrant-blue-16x16@2x.png");
+          transform: scale(0.5);
+        }
+      }
+    }
+
+    .Select-value-label {
+      font-size: $small;
+      color: $ui-fleet-black-75;
+      font-size: $x-small;
+      padding: 0 0 0 $pad-medium;
+      line-height: 34px;
+    }
+  }
+
+  .Select-clear {
+    content: url("../assets/images/icon-close-mdmlab-blue-16x16@2x.png");
+    width: 16px;
+    height: 16px;
+    border-radius: 0px;
+    margin-left: -4px;
+    margin-top: 6px;
+
+    &:hover {
+      content: url("../assets/images/icon-close-vibrant-blue-16x16@2x.png");
+      width: 16px;
+      height: 16px;
+      border-radius: 0px;
+    }
+  }
+
+  .Select-clear-zone {
+    width: 30px;
+  }
+
+  .Select-arrow-zone {
+    width: 30px;
+    margin-right: 5px;
+  }
+
+  .Select-loading-zone {
+    margin-right: 10px;
+  }
+
+  &.is-empty {
+    .Select-menu-outer {
+      .Select-menu {
+        &::after {
+          content: "\f049";
+          font-size: 180px;
+          margin-top: -90px;
+          color: $ui-gray;
+        }
+      }
+    }
+  }
+
+  &.is-disabled {
+    .Select-value-label {
+      padding: 0 $pad-medium;
+    }
+  }
+}

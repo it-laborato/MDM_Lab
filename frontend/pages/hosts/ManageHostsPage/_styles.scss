@@ -1,0 +1,267 @@
+.manage-hosts {
+  .header-wrap {
+    @include normalize-team-header;
+    margin-bottom: $pad-medium;
+
+    .button-wrap {
+      display: flex;
+      justify-content: flex-end;
+      min-width: 266px;
+    }
+  }
+
+  .ace-fleet {
+    margin-bottom: $pad-medium;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    min-width: 125px;
+
+    .form-field {
+      margin-bottom: 0;
+    }
+  }
+
+  &__text {
+    margin-right: $pad-large;
+  }
+
+  &__title {
+    font-size: $large;
+
+    .fleeticon {
+      color: $core-fleet-blue;
+      margin-right: 15px;
+    }
+
+    .fleeticon-success-check {
+      color: $ui-success;
+    }
+
+    .fleeticon-offline {
+      color: $ui-error;
+    }
+  }
+
+  &__label-actions {
+    button {
+      &:first-child {
+        margin-right: $pad-medium;
+      }
+    }
+  }
+
+  &__label-block {
+    .title {
+      display: flex;
+      align-items: center;
+      span {
+        font-size: $x-small;
+        font-weight: $bold;
+      }
+      button {
+        margin-left: $pad-small;
+        padding: 0;
+        height: auto;
+
+        img {
+          margin: 0;
+        }
+      }
+    }
+    .description {
+      span {
+        vertical-align: text-top;
+        font-size: $x-small;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__toggle-view {
+    .fleeticon {
+      width: 24px;
+      height: 24px;
+      margin-left: 12px;
+      fill: $ui-gray;
+    }
+
+    &--active {
+      .fleeticon {
+        fill: $core-fleet-purple;
+      }
+    }
+  }
+
+  .table-container {
+    padding-top: $pad-small;
+
+    &__header-left {
+      .controls {
+        display: flex;
+        align-items: center;
+
+        .manage-hosts__filter-dropdowns {
+          display: flex;
+          flex-direction: row;
+          margin-left: $pad-medium;
+          align-items: center;
+
+          // Dropdown height matches search bar height
+          .manage-hosts__status-filter {
+            .Select-control,
+            .Select-input {
+              height: 33px;
+            }
+            .Select-value {
+              line-height: 40px;
+            }
+          }
+        }
+      }
+    }
+
+    // table header content responsive styles
+    @media (max-width: $table-controls-break) {
+      &__header {
+        flex-direction: column;
+      }
+
+      .table-container__search {
+        order: 1;
+        width: 100%;
+        margin-bottom: $pad-small;
+
+        .table-container__search-input {
+          margin-left: 0;
+
+          .input-with-icon {
+            width: 100%;
+          }
+
+          & .search-field__input-wrapper {
+            width: auto;
+          }
+        }
+      }
+
+      &__header-left {
+        order: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        .results-count {
+          order: 2;
+        }
+
+        .controls {
+          order: -2;
+          margin-bottom: $pad-small;
+
+          .manage-hosts__filter-dropdowns {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+
+            .form-field--dropdown,
+            .manage-hosts__label-filter-dropdown {
+              flex: 1;
+            }
+
+            .manage-hosts__status-filter {
+              width: auto;
+            }
+          }
+        }
+      }
+    }
+
+    .table-container__data-table-block {
+      .data-table-block {
+        .data-table {
+          &__wrapper {
+            overflow-x: auto;
+          }
+          &__table {
+            tbody {
+              .issues {
+                &__cell {
+                  display: flex;
+                  align-items: center;
+                  gap: $pad-small;
+                  .issue-cell__icon {
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+
+              .device_mapping__cell,
+              .mdm_enrollment_status__cell,
+              .mdm_server_url__cell,
+              .public_ip__cell,
+              .issues__cell {
+                .text-cell {
+                  display: inline;
+                }
+                .text-muted {
+                  color: $ui-fleet-black-50;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .form-field--dropdown {
+    margin: 0;
+  }
+
+  &__status-filter {
+    width: 175px;
+
+    @media (min-width: $table-controls-break) {
+      width: 190px;
+    }
+
+    .Select-menu-outer {
+      width: 364px;
+      max-height: min-content;
+
+      .Select-menu {
+        max-height: none;
+      }
+    }
+    .Select-value {
+      padding-left: $pad-medium;
+      padding-right: $pad-medium;
+    }
+    .Select-value-label {
+      padding-left: $pad-large;
+      font-size: $small !important;
+    }
+  }
+
+  &__label-filter-dropdown {
+    margin-left: $pad-small;
+  }
+
+  &__enroll-hosts {
+    padding: $pad-small;
+    margin-right: $pad-small;
+  }
+
+  &__info-banners {
+    padding-top: $pad-xxlarge;
+    padding-bottom: $pad-large;
+  }
+
+  &__export-btn {
+    margin-left: $pad-xsmall;
+  }
+}

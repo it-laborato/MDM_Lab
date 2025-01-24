@@ -1,0 +1,99 @@
+.software-card {
+  .card-header {
+    font-weight: $bold;
+    margin: 0 0 $pad-large 0;
+  }
+
+  .table-container__search-input {
+    width: 325px; // Custom to fit placeholder text
+  }
+
+  .host-software-table {
+    &__software-filter {
+      min-width: 235px;
+    }
+
+    .data-table-block {
+      .data-table__table {
+        thead {
+          .status__header {
+            display: table-cell;
+          }
+          .source__header {
+            display: table-cell;
+          }
+          .Vulnerabilities__header {
+            display: table-cell;
+          }
+          // this is called `id` only due to typing concerns in the table config – it is for the
+          // "Show details" column
+          .id__header {
+            width: px-to-rem(90);
+          }
+          @media (max-width: $break-xl) {
+            .source__header {
+              display: none;
+              width: 0;
+            }
+          }
+          @media (max-width: $break-lg) {
+            .Vulnerabilities__header {
+              display: none;
+              width: 0;
+            }
+          }
+          @media (max-width: $break-sm) {
+            .status__header {
+              display: none;
+              width: 0;
+            }
+          }
+        }
+        tbody {
+          tr {
+            .status__cell {
+              display: table-cell;
+            }
+            .source__cell {
+              display: table-cell;
+            }
+            .Vulnerabilities__cell {
+              display: table-cell;
+            }
+            @media (max-width: $break-xl) {
+              .source__cell {
+                display: none;
+                width: 0;
+              }
+            }
+            @media (max-width: $break-lg) {
+              .Vulnerabilities__cell {
+                display: none;
+                width: 0;
+              }
+            }
+            @media (max-width: $break-sm) {
+              .status__cell {
+                display: none;
+                width: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.device-software {
+  .card-header {
+    font-weight: $regular;
+    margin: 0 0 $pad-small 0;
+  }
+
+  .card-subheader {
+    margin: 0 0 $pad-large 0;
+    color: $ui-fleet-black-75;
+    font-size: $x-small;
+  }
+}

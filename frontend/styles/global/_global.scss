@@ -1,0 +1,236 @@
+html {
+  position: relative;
+  height: 100%;
+  // Because iOS hates us we must fight to the death!
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  // End Apple War
+}
+
+body {
+  color: $core-fleet-black;
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: $medium;
+  height: 100%;
+}
+
+html,
+body {
+  height: 100%;
+
+  .__react_component_tooltip {
+    text-align: center;
+    padding: 6px;
+    max-width: 320px;
+    height: auto;
+
+    &.show {
+      opacity: 1; // Overrides 0.9 default opacity
+    }
+  }
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+p {
+  // Desired default line-height for text is 1.5x the font size for paragrah text.
+  // This allows for a comfortable reading experience by adding space between
+  // multiline paragraphs.
+  line-height: 1.5;
+  font-size: $x-small;
+}
+
+h1 {
+  font-size: $large;
+  font-weight: $regular;
+  letter-spacing: -0.5px;
+  color: $core-fleet-black;
+  margin: 0;
+}
+
+a {
+  @include link;
+}
+
+b {
+  font-weight: $bold;
+}
+
+.__react_component_tooltip {
+  a {
+    color: $core-white;
+  }
+}
+
+.has-sidebar {
+  display: flex;
+  flex-grow: 1;
+
+  & > *:first-child {
+    flex-grow: 1;
+  }
+}
+
+.cf {
+  @include clearfix;
+}
+
+form,
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $large;
+  align-items: flex-start;
+
+  > * {
+    width: 100%;
+  }
+
+  .button-wrap {
+    margin: 0;
+    margin-top: $pad-medium; // 24px gap between form fields + this additional 16px = style-guide specified 40px between form submit and above field
+    display: flex;
+    gap: $pad-medium;
+  }
+
+  .button {
+    width: auto;
+    &--text-icon {
+      @include form-button-extra-clickable-area-compensation;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .info-banner {
+    box-sizing: border-box;
+  }
+}
+
+.form-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $pad-small;
+
+  &__label {
+    font-size: $x-small;
+    font-weight: $bold;
+    color: $core-fleet-black;
+
+    // compensate for height added by tooltip wrapper underline
+    .component__tooltip-wrapper__underline {
+      margin-top: -2.5px;
+      padding-bottom: 0;
+    }
+
+    &--error {
+      color: $core-vibrant-red;
+    }
+  }
+
+  &__help-text {
+    @include help-text;
+
+    .custom-link {
+      font-size: inherit;
+      .icon {
+        scale: 0.88;
+      }
+      &__no-wrap {
+        // adjust for multi-line custom links
+        .icon {
+          padding-left: 4px;
+          position: relative;
+          top: 2px;
+        }
+      }
+    }
+    code {
+      color: $core-vibrant-blue;
+      background-color: $ui-light-grey;
+      padding: $pad-xxsmall;
+      font-family: "SourceCodePro", $monospace;
+    }
+  }
+
+  &--checkbox {
+    // flex properties only have an effect when checkbox help text is present
+    display: flex;
+    flex-direction: column;
+    gap: $pad-small;
+  }
+
+  &--slider {
+    margin-bottom: 0;
+  }
+}
+
+input,
+textarea,
+button {
+  font-family: "Inter", sans-serif;
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset;
+    -webkit-text-fill-color: $core-fleet-black !important; //sass-lint:disable-line no-important
+  }
+}
+
+input {
+  &[type="number"] {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+// syntax highlighting for pretty-printed JSON
+pre {
+  padding: $pad-large;
+  background-color: $core-fleet-black;
+  color: $core-white;
+  border-radius: 4px;
+  white-space: pre-wrap;
+
+  .string {
+    color: $rainbow-green;
+  }
+  .number {
+    color: $rainbow-orange;
+  }
+  .boolean {
+    color: $rainbow-blue;
+  }
+  .null {
+    color: magenta;
+  }
+  .key {
+    color: $core-white;
+  }
+}
+
+hr {
+  margin-top: $pad-xlarge;
+  margin-bottom: $pad-xlarge;
+  border: none;
+  border-bottom: 1px solid $ui-fleet-black-10;
+}
+
+dl {
+  margin: 0;
+  padding: 0;
+}
+
+dd {
+  margin: 0;
+}

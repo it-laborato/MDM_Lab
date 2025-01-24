@@ -1,0 +1,63 @@
+name: users
+platforms:
+  - darwin
+  - windows
+  - linux
+  - chrome
+examples: |-
+  List users that have interactive access via a shell that isn't false.
+  
+  ```
+  SELECT * FROM users WHERE shell!='/usr/bin/false';
+  ```
+columns:
+  - name: gid
+    platforms:
+      - darwin
+      - windows
+      - linux
+  - name: uid_signed
+    platforms:
+      - darwin
+      - windows
+      - linux
+  - name: gid_signed
+    platforms:
+      - darwin
+      - windows
+      - linux
+  - name: description
+    platforms:
+      - darwin
+      - windows
+      - linux
+  - name: directory
+    platforms:
+      - darwin
+      - windows
+      - linux
+  - name: shell
+    platforms:
+      - darwin
+      - windows
+      - linux
+  - name: uuid
+  - name: email
+    required: false
+    type: text
+    description: Email
+    platforms:
+      - chrome
+  - name: type
+    platforms:
+      - windows
+  - name: is_hidden
+    platforms:
+      - darwin
+  - name: pid_with_namespace
+    platforms:
+      - linux
+  - name: username
+    description: Username
+notes: |-
+  - On ChromeOS, this table requires the [fleetd Chrome extension](https://fleetdm.com/docs/using-fleet/chromeos).

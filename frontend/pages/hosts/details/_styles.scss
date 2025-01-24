@@ -1,0 +1,165 @@
+.host-details,
+.device-user {
+  .react-tabs__tab-panel--selected {
+    margin-top: $pad-medium;
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: $pad-medium;
+
+  @include color-contrasted-sections;
+  .header {
+    flex: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card {
+    &__header {
+      font-size: $medium;
+      font-weight: $bold;
+      margin: 0 0 $pad-medium 0;
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      &__item {
+        margin-bottom: 12px;
+        display: flex;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .results {
+      margin: 0;
+      width: 350px;
+
+      &__header {
+        margin: 0 0 $pad-medium 0;
+        font-size: $small;
+        color: $core-fleet-black;
+        font-weight: $bold;
+      }
+
+      &__data {
+        margin: 0;
+        font-size: $x-small;
+      }
+    }
+  }
+
+  .title {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding-bottom: 0;
+
+    .display-name-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .display-name {
+      font-size: $large;
+      font-weight: $bold;
+    }
+  }
+
+  &__tabs-wrapper {
+    background-color: $ui-off-white;
+    width: 100%;
+
+    // direct descendant of selector allows us to only change the first level of
+    // tab styling and not change the tabs inside the cards.
+    > .react-tabs > .react-tabs__tab-list {
+      .react-tabs__tab {
+        padding: 6px 0px 16px 0px;
+        margin-right: $pad-xxlarge;
+      }
+      .react-tabs__tab--selected {
+        background-color: $ui-off-white;
+
+        // When tabbing through the app
+        &:focus-visible {
+          background-color: $ui-vibrant-blue-10;
+        }
+      }
+    }
+  }
+
+  .col-50 {
+    flex: 2;
+  }
+
+  .col-25 {
+    flex: 1;
+  }
+
+  .status {
+    color: $core-fleet-black;
+    text-transform: capitalize;
+
+    &--online {
+      &:before {
+        background-color: $ui-success;
+        border-radius: 100%;
+        content: " ";
+        display: inline-block;
+        height: 8px;
+        margin-right: $pad-small;
+        width: 8px;
+      }
+    }
+
+    &--offline {
+      &:before {
+        background-color: $ui-fleet-black-50;
+        border-radius: 100%;
+        content: " ";
+        display: inline-block;
+        height: 8px;
+        margin-right: $pad-small;
+        width: 8px;
+      }
+    }
+  }
+
+  .form-field--dropdown {
+    margin: 0;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 25px;
+
+    span {
+      font-weight: $regular;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .empty-table {
+    &__container {
+      margin: $pad-xxlarge 0; // Equal padding above and below empty states
+      min-height: initial;
+    }
+  }
+}
+
+// we dont need the margin on the host details page as we are not using grid css
+// for the spacing.
+.host-details__tabs-wrapper .card {
+  margin-top: 0;
+}

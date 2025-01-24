@@ -1,0 +1,111 @@
+.confirm-user-reg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    text-align: center;
+  }
+  .help-text {
+    @include help-text;
+  }
+
+  &__wrapper {
+    width: auto;
+  }
+
+  &__icon {
+    color: $ui-success;
+    font-size: 120px;
+    display: block;
+    text-align: center;
+    margin: 10px 0 35px;
+  }
+
+  &__submit {
+    bottom: 0;
+    top: auto;
+    position: absolute;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    &:active {
+      top: auto;
+    }
+  }
+
+  &__table {
+    width: 100%;
+
+    caption {
+      font-size: $small;
+      font-weight: $bold;
+      margin-bottom: $pad-large;
+      text-align: left;
+    }
+
+    tr {
+      vertical-align: bottom;
+    }
+
+    th {
+      font-size: $small;
+      font-weight: $bold;
+      text-align: left;
+      padding-right: 20px;
+    }
+
+    td {
+      font-size: $small;
+      font-weight: $regular;
+    }
+  }
+
+  &__table-email {
+    max-width: 292px;
+    word-wrap: break-word;
+  }
+
+  &__table-url {
+    display: inline-block;
+    max-width: 292px;
+    word-wrap: break-word;
+    font-family: "SourceCodePro", $monospace;
+    vertical-align: bottom;
+    font-weight: $bold;
+  }
+
+  &__import {
+    user-select: none;
+    font-size: $x-small;
+    font-weight: $regular;
+    line-height: 1.71;
+    letter-spacing: 0.5px;
+    color: $core-fleet-black;
+    margin: 30px 0 0;
+
+    .fleet-checkbox {
+      display: block;
+
+      &__label {
+        padding: 0;
+      }
+    }
+
+    p {
+      margin: 0;
+      padding-left: $pad-xxlarge;
+    }
+
+    .fleet-checkbox__input {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+
+  .button {
+    width: 160px;
+    margin-top: $pad-xxlarge;
+  }
+}

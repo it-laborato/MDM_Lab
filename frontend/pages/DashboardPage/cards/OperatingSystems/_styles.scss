@@ -1,0 +1,39 @@
+.operating-systems {
+  margin-top: $pad-large;
+  position: relative;
+
+  .data-table__wrapper {
+    overflow-x: auto;
+  }
+
+  .hosts-cell__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .os-hosts-link {
+    opacity: 0;
+    transition: 250ms;
+  }
+
+  tr:hover {
+    .os-hosts-link {
+      opacity: 1;
+    }
+  }
+
+  .count-loading {
+    color: $ui-fleet-black-50;
+  }
+
+  .count-error {
+    color: $ui-error;
+  }
+
+  &__os-empty-table.empty-table__container {
+    // overriding base component styles so this look correct for this card
+    margin-top: $pad-large;
+    margin-bottom: $pad-large;
+  }
+}

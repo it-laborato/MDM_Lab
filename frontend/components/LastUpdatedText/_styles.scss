@@ -1,0 +1,15 @@
+.component__last-updated-text {
+  font-size: $xx-small;
+  font-weight: $regular;
+  color: $ui-fleet-black-75;
+
+  .tooltip {
+    padding-left: $pad-xsmall;
+  }
+
+  img {
+    height: 16px;
+    width: 16px;
+    vertical-align: text-top;
+  }
+}

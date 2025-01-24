@@ -1,0 +1,126 @@
+@import "../../../../../../../node_modules/react-tabs/style/react-tabs.scss";
+
+.platform-wrapper {
+  padding: 0; // different to pad sticky subnav properly
+
+  .component__tabs-wrapper {
+    // negate problematic sticky positioning
+    position: initial;
+    .react-tabs {
+      &__tab-list {
+        margin: 0 0 $pad-large;
+      }
+    }
+  }
+
+  h1 {
+    margin-bottom: $pad-small;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .input-field {
+    &__textarea {
+      min-height: 88px;
+    }
+
+    &__textarea {
+      font-family: "SourceCodePro", $monospace;
+      font-weight: $bold;
+      font-size: 13px;
+      color: $core-fleet-blue;
+      line-height: 20px;
+      line-break: anywhere;
+      padding: 12px $pad-xlarge 12px $pad-medium;
+    }
+  }
+
+  &__advanced--installer {
+    .input-field {
+      height: 105px;
+    }
+  }
+
+  &__installer-copy-icon {
+    color: $core-vibrant-blue;
+    margin-left: $pad-small;
+    margin-right: $pad-medium;
+  }
+
+  &__copy-message {
+    @include copy-message;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    position: relative;
+    top: 28px;
+    right: 12px;
+    // prevent this element from affecting the parent label's height
+    height: 0;
+    gap: $pad-small;
+
+    a {
+      display: flex;
+      align-items: center;
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__certificate-loading {
+    color: $ui-fleet-black-50;
+    padding-top: $pad-xsmall;
+  }
+
+  &__certificate-error {
+    span,
+    em {
+      display: block;
+      padding: $pad-xsmall 0;
+    }
+    em {
+      color: $ui-error;
+      font-style: normal;
+    }
+  }
+
+  &__advanced--heading,
+  &__chromeos--heading {
+    font-weight: $bold;
+  }
+
+  &__chromeos--info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__chromeos-policy-for-extension {
+    height: 230px;
+
+    .input-field {
+      &__textarea {
+        height: 190px;
+      }
+      &--disabled {
+        height: 190px;
+      }
+    }
+  }
+
+  .download-certificate--tooltip {
+    margin-bottom: 0;
+  }
+
+  &__copy-message {
+    @include copy-message;
+  }
+}

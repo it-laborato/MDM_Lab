@@ -1,0 +1,51 @@
+.app-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $ui-off-white;
+}
+
+.core-wrapper {
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background-color: $core-white;
+  display: flex;
+
+  // App hidden below 768px
+  @media (max-width: $break-xs - 1px) {
+    display: none;
+  }
+
+  // App not hidden when printing
+  @media print {
+    display: initial;
+  }
+
+  a {
+    img {
+      height: 12px;
+      width: 12px;
+      margin-left: $pad-xsmall;
+    }
+  }
+}
+
+.site-nav-container {
+  background: $core-fleet-black;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  // Nav hidden below 768px;
+  @media (max-width: $break-xs - 1px) {
+    display: none;
+  }
+
+  // Nav not hidden when printing
+  @media print {
+    display: initial;
+  }
+}

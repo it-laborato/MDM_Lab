@@ -1,0 +1,17 @@
+.auth-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  padding: $pad-medium 0;
+  gap: 2.5rem;
+  align-items: center;
+
+  &__logo {
+    width: 120px;
+  }
+
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    height: 100vh;
+  }
+}

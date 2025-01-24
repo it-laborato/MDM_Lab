@@ -1,0 +1,105 @@
+.host-details {
+  &__tabs-wrapper {
+    .react-tabs__tab {
+      display: inline-flex;
+      flex-direction: row;
+    }
+  }
+
+  // grid layout styles for the host details page
+  &__details-panel {
+    display: grid;
+    gap: $pad-medium;
+  }
+
+  @media screen and (min-width: $break-md) {
+    &__details-panel.react-tabs__tab-panel--selected {
+      // Must be selected to show grid
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "about about"
+        "activity agent-options"
+        "activity labels"
+        "users users";
+      grid-auto-flow: column;
+    }
+
+    // No agent options card for i(Pad)OS, so extend Labels card vertically
+    &__details-panel--ios-grid.react-tabs__tab-panel--selected {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "about about"
+        "activity labels";
+      grid-auto-flow: column;
+    }
+
+    .about-card {
+      grid-area: about;
+    }
+
+    .activity-card {
+      grid-area: activity;
+    }
+
+    .agent-options-card {
+      grid-area: agent-options;
+    }
+
+    .labels-card {
+      grid-area: labels;
+    }
+
+    .users-card {
+      grid-area: users;
+    }
+  }
+
+  .about-card,
+  .agent-options-card {
+    .info {
+      &__item {
+        &--about {
+          margin-right: 92px;
+          flex-direction: row;
+        }
+      }
+      &__data {
+        margin-bottom: $pad-medium;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .munki-issues-card {
+    margin-top: $pad-medium;
+  }
+
+  .button img {
+    transform: scale(0.5);
+  }
+
+  &__button-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin: $pad-xxlarge 0 0;
+  }
+
+  &__device_mapping {
+    .device_mapping--tooltip {
+      flex-direction: column;
+      justify-content: start;
+      text-align: left;
+    }
+  }
+
+  .tooltip__tooltip-icon {
+    img {
+      vertical-align: middle;
+      height: 16px;
+      width: auto;
+    }
+  }
+}

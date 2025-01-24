@@ -1,0 +1,29 @@
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $pad-xlarge;
+
+  &__left-header {
+    display: flex;
+    align-items: baseline;
+    gap: $pad-small;
+
+    &--vertical {
+      flex-direction: column;
+    }
+  }
+
+  &__sub-title {
+    &--grey {
+      @include grey-text;
+    }
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: $regular;
+    font-size: $medium;
+    width: 100%;
+    color: $core-fleet-black;
+  }
+}

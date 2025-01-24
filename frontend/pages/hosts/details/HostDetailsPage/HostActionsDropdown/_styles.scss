@@ -1,0 +1,11 @@
+.host-actions-dropdown {
+  @include button-dropdown;
+  color: $core-fleet-black;
+  .Select-multi-value-wrapper {
+    width: 55px;
+  }
+  .Select > .Select-menu-outer {
+    right: 0;
+    min-width: max-content;
+  }
+}

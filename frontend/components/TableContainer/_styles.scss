@@ -1,0 +1,258 @@
+.table-container {
+  // Container is responsive design used when customFilters is rendered
+  .container {
+    display: grid;
+    grid-template-columns: 1fr auto; /* First column takes all remaining space */
+    grid-template-rows: auto auto; /* Two rows for smaller screens*/
+    width: 100%;
+    height: max-content;
+    gap: $pad-small $pad-medium;
+  }
+
+  .stackable-header {
+    min-width: max-content;
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: $pad-medium;
+
+    > div {
+      display: flex;
+      flex-direction: row;
+    }
+
+    // only if in stackable header
+    .table-container__search {
+      width: 100%;
+    }
+  }
+
+  .top-shift-header {
+    grid-column: 1 / -1; /* Span across all columns */
+    grid-row: 1; /* Place in the first row */
+
+    .Select-multi-value-wrapper {
+      height: 36px; // Fixes height issues
+      width: 236px;
+    }
+  }
+
+  .stackable-header:nth-child(1) {
+    grid-column: 1 / span 2; /* Make Header 1 expand across two columns */
+    grid-row: 2;
+
+    .form-field--dropdown {
+      width: 235px;
+    }
+  }
+
+  /* Media query for larger screens */
+  @media (min-width: $break-md) {
+    .container {
+      grid-template-columns: 1fr auto; /* First column takes all remaining space */
+      grid-template-rows: auto; /* Single row */
+    }
+
+    .top-shift-header {
+      grid-column: 2; /* Single row */
+    }
+
+    .stackable-header:nth-child(1) {
+      grid-column: 1; /* Ensure Header 1 stays in the first column */
+      grid-row: 1; /* Single row */
+    }
+  }
+
+  // TODO: Fix hacky solution to clientside search being 0 no longer accessing rows.length
+  .client-result-count-0 {
+    display: none;
+  }
+
+  &__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: $pad-small;
+    margin-top: 3px; // Fits button highlight during tabbing
+
+    .input-icon-field {
+      height: 40px; // Height 40px on table headers
+    }
+
+    &.stack-table-controls {
+      align-items: start;
+
+      @media (min-width: $break-xs) {
+        flex-direction: row;
+        align-items: end;
+        justify-content: space-between;
+
+        .table-container__search {
+          order: -2;
+        }
+
+        .table-container__results-count {
+          order: -1;
+        }
+      }
+
+      @media (min-width: $break-md) {
+        align-items: center;
+
+        .table-container__search {
+          order: initial;
+        }
+      }
+    }
+
+    // filter and search bar height
+    .dropdown__select,
+    .input-with-icon {
+      height: 40px;
+    }
+  }
+
+  &__header-left {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+
+    &.stack-table-controls {
+      flex-direction: column;
+      align-items: start;
+
+      @media (min-width: $break-md) {
+        justify-content: space-between;
+      }
+    }
+  }
+
+  &__results-count {
+    display: flex;
+    align-items: baseline;
+    font-size: $x-small;
+    font-weight: $bold;
+    color: $core-fleet-black;
+    margin: 0;
+    height: 40px;
+    gap: 12px;
+
+    > span {
+      line-height: 40px; // Match other header components' height but still align text baseline
+      min-width: fit-content;
+    }
+
+    .count-error {
+      color: $ui-error;
+    }
+    .count-loading {
+      color: $ui-fleet-black-50;
+    }
+  }
+
+  &__edit-columns-button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: $core-vibrant-blue-over;
+  }
+
+  &__search-input {
+    position: relative;
+    color: $core-fleet-blue;
+    width: 100%;
+
+    .input-with-icon {
+      width: 100%;
+      min-width: 250px;
+    }
+
+    &.stack-table-controls {
+      padding-bottom: $pad-large;
+      margin-left: 0;
+
+      @media (min-width: $break-xs) {
+        padding-bottom: 0;
+      }
+    }
+
+    .input-field {
+      padding-left: 42px;
+      width: 100%;
+    }
+
+    .fleeticon {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      font-size: $medium;
+      color: $core-fleet-black;
+    }
+  }
+
+  .table-container__search-input.wide-search {
+    margin-left: 0;
+    margin-bottom: $pad-small;
+  }
+
+  #search-tooltip {
+    width: 190px;
+    text-align: center;
+  }
+
+  &__empty-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__previous {
+    width: 350px;
+
+    .pagination__pager-wrap {
+      justify-content: left;
+
+      button:last-child {
+        display: none;
+      }
+    }
+  }
+
+  .fleet-checkbox__tick {
+    top: 1px;
+  }
+
+  // Truncates clickable button cells (not compatible with buttons with icons)
+  tbody {
+    .children-wrapper {
+      overflow: hidden;
+      white-space: nowrap;
+      display: block;
+      text-overflow: ellipsis;
+    }
+
+    .icon {
+      vertical-align: sub;
+    }
+  }
+  .linkToFilteredHosts__header {
+    width: 120px;
+  }
+
+  // This hides View all host link unless the row is hovered
+  tr {
+    .row-hover-link {
+      opacity: 0;
+      transition: 250ms;
+      text-overflow: none;
+    }
+    &:hover,
+    &:focus-visible {
+      .row-hover-link {
+        opacity: 1;
+      }
+    }
+  }
+}

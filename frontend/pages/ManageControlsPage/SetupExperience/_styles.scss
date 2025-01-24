@@ -1,0 +1,30 @@
+.setup-experience {
+  > p {
+    font-size: $x-small;
+    margin: $pad-xxlarge 0;
+  }
+
+  &__premium-feature-message {
+    margin-top: 80px;
+  }
+
+  &__empty-state {
+    margin-top: $pad-xxlarge;
+
+    text-align: center;
+
+    h2 {
+      font-size: $small;
+      margin: 0 0 $pad-xsmall;
+    }
+
+    p {
+      font-size: $x-small;
+      margin: 0 0 $pad-medium;
+    }
+
+    button {
+      margin: 0 auto;
+    }
+  }
+}

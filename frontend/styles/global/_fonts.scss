@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "Inter";
+  font-weight: 400;
+  src: url("../assets/fonts/inter/Inter-Regular.woff2") format("woff2"),
+    url("../assets/fonts/inter/Inter-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../assets/fonts/inter/Inter-Regular-Italic.woff2") format("woff2"),
+    url("../assets/fonts/inter/Inter-Regular-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 600;
+  src: url("../assets/fonts/inter/Inter-Semibold.woff2") format("woff2"),
+    url("../assets/fonts/inter/Inter-Semibold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: 700;
+  src: url("../assets/fonts/inter/Inter-Bold.woff2") format("woff2"),
+    url("../assets/fonts/inter/Inter-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "fleeticons";
+  src: url("../assets/fonts/fleeticons/mdmlabicons.woff2") format("woff2"),
+    url("../assets/fonts/fleeticons/mdmlabicons.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SourceCodePro";
+  src: url("../assets/fonts/source-code-pro/Source-Code-Pro-Regular.eot");
+  src: url("../assets/fonts/source-code-pro/Source-Code-Pro-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../assets/fonts/source-code-pro/Source-Code-Pro-Regular.ttf.woff")
+      format("woff"),
+    url("../assets/fonts/source-code-pro/Source-Code-Pro-Regular.ttf")
+      format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SourceCodePro";
+  src: url("../assets/fonts/source-code-pro/Source-Code-Pro-Bold.eot");
+  src: url("../assets/fonts/source-code-pro/Source-Code-Pro-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../assets/fonts/source-code-pro/Source-Code-Pro-Bold.woff")
+      format("woff"),
+    url("../assets/fonts/source-code-pro/Source-Code-Pro-Bold.ttf")
+      format("truetype");
+  font-weight: $bold;
+  font-style: normal;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

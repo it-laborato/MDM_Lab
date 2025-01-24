@@ -1,0 +1,514 @@
+//go:build darwin
+
+package profiles
+
+import (
+	"bytes"
+	"errors"
+	"io"
+	"strings"
+	"testing"
+
+	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com:it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
+	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/stretchr/testify/require"
+)
+
+func TestGetMDMlabdConfig(t *testing.T) {
+	testErr := errors.New("test error")
+	cases := []struct {
+		cmdOut  *string
+		cmdErr  error
+		wantOut *mdmlab.MDMAppleMDMlabdConfig
+		wantErr error
+	}{
+		{nil, testErr, nil, testErr},
+		{ptr.String("invalid-xml"), nil, nil, io.EOF},
+		{&emptyOutput, nil, &mdmlab.MDMAppleMDMlabdConfig{}, nil},
+		{&withMDMlabdConfig, nil, &mdmlab.MDMAppleMDMlabdConfig{EnrollSecret: "ENROLL_SECRET", MDMlabURL: "https://test.example.com"}, nil},
+	}
+
+	origExecProfileCmd := execProfileCmd
+	t.Cleanup(func() { execProfileCmd = origExecProfileCmd })
+	for _, c := range cases {
+		execProfileCmd = func() (*bytes.Buffer, error) {
+			if c.cmdOut == nil {
+				return nil, c.cmdErr
+			}
+
+			var buf bytes.Buffer
+			buf.WriteString(*c.cmdOut)
+			return &buf, nil
+		}
+
+		out, err := GetMDMlabdConfig()
+		require.ErrorIs(t, err, c.wantErr)
+		require.Equal(t, c.wantOut, out)
+	}
+}
+
+var (
+	emptyOutput = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict/>
+</plist>`
+
+	withMDMlabdConfig = `
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_computerlevel</key>
+	<array>
+		<dict>
+			<key>ProfileDescription</key>
+			<string>test descripiton</string>
+			<key>ProfileDisplayName</key>
+			<string>test name</string>
+			<key>ProfileIdentifier</key>
+			<string>com.mdmlabdm.mdmlabd.config</string>
+			<key>ProfileInstallDate</key>
+			<string>2023-02-27 18:55:07 +0000</string>
+			<key>ProfileItems</key>
+			<array>
+				<dict>
+					<key>PayloadContent</key>
+					<dict>
+						<key>EnrollSecret</key>
+						<string>ENROLL_SECRET</string>
+						<key>MDMlabURL</key>
+						<string>https://test.example.com</string>
+					</dict>
+					<key>PayloadDescription</key>
+					<string>test description</string>
+					<key>PayloadDisplayName</key>
+					<string>test name</string>
+					<key>PayloadIdentifier</key>
+					<string>com.mdmlabdm.mdmlabd.config</string>
+					<key>PayloadType</key>
+					<string>com.mdmlabdm.mdmlabd</string>
+					<key>PayloadUUID</key>
+					<string>0C6AFB45-01B6-4E19-944A-123CD16381C7</string>
+					<key>PayloadVersion</key>
+					<integer>1</integer>
+				</dict>
+			</array>
+			<key>ProfileRemovalDisallowed</key>
+			<string>true</string>
+			<key>ProfileType</key>
+			<string>Configuration</string>
+			<key>ProfileUUID</key>
+			<string>8D0F62E6-E24F-4B2F-AFA8-CAC1F07F4FDC</string>
+			<key>ProfileVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+</dict>
+</plist>`
+
+	withMDMlabdConfigAndEnrollment = `
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_computerlevel</key>
+	<array>
+		<dict>
+			<key>ProfileDescription</key>
+			<string>test descripiton</string>
+			<key>ProfileDisplayName</key>
+			<string>test name</string>
+			<key>ProfileIdentifier</key>
+			<string>com.mdmlabdm.mdmlabd.config</string>
+			<key>ProfileInstallDate</key>
+			<string>2023-02-27 18:55:07 +0000</string>
+			<key>ProfileItems</key>
+			<array>
+				<dict>
+					<key>PayloadContent</key>
+					<dict>
+						<key>EnrollSecret</key>
+						<string>ENROLL_SECRET</string>
+						<key>MDMlabURL</key>
+						<string>https://test.example.com</string>
+					</dict>
+					<key>PayloadDescription</key>
+					<string>test description</string>
+					<key>PayloadDisplayName</key>
+					<string>test name</string>
+					<key>PayloadIdentifier</key>
+					<string>com.mdmlabdm.mdmlabd.config</string>
+					<key>PayloadType</key>
+					<string>com.mdmlabdm.mdmlabd</string>
+					<key>PayloadUUID</key>
+					<string>0C6AFB45-01B6-4E19-944A-123CD16381C7</string>
+					<key>PayloadVersion</key>
+					<integer>1</integer>
+				</dict>
+			</array>
+			<key>ProfileRemovalDisallowed</key>
+			<string>true</string>
+			<key>ProfileType</key>
+			<string>Configuration</string>
+			<key>ProfileUUID</key>
+			<string>8D0F62E6-E24F-4B2F-AFA8-CAC1F07F4FDC</string>
+			<key>ProfileVersion</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>ProfileDisplayName</key>
+			<string>f1337 enrollment</string>
+			<key>ProfileIdentifier</key>
+			<string>com.mdmlabdm.mdmlab.mdm.apple</string>
+			<key>ProfileInstallDate</key>
+			<string>2023-02-27 18:55:07 +0000</string>
+			<key>ProfileItems</key>
+			<array>
+				<dict>
+						<key>PayloadContent</key>
+						<dict/>
+						<key>PayloadIdentifier</key>
+						<string>com.mdmlabdm.mdmlab.mdm.apple.scep</string>
+						<key>PayloadType</key>
+						<string>com.apple.security.scep</string>
+						<key>PayloadUUID</key>
+						<string>BCA53F9D-5DD2-494D-98D3-0D0F20FF6BA1</string>
+						<key>PayloadVersion</key>
+						<integer>1</integer>
+				</dict>
+				<dict>
+					<key>PayloadContent</key>
+					<dict>
+						<key>AccessRights</key>
+						<integer>8191</integer>
+						<key>CheckOutWhenRemoved</key>
+						<true/>
+						<key>EndUserEmail</key>
+						<string>user@example.com</string>
+						<key>ServerCapabilities</key>
+						<array>
+							<string>com.apple.mdm.per-user-connections</string>
+							<string>com.apple.mdm.bootstraptoken</string>
+						</array>
+						<key>ServerURL</key>
+						<string>https://test.example.com</string>
+					</dict>
+					<key>PayloadIdentifier</key>
+					<string>com.mdmlabdm.mdmlab.mdm.apple.mdm</string>
+					<key>PayloadType</key>
+					<string>com.apple.mdm</string>
+					<key>PayloadUUID</key>
+					<string>29713130-1602-4D27-90C9-B822A295E44E</string>
+					<key>PayloadVersion</key>
+					<integer>1</integer>
+				</dict>
+			</array>
+			<key>ProfileOrganization</key>
+			<string>f1337</string>
+			<key>ProfileType</key>
+			<string>Configuration</string>
+			<key>ProfileUUID</key>
+			<string>5ACABE91-CE30-4C05-93E3-B235C152404E</string>
+			<key>ProfileVersion</key>
+			<integer>1</integer>
+	</dict>
+</array>
+</dict>
+</plist>`
+)
+
+func TestCustomInstallerWorkflow(t *testing.T) {
+	origExecProfileCmd := execProfileCmd
+	t.Cleanup(func() { execProfileCmd = origExecProfileCmd })
+
+	for _, c := range []struct {
+		name      string
+		mockOut   string
+		wantEmail string
+		wantErr   error
+	}{
+		{"happy path", withMDMlabdConfigAndEnrollment, "user@example.com", nil},
+		{"empty profiles", emptyOutput, "", ErrNotFound},
+		{"no enrollment payload", withMDMlabdConfig, "", ErrNotFound},
+		{"wrong payload identifier", strings.Replace(withMDMlabdConfigAndEnrollment, mobileconfig.MDMlabEnrollmentPayloadIdentifier, "wrong-identifier", 1), "", ErrNotFound},
+		{"no end user email key", strings.Replace(withMDMlabdConfigAndEnrollment, "EndUserEmail", "WrongKey", 1), "", ErrNotFound},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			execProfileCmd = func() (*bytes.Buffer, error) {
+				var buf bytes.Buffer
+				buf.WriteString(c.mockOut)
+				return &buf, nil
+			}
+
+			gotContent, err := GetCustomEnrollmentProfileEndUserEmail()
+			if c.wantErr != nil {
+				require.ErrorIs(t, err, c.wantErr)
+				require.Empty(t, gotContent)
+			} else {
+				require.NoError(t, err)
+				require.Equal(t, "user@example.com", gotContent)
+			}
+		})
+	}
+}
+
+func TestIsEnrolledInMDM(t *testing.T) {
+	cases := []struct {
+		cmdOut       *string
+		cmdErr       error
+		wantEnrolled bool
+		wantURL      string
+		wantErr      bool
+	}{
+		{nil, errors.New("test error"), false, "", true},
+		{ptr.String(""), nil, false, "", false},
+		{ptr.String(`
+Enrolled via DEP: No
+MDM enrollment: No
+		`), nil, false, "", false},
+		{
+			ptr.String(`
+Enrolled via DEP: Yes
+MDM enrollment: Yes
+MDM server: https://test.example.com
+			`),
+			nil,
+			true,
+			"https://test.example.com",
+			false,
+		},
+		{
+			ptr.String(`
+Enrolled via DEP: Yes
+MDM enrollment: Yes
+MDM server /  https://test.example.com
+			`),
+			nil,
+			true,
+			"//test.example.com",
+			false,
+		},
+		{
+			ptr.String(`
+Enrolled via DEP: Yes
+MDM enrollment: Yes
+MDM server: https://valid.com/mdm/apple/mdm
+			`),
+			nil,
+			true,
+			"https://valid.com/mdm/apple/mdm",
+			false,
+		},
+	}
+
+	origCmd := getMDMInfoFromProfilesCmd
+	t.Cleanup(func() { getMDMInfoFromProfilesCmd = origCmd })
+	for _, c := range cases {
+		getMDMInfoFromProfilesCmd = func() ([]byte, error) {
+			if c.cmdOut == nil {
+				return nil, c.cmdErr
+			}
+
+			var buf bytes.Buffer
+			buf.WriteString(*c.cmdOut)
+			return []byte(*c.cmdOut), nil
+		}
+
+		enrolled, url, err := IsEnrolledInMDM()
+		if c.wantErr {
+			require.Error(t, err)
+		} else {
+			require.NoError(t, err)
+		}
+		require.Equal(t, c.wantEnrolled, enrolled)
+		require.Equal(t, c.wantURL, url)
+	}
+}
+
+func TestCheckAssignedEnrollmentProfile(t *testing.T) {
+	mdmlabURL := "https://valid.com"
+	cases := []struct {
+		name    string
+		cmdOut  *string
+		cmdErr  error
+		wantOut bool
+		wantErr error
+	}{
+		{
+			"command error",
+			nil,
+			errors.New("some command error"),
+			false,
+			errors.New("some command error"),
+		},
+		{
+			"empty output",
+			ptr.String(""),
+			nil,
+			false,
+			errors.New("parsing profiles output: expected at least 2 lines but got 1"),
+		},
+		{
+			"null profile",
+			ptr.String(`Device Enrollment configuration:
+(null)
+		`),
+			nil,
+			false,
+			errors.New("parsing profiles output: received null device enrollment configuration"),
+		},
+		{
+			"mismatch profile",
+			ptr.String(`Device Enrollment configuration:
+{
+    AllowPairing = 1;
+	AutoAdvanceSetup = 0;
+	AwaitDeviceConfigured = 0;
+	ConfigurationURL = "https://test.example.com/mdm/apple/enroll?token=1234";
+	ConfigurationWebURL = "https://test.example.com/mdm/apple/enroll?token=1234";
+	...
+}
+			`),
+			nil,
+			false,
+			errors.New(`configuration web url: expected 'valid.com' but found 'test.example.com'`),
+		},
+		{
+			"match profile",
+			ptr.String(`Device Enrollment configuration:
+{
+    AllowPairing = 1;
+	AutoAdvanceSetup = 0;
+	AwaitDeviceConfigured = 0;
+	ConfigurationURL = "https://test.example.com/mdm/apple/enroll?token=1234";
+	ConfigurationWebURL = "https://valid.com?token=1234";
+	...
+}
+			`),
+			nil,
+			false,
+			nil,
+		},
+		{
+			"mixed case match",
+			ptr.String(`Device Enrollment configuration:
+{
+    AllowPairing = 1;
+	AutoAdvanceSetup = 0;
+	AwaitDeviceConfigured = 0;
+	ConfigurationURL = "https://test.ExaMplE.com/mdm/apple/enroll?token=1234";
+	ConfigurationWebURL = "https://vaLiD.com?tOken=1234";
+	...
+}
+			`),
+			nil,
+			false,
+			nil,
+		},
+	}
+
+	origCmd := showEnrollmentProfileCmd
+	t.Cleanup(func() { showEnrollmentProfileCmd = origCmd })
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			showEnrollmentProfileCmd = func() ([]byte, error) {
+				if c.cmdOut == nil {
+					return nil, c.cmdErr
+				}
+				var buf bytes.Buffer
+				buf.WriteString(*c.cmdOut)
+				return []byte(*c.cmdOut), nil
+			}
+
+			err := CheckAssignedEnrollmentProfile(mdmlabURL)
+			if c.wantErr != nil {
+				require.ErrorContains(t, err, c.wantErr.Error())
+			} else {
+				require.NoError(t, err)
+			}
+		})
+	}
+}
+
+func TestGetProfilePayloadContent(t *testing.T) {
+	origExecProfileCmd := execProfileCmd
+	t.Cleanup(func() { execProfileCmd = origExecProfileCmd })
+
+	execProfileCmd = func() (*bytes.Buffer, error) {
+		var buf bytes.Buffer
+		buf.WriteString(withMDMlabdConfigAndEnrollment)
+		return &buf, nil
+	}
+
+	// mismatched int type is not acceptable
+	_, err := getProfilePayloadContent[int]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type int")
+
+	// mismatched string type is not acceptable
+	_, err = getProfilePayloadContent[string]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type string")
+
+	// mismatched bool type is not acceptable
+	_, err = getProfilePayloadContent[bool]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type bool")
+
+	// mismatched slice type is not acceptable
+	_, err = getProfilePayloadContent[[]string]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type []string")
+
+	// mismatched []byte type is not acceptable
+	_, err = getProfilePayloadContent[[]byte]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type []uint8")
+
+	// mismatched struct type is acceptable, but result is empty
+	type wrongStruct struct {
+		foo string
+		bar int
+	}
+	ws, err := getProfilePayloadContent[wrongStruct]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	require.NoError(t, err)
+	require.NotNil(t, ws)
+	require.Empty(t, ws.bar)
+	require.Empty(t, ws.foo)
+
+	// struct type is acceptable and returns the expected value type corresponds to the payload identifier
+	c, err := getProfilePayloadContent[mdmlab.MDMAppleMDMlabdConfig]("com.mdmlabdm.mdmlabd.config")
+	require.NoError(t, err)
+	require.NotNil(t, c)
+	require.Equal(t, *c, mdmlab.MDMAppleMDMlabdConfig{EnrollSecret: "ENROLL_SECRET", MDMlabURL: "https://test.example.com"})
+
+	// struct type is acceptable and returns the expected value type corresponds to the payload identifier
+	e, err := getProfilePayloadContent[mdmlab.MDMCustomEnrollmentProfileItem]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	require.NoError(t, err)
+	require.NotNil(t, e)
+	require.Equal(t, *e, mdmlab.MDMCustomEnrollmentProfileItem{EndUserEmail: "user@example.com"})
+
+	// map type is acceptable
+	m, err := getProfilePayloadContent[map[string]any]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	require.NoError(t, err)
+	require.NotNil(t, m)
+	gotMap := *m
+	v, ok := gotMap["EndUserEmail"]
+	require.True(t, ok)
+	require.Equal(t, "user@example.com", v)
+	_, ok = gotMap["EnrollSecret"]
+	require.False(t, ok)
+	_, ok = gotMap["MDMlabURL"]
+	require.False(t, ok)
+
+	// map type is acceptable
+	m2, err := getProfilePayloadContent[map[string]any]("com.mdmlabdm.mdmlabd.config")
+	require.NoError(t, err)
+	require.NotNil(t, m)
+	gotMap = *m2
+	v, ok = gotMap["EnrollSecret"]
+	require.True(t, ok)
+	require.Equal(t, "ENROLL_SECRET", v)
+	v, ok = gotMap["MDMlabURL"]
+	require.True(t, ok)
+	require.Equal(t, "https://test.example.com", v)
+	_, ok = gotMap["EndUserEmail"]
+	require.False(t, ok)
+}

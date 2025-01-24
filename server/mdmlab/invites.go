@@ -1,0 +1,35 @@
+package mdmlab
+
+import (
+	"gopkg.in/guregu/null.v3"
+)
+
+// InvitePayload contains fields required to create a new user invite or update an existing one.
+type InvitePayload struct {
+	Email      *string     `json:"email"`
+	Name       *string     `json:"name"`
+	Position   *string     `json:"position"`
+	SSOEnabled *bool       `json:"sso_enabled"`
+	MFAEnabled *bool       `json:"mfa_enabled"`
+	GlobalRole null.String `json:"global_role"`
+	Teams      []UserTeam  `json:"teams"`
+}
+
+// Invite represents an invitation for a user to join MDMlab.
+type Invite struct {
+	UpdateCreateTimestamps
+	ID         uint        `json:"id"`
+	InvitedBy  uint        `json:"invited_by" db:"invited_by"`
+	Email      string      `json:"email" db:"email"`
+	Name       string      `json:"name" db:"name"`
+	Position   string      `json:"position,omitempty"`
+	Token      string      `json:"-"`
+	SSOEnabled bool        `json:"sso_enabled" db:"sso_enabled"`
+	MFAEnabled bool        `json:"mfa_enabled" db:"mfa_enabled"`
+	GlobalRole null.String `json:"global_role" db:"global_role"`
+	Teams      []UserTeam  `json:"teams"`
+}
+
+func (i Invite) AuthzType() string {
+	return "invite"
+}

@@ -1,0 +1,19 @@
+.manage-user {
+  .input-field {
+    width: 100%;
+  }
+
+  .form-field__label {
+    font-size: $x-small;
+    font-weight: $bold;
+  }
+
+  &__email-help-text {
+    display: block;
+  }
+
+  .button-wrap {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

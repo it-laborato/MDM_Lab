@@ -1,0 +1,52 @@
+.data-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__card {
+    display: flex;
+    flex-direction: row;
+    margin: $pad-large 0 0;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .info {
+    &__header {
+      display: flex;
+      color: $core-fleet-black;
+      font-weight: $bold;
+      font-size: $x-small;
+      text-align: left;
+      gap: $pad-small;
+    }
+    &__data {
+      display: block;
+      color: $core-fleet-black;
+      font-weight: normal;
+      font-size: $x-small;
+      text-align: left;
+      margin-top: 10px;
+    }
+  }
+  
+  //  // // // // // // // // // // //
+  // new version
+  &__inner-new {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    .graphic {
+      margin-bottom: 8px;
+    }
+    color: $core-fleet-black;
+    font-size: $x-small;
+  }
+    &__header {
+      font-weight: $bold;
+    }
+}

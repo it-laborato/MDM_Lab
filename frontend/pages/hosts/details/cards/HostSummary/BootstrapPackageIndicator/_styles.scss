@@ -1,0 +1,19 @@
+.bootstrap-package-indicator {
+  display: flex;
+  gap: 4px;
+
+  &__button {
+    font-weight: normal;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    align-self: center;
+  }
+
+  &__tooltip {
+    display: block;
+    text-align: center;
+  }
+}

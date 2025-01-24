@@ -1,0 +1,119 @@
+.query-side-panel {
+  position: relative;
+  overflow: unset !important; // was unnecessary and broke close button positioning
+
+  &__close-button {
+    width: 24px;
+    height: 24px;
+    border: 1px solid $ui-fleet-black-25;
+    border-radius: 12px;
+    background-color: $core-white;
+    position: absolute;
+    top: 40px;
+    left: -13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+
+    &:focus {
+      border: 1px solid $core-vibrant-blue;
+      outline: none;
+
+      svg {
+        path {
+          stroke: $core-vibrant-blue;
+        }
+      }
+    }
+
+    &:hover {
+      svg {
+        path {
+          stroke: $core-vibrant-blue-over;
+        }
+      }
+    }
+  }
+
+  &__choose-table {
+    margin: 0 0 $pad-large;
+
+    .form-field {
+      margin-bottom: $pad-medium;
+    }
+  }
+
+  &__header {
+    margin: 0 0 $pad-medium;
+    font-size: $small;
+    font-weight: $bold;
+    display: flex;
+    align-items: center;
+  }
+
+  &__table-count {
+    line-height: normal;
+    margin-left: $pad-small;
+    background-color: $ui-fleet-black-10;
+    padding: $pad-xsmall $pad-small;
+    border-radius: 8px;
+    font-size: $x-small;
+  }
+
+  &__table-select {
+    // TODO: Remove these overrides when we do a style update for the core
+    // dropdown component.
+    &.Select {
+      // fixes up some padding issues with the scroll bar for the dropdown.
+      .Select-menu-outer {
+        padding: 0;
+
+        .Select-menu {
+          padding: $pad-xsmall;
+        }
+      }
+
+      // use to truncate selected long table names in the dropdown
+      &.has-value.Select--single > .Select-control {
+        .Select-value .Select-value-label {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 220px;
+          display: inline-block;
+        }
+      }
+
+      // styles to truncate table names in the dropdown options
+      .Select-option .dropdown__option {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        // this width makes the dropdown option truncation consistant regardless
+        // if the scrollbar is showing or not.
+        width: 225px;
+      }
+    }
+  }
+
+  &__description {
+    font-size: $x-small;
+    overflow-wrap: break-word;
+  }
+
+  &__mdm-required {
+    background-color: $core-vibrant-blue;
+    color: $core-white;
+    font-size: $x-small;
+    font-weight: $bold;
+    padding: 2px 4px;
+    border-radius: $border-radius;
+    position: relative;
+    top: -2px;
+    min-width: 95px;
+    max-height: 19px;
+  }
+}

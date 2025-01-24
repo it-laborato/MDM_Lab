@@ -1,0 +1,184 @@
+.registration-breadcrumbs {
+  display: flex;
+  justify-content: space-between;
+  width: 652px;
+  height: 125px;
+  margin: 38px auto 0;
+
+  @include breakpoint(tablet) {
+    height: 75px;
+  }
+
+  &__page {
+    text-align: center;
+    min-width: 156px;
+    font-size: $small;
+    font-weight: $regular;
+    color: $core-white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    // line after breadcrumb
+    &::before {
+      content: "";
+      position: absolute;
+      width: 88.5%;
+      height: 2px;
+      background-color: $core-vibrant-blue;
+      bottom: 36%;
+      left: 121px;
+
+      // Firefox-specific
+      @-moz-document url-prefix() {
+        bottom: 38.2%;
+      }
+
+      @include breakpoint(tablet) {
+        bottom: 26.5%;
+        // Firefox-specific
+        @-moz-document url-prefix() {
+          bottom: 30%;
+        }
+      }
+    }
+
+    &::after {
+      @extend %fleeticon;
+      @include size(24px);
+      background-color: transparent;
+      display: block;
+      border-radius: 50%;
+      content: "";
+      font-size: $x-large;
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+
+      @include breakpoint(tablet) {
+        margin-top: $pad-xsmall;
+      }
+    }
+
+    &:focus {
+      outline: 1px dashed $core-white;
+      border-radius: $border-radius;
+    }
+
+    &--active {
+      font-weight: $bold;
+    }
+
+    &--1 {
+      &::after {
+        border: 2px solid $core-white;
+        margin-top: 11px;
+      }
+
+      &.registration-breadcrumbs__page--active {
+        &::before {
+          background: linear-gradient(
+            to right,
+            $core-white 50%,
+            $core-vibrant-blue 50%
+          );
+        }
+
+        &::after {
+          background-color: transparent;
+          border: 2px solid $core-white;
+        }
+      }
+
+      &.registration-breadcrumbs__page--complete {
+        &::before {
+          background: $core-white;
+          background-size: auto;
+          z-index: 2;
+        }
+
+        &::after {
+          @include size(28px);
+          content: "\f035";
+          color: $core-white;
+          border: 0;
+        }
+      }
+    }
+
+    &--2 {
+      &::after {
+        border: solid 1px $core-vibrant-blue;
+        margin-top: 11px;
+      }
+
+      &.registration-breadcrumbs__page--active {
+        &::before {
+          background: linear-gradient(
+            to right,
+            $core-white 50%,
+            $core-vibrant-blue 50%
+          );
+        }
+
+        &::after {
+          background-color: transparent;
+          border: 2px solid $core-white;
+        }
+      }
+
+      &.registration-breadcrumbs__page--complete {
+        &::before {
+          background: $core-white;
+          z-index: 2;
+        }
+
+        &::after {
+          @include size(28px);
+          content: "\f035";
+          color: $core-white;
+          border: 0;
+        }
+      }
+    }
+
+    &--3 {
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        border: solid 1px $core-vibrant-blue;
+        margin-top: 11px;
+      }
+
+      &.registration-breadcrumbs__page--active {
+        &::before {
+          background: linear-gradient(
+            to right,
+            $core-white 50%,
+            $core-vibrant-blue 50%
+          );
+        }
+
+        &::after {
+          background-color: transparent;
+          border: 2px solid $core-white;
+        }
+      }
+
+      &.registration-breadcrumbs__page--complete {
+        &::after {
+          @include size(28px);
+          content: "\f035";
+          color: $core-white;
+          border: 0;
+        }
+      }
+    }
+  }
+}

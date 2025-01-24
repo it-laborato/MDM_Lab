@@ -1,0 +1,17 @@
+.gated-layout {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  .flash-message {
+    border: 0;
+  }
+  a.external-link {
+    img {
+      height: 12px;
+      width: 12px;
+      margin-left: $pad-xsmall;
+    }
+  }
+}

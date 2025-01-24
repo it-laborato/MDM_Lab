@@ -1,0 +1,443 @@
+$base-class: "button";
+
+@mixin button-focus-outline($offset: 2px) {
+  outline-color: $core-focused-outline;
+  outline-offset: $offset;
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+@mixin button-variant($color, $hover: null, $active: null, $inverse: false) {
+  background-color: $color;
+
+  @if $inverse {
+    &:hover {
+      background-color: rgba(#192147, 0.05);
+
+      &:active {
+        background-color: $ui-fleet-black-10;
+      }
+    }
+
+    &:focus-visible {
+      // need a slightly larger focus outline to accomodate the :after content box
+      // that correctly displays the border. We chose this approach as adding a
+      // border to the button caused the button to jump around on the screen
+      // when it was added and removed.
+      @include button-focus-outline($offset: 3px);
+      &::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        border: 1px solid $core-vibrant-blue;
+        border-radius: 6px;
+      }
+    }
+  } @else {
+    &:hover:not(.button--disabled) {
+      background-color: $hover;
+
+      &:active {
+        background-color: $active;
+      }
+    }
+
+    &:focus-visible {
+      @include button-focus-outline();
+    }
+  }
+}
+
+.#{$base-class} {
+  @include button-variant($core-vibrant-blue);
+  transition: color 150ms ease-in-out, background 150ms ease-in-out,
+    top 50ms ease-in-out, box-shadow 50ms ease-in-out, border 50ms ease-in-out;
+  position: relative;
+  color: $core-white;
+  text-decoration: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: $pad-small $pad-medium;
+  border-radius: 6px;
+  font-size: $x-small;
+  font-family: "Inter", sans-serif;
+  font-weight: $bold;
+  display: inline-flex;
+  height: 38px;
+  top: 0;
+  border: 0;
+  position: relative;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  .transparent-text {
+    opacity: 0;
+  }
+
+  .children-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &--brand {
+    @include button-variant(
+      $core-vibrant-blue,
+      $core-vibrant-blue-over,
+      $core-vibrant-blue-down
+    );
+    display: flex;
+  }
+
+  &--success {
+    @include button-variant($ui-success);
+  }
+
+  &--alert {
+    @include button-variant(
+      $core-vibrant-red,
+      $core-vibrant-red-over,
+      $core-vibrant-red-down
+    );
+    display: flex;
+
+    .loading-spinner {
+      &__ring {
+        div {
+          border-color: $ui-error transparent transparent transparent;
+        }
+      }
+    }
+  }
+
+  &--blue-green {
+    @include button-variant($ui-success);
+  }
+
+  &--grey {
+    @include button-variant(
+      $core-fleet-blue,
+      $core-fleet-blue-over,
+      $core-fleet-blue-down
+    );
+  }
+
+  &--warning {
+    @include button-variant($ui-warning);
+  }
+
+  &--link {
+    @include button-variant($core-fleet-purple);
+  }
+
+  &--label {
+    @include button-variant(
+      $ui-off-white,
+      $core-vibrant-blue-over,
+      null,
+      $inverse: true
+    );
+    color: $core-vibrant-blue;
+    border: 1px solid $core-vibrant-blue;
+    box-sizing: border-box;
+    font-size: $xx-small;
+    padding: $pad-xsmall 10px;
+    height: 24px;
+    white-space: nowrap;
+
+    &:active {
+      box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
+    }
+
+    &:hover,
+    &:focus {
+      border: 1px solid $core-vibrant-blue;
+    }
+  }
+
+  &--text-link {
+    @include button-variant(transparent);
+    border: 0;
+    box-shadow: none;
+    color: $core-vibrant-blue;
+    font-size: $x-small;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    line-height: normal;
+    text-align: left;
+
+    &:active {
+      color: $core-vibrant-blue-down;
+      box-shadow: none;
+      top: 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:focus {
+      color: $core-vibrant-blue-over;
+      background-color: transparent;
+      box-shadow: none;
+      text-decoration: underline;
+    }
+
+    &.light-text {
+      font-weight: $regular;
+    }
+  }
+
+  // &--icon, &--small-icon used for no text and svg icons
+  &--text-icon,
+  &--icon,
+  &--small-icon {
+    @include button-variant(transparent);
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    color: $core-vibrant-blue;
+    font-size: $x-small;
+    font-weight: $bold;
+    cursor: pointer;
+    white-space: nowrap;
+
+    img {
+      transform: scale(0.5);
+    }
+
+    &:active {
+      color: $core-vibrant-blue-down;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      @include button-focus-outline();
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        border: 1px solid $core-vibrant-blue;
+        border-radius: 6px;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      color: $core-vibrant-blue;
+
+      svg {
+        path {
+          fill: $core-vibrant-blue;
+        }
+      }
+
+      // The SVG icons in these buttons contain a `stroke` instead of a `fill`,
+      // so we need to modify that property instead. Adding a custom `fill`
+      // could make these icons render incorrectly.
+      &.input-field__copy-value-button,
+      &.windows-details-button,
+      [data-testid="chevron-right-icon"] {
+        svg {
+          path {
+            fill: none;
+            stroke: $core-vibrant-blue-over;
+          }
+        }
+      }
+    }
+
+    // globally styled gap between text and icon
+    .children-wrapper {
+      gap: $pad-small;
+    }
+  }
+
+  &--icon {
+    svg {
+      padding: $pad-icon;
+    }
+  }
+
+  &--small-icon {
+    svg {
+      padding: $pad-small;
+    }
+  }
+
+  &--small-text-icon {
+    @include button-variant(transparent);
+    margin-left: $pad-medium;
+    padding: 4px;
+    border: 1px solid $ui-fleet-black-25;
+    box-shadow: none;
+    color: $core-fleet-black;
+    font-size: $xx-small;
+    font-weight: $bold;
+    cursor: pointer;
+    height: 28px;
+
+    img {
+      width: 12px;
+      height: 12px;
+      padding: $pad-small;
+    }
+
+    &:active {
+      color: $core-vibrant-blue-down;
+    }
+
+    &:focus-visible {
+      color: $core-vibrant-blue-over;
+      border: 1px;
+      border-radius: 2px; // Visble when tabbing
+      background: var(--Core-White, #fff);
+      outline: none;
+      box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 4px #d9d9fe;
+    }
+
+    &:hover,
+    &:focus {
+      color: $core-vibrant-blue-over;
+    }
+  }
+
+  &--inverse {
+    @include button-variant(
+      $core-white,
+      $core-vibrant-blue-over,
+      $core-vibrant-blue-down,
+      $inverse: true
+    );
+    color: $core-vibrant-blue;
+    box-sizing: border-box;
+    padding: $pad-small;
+  }
+
+  &--inverse-alert {
+    @include button-variant(
+      $core-white,
+      $core-vibrant-red-over,
+      $core-vibrant-red-down,
+      $inverse: true
+    );
+    color: $core-vibrant-red;
+    border: 0;
+    box-sizing: border-box;
+
+    &:hover,
+    &:focus {
+      border: 0;
+    }
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--disabled {
+    @include disabled;
+
+    &:hover,
+    &:focus {
+      cursor: default;
+    }
+  }
+
+  &--unstyled {
+    @include button-variant(transparent);
+    border: 0;
+    box-shadow: none;
+    color: $core-fleet-black;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    line-height: normal;
+    font-weight: normal;
+
+    &:active {
+      box-shadow: none;
+      top: 0;
+    }
+  }
+
+  &--unstyled-modal-query {
+    @include button-variant(transparent);
+    border: 0;
+    box-shadow: none;
+    color: $core-fleet-black;
+    cursor: pointer;
+    margin: 0;
+    padding: 15px 12px;
+    height: auto;
+    line-height: normal;
+    display: block;
+    width: 100%;
+    border-radius: 0px;
+    border-bottom: 1px solid $ui-fleet-black-10;
+
+    &:active {
+      box-shadow: none;
+      top: 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $ui-vibrant-blue-10;
+      box-shadow: none;
+    }
+
+    .children-wrapper {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      gap: $pad-xsmall;
+      align-items: flex-start;
+
+      .info {
+        &__header {
+          display: block;
+          text-align: left;
+        }
+        &__data {
+          display: block;
+          width: 100%;
+          font-weight: normal;
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  &--contextual-nav-item {
+    @include button-variant(transparent, $ui-vibrant-blue-10);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &--oversized {
+    background-color: $core-fleet-black;
+    padding: $pad-large $pad-small;
+    font-size: $medium;
+    width: 100%;
+  }
+}

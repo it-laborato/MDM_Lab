@@ -1,0 +1,158 @@
+#!/bin/bash
+
+# This script creates 2 teams and 9 users with various roles.
+# These users are seeded to Fleet Premium E2E tests
+
+source $FLEET_ENV_PATH
+
+# Create teams
+create_team_endpoint="api/latest/fleet/teams"
+
+# Create Apples
+data='{
+  "name": "Apples"
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_team_endpoint" -d "$data" --insecure
+
+# Create Oranges
+data='{
+  "name": "Oranges"
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_team_endpoint" -d "$data" --insecure
+
+# Create users
+create_user_endpoint="api/latest/fleet/users/admin"
+
+# Create Anna
+data='{
+  "name": "Anna G. Admin",
+  "email": "anna@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": "admin",
+  "admin_forced_password_reset": false
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure
+
+# Create Mary
+data='{
+  "name": "Mary G. Maintainer",
+  "email": "mary@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": "maintainer",
+  "admin_forced_password_reset": false
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure
+
+# Create Oliver
+data='{
+  "name": "Oliver G. Observer",
+  "email": "oliver@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": "observer",
+  "admin_forced_password_reset": false
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure
+
+# Create Opal
+data='{
+  "name": "Opal G. Observer+",
+  "email": "opal@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": "observer_plus",
+  "admin_forced_password_reset": false
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure
+
+# Create Marco
+data='{
+  "name": "Marco Mixed Roles",
+  "email": "marco@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": null,
+  "admin_forced_password_reset": false,
+  "teams": [
+    {
+      "id": 1,
+      "role": "observer"
+    },
+    {
+      "id": 2,
+      "role": "maintainer"
+    }
+  ]
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure
+
+# Create Anita
+data='{
+  "name": "Anita T. Admin",
+  "email": "anita@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": null,
+  "admin_forced_password_reset": false,
+  "teams": [
+    {
+      "id": 1,
+      "role": "admin"
+    }
+  ]
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure
+
+
+# Create Manny
+data='{
+  "name": "Manny T. Maintainer",
+  "email": "manny@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": null,
+  "admin_forced_password_reset": false,
+  "teams": [
+    {
+      "id": 1,
+      "role": "maintainer"
+    }
+  ]
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure
+
+# Create Toni
+data='{
+  "name": "Toni T. Observer",
+  "email": "toni@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": null,
+  "admin_forced_password_reset": false,
+  "teams": [
+    {
+      "id": 1,
+      "role": "observer"
+    }
+  ]
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure
+
+# Create Topanga
+data='{
+  "name": "Topanga T. Observer+",
+  "email": "topanga@organization.com",
+  "password": "password123#",
+  "invited_by": 1,
+  "global_role": null,
+  "admin_forced_password_reset": false,
+  "teams": [
+    {
+      "id": 1,
+      "role": "observer_plus"
+    }
+  ]
+}'
+curl -X POST $CURL_FLAGS -H "Authorization: Bearer $TOKEN" "$SERVER_URL/$create_user_endpoint" -d "$data" --insecure

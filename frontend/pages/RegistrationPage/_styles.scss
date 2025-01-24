@@ -1,0 +1,21 @@
+.registration-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 24px;
+
+  &__logo {
+    width: 120px;
+
+    @include breakpoint(tablet) {
+      width: 125px;
+      position: static;
+      display: block;
+      margin: 15px 0 0 15px;
+    }
+  }
+
+  &__flash-message {
+    top: 180px;
+  }
+}

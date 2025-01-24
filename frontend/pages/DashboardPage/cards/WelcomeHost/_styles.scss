@@ -1,0 +1,144 @@
+.welcome-host {
+  p {
+    font-size: $x-small;
+  }
+
+  .button-slack {
+    width: 173px;
+    height: auto;
+    margin-top: 4px;
+  }
+
+  p.error-message {
+    font-weight: $bold;
+    margin: 1.5rem 0;
+  }
+
+  p.error-message,
+  .policy-block {
+    .icon {
+      vertical-align: sub;
+      margin-right: $pad-small;
+    }
+  }
+
+  .external-link {
+    display: flex;
+    font-size: $x-small;
+    color: $core-vibrant-blue;
+    font-weight: $bold;
+    text-decoration: none !important;
+
+    .icon {
+      margin-left: $pad-small;
+      vertical-align: sub;
+    }
+
+    &:last-of-type {
+      margin-top: $pad-large;
+    }
+  }
+  &__intro {
+    margin-top: $pad-large;
+    display: flex;
+    align-items: center;
+
+    & > img {
+      width: 126px;
+    }
+    .info {
+      margin-left: $pad-medium;
+      flex: 1;
+
+      p {
+        margin: 0;
+        margin-top: $pad-small;
+      }
+    }
+  }
+  &__policies {
+    margin-top: $pad-large;
+    margin-bottom: $pad-large;
+
+    > * {
+      margin: 4px 0;
+    }
+
+    button {
+      height: auto;
+      width: 100%;
+    }
+
+    .children-wrapper {
+      width: 100%;
+    }
+
+    .policy-block {
+      min-width: 100%;
+      height: 36px;
+      border: 1px solid $ui-fleet-black-25;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: $regular;
+
+      .info {
+        line-height: 1;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        flex: 1;
+        text-align: left;
+      }
+
+      .icon {
+        padding-left: $pad-medium;
+      }
+    }
+  }
+  &__loading {
+    .loading-spinner {
+      margin: $pad-medium auto;
+    }
+  }
+  &__refetch {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-right: $pad-small;
+
+      &.refetch-spinner {
+        color: $core-white;
+        font-size: $x-small;
+        height: 38px;
+
+        .icon {
+          margin-right: 6px;
+        }
+
+        &.spin {
+          .icon {
+            animation: spin 2s linear infinite;
+          }
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+            transform-origin: center center;
+          }
+          100% {
+            transform: rotate(360deg);
+            transform-origin: center center;
+          }
+        }
+      }
+    }
+    span {
+      padding-left: 4px;
+      font-size: $x-small;
+    }
+  }
+}

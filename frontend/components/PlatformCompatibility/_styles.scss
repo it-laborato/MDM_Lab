@@ -1,0 +1,19 @@
+.platform-compatibility {
+  display: flex;
+  font-size: $x-small;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  b,
+  svg,
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  .platform {
+    display: flex;
+    gap: $pad-xsmall;
+  }
+}

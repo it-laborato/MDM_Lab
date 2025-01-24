@@ -1,0 +1,34 @@
+.team-details {
+  &__loading-spinner {
+    // NOTE: this value was chosen just cause it looked right. Might want to
+    // come back and change it later to be more exact.
+    margin: 30vh auto 0;
+  }
+
+  &__team-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $pad-medium;
+  }
+
+  &__team-details {
+    display: flex;
+    align-items: center;
+    .form-field--dropdown {
+      margin-bottom: 0;
+    }
+  }
+
+  &__host-count {
+    background-color: $ui-vibrant-blue-25;
+    font-size: $xx-small;
+    font-weight: $bold;
+    border-radius: 30px;
+    margin-left: $pad-medium;
+    padding: 4px 12px;
+  }
+
+  .react-tabs__tab-list {
+    margin-bottom: 50px;
+  }
+}

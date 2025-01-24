@@ -1,0 +1,18 @@
+.login-page {
+  &__loading-spinner.centered {
+    margin: 0;
+    position: absolute;
+    left: 50vw;
+    top: 40vh;
+  }
+}
+.login-form-animation-leave {
+  transform: scale(1);
+  opacity: 1;
+
+  &.login-form-animation-leave-active {
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}

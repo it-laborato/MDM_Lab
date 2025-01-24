@@ -1,0 +1,13 @@
+.policy-details-modal {
+  &__body {
+    white-space: pre-wrap;
+  }
+  &__resolution {
+    margin-top: $pad-small;
+    overflow: hidden;
+  }
+
+  &__resolution-header {
+    font-weight: $bold;
+  }
+}

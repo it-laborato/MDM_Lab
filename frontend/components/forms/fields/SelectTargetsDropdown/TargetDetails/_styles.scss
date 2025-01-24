@@ -1,0 +1,166 @@
+.host-target,
+.label-target {
+  width: 100%;
+
+  &__back {
+    color: $core-fleet-black;
+    font-size: $xx-small;
+    display: none;
+  }
+
+  @include breakpoint(ltdesktop) {
+    padding-top: $pad-xxlarge;
+  }
+}
+
+.host-target {
+  &__display-text {
+    font-size: $medium;
+    font-weight: $bold;
+    letter-spacing: 0.6px;
+    color: $core-fleet-black;
+    margin: 0;
+  }
+
+  &__icon {
+    color: $core-fleet-blue;
+    margin-right: $pad-small;
+    width: 21px;
+
+    &--online {
+      color: $core-fleet-black;
+    }
+
+    &--offline {
+      color: $core-fleet-black;
+    }
+  }
+
+  &__status {
+    margin: $pad-xsmall 0;
+    font-size: $small;
+    font-weight: $bold;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+
+    &--is-online {
+      color: $ui-success;
+    }
+
+    &--is-offline {
+      color: $ui-error;
+    }
+  }
+
+  &__labels-wrapper {
+    position: absolute;
+    bottom: $pad-large;
+  }
+
+  &__labels-header {
+    font-size: $small;
+    font-weight: $bold;
+    letter-spacing: 0.9px;
+    color: $core-fleet-black;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  &__labels-list {
+    font-size: $small;
+    font-weight: $regular;
+    letter-spacing: 0.5px;
+    color: $core-fleet-black;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+
+      &::after {
+        content: ",";
+        margin-right: 3px;
+      }
+
+      &:last-child {
+        &::after {
+          content: "";
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &__platform-text {
+    text-transform: capitalize;
+  }
+
+  &__mac-address {
+    text-transform: uppercase;
+  }
+}
+
+.label-target {
+  &__display-text {
+    font-size: $medium;
+    font-weight: $bold;
+    letter-spacing: 0.6px;
+    color: $core-fleet-black;
+    margin: 0;
+  }
+
+  &__icon {
+    color: $core-fleet-blue;
+    margin-right: $pad-small;
+    width: 30px;
+  }
+
+  &__hosts {
+    margin: $pad-xsmall 0;
+    letter-spacing: 0.4px;
+    font-size: $small;
+    font-weight: $regular;
+  }
+
+  &__hosts-count {
+    font-weight: $bold;
+    color: $core-fleet-black;
+
+    strong {
+      min-width: 21px;
+      text-align: center;
+      font-weight: $bold;
+      display: inline-block;
+      margin-right: $pad-small;
+    }
+  }
+
+  &__hosts-online {
+    color: $ui-success;
+  }
+
+  &__description {
+    font-size: $pad-medium;
+    font-weight: $regular;
+    color: $core-fleet-black;
+    margin: 0 0 $pad-small;
+  }
+}
+
+.target-details {
+  &__table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: left;
+    font-size: $small;
+    width: 100%;
+    margin-bottom: $pad-medium;
+
+    th {
+      font-weight: $bold;
+      color: $core-fleet-black;
+      padding-right: $pad-small;
+    }
+  }
+}

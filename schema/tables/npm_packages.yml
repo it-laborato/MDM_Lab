@@ -1,0 +1,15 @@
+name: npm_packages
+columns:
+  - name: pid_with_namespace
+    platforms:
+      - linux
+  - name: mount_namespace_id
+    platforms:
+      - linux
+examples: |-
+  List the author, description and more information about the NPM package called `webpack`, if installed:
+
+  ```sql
+  SELECT author, description, directory, version FROM npm_packages WHERE name='webpack';
+  ```
+description: Node.js packages globally installed on a system.

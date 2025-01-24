@@ -1,0 +1,33 @@
+.policies-table {
+  border-collapse: collapse;
+
+  thead {
+    th {
+      &.passing_host_count__header,
+      &.failing_host_count__header,
+      &.webhook__header {
+        width: 20%;
+        @media (min-width: $medium-width) {
+          width: 15%;
+        }
+      }
+      &.passing_host_count__header,
+      &.failing_host_count__header {
+        .passing-column-header {
+          gap: 10px;
+        }
+      }
+    }
+  }
+
+  &__action-button-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.no-team-policy {
+  border: 1px solid #e2e4ea;
+  box-sizing: border-box;
+  border-radius: 8px;
+}

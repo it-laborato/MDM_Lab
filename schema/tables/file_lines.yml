@@ -1,0 +1,23 @@
+name: file_lines
+notes: This table is from the [Mac Admins osquery extension](https://github.com/macadmins/osquery-extension).
+description: Allows reading an arbitrary file.
+platforms: 
+  - darwin
+  - windows
+  - linux
+evented: false
+examples: |-
+  Output the content of `/etc/hosts` line by line. 
+  
+  ```
+  SELECT * FROM file_lines WHERE path='/etc/hosts';
+  ```
+columns:
+  - name: path
+    description: Path of the file to read.
+    required: true
+    type: text
+  - name: line
+    description: Output of the file, line by line.
+    required: false
+    type: text

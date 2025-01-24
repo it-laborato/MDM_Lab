@@ -1,0 +1,32 @@
+.hosts-filter-block {
+  &__labels-active-filter-wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: $pad-small;
+    gap: $pad-small; // between multiple filter pills
+
+    .form-field {
+      // negate global .form-field {width: 100%} for use of Dropdown
+      // and other "form-fields" in the filter block
+      width: initial;
+    }
+
+    // Vertically centers icon and text
+    .Select-multi-value-wrapper {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__os_settings-dropdown,
+  &__macsettings-dropdown,
+  &__sw-install-status-dropdown {
+    .dropdown__select {
+      border: 1px solid #e2e4ea;
+    }
+
+    .Select-multi-value-wrapper {
+      width: 150px; // Fits all dropdown options without resizing
+    }
+  }
+}

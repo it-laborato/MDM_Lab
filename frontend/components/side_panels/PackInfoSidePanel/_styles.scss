@@ -1,0 +1,54 @@
+.pack-info-side-panel {
+  &__title {
+    font-size: $medium;
+    font-weight: $regular;
+    color: $core-fleet-black;
+    border-bottom: 1px solid $ui-fleet-black-10;
+    padding-bottom: 8px;
+    margin: 0 0 7px;
+  }
+
+  &__subtitle {
+    font-size: $x-small;
+    font-weight: $bold;
+    color: $core-fleet-black;
+  }
+
+  p,
+  ul {
+    font-size: $x-small;
+    color: $core-fleet-black;
+  }
+
+  p {
+    margin: 24px 0 24px 0;
+  }
+
+  ul {
+    margin-left: 16px;
+    padding-left: 0px;
+  }
+
+  li::marker {
+    color: $core-vibrant-blue;
+  }
+
+  dl {
+    dt {
+      font-weight: $bold;
+      font-size: $x-small;
+      color: $core-fleet-black;
+      margin-bottom: 24px;
+
+      img {
+        height: 16px;
+        width: auto;
+        margin-right: 8px;
+      }
+
+      span {
+        vertical-align: 2px;
+      }
+    }
+  }
+}

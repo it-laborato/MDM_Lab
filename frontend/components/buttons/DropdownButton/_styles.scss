@@ -1,0 +1,72 @@
+.dropdown-button {
+  padding: 8px 0;
+  &__wrapper {
+    display: flex;
+    position: relative;
+  }
+
+  &__caret {
+    font-size: 6px;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+
+  &__options {
+    position: absolute;
+    right: 0;
+    top: 45px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 2;
+    border-radius: 2px;
+    background-color: $core-white;
+    box-shadow: 0 4px 10px rgba(52, 59, 96, 0.15);
+    animation: fade-in 150ms ease-out;
+    &--opened {
+      display: inline-block;
+    }
+  }
+
+  &__option {
+    display: block;
+
+    .button {
+      color: $core-fleet-blue;
+      text-transform: none;
+      text-align: left;
+      font-weight: $regular;
+      margin: 0;
+      border-radius: 0;
+      padding: 0 10px;
+      white-space: nowrap;
+      width: 100%;
+      font-size: 15px;
+      height: 38px;
+      letter-spacing: -0.5px;
+
+      &:hover,
+      &:focus {
+        background-color: $ui-vibrant-blue-10;
+        color: $core-fleet-blue;
+      }
+    }
+  }
+
+  &.story {
+    padding-left: 100px;
+  }
+}
+
+.downcaret {
+  &::after {
+    content: url("../assets/images/icon-chevron-white-16x16@2x.png");
+    transform: scale(0.5);
+    width: 16px;
+    border-radius: 0px;
+    padding: 0px;
+    padding-left: 2px;
+    margin-top: 1px;
+  }
+}
