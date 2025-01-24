@@ -35,7 +35,7 @@ const TeamHostExpiryToggle = ({
           >
             <>
               Add custom expiry window
-              <Icon name="chevron-right" color="core-fleet-blue" size="small" />
+              <Icon name="chevron-right" color="core-mdmlab-blue" size="small" />
             </>
           </Link>
         )}

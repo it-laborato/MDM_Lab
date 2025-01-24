@@ -107,7 +107,7 @@ const ScriptListItem = ({
             variant="text-icon"
             onClick={() => onDelete(script)}
           >
-            <Icon name="trash" color="ui-fleet-black-75" />
+            <Icon name="trash" color="ui-mdmlab-black-75" />
           </Button>
         </>
       }

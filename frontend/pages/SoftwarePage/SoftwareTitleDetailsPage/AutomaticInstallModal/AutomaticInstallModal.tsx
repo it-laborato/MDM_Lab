@@ -55,7 +55,7 @@ const AutomaticInstallModal = ({
         <CustomLink
           newTab
           text="Learn more"
-          url="https://fleetdm.com/learn-more-about/policy-automation-install-software"
+          url="https://mdmlabdm.com/learn-more-about/policy-automation-install-software"
         />
       </>
     ) : (
@@ -64,7 +64,7 @@ const AutomaticInstallModal = ({
         <CustomLink
           newTab
           text="Learn more"
-          url="https://fleetdm.com/learn-more-about/policy-automation-install-software"
+          url="https://mdmlabdm.com/learn-more-about/policy-automation-install-software"
         />
       </>
     );

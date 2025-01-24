@@ -131,13 +131,7 @@ const AccountSidePanel = ({
         className={`${baseClass}__version`}
       >{`Mdmlab ${versionData?.version} • Go ${versionData?.go_version}`}</span>
       <span className={`${baseClass}__privacy-policy`}>
-        <a
-          href="https://fleetdm.com/legal/privacy"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Privacy policy
-        </a>
+
       </span>
     </div>
   );

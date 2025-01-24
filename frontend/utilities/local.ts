@@ -7,13 +7,13 @@ const local = {
     localStorage.clear();
   },
   getItem: (itemName: string): string | null => {
-    return localStorage.getItem(`FLEET::${itemName}`);
+    return localStorage.getItem(`MDMLAB::${itemName}`);
   },
   setItem: (itemName: string, value: string): void => {
-    return localStorage.setItem(`FLEET::${itemName}`, value);
+    return localStorage.setItem(`MDMLAB::${itemName}`, value);
   },
   removeItem: (itemName: string): void => {
-    localStorage.removeItem(`FLEET::${itemName}`);
+    localStorage.removeItem(`MDMLAB::${itemName}`);
   },
 };
 

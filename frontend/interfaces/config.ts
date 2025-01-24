@@ -1,4 +1,4 @@
-/* Config interface is a flattened version of the fleet/config API response */
+/* Config interface is a flattened version of the mdmlab/config API response */
 import {
   IWebhookHostStatus,
   IWebhookFailingPolicies,
@@ -52,7 +52,7 @@ export interface IMdmConfig {
   /**
    * @deprecated
    * Refer to needsAbmTermsRenewal from AppContext instead of config.apple_bm_terms_expired.
-   * https://github.com/fleetdm/fleet/pull/21043/files#r1705977965
+   * https://github.com/mdmlabdm/mdmlab/pull/21043/files#r1705977965
    */
   apple_bm_terms_expired: boolean;
   apple_bm_enabled_and_configured: boolean;
@@ -157,7 +157,7 @@ export interface IConfig {
     osquery_policy: number;
   };
   license: ILicense;
-  fleet_desktop: IMdmlabDesktopSettings;
+  mdmlab_desktop: IMdmlabDesktopSettings;
   vulnerabilities: {
     databases_path: string;
     periodicity: number;

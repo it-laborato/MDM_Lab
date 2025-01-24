@@ -111,7 +111,7 @@ const ActivityItem = ({
   // TODO: remove this once we have a proper way of handling "Mdmlab-initiated" activities in
   // the backend. For now, if all these fields are empty, then we assume it was
   // Mdmlab-initiated.
-  let fleetInitiated = false;
+  let mdmlabInitiated = false;
   if (
     !activity.actor_email &&
     !activity.actor_full_name &&
@@ -119,7 +119,7 @@ const ActivityItem = ({
       activity.type === ActivityType.InstalledAppStoreApp ||
       activity.type === ActivityType.RanScript)
   ) {
-    fleetInitiated = true;
+    mdmlabInitiated = true;
   }
 
   return (
@@ -131,7 +131,7 @@ const ActivityItem = ({
           user={{ gravatar_url }}
           size="small"
           hasWhiteBackground
-          useMdmlabAvatar={fleetInitiated}
+          useMdmlabAvatar={mdmlabInitiated}
         />
         <div className={`${baseClass}__avatar-lower-dash`} />
       </div>
@@ -178,7 +178,7 @@ const ActivityItem = ({
             >
               <Icon
                 name="close"
-                color="ui-fleet-black-75"
+                color="ui-mdmlab-black-75"
                 className={`${baseClass}__close-icon`}
               />
             </Button>

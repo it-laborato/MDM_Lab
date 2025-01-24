@@ -1,4 +1,4 @@
-# Fleet UI tests
+# mdmlab UI tests
 
 The test directory contains the jest configuration, test setup, request handlers, mock server definition,  testing utilities, and entity stubs (deprecated and will be replaced by mocks in `frontend/__mocks__`) for use in test files throughout the application. The test files for components and app functions are located in the same directory as the files they test.
 
@@ -42,4 +42,4 @@ Check out how we [mock data](../__mocks__/README.md) used for unit and integrati
 
 Follow [this guide](../../docs/Contributing/Testing-and-local-development.md) to run tests locally.
 
-Visit the frontend [overview of Fleet UI testing](../docs/Contributing/Fleet-UI-Testing.md) for more information on our testing strategy, philosophies, and tools.
+Visit the frontend [overview of mdmlab UI testing](../docs/Contributing/mdmlab-UI-Testing.md) for more information on our testing strategy, philosophies, and tools.

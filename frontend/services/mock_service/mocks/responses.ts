@@ -562,7 +562,7 @@ const teamQueries = {
       observer_can_run: true,
       author_id: 1,
       author_name: "Jacob",
-      author_email: "jacob@fleetdm.com",
+      author_email: "jacob@mdmlabdm.com",
       packs: [],
       stats: {
         system_time_p50: 1,
@@ -592,7 +592,7 @@ const teamQueries = {
       observer_can_run: true,
       author_id: 1,
       author_name: "Jacob",
-      author_email: "jacob@fleetdm.com",
+      author_email: "jacob@mdmlabdm.com",
       packs: [],
       stats: {
         system_time_p50: 4,

@@ -45,7 +45,7 @@ const DataError = ({
                 <div className={`${baseClass}__data`}>
                   If this keeps happening please&nbsp;
                   <CustomLink
-                    url="https://github.com/fleetdm/fleet/issues/new/choose"
+                    url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
                     text="file an issue"
                     newTab
                   />
@@ -75,7 +75,7 @@ const DataError = ({
                   <span className="info__data">
                     If this keeps happening, please&nbsp;
                     <CustomLink
-                      url="https://github.com/fleetdm/fleet/issues/new/choose"
+                      url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
                       text="file an issue"
                       newTab
                     />

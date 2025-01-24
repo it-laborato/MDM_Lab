@@ -86,7 +86,7 @@ const StatusMessage = ({
         <StatusMessageError message={message} />
       );
     case -2:
-      // Expected API message: "Scripts are disabled for this host. To run scripts, deploy the fleetd agent with scripts enabled."
+      // Expected API message: "Scripts are disabled for this host. To run scripts, deploy the mdmlabd agent with scripts enabled."
       return <StatusMessageError message={message} />;
     case -1: {
       // message should look like: "Timeout. Mdmlab stopped the script after 600 seconds to protect host performance.";

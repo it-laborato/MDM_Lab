@@ -38,37 +38,17 @@ interface IDownloadFormProps {
 const baseClass = "download-installers";
 
 const displayOrder = [
-  "macOS",
   "Windows",
-  "Linux (RPM)",
-  "Linux (deb)",
 ] as const;
 
 const displayIcon = (platform: IInstallerPlatform, isSelected: boolean) => {
   switch (platform) {
-    case "Linux (RPM)":
-    case "Linux (deb)":
-      return (
-        <Icon
-          name="linux"
-          size="large"
-          color={isSelected ? "core-fleet-blue" : "core-fleet-black"}
-        />
-      );
-    case "macOS":
-      return (
-        <Icon
-          name="darwin"
-          size="large"
-          color={isSelected ? "core-fleet-blue" : "core-fleet-black"}
-        />
-      );
     case "Windows":
       return (
         <Icon
           name="windows"
           size="large"
-          color={isSelected ? "core-fleet-blue" : "core-fleet-black"}
+          color={isSelected ? "core-mdmlab-blue" : "core-mdmlab-black"}
         />
       );
     default:
@@ -231,7 +211,7 @@ const DownloadInstallers = ({
         })}
       </div>
       <Checkbox
-        name="include-fleet-desktop"
+        name="include-mdmlab-desktop"
         onChange={(value: boolean) => setIncludeDesktop(value)}
         value={includeDesktop}
       >

@@ -104,8 +104,8 @@ const TeamsDropdown = ({
     const { isFocused, selectProps } = props;
     const color =
       isFocused || selectProps.menuIsOpen
-        ? "core-fleet-blue"
-        : "core-fleet-black";
+        ? "core-mdmlab-blue"
+        : "core-mdmlab-black";
 
     return (
       <components.DropdownIndicator {...props} className={baseClass}>
@@ -133,7 +133,7 @@ const TeamsDropdown = ({
       "&:hover": {
         boxShadow: "none",
         ".team-dropdown__single-value": {
-          color: COLORS["core-fleet-blue"],
+          color: COLORS["core-mdmlab-blue"],
         },
         ".team-dropdown__indicator path": {
           stroke: COLORS["core-vibrant-blue-over"],
@@ -151,10 +151,10 @@ const TeamsDropdown = ({
       },
       ...(state.isDisabled && {
         ".team-dropdown__single-value": {
-          color: COLORS["ui-fleet-black-50"],
+          color: COLORS["ui-mdmlab-black-50"],
         },
         ".team-dropdown__indicator path": {
-          stroke: COLORS["ui-fleet-black-50"],
+          stroke: COLORS["ui-mdmlab-black-50"],
         },
       }),
       // When clicking
@@ -220,7 +220,7 @@ const TeamsDropdown = ({
       borderRadius: "4px",
       backgroundColor: getOptionBackgroundColor(state),
       fontWeight: state.isSelected ? "bold" : "normal",
-      color: COLORS["core-fleet-black"],
+      color: COLORS["core-mdmlab-black"],
       "&:hover": {
         backgroundColor: state.isDisabled
           ? "transparent"
@@ -232,7 +232,7 @@ const TeamsDropdown = ({
           : COLORS["ui-vibrant-blue-25"],
       },
       ...(state.isDisabled && {
-        color: COLORS["ui-fleet-black-50"],
+        color: COLORS["ui-mdmlab-black-50"],
         fontStyle: "italic",
       }),
     }),

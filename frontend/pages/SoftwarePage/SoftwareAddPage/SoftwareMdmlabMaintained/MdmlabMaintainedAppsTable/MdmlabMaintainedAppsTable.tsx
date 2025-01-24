@@ -16,7 +16,7 @@ import CustomLink from "components/CustomLink";
 
 import { generateTableConfig } from "./MdmlabMaintainedAppsTableConfig";
 
-const baseClass = "fleet-maintained-apps-table";
+const baseClass = "mdmlab-maintained-apps-table";
 
 const EmptyMdmlabAppsTable = () => (
   <EmptyTable
@@ -27,7 +27,7 @@ const EmptyMdmlabAppsTable = () => (
         Can&apos;t find app?{" "}
         <CustomLink
           newTab
-          url="https://fleetdm.com/feature-request"
+          url="https://mdmlabdm.com/feature-request"
           text="File an issue on GitHub"
         />
       </>
@@ -112,7 +112,7 @@ const MdmlabMaintainedAppsTable = ({
       if (changedParam === "") return;
 
       const newRoute = getNextLocationPath({
-        pathPrefix: PATHS.SOFTWARE_ADD_FLEET_MAINTAINED,
+        pathPrefix: PATHS.SOFTWARE_ADD_MDMLAB_MAINTAINED,
         routeTemplate: "",
         queryParams: generateNewQueryParams(newTableQuery, changedParam),
       });
@@ -123,7 +123,7 @@ const MdmlabMaintainedAppsTable = ({
   );
 
   const handleRowClick = (row: IRowProps) => {
-    const path = `${PATHS.SOFTWARE_FLEET_MAINTAINED_DETAILS(
+    const path = `${PATHS.SOFTWARE_MDMLAB_MAINTAINED_DETAILS(
       row.original.id
     )}?${buildQueryStringFromParams({
       team_id: teamId,
@@ -163,7 +163,7 @@ const MdmlabMaintainedAppsTable = ({
     <TableContainer<IRowProps>
       className={baseClass}
       columnConfigs={tableHeadersConfig}
-      data={data?.fleet_maintained_apps ?? []}
+      data={data?.mdmlab_maintained_apps ?? []}
       isLoading={isLoading}
       resultsTitle="items"
       emptyComponent={EmptyMdmlabAppsTable}

@@ -40,7 +40,7 @@ const WindowsAutomaticEnrollmentPage = () => {
           <CustomLink
             newTab
             text="Learn more"
-            url="https://fleetdm.com/learn-more-about/setup-windows-mdm"
+            url="https://mdmlabdm.com/learn-more-about/setup-windows-mdm"
           />
         </p>
         {/* Ideally we'd use the native browser list styles and css to display
@@ -52,7 +52,7 @@ const WindowsAutomaticEnrollmentPage = () => {
             <CustomLink
               newTab
               text="Sign in to Azure portal"
-              url="https://fleetdm.com/sign-in-to/microsoft-automatic-enrollment-tool"
+              url="https://mdmlabdm.com/sign-in-to/microsoft-automatic-enrollment-tool"
             />
           </li>
           <li>
@@ -60,7 +60,7 @@ const WindowsAutomaticEnrollmentPage = () => {
             <p>
               At the top of the page, search “Domain names“ and select{" "}
               <b>Domain names</b>. Then select <b>+ Add custom domain</b>, type
-              your Mdmlab URL (e.g. fleet.acme.com), and select <b>Add domain</b>
+              your Mdmlab URL (e.g. mdmlab.acme.com), and select <b>Add domain</b>
               .
             </p>
           </li>
@@ -77,7 +77,7 @@ const WindowsAutomaticEnrollmentPage = () => {
                 icon="warning"
               >
                 <div className={`${baseClass}__banner-content`}>
-                  <Icon name="error-outline" color="core-fleet-blue" />
+                  <Icon name="error-outline" color="core-mdmlab-blue" />
                   <p>
                     If you&apos;re a managed-cloud customer, please reach out to
                     Mdmlab to create a TXT/MX record for you.
@@ -156,7 +156,7 @@ const WindowsAutomaticEnrollmentPage = () => {
           <li>
             <span>10.</span>
             <p>
-              Use your Mdmlab URL (e.g. fleet.acme.com) and select <b>Save</b>.
+              Use your Mdmlab URL (e.g. mdmlab.acme.com) and select <b>Save</b>.
             </p>
           </li>
           <li>

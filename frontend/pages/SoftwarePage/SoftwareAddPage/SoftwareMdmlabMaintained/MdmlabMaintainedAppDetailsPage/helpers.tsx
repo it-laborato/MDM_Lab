@@ -2,7 +2,7 @@ import { getErrorReason } from "interfaces/errors";
 
 import { generateSecretErrMsg } from "pages/SoftwarePage/helpers";
 
-import fleetAppData from "../../../../../../server/mdm/maintainedapps/apps.json";
+import mdmlabAppData from "../../../../../../server/mdm/maintainedapps/apps.json";
 
 const NameToIdentifierMap: Record<string, string> = {
   "1Password": "1password",
@@ -30,7 +30,7 @@ const NameToIdentifierMap: Record<string, string> = {
 
 const getMdmlabAppData = (name: string) => {
   const appId = NameToIdentifierMap[name]; // TODO: need a better matching mechanism here
-  return fleetAppData.find((app) => app.identifier === appId);
+  return mdmlabAppData.find((app) => app.identifier === appId);
 };
 
 export const getMdmlabAppPolicyName = (appName: string) => {

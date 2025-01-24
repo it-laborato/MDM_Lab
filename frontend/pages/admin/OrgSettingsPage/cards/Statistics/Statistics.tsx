@@ -62,7 +62,7 @@ const Statistics = ({
             <br />
             <br />
             <CustomLink
-              url="https://fleetdm.com/docs/using-fleet/usage-statistics#usage-statistics"
+              url="https://mdmlabdm.com/docs/using-mdmlab/usage-statistics#usage-statistics"
               text="Learn more about usage statistics"
               newTab
             />

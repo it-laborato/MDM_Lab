@@ -64,7 +64,7 @@ const AddIntegrationModal = ({
               wrapperClassname={`${baseClass}__form-field ${baseClass}__form-field--platform`}
             />
             <CustomLink
-              url="https://github.com/fleetdm/fleet/issues/new?assignees=&labels=idea&template=feature-request.md&title="
+              url="https://github.com/mdmlabdm/mdmlab/issues/new?assignees=&labels=idea&template=feature-request.md&title="
               text="Suggest a new destination"
               newTab
             />

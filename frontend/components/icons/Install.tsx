@@ -9,7 +9,7 @@ interface IInstallProps {
 }
 
 const Install = ({
-  color = "ui-fleet-black-50",
+  color = "ui-mdmlab-black-50",
   size = "medium",
 }: IInstallProps) => {
   return (

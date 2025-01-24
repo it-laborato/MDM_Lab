@@ -9,7 +9,7 @@ interface IPendingProps {
 
 const Pending = ({
   size = "medium",
-  color = "ui-fleet-black-50",
+  color = "ui-mdmlab-black-50",
 }: IPendingProps) => {
   return (
     <svg

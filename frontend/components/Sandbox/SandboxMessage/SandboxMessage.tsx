@@ -24,14 +24,14 @@ const SandboxMessage = ({
   const variants = {
     demo: (
       <CustomLink
-        url={`https://calendly.com/fleetdm/demo?utm_source=${utmSource}`}
+        url={`https://calendly.com/mdmlabdm/demo?utm_source=${utmSource}`}
         text="Schedule a demo"
         newTab
       />
     ),
     sales: (
       <CustomLink
-        url={`https://fleetdm.com/upgrade`}
+        url={`https://mdmlabdm.com/upgrade`}
         text="Contact sales"
         newTab
       />

@@ -204,7 +204,7 @@ const AppleOSTargetForm = ({
             <CustomLink
               text="Learn more"
               newTab
-              url="https://fleetdm.com/learn-more-about/available-os-update-versions"
+              url="https://mdmlabdm.com/learn-more-about/available-os-update-versions"
             />
           </>
         }

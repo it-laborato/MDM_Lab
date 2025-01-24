@@ -127,16 +127,16 @@ const getReasonFromErrors = (errors: unknown[], filter?: IFilterMdmlabError) => 
     return "";
   }
 
-  let fleetError: IMdmlabApiError | undefined;
+  let mdmlabError: IMdmlabApiError | undefined;
   if (filter?.nameEquals) {
-    fleetError = filterMdmlabErrorNameEquals(errors, filter.nameEquals);
+    mdmlabError = filterMdmlabErrorNameEquals(errors, filter.nameEquals);
   } else if (filter?.reasonIncludes) {
-    fleetError = filterMdmlabErrorReasonIncludes(errors, filter.reasonIncludes);
+    mdmlabError = filterMdmlabErrorReasonIncludes(errors, filter.reasonIncludes);
   } else {
-    fleetError = isMdmlabApiError(errors[0]) ? errors[0] : undefined;
+    mdmlabError = isMdmlabApiError(errors[0]) ? errors[0] : undefined;
   }
 
-  return fleetError?.reason || "";
+  return mdmlabError?.reason || "";
 };
 
 const getReasonFromRecordWithDataErrors = (

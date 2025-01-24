@@ -29,7 +29,7 @@ const MdmlabDesktop = ({
 }: IAppConfigFormProps): JSX.Element => {
   const [formData, setFormData] = useState<IMdmlabDesktopFormData>({
     transparencyUrl:
-      appConfig.fleet_desktop?.transparency_url || DEFAULT_TRANSPARENCY_URL,
+      appConfig.mdmlab_desktop?.transparency_url || DEFAULT_TRANSPARENCY_URL,
   });
 
   const [formErrors, setFormErrors] = useState<IMdmlabDesktopFormErrors>({});
@@ -54,7 +54,7 @@ const MdmlabDesktop = ({
     evt.preventDefault();
 
     const formDataForAPI = {
-      fleet_desktop: {
+      mdmlab_desktop: {
         transparency_url: formData.transparencyUrl,
       },
     };
@@ -75,8 +75,8 @@ const MdmlabDesktop = ({
             When an end user clicks “About Mdmlab” in the Mdmlab Desktop menu, by
             default they are taken to{" "}
             <CustomLink
-              url="https://fleetdm.com/transparency"
-              text="https://fleetdm.com/transparency"
+              url="https://mdmlabdm.com/transparency"
+              text="https://mdmlabdm.com/transparency"
               newTab
               multiline
             />{" "}
@@ -91,7 +91,7 @@ const MdmlabDesktop = ({
             parseTarget
             onBlur={validateForm}
             error={formErrors.transparency_url}
-            placeholder="https://fleetdm.com/transparency"
+            placeholder="https://mdmlabdm.com/transparency"
           />
           <Button
             type="submit"

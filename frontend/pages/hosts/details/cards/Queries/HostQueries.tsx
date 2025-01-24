@@ -49,7 +49,7 @@ const HostQueries = ({
             <>
               <span>Interested in collecting data from your Chromebooks? </span>
               <CustomLink
-                url="https://www.fleetdm.com/contact"
+                url="https://www.mdmlabdm.com/contact"
                 text="Let us know"
                 newTab
               />

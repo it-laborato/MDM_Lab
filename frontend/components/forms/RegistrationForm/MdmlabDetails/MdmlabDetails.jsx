@@ -10,7 +10,7 @@ import InputField from "components/forms/fields/InputField";
 const formFields = ["server_url"];
 const { validate } = helpers;
 
-class FleetDetails extends Component {
+class MdmlabDetails extends Component {
   static propTypes = {
     className: PropTypes.string,
     currentPage: PropTypes.bool,
@@ -42,7 +42,7 @@ class FleetDetails extends Component {
       <form onSubmit={handleSubmit} className={className} autoComplete="off">
         <InputField
           {...fields.server_url}
-          label="Fleet web address"
+          label="mdmlab web address"
           tabIndex={tabIndex}
           helpText={[
             "Don’t include ",
@@ -66,7 +66,7 @@ class FleetDetails extends Component {
   }
 }
 
-export default Form(FleetDetails, {
+export default Form(MdmlabDetails, {
   fields: formFields,
   validate,
 });

@@ -44,7 +44,7 @@ const DeleteSecretModal = ({
           <p>Hosts can no longer enroll using this secret.</p>
           <p>
             <CustomLink
-              url="https://fleetdm.com/learn-more-about/rotating-enroll-secrets"
+              url="https://mdmlabdm.com/learn-more-about/rotating-enroll-secrets"
               text="Learn about rotating enroll secrets"
               newTab
             />

@@ -101,7 +101,7 @@ const SetupAssistant = ({ currentTeamId }: ISetupAssistantProps) => {
               Add an automatic enrollment profile to customize the macOS Setup
               Assistant.{" "}
               <CustomLink
-                url="https://fleetdm.com/learn-more-about/setup-assistant"
+                url="https://mdmlabdm.com/learn-more-about/setup-assistant"
                 text="Learn how"
                 newTab
               />

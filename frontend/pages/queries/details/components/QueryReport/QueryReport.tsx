@@ -88,7 +88,7 @@ const QueryReport = ({
         >
           <>
             Export results
-            <Icon name="download" color="core-fleet-blue" />
+            <Icon name="download" color="core-mdmlab-blue" />
           </>
         </Button>
       </div>

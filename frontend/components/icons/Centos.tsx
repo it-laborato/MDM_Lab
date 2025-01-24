@@ -9,7 +9,7 @@ interface ICentosProps {
 
 const Centos = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: ICentosProps) => {
   return (
     <svg

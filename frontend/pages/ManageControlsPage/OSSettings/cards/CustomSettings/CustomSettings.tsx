@@ -190,7 +190,7 @@ const CustomSettings = ({
         <CustomLink
           newTab
           text="Learn how"
-          url="https://fleetdm.com/learn-more-about/custom-os-settings"
+          url="https://mdmlabdm.com/learn-more-about/custom-os-settings"
         />
       </p>
       {!mdmEnabled ? (

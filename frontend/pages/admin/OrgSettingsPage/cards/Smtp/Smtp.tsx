@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import { AppContext } from "context/app";
 
-import { CONTACT_FLEET_LINK } from "utilities/constants";
+import { CONTACT_MDMLAB_LINK } from "utilities/constants";
 
 import Button from "components/buttons/Button";
 import Checkbox from "components/forms/fields/Checkbox";
@@ -225,7 +225,7 @@ const Smtp = ({
       <>
         To configure SMTP,{" "}
         <CustomLink
-          url={isPremiumTier ? CONTACT_FLEET_LINK : "https://fleetdm.com/slack"}
+          url={isPremiumTier ? CONTACT_MDMLAB_LINK : "https://mdmlabdm.com/slack"}
           text="get help"
           newTab
         />

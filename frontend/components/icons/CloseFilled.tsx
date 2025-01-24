@@ -9,7 +9,7 @@ interface IExCircledProps {
 
 const CloseFilled = ({
   size = "medium",
-  color = "core-fleet-blue",
+  color = "core-mdmlab-blue",
 }: IExCircledProps) => {
   return (
     <svg

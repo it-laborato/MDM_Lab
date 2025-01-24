@@ -7,7 +7,7 @@ describe("MdmlabIcon - component", () => {
   it("renders", () => {
     const { container } = render(<MdmlabIcon name="success-check" />);
     expect(
-      container.querySelector(".fleeticon-success-check")
+      container.querySelector(".mdmlabicon-success-check")
     ).toBeInTheDocument();
   });
 });

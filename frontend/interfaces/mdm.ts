@@ -172,7 +172,7 @@ export const isLinuxDiskEncryptionStatus = (
 ): status is LinuxDiskEncryptionStatus =>
   ["verified", "failed", "action_required"].includes(status);
 
-export const FLEET_FILEVAULT_PROFILE_DISPLAY_NAME = "Disk encryption";
+export const MDMLAB_FILEVAULT_PROFILE_DISPLAY_NAME = "Disk encryption";
 
 export interface IMdmSSOReponse {
   url: string;

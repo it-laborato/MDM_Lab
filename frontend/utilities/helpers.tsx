@@ -46,7 +46,7 @@ import {
   DEFAULT_GRAVATAR_LINK_FALLBACK,
   DEFAULT_GRAVATAR_LINK_DARK,
   DEFAULT_GRAVATAR_LINK_DARK_FALLBACK,
-  INITIAL_FLEET_DATE,
+  INITIAL_MDMLAB_DATE,
   PLATFORM_LABEL_DISPLAY_TYPES,
   isPlatformLabelNameFromAPI,
   PolicyResponse,
@@ -550,7 +550,7 @@ export const inMilliseconds = (nanoseconds: number): number => {
 };
 
 export const humanHostLastSeen = (lastSeen: string): string => {
-  if (!lastSeen || lastSeen < INITIAL_FLEET_DATE) {
+  if (!lastSeen || lastSeen < INITIAL_MDMLAB_DATE) {
     return "Never";
   }
   if (lastSeen === "Unavailable") {
@@ -560,7 +560,7 @@ export const humanHostLastSeen = (lastSeen: string): string => {
 };
 
 export const humanHostEnrolled = (enrolled: string): string => {
-  if (!enrolled || enrolled < INITIAL_FLEET_DATE) {
+  if (!enrolled || enrolled < INITIAL_MDMLAB_DATE) {
     return "Never";
   }
   return formatDistanceToNow(new Date(enrolled), { addSuffix: true });
@@ -573,7 +573,7 @@ export const humanHostMemory = (bytes: number): string => {
 export const humanHostDetailUpdated = (detailUpdated?: string): string => {
   // Handles the case when a host has checked in to Mdmlab but
   // its details haven't been updated.
-  if (!detailUpdated || detailUpdated < INITIAL_FLEET_DATE) {
+  if (!detailUpdated || detailUpdated < INITIAL_MDMLAB_DATE) {
     return "unavailable";
   }
   try {
@@ -620,7 +620,7 @@ export const hostTeamName = (teamName: string | null): string => {
 
 export const humanQueryLastRun = (lastRun: string): string => {
   // Handles the case when a query has never been ran.
-  if (!lastRun || lastRun < INITIAL_FLEET_DATE) {
+  if (!lastRun || lastRun < INITIAL_MDMLAB_DATE) {
     return "Has not run";
   }
 

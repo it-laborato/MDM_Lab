@@ -143,8 +143,8 @@ const DropdownWrapper = ({
     const { isFocused, selectProps } = props;
     const color =
       isFocused || selectProps.menuIsOpen
-        ? "core-fleet-blue"
-        : "core-fleet-black";
+        ? "core-mdmlab-blue"
+        : "core-mdmlab-black";
 
     return (
       <components.DropdownIndicator
@@ -196,11 +196,11 @@ const DropdownWrapper = ({
       boxShadow: "none",
       borderRadius: "4px",
       borderColor: state.isFocused
-        ? COLORS["core-fleet-blue"]
-        : COLORS["ui-fleet-black-10"],
+        ? COLORS["core-mdmlab-blue"]
+        : COLORS["ui-mdmlab-black-10"],
       "&:hover": {
         boxShadow: "none",
-        borderColor: COLORS["core-fleet-blue"],
+        borderColor: COLORS["core-mdmlab-blue"],
         ".dropdown-wrapper__single-value": {
           color: COLORS["core-vibrant-blue-over"],
         },
@@ -226,13 +226,13 @@ const DropdownWrapper = ({
       },
       ...(state.isDisabled && {
         ".dropdown-wrapper__single-value": {
-          color: COLORS["ui-fleet-black-50"],
+          color: COLORS["ui-mdmlab-black-50"],
         },
         ".dropdown-wrapper__indicator path": {
-          stroke: COLORS["ui-fleet-black-50"],
+          stroke: COLORS["ui-mdmlab-black-50"],
         },
         ".filter-icon path": {
-          fill: COLORS["ui-fleet-black-50"],
+          fill: COLORS["ui-mdmlab-black-50"],
         },
       }),
       "&:active": {
@@ -298,7 +298,7 @@ const DropdownWrapper = ({
       borderRadius: "4px",
       backgroundColor: getOptionBackgroundColor(state),
       fontWeight: state.isSelected ? "bold" : "normal",
-      color: COLORS["core-fleet-black"],
+      color: COLORS["core-mdmlab-black"],
       "&:hover": {
         backgroundColor: state.isDisabled
           ? "transparent"
@@ -310,7 +310,7 @@ const DropdownWrapper = ({
           : COLORS["ui-vibrant-blue-25"],
       },
       ...(state.isDisabled && {
-        color: COLORS["ui-fleet-black-50"],
+        color: COLORS["ui-mdmlab-black-50"],
         fontStyle: "italic",
         cursor: "not-allowed",
       }),
@@ -324,7 +324,7 @@ const DropdownWrapper = ({
       ".dropdown-wrapper__help-text": {
         fontSize: "12px",
         whiteSpace: "normal",
-        color: COLORS["ui-fleet-black-75"],
+        color: COLORS["ui-mdmlab-black-75"],
         fontStyle: "italic",
         fontWeight: "normal",
       },

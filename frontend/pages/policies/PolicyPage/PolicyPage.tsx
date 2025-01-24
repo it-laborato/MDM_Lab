@@ -276,7 +276,7 @@ const PolicyPage = ({
             Mdmlab is unable to run a live query. Refresh the page or log in
             again. If this keeps happening please{" "}
             <CustomLink
-              url="https://github.com/fleetdm/fleet/issues/new/choose"
+              url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
               text="file an issue"
               newTab
             />

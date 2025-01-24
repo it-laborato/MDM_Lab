@@ -30,7 +30,7 @@ export const STYLIZATIONS_AND_ACRONYMS = [
   "JSON",
 ];
 
-// fleetdm.com/handbook/marketing/content-style-guide#sentence-case
+// mdmlabdm.com/handbook/marketing/content-style-guide#sentence-case
 /** Does not recognize proper nouns! */
 export const enforceMdmlabSentenceCasing = (s: string) => {
   const resArr = s.split(" ").map((word, i) => {

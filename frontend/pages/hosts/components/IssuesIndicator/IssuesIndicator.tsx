@@ -28,7 +28,7 @@ const IssuesIndicator = ({
         data-for={`host-issue-count-${rowId}`}
         data-tip-disable={false}
       >
-        <Icon name="error-outline" color="ui-fleet-black-50" />{" "}
+        <Icon name="error-outline" color="ui-mdmlab-black-50" />{" "}
         {totalIssuesCount}
       </span>
       <ReactTooltip

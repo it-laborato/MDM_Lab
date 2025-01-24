@@ -104,13 +104,13 @@ const generateTableHeaders = (
                     delayHide={200} // need delay set to hover using clickable
                   >
                     <>
-                      This user was created using fleetctl and
+                      This user was created using mdmlabctl and
                       <br /> only has API access.{" "}
                       <CustomLink
                         text="Learn more"
                         newTab
-                        url="https://fleetdm.com/docs/using-fleet/fleetctl-cli#using-fleetctl-with-an-api-only-user"
-                        iconColor="core-fleet-white"
+                        url="https://mdmlabdm.com/docs/using-mdmlab/mdmlabctl-cli#using-mdmlabctl-with-an-api-only-user"
+                        iconColor="core-mdmlab-white"
                       />
                     </>
                   </ReactTooltip>
@@ -316,7 +316,7 @@ const enhanceInviteData = (invites: IInvite[]): IUserTableData[] => {
       actions: generateActionDropdownOptions(false, true, invite.sso_enabled),
       id: invite.id,
       type: "invite",
-      api_only: false, // api only users are created through fleetctl and not invites
+      api_only: false, // api only users are created through mdmlabctl and not invites
     };
   });
 };

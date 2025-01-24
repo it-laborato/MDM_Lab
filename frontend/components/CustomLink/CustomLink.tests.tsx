@@ -6,7 +6,7 @@ describe("CustomLink - component", () => {
   it("renders text, link in same tab, and no icon", () => {
     render(
       <CustomLink
-        url="https://github.com/fleetdm/fleet/issues/new/choose"
+        url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
         text="file an issue"
       />
     );
@@ -18,7 +18,7 @@ describe("CustomLink - component", () => {
     expect(icon).toBeNull();
     expect(text.closest("a")).toHaveAttribute(
       "href",
-      "https://github.com/fleetdm/fleet/issues/new/choose"
+      "https://github.com/mdmlabdm/mdmlab/issues/new/choose"
     );
     expect(text.closest("a")).not.toHaveAttribute("target", "_blank");
   });
@@ -26,7 +26,7 @@ describe("CustomLink - component", () => {
   it("renders icon and link in new tab if newTab is set", () => {
     render(
       <CustomLink
-        url="https://github.com/fleetdm/fleet/issues/new/choose"
+        url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
         text="file an issue"
         newTab
       />

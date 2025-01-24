@@ -10,7 +10,7 @@ interface ILinuxCircledProps {
 
 const LinuxCircled = ({
   size = "extra-large",
-  iconColor = "ui-fleet-black-75", // default grey
+  iconColor = "ui-mdmlab-black-75", // default grey
   bgColor = "ui-blue-10", // default light blue
 }: ILinuxCircledProps) => {
   return (

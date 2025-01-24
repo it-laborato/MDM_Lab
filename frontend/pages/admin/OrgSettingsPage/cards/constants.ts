@@ -1,6 +1,6 @@
 import { IConfig } from "interfaces/config";
 
-export const DEFAULT_TRANSPARENCY_URL = "https://fleetdm.com/transparency";
+export const DEFAULT_TRANSPARENCY_URL = "https://mdmlabdm.com/transparency";
 
 export type DeepPartial<T> = T extends object
   ? {

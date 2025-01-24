@@ -72,7 +72,7 @@ const DeleteHostModal = ({
             agent is uninstalled.{" "}
             <CustomLink
               text="Uninstall Mdmlab's agent"
-              url={`${LEARN_MORE_ABOUT_BASE_LINK}/uninstall-fleetd`}
+              url={`${LEARN_MORE_ABOUT_BASE_LINK}/uninstall-mdmlabd`}
               newTab
             />
           </li>

@@ -45,11 +45,11 @@ const PremiumFeatureIconWithTooltip = ({
       >
         {`This is a Mdmlab Premium feature. `}
         <CustomLink
-          url="https://fleetdm.com/upgrade"
+          url="https://mdmlabdm.com/upgrade"
           text="Learn more"
           newTab
           multiline={false}
-          iconColor="core-fleet-white"
+          iconColor="core-mdmlab-white"
         />
       </ReactTooltip>
     </span>

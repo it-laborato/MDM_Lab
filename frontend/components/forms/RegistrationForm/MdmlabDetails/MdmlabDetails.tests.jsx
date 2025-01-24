@@ -3,62 +3,62 @@ import { render, screen } from "@testing-library/react";
 
 import { renderWithSetup } from "test/test-utils";
 
-import FleetDetails from "components/forms/RegistrationForm/MdmlabDetails";
+import MdmlabDetails from "components/forms/RegistrationForm/MdmlabDetails";
 
-describe("FleetDetails - form", () => {
+describe("MdmlabDetails - form", () => {
   const handleSubmitSpy = jest.fn();
   it("renders", () => {
-    render(<FleetDetails handleSubmit={handleSubmitSpy} />);
+    render(<MdmlabDetails handleSubmit={handleSubmitSpy} />);
 
     expect(
-      screen.getByRole("textbox", { name: "Fleet web address" })
+      screen.getByRole("textbox", { name: "Mdmlab web address" })
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next" })).toBeInTheDocument();
   });
 
-  it("validates the presence of the fleet web address field", async () => {
+  it("validates the presence of the Mdmlab web address field", async () => {
     const { user } = renderWithSetup(
-      <FleetDetails handleSubmit={handleSubmitSpy} currentPage />
+      <MdmlabDetails handleSubmit={handleSubmitSpy} currentPage />
     );
 
     await user.click(screen.getByRole("button", { name: "Next" }));
 
     expect(handleSubmitSpy).not.toHaveBeenCalled();
     expect(
-      screen.getByText("Fleet web address must be completed")
+      screen.getByText("Mdmlab web address must be completed")
     ).toBeInTheDocument();
   });
 
-  it("validates the fleet web address field starts with https://", async () => {
+  it("validates the Mdmlab web address field starts with https://", async () => {
     const { user } = renderWithSetup(
-      <FleetDetails handleSubmit={handleSubmitSpy} currentPage />
+      <MdmlabDetails handleSubmit={handleSubmitSpy} currentPage />
     );
 
     await user.type(
-      screen.getByRole("textbox", { name: "Fleet web address" }),
-      "http://gnar.Fleet.co"
+      screen.getByRole("textbox", { name: "Mdmlab web address" }),
+      "http://gnar.Mdmlab.co"
     );
     await user.click(screen.getByRole("button", { name: "Next" }));
 
     expect(handleSubmitSpy).not.toHaveBeenCalled();
     expect(
-      screen.getByText("Fleet web address must start with https://")
+      screen.getByText("Mdmlab web address must start with https://")
     ).toBeInTheDocument();
   });
 
   it("submits the form when valid", async () => {
     const { user } = renderWithSetup(
-      <FleetDetails handleSubmit={handleSubmitSpy} currentPage />
+      <MdmlabDetails handleSubmit={handleSubmitSpy} currentPage />
     );
     // when
     await user.type(
-      screen.getByRole("textbox", { name: "Fleet web address" }),
-      "https://gnar.Fleet.co"
+      screen.getByRole("textbox", { name: "Mdmlab web address" }),
+      "https://gnar.Mdmlab.co"
     );
     await user.click(screen.getByRole("button", { name: "Next" }));
     // then
     expect(handleSubmitSpy).toHaveBeenCalledWith({
-      server_url: "https://gnar.Fleet.co",
+      server_url: "https://gnar.Mdmlab.co",
     });
   });
 });

@@ -22,7 +22,7 @@ interface ILoadTeamsParams {
 
 /**
  * The response body expected for the "Get team" endpoint.
- * See https://fleetdm.com/docs/using-fleet/rest-api#get-team
+ * See https://mdmlabdm.com/docs/using-mdmlab/rest-api#get-team
  */
 export interface ILoadTeamResponse {
   team: ITeamConfig;

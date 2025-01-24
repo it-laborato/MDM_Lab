@@ -93,7 +93,7 @@ const OrgSettingsPage = ({ params, router }: IOrgSettingsPageProps) => {
                   <>
                     <br />
                     If you&apos;re not using the latest osquery, use the
-                    fleetctl apply --force command to override validation.
+                    mdmlabctl apply --force command to override validation.
                   </>
                 )}
               </>
@@ -111,7 +111,7 @@ const OrgSettingsPage = ({ params, router }: IOrgSettingsPageProps) => {
   let navItems = ORG_SETTINGS_NAV_ITEMS;
   if (!isPremiumTier) {
     navItems = ORG_SETTINGS_NAV_ITEMS.filter(
-      (item) => item.urlSection !== "fleet-desktop"
+      (item) => item.urlSection !== "mdmlab-desktop"
     );
   }
 
@@ -121,7 +121,7 @@ const OrgSettingsPage = ({ params, router }: IOrgSettingsPageProps) => {
 
   const CurrentCard = currentFormSection.Card;
 
-  if (isFreeTier && section === "fleet-desktop") {
+  if (isFreeTier && section === "mdmlab-desktop") {
     handlePageError({ status: 403 });
     return null;
   }

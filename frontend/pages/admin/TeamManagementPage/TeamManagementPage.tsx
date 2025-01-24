@@ -260,7 +260,7 @@ const TeamManagementPage = (): JSX.Element => {
           <SandboxMessage
             variant="sales"
             message="Teams is only available in Mdmlab premium."
-            utmSource="fleet-ui-teams-page"
+            utmSource="mdmlab-ui-teams-page"
             className={`${baseClass}__sandbox-message`}
           />
         )}

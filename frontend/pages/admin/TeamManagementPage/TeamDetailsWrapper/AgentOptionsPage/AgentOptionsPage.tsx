@@ -123,7 +123,7 @@ const AgentOptionsPage = ({
             {agentOptionsInvalid && (
               <>
                 <br />
-                If you&apos;re not using the latest osquery, use the fleetctl
+                If you&apos;re not using the latest osquery, use the mdmlabctl
                 apply --force command to override validation.
               </>
             )}
@@ -142,12 +142,12 @@ const AgentOptionsPage = ({
   return (
     <div className={`${baseClass}`}>
       <p className={`${baseClass}__page-description`}>
-        Agent options configure Mdmlab&apos;s agent (fleetd). When you update
+        Agent options configure Mdmlab&apos;s agent (mdmlabd). When you update
         agent options, they will be applied the next time a host checks in to
         Mdmlab.
         <br />
         <CustomLink
-          url="https://fleetdm.com/learn-more-about/agent-options"
+          url="https://mdmlabdm.com/learn-more-about/agent-options"
           text="Learn more about agent options"
           newTab
           multiline

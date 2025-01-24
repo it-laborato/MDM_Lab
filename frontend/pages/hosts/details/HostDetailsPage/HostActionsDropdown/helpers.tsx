@@ -300,7 +300,7 @@ export const getDropdownOptionTooltipContent = (
       <>
         To {tooltipAction[value]} this host, deploy the
         <br />
-        fleetd agent with --enable-scripts and
+        mdmlabd agent with --enable-scripts and
         <br />
         refetch host vitals
       </>

@@ -64,7 +64,7 @@ const ViewAllHostsLink = ({
         <Icon
           name="chevron-right"
           className={`${baseClass}__icon`}
-          color="core-fleet-blue"
+          color="core-mdmlab-blue"
         />
       )}
     </Link>

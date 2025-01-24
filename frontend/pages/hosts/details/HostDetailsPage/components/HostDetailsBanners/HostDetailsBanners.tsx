@@ -124,8 +124,8 @@ const HostDetailsBanners = ({
               <CustomLink
                 url={`${LEARN_MORE_ABOUT_BASE_LINK}/mdm-disk-encryption`}
                 text="Guide"
-                color="core-fleet-black"
-                iconColor="core-fleet-black"
+                color="core-mdmlab-black"
+                iconColor="core-mdmlab-black"
                 newTab
               />
             }

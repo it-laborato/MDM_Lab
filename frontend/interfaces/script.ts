@@ -9,7 +9,7 @@ export interface IScript {
 }
 
 export const isScriptSupportedPlatform = (hostPlatform: string) =>
-  ["darwin", "windows", ...HOST_LINUX_PLATFORMS].includes(hostPlatform); // excludes chrome, ios, ipados see also https://github.com/fleetdm/fleet/blob/5a21e2cfb029053ddad0508869eb9f1f23997bf2/server/fleet/hosts.go#L775
+  ["darwin", "windows", ...HOST_LINUX_PLATFORMS].includes(hostPlatform); // excludes chrome, ios, ipados see also https://github.com/mdmlabdm/mdmlab/blob/5a21e2cfb029053ddad0508869eb9f1f23997bf2/server/mdmlab/hosts.go#L775
 
 export type IScriptExecutionStatus = "ran" | "pending" | "error";
 

@@ -14,7 +14,7 @@ export interface IEmptyVulnerabilitiesTableProps {
 
 const LearnMoreLink = () => (
   <CustomLink
-    url="https://fleetdm.com/learn-more-about/vulnerability-processing"
+    url="https://mdmlabdm.com/learn-more-about/vulnerability-processing"
     text="Learn more"
     newTab
   />
@@ -70,7 +70,7 @@ const EmptyVulnerabilitiesTable: React.FC<IEmptyVulnerabilitiesTableProps> = ({
           <>
             Users with the admin role can{" "}
             <CustomLink
-              url="https://fleetdm.com/docs/using-fleet/vulnerability-processing#configuration"
+              url="https://mdmlabdm.com/docs/using-mdmlab/vulnerability-processing#configuration"
               text="turn on software inventory"
               newTab
             />

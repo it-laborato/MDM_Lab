@@ -171,7 +171,7 @@ const Scripts = ({ router, currentPage, teamIdForApi }: IScriptsProps) => {
         You can run scripts on individual hosts.{" "}
         <CustomLink
           text="Learn more"
-          url="https://fleetdm.com/docs/using-fleet/scripts"
+          url="https://mdmlabdm.com/docs/using-mdmlab/scripts"
           newTab
         />
       </p>

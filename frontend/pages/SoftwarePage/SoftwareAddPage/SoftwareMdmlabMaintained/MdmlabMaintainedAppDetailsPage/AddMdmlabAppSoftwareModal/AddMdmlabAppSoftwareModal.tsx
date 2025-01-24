@@ -3,7 +3,7 @@ import Spinner from "components/Spinner";
 import { noop } from "lodash";
 import React from "react";
 
-const baseClass = "add-fleet-app-software-modal";
+const baseClass = "add-mdmlab-app-software-modal";
 
 const AddMdmlabAppSoftwareModal = () => {
   return (

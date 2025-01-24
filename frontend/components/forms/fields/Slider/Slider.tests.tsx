@@ -13,13 +13,13 @@ describe("Slider Component", () => {
   it("renders correctly with default props", () => {
     render(<Slider {...defaultProps} />);
     expect(screen.getByText("Off")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toHaveClass("fleet-slider");
+    expect(screen.getByRole("button")).toHaveClass("mdmlab-slider");
   });
 
   it("renders active state correctly", () => {
     render(<Slider {...defaultProps} value />);
     expect(screen.getByText("On")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toHaveClass("fleet-slider--active");
+    expect(screen.getByRole("button")).toHaveClass("mdmlab-slider--active");
   });
 
   it("calls onChange when clicked", () => {

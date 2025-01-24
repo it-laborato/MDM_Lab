@@ -74,7 +74,7 @@ const countHostProfilesByStatus = (
  * If all profiles have a status of "verified", the status will be displayed as "Verified".
  *
  * The default status will be displayed as "Failed".
- * https://fleetdm.com/handbook/company/why-this-way#why-make-it-obvious-when-stuff-breaks
+ * https://mdmlabdm.com/handbook/company/why-this-way#why-make-it-obvious-when-stuff-breaks
  */
 const getHostProfilesStatusForDisplay = (
   hostMacSettings: IHostMdmProfile[]
@@ -106,7 +106,7 @@ const OSSettingsIndicator = ({
   if (!profiles.length) {
     // the caller should ensure that this never happens, but just in case we return a default
     // to make it more obvious that something is wrong.
-    // https://fleetdm.com/handbook/company/why-this-way#why-make-it-obvious-when-stuff-breaks
+    // https://mdmlabdm.com/handbook/company/why-this-way#why-make-it-obvious-when-stuff-breaks
     return <span className={`${baseClass} info-flex__data`}>Unavailable</span>;
   }
 

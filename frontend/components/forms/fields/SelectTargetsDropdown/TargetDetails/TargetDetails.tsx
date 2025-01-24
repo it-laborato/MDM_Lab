@@ -149,7 +149,7 @@ const TargetDetails = ({
         <div className={`${labelBaseClass}__editor`}>
           <AceEditor
             editorProps={{ $blockScrolling: Infinity }}
-            mode="fleet"
+            mode="mdmlab"
             minLines={1}
             maxLines={20}
             name="label-query"
@@ -157,7 +157,7 @@ const TargetDetails = ({
             setOptions={{ wrap: true }}
             showGutter={false}
             showPrintMargin={false}
-            theme="fleet"
+            theme="mdmlab"
             value={query}
             width="100%"
             fontSize={14}

@@ -42,7 +42,7 @@ export const Default: Story = {
           <Icon name="download" />
         </Button>
         <Button variant="icon" onClick={() => alert("Delete clicked")}>
-          <Icon name="trash" color="ui-fleet-black-75" />
+          <Icon name="trash" color="ui-mdmlab-black-75" />
         </Button>
       </>
     ),

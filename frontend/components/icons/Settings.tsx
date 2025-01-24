@@ -10,7 +10,7 @@ interface ISettingsProps {
 
 const Settings = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: ISettingsProps) => {
   return (
     <svg

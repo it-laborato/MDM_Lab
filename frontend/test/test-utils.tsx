@@ -14,7 +14,7 @@ import { IPolicyContext, PolicyContext } from "context/policy";
 import { IQueryContext, QueryContext } from "context/query";
 
 export const baseUrl = (path: string) => {
-  return `/api/latest/fleet${path}`;
+  return `/api/latest/mdmlab${path}`;
 };
 
 type RenderOptionsWithProviderProps = RenderOptions & {

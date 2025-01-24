@@ -102,7 +102,7 @@ const IdpSection = () => {
           Connect Mdmlab to your identity provider to require end users to
           authenticate when they first setup their new macOS hosts.{" "}
           <CustomLink
-            url="https://fleetdm.com/learn-more-about/end-user-authentication"
+            url="https://mdmlabdm.com/learn-more-about/end-user-authentication"
             text="Learn more"
             newTab
           />

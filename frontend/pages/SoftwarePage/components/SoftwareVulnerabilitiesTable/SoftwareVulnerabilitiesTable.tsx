@@ -11,7 +11,7 @@ import PATHS from "router/paths";
 
 import { AppContext } from "context/app";
 import { ISoftwareVulnerability } from "interfaces/software";
-import { CONTACT_FLEET_LINK, GITHUB_NEW_ISSUE_LINK } from "utilities/constants";
+import { CONTACT_MDMLAB_LINK, GITHUB_NEW_ISSUE_LINK } from "utilities/constants";
 import { DisplayPlatform } from "interfaces/platform";
 import { buildQueryStringFromParams } from "utilities/url";
 import TableContainer from "components/TableContainer";
@@ -57,7 +57,7 @@ export const VulnsNotSupported = ({
     info={
       <>
         Interested in vulnerabilities in {platformText ?? "this platform"}?{" "}
-        <CustomLink url={CONTACT_FLEET_LINK} text="Let us know" newTab />
+        <CustomLink url={CONTACT_MDMLAB_LINK} text="Let us know" newTab />
       </>
     }
   />

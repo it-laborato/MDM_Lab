@@ -58,8 +58,8 @@ const ORG_SETTINGS_NAV_ITEMS: ISideNavItem<IAppConfigFormProps>[] = [
   },
   {
     title: "Mdmlab Desktop",
-    urlSection: "fleet-desktop",
-    path: PATHS.ADMIN_ORGANIZATION_FLEET_DESKTOP,
+    urlSection: "mdmlab-desktop",
+    path: PATHS.ADMIN_ORGANIZATION_MDMLAB_DESKTOP,
     // isPremium: true,
     Card: MdmlabDesktop,
   },

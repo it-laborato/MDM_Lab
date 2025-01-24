@@ -283,16 +283,16 @@ const routes = (
             {/* we check the add route first otherwise a route like 'software/add' will be caught
              * by the 'software/:id' redirect and be redirected to 'software/versions/add  */}
             <Route path="add" component={SoftwareAddPage}>
-              <IndexRedirect to="fleet-maintained" />
+              <IndexRedirect to="mdmlab-maintained" />
               <Route
-                path="fleet-maintained"
+                path="mdmlab-maintained"
                 component={SoftwareMdmlabMaintained}
               />
               <Route path="package" component={SoftwareCustomPackage} />
               <Route path="app-store" component={SoftwareAppStore} />
             </Route>
             <Route
-              path="add/fleet-maintained/:id"
+              path="add/mdmlab-maintained/:id"
               component={MdmlabMaintainedAppDetailsPage}
             />
             <Route component={SoftwarePage}>

@@ -7,13 +7,13 @@ import { SUPPORT_LINK } from "utilities/constants";
 import Button from "components/buttons/Button";
 
 // @ts-ignore
-import fleetLogoText from "../../../../assets/images/mdmlab-logo-text-white.svg";
+import mdmlabLogoText from "../../../../assets/images/mdmlab-logo-text-white.svg";
 // @ts-ignore
 import backgroundImg from "../../../../assets/images/404.svg";
 import githubLogo from "../../../../assets/images/github-mark-white-24x24@2x.png";
 import slackLogo from "../../../../assets/images/logo-slack-24x24@2x.png";
 
-const baseClass = "fleet-404";
+const baseClass = "mdmlab-404";
 
 const Mdmlab404 = () => (
   <div className={baseClass}>
@@ -21,7 +21,7 @@ const Mdmlab404 = () => (
       <Link to={PATHS.DASHBOARD}>
         <img
           className="primary-header__logo"
-          src={fleetLogoText}
+          src={mdmlabLogoText}
           alt="Mdmlab logo"
         />
       </Link>
@@ -52,7 +52,7 @@ const Mdmlab404 = () => (
           </Button>
         </a>
         <a
-          href="https://github.com/fleetdm/fleet/issues/new?assignees=&labels=bug%2C%3Areproduce&template=bug-report.md&title="
+          href="https://github.com/mdmlabdm/mdmlab/issues/new?assignees=&labels=bug%2C%3Areproduce&template=bug-report.md&title="
           target="_blank"
           rel="noopener noreferrer"
         >

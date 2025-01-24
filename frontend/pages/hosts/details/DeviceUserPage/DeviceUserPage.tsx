@@ -312,7 +312,7 @@ const DeviceUserPage = ({
   };
 
   const renderEnrollMdmModal = () => {
-    return host?.dep_assigned_to_fleet ? (
+    return host?.dep_assigned_to_mdmlab ? (
       <AutoEnrollMdmModal host={host} onCancel={toggleEnrollMdmModal} />
     ) : (
       <ManualEnrollMdmModal
@@ -376,7 +376,7 @@ const DeviceUserPage = ({
               mdmEnabledAndConfigured={
                 !!globalConfig?.mdm.enabled_and_configured
               }
-              connectedToMdmlabMdm={!!host.mdm.connected_to_fleet}
+              connectedToMdmlabMdm={!!host.mdm.connected_to_mdmlab}
               macDiskEncryptionStatus={
                 host.mdm.macos_settings?.disk_encryption ?? null
               }

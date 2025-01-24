@@ -61,7 +61,7 @@ const BootstrapPackageUploader = ({
         (ex. Munki, Chef, or Puppet) on hosts that automatically enroll to
         Mdmlab.{" "}
         <CustomLink
-          url="https://fleetdm.com/docs/using-fleet/mdm-macos-setup-experience#bootstrap-package"
+          url="https://mdmlabdm.com/docs/using-mdmlab/mdm-macos-setup-experience#bootstrap-package"
           text="Learn more"
           newTab
         />

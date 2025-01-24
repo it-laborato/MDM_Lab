@@ -16,8 +16,8 @@ const CustomDropdownIndicator = (
   // file of LabelFilterSelect.
   const color =
     isFocused || selectProps.menuIsOpen
-      ? "core-fleet-blue"
-      : "core-fleet-black";
+      ? "core-mdmlab-blue"
+      : "core-mdmlab-black";
 
   return (
     <components.DropdownIndicator {...props} className={baseClass}>

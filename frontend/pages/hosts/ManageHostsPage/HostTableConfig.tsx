@@ -662,7 +662,7 @@ const defaultHiddenColumns = [
 
 /**
  * Will generate a host table column configuration based off of the current user
- * permissions and license tier of fleet they are on.
+ * permissions and license tier of mdmlab they are on.
  */
 const generateAvailableTableHeaders = ({
   isFreeTier = true,

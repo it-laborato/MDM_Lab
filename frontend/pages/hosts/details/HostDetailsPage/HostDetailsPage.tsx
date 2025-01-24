@@ -719,7 +719,7 @@ const HostDetailsPage = ({
         hostMdmDeviceStatus={hostMdmDeviceStatus}
         hostMdmEnrollmentStatus={host.mdm.enrollment_status}
         doesStoreEncryptionKey={host.mdm.encryption_key_available}
-        isConnectedToMdmlabMdm={host.mdm?.connected_to_fleet}
+        isConnectedToMdmlabMdm={host.mdm?.connected_to_mdmlab}
         hostScriptsEnabled={host.scripts_enabled}
       />
     );
@@ -814,7 +814,7 @@ const HostDetailsPage = ({
           mdmEnrollmentStatus={host?.mdm.enrollment_status}
           hostPlatform={host?.platform}
           macDiskEncryptionStatus={host?.mdm.macos_settings?.disk_encryption}
-          connectedToMdmlabMdm={host?.mdm.connected_to_fleet}
+          connectedToMdmlabMdm={host?.mdm.connected_to_mdmlab}
           diskEncryptionOSSetting={host?.mdm.os_settings?.disk_encryption}
           diskIsEncrypted={host?.disk_encryption_enabled}
           diskEncryptionKeyAvailable={host?.mdm.encryption_key_available}
@@ -918,7 +918,7 @@ const HostDetailsPage = ({
                 pathname={location.pathname}
                 onShowSoftwareDetails={setSelectedSoftwareDetails}
                 hostTeamId={host.team_id || 0}
-                hostMDMEnrolled={host.mdm.connected_to_fleet}
+                hostMDMEnrolled={host.mdm.connected_to_mdmlab}
               />
               {host?.platform === "darwin" && macadmins?.munki?.version && (
                 <MunkiIssuesCard

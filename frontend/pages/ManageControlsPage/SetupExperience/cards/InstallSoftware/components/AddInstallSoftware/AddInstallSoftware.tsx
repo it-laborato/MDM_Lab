@@ -31,7 +31,7 @@ const AddInstallSoftware = ({
         <>
           No software available to add. Please{" "}
           <LinkWithContext
-            to={PATHS.SOFTWARE_ADD_FLEET_MAINTAINED}
+            to={PATHS.SOFTWARE_ADD_MDMLAB_MAINTAINED}
             currentQueryParams={{ team_id: currentTeamId }}
             withParams={{ type: "query", names: ["team_id"] }}
           >

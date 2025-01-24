@@ -21,27 +21,27 @@ import Icon from "components/Icon";
 import Card from "components/Card";
 
 const CREATING_SERVICE_ACCOUNT =
-  "https://www.fleetdm.com/learn-more-about/creating-service-accounts";
+  "https://www.mdmlabdm.com/learn-more-about/creating-service-accounts";
 const GOOGLE_WORKSPACE_DOMAINS =
-  "https://www.fleetdm.com/learn-more-about/google-workspace-domains";
+  "https://www.mdmlabdm.com/learn-more-about/google-workspace-domains";
 const DOMAIN_WIDE_DELEGATION =
-  "https://www.fleetdm.com/learn-more-about/domain-wide-delegation";
+  "https://www.mdmlabdm.com/learn-more-about/domain-wide-delegation";
 const ENABLING_CALENDAR_API =
-  "https://www.fleetdm.com/learn-more-about/enabling-calendar-api";
+  "https://www.mdmlabdm.com/learn-more-about/enabling-calendar-api";
 const OAUTH_SCOPES =
   "https://www.googleapis.com/auth/calendar.events,https://www.googleapis.com/auth/calendar.settings.readonly";
 
 const API_KEY_JSON_PLACEHOLDER = `{
   "type": "service_account",
-  "project_id": "fleet-in-your-calendar",
+  "project_id": "mdmlab-in-your-calendar",
   "private_key_id": "<private key id>",
   "private_key": "-----BEGIN PRIVATE KEY----\\n<private key>\\n-----END PRIVATE KEY-----\\n",
-  "client_email": "fleet-calendar-events@fleet-in-your-calendar.iam.gserviceaccount.com",
+  "client_email": "mdmlab-calendar-events@mdmlab-in-your-calendar.iam.gserviceaccount.com",
   "client_id": "<client id>",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fleet-calendar-events%40fleet-in-your-calendar.iam.gserviceaccount.com",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mdmlab-calendar-events%40mdmlab-in-your-calendar.iam.gserviceaccount.com",
   "universe_domain": "googleapis.com"
 }`;
 
@@ -255,7 +255,7 @@ const Calendars = (): JSX.Element => {
                 events&quot;.
               </li>
               <li>
-                Set the service account ID to &quot;fleet-calendar-events&quot;.
+                Set the service account ID to &quot;mdmlab-calendar-events&quot;.
               </li>
               <li>
                 Click <b>Create and continue</b>.

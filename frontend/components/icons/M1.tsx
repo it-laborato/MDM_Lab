@@ -7,7 +7,7 @@ interface IM1Props {
   color?: Colors;
 }
 
-const M1 = ({ size = "medium", color = "ui-fleet-black-75" }: IM1Props) => {
+const M1 = ({ size = "medium", color = "ui-mdmlab-black-75" }: IM1Props) => {
   return (
     <svg
       width={ICON_SIZES[size]}

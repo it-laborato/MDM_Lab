@@ -9,7 +9,7 @@ interface IAutomaticSelfServiceProps {
 
 const AutomaticSelfService = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: IAutomaticSelfServiceProps) => {
   return (
     <svg

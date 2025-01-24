@@ -9,7 +9,7 @@ interface IFilterAltProps {
 
 const FilterAlt = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: IFilterAltProps) => {
   return (
     <svg

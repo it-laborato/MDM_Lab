@@ -25,7 +25,7 @@ export interface IAddPolicyModalProps {
 }
 
 const CONTRIBUTE_TO_POLICIES_DOCS_URL =
-  "https://www.fleetdm.com/contribute-to/policies";
+  "https://www.mdmlabdm.com/contribute-to/policies";
 
 const PLATFORM_FILTER_OPTIONS = [
   {

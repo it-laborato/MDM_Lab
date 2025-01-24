@@ -102,7 +102,7 @@ const DiskEncryption = ({
     } catch (e) {
       if (getErrorReason(e).includes("Missing required private key")) {
         const link =
-          "https://fleetdm.com/learn-more-about/fleet-server-private-key";
+          "https://mdmlabdm.com/learn-more-about/mdmlab-server-private-key";
         renderFlash(
           "error",
           <>

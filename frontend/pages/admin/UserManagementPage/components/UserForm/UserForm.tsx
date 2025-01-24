@@ -336,7 +336,7 @@ const UserForm = ({
               settings in Mdmlab.
             </p>
             <CustomLink
-              url="https://fleetdm.com/docs/using-fleet/permissions#user-permissions"
+              url="https://mdmlabdm.com/docs/using-mdmlab/permissions#user-permissions"
               text="Learn more about user permissions"
               newTab
             />
@@ -393,7 +393,7 @@ const UserForm = ({
                   settings in Mdmlab.
                 </p>
                 <CustomLink
-                  url="https://fleetdm.com/docs/using-fleet/permissions#team-member-permissions"
+                  url="https://mdmlabdm.com/docs/using-mdmlab/permissions#team-member-permissions"
                   text="Learn more about user permissions"
                   newTab
                 />
@@ -584,7 +584,7 @@ const UserForm = ({
               <br />
               <br />
               This user will not be asked to set a new password after logging in
-              to fleetctl or the Mdmlab API.
+              to mdmlabctl or the Mdmlab API.
             </>
           ) : undefined
         }

@@ -20,7 +20,7 @@ const EmptyIntegrationsTable = ({
         <>
           Want to learn more?&nbsp;
           <CustomLink
-            url="https://fleetdm.com/docs/using-fleet/automations"
+            url="https://mdmlabdm.com/docs/using-mdmlab/automations"
             text="Read about automations"
             newTab
           />

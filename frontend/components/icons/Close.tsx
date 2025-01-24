@@ -7,7 +7,7 @@ interface IExProps {
   size?: IconSizes;
 }
 
-const Close = ({ size = "medium", color = "core-fleet-blue" }: IExProps) => {
+const Close = ({ size = "medium", color = "core-mdmlab-blue" }: IExProps) => {
   return (
     <svg
       width={ICON_SIZES[size]}

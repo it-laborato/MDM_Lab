@@ -45,7 +45,7 @@ const DEFAULT_HOST_MOCK: IHost = {
   platform: "ubuntu",
   osquery_version: "4.9.0",
   orbit_version: "1.22.0",
-  fleet_desktop_version: "1.22.1",
+  mdmlab_desktop_version: "1.22.1",
   os_version: "Ubuntu 18.4.0",
   build: "",
   platform_like: "debian",

@@ -5,7 +5,7 @@ interface IArrowProps {
   color?: Colors;
 }
 
-const Arrow = ({ color = "core-fleet-blue" }: IArrowProps) => {
+const Arrow = ({ color = "core-mdmlab-blue" }: IArrowProps) => {
   return (
     <svg
       width="16"

@@ -48,13 +48,13 @@ const PreviewPayloadModal = ({
         {
           id: 1,
           display_name: "macbook-1",
-          url: "https://fleet.example.com/hosts/1",
+          url: "https://mdmlab.example.com/hosts/1",
           software_installed_paths: ["/usr/lib/some-path"],
         },
         {
           id: 2,
           display_name: "macbook-2",
-          url: "https://fleet.example.com/hosts/2",
+          url: "https://mdmlab.example.com/hosts/2",
         },
       ],
     },
@@ -78,7 +78,7 @@ const PreviewPayloadModal = ({
         <p>
           Want to learn more about how automations in Mdmlab work?{" "}
           <CustomLink
-            url="https://fleetdm.com/docs/using-fleet/automations"
+            url="https://mdmlabdm.com/docs/using-mdmlab/automations"
             text="Check out the Mdmlab documentation"
             newTab
           />

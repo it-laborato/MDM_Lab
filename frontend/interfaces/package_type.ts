@@ -1,4 +1,4 @@
-const fleetMaintainedPackageTypes = ["dmg", "zip"] as const;
+const mdmlabMaintainedPackageTypes = ["dmg", "zip"] as const;
 const unixPackageTypes = ["pkg", "deb", "rpm", "dmg", "zip"] as const;
 const windowsPackageTypes = ["msi", "exe"] as const;
 export const packageTypes = [
@@ -8,7 +8,7 @@ export const packageTypes = [
 
 export type WindowsPackageType = typeof windowsPackageTypes[number];
 export type UnixPackageType = typeof unixPackageTypes[number];
-export type MdmlabMaintainedPackageType = typeof fleetMaintainedPackageTypes[number];
+export type MdmlabMaintainedPackageType = typeof mdmlabMaintainedPackageTypes[number];
 export type PackageType =
   | WindowsPackageType
   | UnixPackageType
@@ -25,7 +25,7 @@ export const isUnixPackageType = (s: any): s is UnixPackageType => {
 export const isMdmlabMaintainedPackageType = (
   s: any
 ): s is MdmlabMaintainedPackageType => {
-  return fleetMaintainedPackageTypes.includes(s);
+  return mdmlabMaintainedPackageTypes.includes(s);
 };
 
 export const isPackageType = (s: any): s is PackageType => {

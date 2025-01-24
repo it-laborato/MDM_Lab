@@ -24,7 +24,7 @@ describe("string utilities", () => {
         enforceMdmlabSentenceCasing("osquery shouldn't be Capitalized")
       ).toEqual("osquery shouldn't be capitalized");
     });
-    expect(enforceMdmlabSentenceCasing("fleet uses MySQL")).toEqual(
+    expect(enforceMdmlabSentenceCasing("mdmlab uses MySQL")).toEqual(
       "Mdmlab uses MySQL"
     );
   });

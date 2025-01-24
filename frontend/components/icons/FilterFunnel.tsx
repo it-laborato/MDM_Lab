@@ -9,7 +9,7 @@ interface IFilterFunnelProps {
 
 const FilterFunnel = ({
   size = "medium",
-  color = "ui-fleet-black-33",
+  color = "ui-mdmlab-black-33",
 }: IFilterFunnelProps) => {
   return (
     <svg

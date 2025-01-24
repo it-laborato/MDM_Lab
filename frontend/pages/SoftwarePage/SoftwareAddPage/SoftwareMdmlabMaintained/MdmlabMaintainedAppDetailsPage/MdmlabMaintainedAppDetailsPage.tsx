@@ -39,7 +39,7 @@ import {
   getMdmlabAppPolicyQuery,
 } from "./helpers";
 
-const baseClass = "fleet-maintained-app-details-page";
+const baseClass = "mdmlab-maintained-app-details-page";
 
 interface ISoftwareSummaryProps {
   name: string;
@@ -54,18 +54,18 @@ const MdmlabAppSummary = ({
 }: ISoftwareSummaryProps) => {
   return (
     <Card
-      className={`${baseClass}__fleet-app-summary`}
+      className={`${baseClass}__mdmlab-app-summary`}
       borderRadiusSize="medium"
     >
       <SoftwareIcon name={name} size="medium" />
-      <div className={`${baseClass}__fleet-app-summary--details`}>
-        <div className={`${baseClass}__fleet-app-summary--title`}>{name}</div>
-        <div className={`${baseClass}__fleet-app-summary--info`}>
-          <div className={`${baseClass}__fleet-app-summary--details--platform`}>
+      <div className={`${baseClass}__mdmlab-app-summary--details`}>
+        <div className={`${baseClass}__mdmlab-app-summary--title`}>{name}</div>
+        <div className={`${baseClass}__mdmlab-app-summary--info`}>
+          <div className={`${baseClass}__mdmlab-app-summary--details--platform`}>
             {PLATFORM_DISPLAY_NAMES[platform as Platform]}
           </div>
           &bull;
-          <div className={`${baseClass}__fleet-app-summary--details--version`}>
+          <div className={`${baseClass}__mdmlab-app-summary--details--version`}>
             {version}
           </div>
         </div>
@@ -88,7 +88,7 @@ interface IMdmlabMaintainedAppDetailsPageProps {
   routeParams: IMdmlabMaintainedAppDetailsRouteParams;
 }
 
-/** This type includes the editable form data as well as the fleet maintained
+/** This type includes the editable form data as well as the mdmlab maintained
  * app id */
 export type IAddMdmlabMaintainedData = IMdmlabMaintainedAppFormData & {
   appId: number;
@@ -102,7 +102,7 @@ const MdmlabMaintainedAppDetailsPage = ({
   const teamId = location.query.team_id;
   const appId = parseInt(routeParams.id, 10);
   if (isNaN(appId)) {
-    router.push(PATHS.SOFTWARE_ADD_FLEET_MAINTAINED);
+    router.push(PATHS.SOFTWARE_ADD_MDMLAB_MAINTAINED);
   }
 
   const { renderFlash } = useContext(NotificationContext);
@@ -118,17 +118,17 @@ const MdmlabMaintainedAppDetailsPage = ({
   ] = useState(false);
 
   const {
-    data: fleetApp,
+    data: mdmlabApp,
     isLoading: isLoadingMdmlabApp,
     isError: isErrorMdmlabApp,
   } = useQuery(
-    ["fleet-maintained-app", appId],
+    ["mdmlab-maintained-app", appId],
     () => softwareAPI.getMdmlabMaintainedApp(appId),
     {
       ...DEFAULT_USE_QUERY_OPTIONS,
       enabled: isPremiumTier,
       retry: false,
-      select: (res) => res.fleet_maintained_app,
+      select: (res) => res.mdmlab_maintained_app,
       onError: (error) => handlePageError(error),
     }
   );
@@ -153,7 +153,7 @@ const MdmlabMaintainedAppDetailsPage = ({
   };
 
   const backToAddSoftwareUrl = `${
-    PATHS.SOFTWARE_ADD_FLEET_MAINTAINED
+    PATHS.SOFTWARE_ADD_MDMLAB_MAINTAINED
   }?${buildQueryStringFromParams({ team_id: teamId })}`;
 
   const onCancel = () => {
@@ -189,7 +189,7 @@ const MdmlabMaintainedAppDetailsPage = ({
         renderFlash(
           "success",
           <>
-            <b>{fleetApp?.name}</b> successfully added.
+            <b>{mdmlabApp?.name}</b> successfully added.
           </>
         );
       }
@@ -202,12 +202,12 @@ const MdmlabMaintainedAppDetailsPage = ({
     }
 
     // If the install type is automatic we now need to create the new policy.
-    if (installType === "automatic" && fleetApp) {
+    if (installType === "automatic" && mdmlabApp) {
       try {
         await teamPoliciesAPI.create({
-          name: getMdmlabAppPolicyName(fleetApp.name),
-          description: getMdmlabAppPolicyDescription(fleetApp.name),
-          query: getMdmlabAppPolicyQuery(fleetApp.name),
+          name: getMdmlabAppPolicyName(mdmlabApp.name),
+          description: getMdmlabAppPolicyDescription(mdmlabApp.name),
+          query: getMdmlabAppPolicyQuery(mdmlabApp.name),
           team_id: parseInt(teamId, 10),
           software_title_id: titleId,
           platform: "darwin",
@@ -216,7 +216,7 @@ const MdmlabMaintainedAppDetailsPage = ({
         renderFlash(
           "success",
           <>
-            <b>{fleetApp?.name}</b> successfully added.
+            <b>{mdmlabApp?.name}</b> successfully added.
           </>,
           { persistOnPageChange: true }
         );
@@ -254,7 +254,7 @@ const MdmlabMaintainedAppDetailsPage = ({
       return <DataError className={`${baseClass}__data-error`} />;
     }
 
-    if (fleetApp) {
+    if (mdmlabApp) {
       return (
         <>
           <BackLink
@@ -262,20 +262,20 @@ const MdmlabMaintainedAppDetailsPage = ({
             path={backToAddSoftwareUrl}
             className={`${baseClass}__back-to-add-software`}
           />
-          <h1>{fleetApp.name}</h1>
+          <h1>{mdmlabApp.name}</h1>
           <div className={`${baseClass}__page-content`}>
             <MdmlabAppSummary
-              name={fleetApp.name}
-              platform={fleetApp.platform}
-              version={fleetApp.version}
+              name={mdmlabApp.name}
+              platform={mdmlabApp.platform}
+              version={mdmlabApp.version}
             />
             <MdmlabAppDetailsForm
               labels={labels || []}
-              name={fleetApp.name}
+              name={mdmlabApp.name}
               showSchemaButton={!isSidePanelOpen}
-              defaultInstallScript={fleetApp.install_script}
-              defaultPostInstallScript={fleetApp.post_install_script}
-              defaultUninstallScript={fleetApp.uninstall_script}
+              defaultInstallScript={mdmlabApp.install_script}
+              defaultPostInstallScript={mdmlabApp.post_install_script}
+              defaultUninstallScript={mdmlabApp.uninstall_script}
               onClickShowSchema={() => setSidePanelOpen(true)}
               onCancel={onCancel}
               onSubmit={onSubmit}
@@ -293,7 +293,7 @@ const MdmlabMaintainedAppDetailsPage = ({
       <MainContent className={baseClass}>
         <>{renderContent()}</>
       </MainContent>
-      {isPremiumTier && fleetApp && isSidePanelOpen && (
+      {isPremiumTier && mdmlabApp && isSidePanelOpen && (
         <SidePanelContent className={`${baseClass}__side-panel`}>
           <QuerySidePanel
             key="query-side-panel"

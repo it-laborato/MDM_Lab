@@ -188,8 +188,8 @@ export default {
     `/${API_VERSION}/mdmlab/software/packages/${id}`,
   SOFTWARE_AVAILABLE_FOR_INSTALL: (id: number) =>
     `/${API_VERSION}/mdmlab/software/titles/${id}/available_for_install`,
-  SOFTWARE_FLEET_MAINTAINED_APPS: `/${API_VERSION}/mdmlab/software/mdmlab_maintained_apps`,
-  SOFTWARE_FLEET_MAINTAINED_APP: (id: number) =>
+  SOFTWARE_MDMLAB_MAINTAINED_APPS: `/${API_VERSION}/mdmlab/software/mdmlab_maintained_apps`,
+  SOFTWARE_MDMLAB_MAINTAINED_APP: (id: number) =>
     `/${API_VERSION}/mdmlab/software/mdmlab_maintained_apps/${id}`,
 
   // AI endpoints

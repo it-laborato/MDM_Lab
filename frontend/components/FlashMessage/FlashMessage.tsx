@@ -76,7 +76,7 @@ const FlashMessage = ({
         <div className={`${baseClass}__content`}>
           <Icon
             name={alertType === "success" ? "success" : "error"}
-            color="core-fleet-white"
+            color="core-mdmlab-white"
           />
           <span>{message}</span>
         </div>
@@ -90,8 +90,8 @@ const FlashMessage = ({
                 name="close"
                 color={
                   alertType === "warning-filled"
-                    ? "core-fleet-black"
-                    : "core-fleet-white"
+                    ? "core-mdmlab-black"
+                    : "core-mdmlab-white"
                 }
               />
             </button>

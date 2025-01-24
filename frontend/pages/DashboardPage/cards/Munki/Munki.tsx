@@ -109,8 +109,8 @@ const Munki = ({
                         <>
                           To see Munki versions, deploy&nbsp;
                           <CustomLink
-                            url="https://fleetdm.com/learn-more-about/fleetd"
-                            text="Mdmlab's agent (fleetd)"
+                            url="https://mdmlabdm.com/learn-more-about/mdmlabd"
+                            text="Mdmlab's agent (mdmlabd)"
                             newTab
                           />
                           .

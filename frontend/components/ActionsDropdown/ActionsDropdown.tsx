@@ -60,8 +60,8 @@ const CustomDropdownIndicator = (
   // file of ActionsDropdown.
   const color =
     isFocused || selectProps.menuIsOpen
-      ? "core-fleet-blue"
-      : "core-fleet-black";
+      ? "core-mdmlab-blue"
+      : "core-mdmlab-black";
 
   return (
     <components.DropdownIndicator {...props} className={baseClass}>
@@ -157,8 +157,8 @@ const ActionsDropdown = ({
     placeholder: (provided, state) => ({
       ...provided,
       color: state.isFocused
-        ? COLORS["core-fleet-blue"]
-        : COLORS["core-fleet-black"],
+        ? COLORS["core-mdmlab-blue"]
+        : COLORS["core-mdmlab-black"],
       fontSize: "14px",
       lineHeight: "normal",
       paddingLeft: 0,
@@ -213,7 +213,7 @@ const ActionsDropdown = ({
           : COLORS["ui-vibrant-blue-25"],
       },
       ...(state.isDisabled && {
-        color: COLORS["ui-fleet-black-50"],
+        color: COLORS["ui-mdmlab-black-50"],
         fontStyle: "italic",
       }),
     }),

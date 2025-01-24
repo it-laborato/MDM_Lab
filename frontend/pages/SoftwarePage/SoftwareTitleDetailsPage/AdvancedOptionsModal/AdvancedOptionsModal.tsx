@@ -55,7 +55,7 @@ const AdvancedOptionsModal = ({
                     <CustomLink
                       className={`${baseClass}__table-link`}
                       text="query returns results"
-                      url="https://fleetdm.com/tables"
+                      url="https://mdmlabdm.com/tables"
                       newTab
                     />
                   </>

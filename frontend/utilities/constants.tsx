@@ -14,10 +14,10 @@ export enum PolicyResponse {
 }
 
 export const DEFAULT_GRAVATAR_LINK =
-  "https://fleetdm.com/images/permanent/icon-avatar-default-transparent-64x64%402x.png";
+  "https://mdmlabdm.com/images/permanent/icon-avatar-default-transparent-64x64%402x.png";
 
 export const DEFAULT_GRAVATAR_LINK_DARK =
-  "https://fleetdm.com/images/permanent/icon-avatar-default-dark-24x24%402x.png";
+  "https://mdmlabdm.com/images/permanent/icon-avatar-default-dark-24x24%402x.png";
 
 export const DEFAULT_GRAVATAR_LINK_FALLBACK =
   "/assets/images/icon-avatar-default-transparent-64x64%402x.png";
@@ -58,18 +58,18 @@ export const HOST_STATUS_WEBHOOK_WINDOW_DROPDOWN_OPTIONS: IDropdownOption[] = [
 ];
 
 export const GITHUB_NEW_ISSUE_LINK =
-  "https://github.com/fleetdm/fleet/issues/new?assignees=&labels=bug%2C%3Areproduce&template=bug-report.md";
+  "https://github.com/mdmlabdm/mdmlab/issues/new?assignees=&labels=bug%2C%3Areproduce&template=bug-report.md";
 
-export const FLEET_WEBSITE_URL = "https://fleetdm.com";
+export const MDMLAB_WEBSITE_URL = "https://mdmlabdm.com";
 
-export const SUPPORT_LINK = `${FLEET_WEBSITE_URL}/support`;
+export const SUPPORT_LINK = `${MDMLAB_WEBSITE_URL}/support`;
 
-export const CONTACT_FLEET_LINK = `${FLEET_WEBSITE_URL}/contact`;
+export const CONTACT_MDMLAB_LINK = `${MDMLAB_WEBSITE_URL}/contact`;
 
-export const LEARN_MORE_ABOUT_BASE_LINK = `${FLEET_WEBSITE_URL}/learn-more-about`;
+export const LEARN_MORE_ABOUT_BASE_LINK = `${MDMLAB_WEBSITE_URL}/learn-more-about`;
 
-/**  July 28, 2016 is the date of the initial commit to fleet/fleet. */
-export const INITIAL_FLEET_DATE = "2016-07-28T00:00:00Z";
+/**  July 28, 2016 is the date of the initial commit to MDMLAB/MDMLAB. */
+export const INITIAL_MDMLAB_DATE = "2016-07-28T00:00:00Z";
 
 export const LOGGING_TYPE_OPTIONS = [
   { label: "Snapshot", value: "snapshot" },
@@ -343,7 +343,7 @@ export const MDM_STATUS_TOOLTIP: Record<string, string | React.ReactNode> = {
   "On (manual)": (
     <span>
       MDM was turned on manually (macOS), or hosts were automatically migrated
-      with fleetd (Windows). End users can turn MDM off.
+      with mdmlabd (Windows). End users can turn MDM off.
     </span>
   ),
   Off: undefined, // no tooltip specified
@@ -403,7 +403,7 @@ export const HOST_SUMMARY_DATA = [
   "os_version",
   "osquery_version",
   "orbit_version",
-  "fleet_desktop_version",
+  "mdmlab_desktop_version",
   "enroll_secret_name",
   "detail_updated_at",
   "percent_disk_space_available",

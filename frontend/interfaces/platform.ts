@@ -62,7 +62,7 @@ export type CommaSeparatedPlatformString =
   | `${QueryablePlatform},${QueryablePlatform},${QueryablePlatform}`
   | `${QueryablePlatform},${QueryablePlatform},${QueryablePlatform},${QueryablePlatform}`;
 
-// TODO: revisit this approach pending resolution of https://github.com/fleetdm/fleet/issues/3555.
+// TODO: revisit this approach pending resolution of https://github.com/mdmlabdm/mdmlab/issues/3555.
 export const MACADMINS_EXTENSION_TABLES: Record<string, QueryablePlatform[]> = {
   file_lines: ["darwin", "linux", "windows"],
   filevault_users: ["darwin"],
@@ -81,7 +81,7 @@ export const MACADMINS_EXTENSION_TABLES: Record<string, QueryablePlatform[]> = {
 /**
  * Host Linux OSs as defined by the Mdmlab server.
  *
- * @see https://github.com/fleetdm/fleet/blob/5a21e2cfb029053ddad0508869eb9f1f23997bf2/server/fleet/hosts.go#L780
+ * @see https://github.com/mdmlabdm/mdmlab/blob/5a21e2cfb029053ddad0508869eb9f1f23997bf2/server/mdmlab/hosts.go#L780
  */
 export const HOST_LINUX_PLATFORMS = [
   "linux",

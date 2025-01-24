@@ -6,7 +6,7 @@ import {
 } from "./handlers/device-handler";
 
 export const baseUrl = (path: string) => {
-  return `/api/latest/fleet${path}`;
+  return `/api/latest/mdmlab${path}`;
 };
 
 // These are the default handlers that are used when testing the frontend. They

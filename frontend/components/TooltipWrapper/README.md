@@ -55,8 +55,8 @@ any JSX as mentioned before.
   blockAutoComplete
   tooltip={
     <>
-      This password is temporary. This user will be asked to set a new password after logging in to the Fleet UI.<br /><br />
-      This user will not be asked to set a new password after logging in to fleetctl or the Fleet API.
+      This password is temporary. This user will be asked to set a new password after logging in to the mdmlab UI.<br /><br />
+      This user will not be asked to set a new password after logging in to mdmlabctl or the mdmlab API.
     </>
   }
 />

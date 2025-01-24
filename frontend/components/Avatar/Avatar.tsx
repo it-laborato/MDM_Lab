@@ -85,7 +85,7 @@ interface IAvatarProps {
   user: IAvatarUserInterface;
   hasWhiteBackground?: boolean;
   /**
-   * Set this to `true` to use the fleet avatar instead of the users gravatar.
+   * Set this to `true` to use the mdmlab avatar instead of the users gravatar.
    */
   useMdmlabAvatar?: boolean;
 }

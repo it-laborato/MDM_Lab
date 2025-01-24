@@ -318,7 +318,7 @@ const InstallSoftwareModal = ({
             when hosts fail the policy. Host counts will reset when new software
             is selected.{" "}
             <CustomLink
-              url="https://fleetdm.com/learn-more-about/policy-automation-install-software"
+              url="https://mdmlabdm.com/learn-more-about/policy-automation-install-software"
               text="Learn more"
               newTab
             />

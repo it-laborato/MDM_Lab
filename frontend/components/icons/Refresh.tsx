@@ -7,7 +7,7 @@ interface IRefresh {
   size?: IconSizes;
 }
 const Refresh = ({
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
   size = "medium",
 }: IRefresh) => {
   return (

@@ -27,7 +27,7 @@ const ManualEnrollMdmModal = ({
       );
       const file = new File(
         [profileContent],
-        "fleet-mdm-enrollment-profile.mobileconfig"
+        "mdmlab-mdm-enrollment-profile.mobileconfig"
       );
       FileSaver.saveAs(file);
     } catch (e) {

@@ -9,7 +9,7 @@ interface IiPadOSProps {
 
 const iPadOS = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: IiPadOSProps) => {
   return (
     <svg

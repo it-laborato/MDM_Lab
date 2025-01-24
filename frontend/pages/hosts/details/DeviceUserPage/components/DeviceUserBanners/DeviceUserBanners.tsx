@@ -87,10 +87,10 @@ const DeviceUserBanners = ({
           <InfoBanner
             cta={
               <CustomLink
-                url="https://fleetdm.com/learn-more-about/encrypt-linux-device"
+                url="https://mdmlabdm.com/learn-more-about/encrypt-linux-device"
                 text="Guide"
-                color="core-fleet-black"
-                iconColor="core-fleet-black"
+                color="core-mdmlab-black"
+                iconColor="core-mdmlab-black"
               />
             }
             color="yellow"

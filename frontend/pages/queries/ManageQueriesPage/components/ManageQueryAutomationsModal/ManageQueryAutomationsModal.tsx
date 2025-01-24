@@ -10,7 +10,7 @@ import LogDestinationIndicator from "components/LogDestinationIndicator/LogDesti
 
 import { ISchedulableQuery } from "interfaces/schedulable_query";
 import TooltipTruncatedText from "components/TooltipTruncatedText";
-import { CONTACT_FLEET_LINK } from "utilities/constants";
+import { CONTACT_MDMLAB_LINK } from "utilities/constants";
 
 interface IManageQueryAutomationsModalProps {
   isUpdatingAutomations: boolean;
@@ -162,7 +162,7 @@ const ManageQueryAutomationsModal = ({
           <div className={`${baseClass}__configure form-field__help-text`}>
             Users with the admin role can&nbsp;
             <CustomLink
-              url="https://fleetdm.com/docs/using-fleet/log-destinations"
+              url="https://mdmlabdm.com/docs/using-mdmlab/log-destinations"
               text="configure a different log destination"
               newTab
             />
@@ -172,7 +172,7 @@ const ManageQueryAutomationsModal = ({
           <p>Automations currently run on macOS, Windows, and Linux hosts.</p>
           <p>
             Interested in query automations for your Chromebooks? &nbsp;
-            <CustomLink url={CONTACT_FLEET_LINK} text="Let us know" newTab />
+            <CustomLink url={CONTACT_MDMLAB_LINK} text="Let us know" newTab />
           </p>
         </InfoBanner>
         <Button

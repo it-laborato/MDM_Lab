@@ -5,7 +5,7 @@ interface ICheckProps {
   color?: Colors;
 }
 
-const Check = ({ color = "core-fleet-blue" }: ICheckProps) => {
+const Check = ({ color = "core-mdmlab-blue" }: ICheckProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

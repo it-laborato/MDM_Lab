@@ -14,9 +14,9 @@ interface IMdmlabMarkdownProps {
   name?: string;
 }
 
-const baseClass = "fleet-markdown";
+const baseClass = "mdmlab-markdown";
 
-/** This will give us sensible defaults for how we render markdown across the fleet application.
+/** This will give us sensible defaults for how we render markdown across the mdmlab application.
  * NOTE: can be extended later to take custom components, but dont need that at the moment.
  */
 const MdmlabMarkdown = ({ markdown, className, name }: IMdmlabMarkdownProps) => {
@@ -48,7 +48,7 @@ const MdmlabMarkdown = ({ markdown, className, name }: IMdmlabMarkdownProps) => 
             editor.renderer.visualizeFocus = noop;
           };
 
-          // Dont render the fleet ace code block for simple inline code blocks.
+          // Dont render the mdmlab ace code block for simple inline code blocks.
           // e.g. `x = 1`
           if (inline) {
             return <code {...props}>{children}</code>;

@@ -57,10 +57,10 @@ export const createMockMdmConfig = (
 
 const DEFAULT_CONFIG_MOCK: IConfig = {
   org_info: {
-    org_name: "fleet",
+    org_name: "mdmlab",
     org_logo_url: "",
     org_logo_url_light_background: "",
-    contact_url: "https://fleetdm.com/company/contact",
+    contact_url: "https://mdmlabdm.com/company/contact",
   },
   server_settings: {
     server_url: "https://localhost:8080",
@@ -191,7 +191,7 @@ const DEFAULT_CONFIG_MOCK: IConfig = {
     enable_host_users: true,
     enable_software_inventory: true,
   },
-  fleet_desktop: { transparency_url: "https://fleetdm.com/transparency" },
+  mdmlab_desktop: { transparency_url: "https://mdmlabdm.com/transparency" },
   mdm: createMockMdmConfig(),
 };
 

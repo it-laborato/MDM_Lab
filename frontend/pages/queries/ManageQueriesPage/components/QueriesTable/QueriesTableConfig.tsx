@@ -151,7 +151,7 @@ const generateTableHeaders = ({
                           className="observer-can-run-query-icon"
                           name="query"
                           size="small"
-                          color="core-fleet-blue"
+                          color="core-mdmlab-blue"
                         />
                       </span>
                       <ReactTooltip5

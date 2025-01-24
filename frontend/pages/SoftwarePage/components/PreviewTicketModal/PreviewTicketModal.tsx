@@ -50,7 +50,7 @@ const PreviewTicketModal = ({
         <p className="automations-learn-more">
           Want to learn more about how automations in Mdmlab work?{" "}
           <CustomLink
-            url="https://fleetdm.com/docs/using-fleet/automations"
+            url="https://mdmlabdm.com/docs/using-mdmlab/automations"
             text="Check out the Mdmlab documentation"
             newTab
           />

@@ -331,7 +331,7 @@ const Advanced = ({
             tooltipContent={
               <>
                 When enabled, disables the ability to run live queries <br />
-                (ad hoc queries executed via the UI or fleetctl).{" "}
+                (ad hoc queries executed via the UI or mdmlabctl).{" "}
                 <em>
                   (Default: <strong>Off</strong>)
                 </em>

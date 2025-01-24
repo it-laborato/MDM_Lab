@@ -18,22 +18,6 @@ const OSRequirementDescription = ({
   platform,
 }: IEndUserOSRequirementPreviewProps) => {
   switch (platform) {
-    case "darwin":
-      return (
-        <>
-          <h3>End user experience on macOS</h3>
-          <p>
-            For macOS 14 and above, end users will see native macOS
-            notifications (DDM).
-          </p>
-          <p>Everyone else will see the Nudge window.</p>
-          <CustomLink
-            text="Learn more"
-            url="https://fleetdm.com/learn-more-about/os-updates"
-            newTab
-          />
-        </>
-      );
     case "windows":
       return (
         <>
@@ -46,21 +30,9 @@ const OSRequirementDescription = ({
           </p>
           <CustomLink
             text="Learn more about Windows updates in Mdmlab"
-            url="https://fleetdm.com/learn-more-about/os-updates"
+            url="https://mdmlabdm.com/learn-more-about/os-updates"
             newTab
           />
-        </>
-      );
-    case "ios":
-      return (
-        <>
-          <h3>End user experience on iOS</h3>
-        </>
-      );
-    case "ipados":
-      return (
-        <>
-          <h3>End user experience on iPadOS</h3>
         </>
       );
     default:
@@ -73,16 +45,10 @@ const OSRequirementImage = ({
 }: IEndUserOSRequirementPreviewProps) => {
   const getScreenshot = () => {
     switch (platform) {
-      case "darwin":
-        return MacOSUpdateScreenshot;
       case "windows":
         return WindowsUpdateScreenshot;
-      case "ios":
-        return IOSUpdateScreenshot;
-      case "ipados":
-        return IPadOSUpdateScreenshot;
       default:
-        MacOSUpdateScreenshot;
+        WindowsUpdateScreenshot;
     }
   };
 

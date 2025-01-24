@@ -22,7 +22,7 @@ const Tag = ({ icon, text, className, onClick }: ITagProps) => {
 
   const content = (
     <>
-      <Icon name={icon} size="small" color="ui-fleet-black-75" />
+      <Icon name={icon} size="small" color="ui-mdmlab-black-75" />
       <span className={`${baseClass}__text`}>{text}</span>
     </>
   );

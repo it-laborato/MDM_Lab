@@ -21,7 +21,7 @@ import {
   generateHelpText,
 } from "./helpers";
 
-const baseClass = "fleet-app-details-form";
+const baseClass = "mdmlab-app-details-form";
 
 export type InstallType = "manual" | "automatic";
 export interface IMdmlabMaintainedAppFormData {

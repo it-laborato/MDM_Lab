@@ -1443,7 +1443,7 @@ const ManageHostsPage = ({
           >
             <>
               Export hosts
-              <Icon name="download" size="small" color="core-fleet-blue" />
+              <Icon name="download" size="small" color="core-mdmlab-blue" />
             </>
           </Button>
         )}
@@ -1517,7 +1517,7 @@ const ManageHostsPage = ({
         } else if (canEnrollHosts) {
           emptyHosts.header = "Add your hosts to Mdmlab";
           emptyHosts.info =
-            "Generate Mdmlab's agent (fleetd) to add your own hosts.";
+            "Generate Mdmlab's agent (mdmlabd) to add your own hosts.";
           emptyHosts.primaryButton = (
             <Button variant="brand" onClick={toggleAddHostsModal} type="button">
               Add hosts

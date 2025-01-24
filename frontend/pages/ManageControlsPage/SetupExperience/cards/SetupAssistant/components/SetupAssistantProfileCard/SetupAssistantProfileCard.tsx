@@ -54,7 +54,7 @@ const SetupAssistantProfileCard = ({
           variant="text-icon"
           onClick={onDelete}
         >
-          <Icon name="trash" color="ui-fleet-black-75" />
+          <Icon name="trash" color="ui-mdmlab-black-75" />
         </Button>
       </div>
     </Card>

@@ -2,18 +2,18 @@ export type Colors = keyof typeof COLORS;
 
 export const COLORS = {
   // core colors
-  "core-fleet-black": "#192147",
-  "core-fleet-blue": "#6A67FE", // TODO: lots of work to correctly match scss core-fleet-blue and not ui-vibrant-blue
-  "core-fleet-red": "#FF5C83",
-  "core-fleet-purple": "#AE6DDF",
-  "core-fleet-white": "#FFFFFF",
+  "core-mdmlab-black": "#192147",
+  "core-mdmlab-blue": "#6A67FE", // TODO: lots of work to correctly match scss core-mdmlab-blue and not ui-vibrant-blue
+  "core-mdmlab-red": "#FF5C83",
+  "core-mdmlab-purple": "#AE6DDF",
+  "core-mdmlab-white": "#FFFFFF",
 
   // ui colors
-  "ui-fleet-black-75": "#515774",
-  "ui-fleet-black-50": "#8B8FA2",
-  "ui-fleet-black-33": "#B3B6C1",
-  "ui-fleet-black-25": "#C5C7D1",
-  "ui-fleet-black-10": "#E2E4EA",
+  "ui-mdmlab-black-75": "#515774",
+  "ui-mdmlab-black-50": "#8B8FA2",
+  "ui-mdmlab-black-33": "#B3B6C1",
+  "ui-mdmlab-black-25": "#C5C7D1",
+  "ui-mdmlab-black-10": "#E2E4EA",
   "ui-off-white": "#F9FAFC",
   "ui-blue-hover": "#5D5AE7",
   "ui-blue-pressed": "#4B4AB4",

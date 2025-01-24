@@ -328,8 +328,8 @@ const SoftwareInstallerCard = ({
             newTab
             url={`${LEARN_MORE_ABOUT_BASE_LINK}/read-package-version`}
             text="Learn more"
-            color="core-fleet-white"
-            iconColor="core-fleet-white"
+            color="core-mdmlab-white"
+            iconColor="core-mdmlab-white"
           />
         </span>
       }

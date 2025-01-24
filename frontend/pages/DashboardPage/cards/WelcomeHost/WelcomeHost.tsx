@@ -164,7 +164,7 @@ const WelcomeHost = ({
             <Icon name="disable" color="status-error" />
             Your device is not communicating with Mdmlab.
           </p>
-          <p>Join the #fleet Slack channel for help troubleshooting.</p>
+          <p>Join the #mdmlab Slack channel for help troubleshooting.</p>
           <a
             target="_blank"
             rel="noreferrer"
@@ -189,7 +189,7 @@ const WelcomeHost = ({
             <Icon name="disable" color="status-error" />
             No policies apply to your device.
           </p>
-          <p>Join the #fleet Slack channel for help troubleshooting.</p>
+          <p>Join the #mdmlab Slack channel for help troubleshooting.</p>
           <a
             target="_blank"
             rel="noreferrer"
@@ -242,7 +242,7 @@ const WelcomeHost = ({
                     <span className="info">{p.name}</span>
                     <Icon
                       name="chevron-right"
-                      color="core-fleet-blue"
+                      color="core-mdmlab-blue"
                       className="policy-arrow"
                     />
                   </div>
@@ -271,7 +271,7 @@ const WelcomeHost = ({
             onClick={onRefetchHost}
             disabled={showRefetchLoadingSpinner}
           >
-            <Icon name="refresh" color="core-fleet-white" /> Refetch
+            <Icon name="refresh" color="core-mdmlab-white" /> Refetch
           </Button>
           <span>
             Last updated{" "}

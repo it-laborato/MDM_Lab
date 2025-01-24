@@ -14,7 +14,7 @@ import RegistrationForm from "components/forms/RegistrationForm";
 // @ts-ignore
 import Breadcrumbs from "./Breadcrumbs";
 // @ts-ignore
-import fleetLogoText from "../../../assets/images/mdmlab-logo-text-white.svg";
+import mdmlabLogoText from "../../../assets/images/mdmlab-logo-text-white.svg";
 
 const ERROR_NOTIFICATION: INotification = {
   alertType: "error",
@@ -86,7 +86,7 @@ const RegistrationPage = ({ router }: IRegistrationPageProps) => {
     <div className={baseClass}>
       <img
         alt="Mdmlab logo"
-        src={fleetLogoText}
+        src={mdmlabLogoText}
         className={`${baseClass}__logo`}
       />
       <Breadcrumbs

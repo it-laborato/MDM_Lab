@@ -77,7 +77,7 @@ const InstallIconWithTooltip = ({
         <Icon
           name={installIconMap[iconType].iconName}
           className={`${baseClass}__install-icon`}
-          color="ui-fleet-black-50"
+          color="ui-mdmlab-black-50"
         />
       </div>
       <ReactTooltip

@@ -33,11 +33,11 @@ const renderTooltip = (
 ) => {
   const renderUserContextFootnote = () => {
     const queryString = buildQueryStringFromParams({
-      utm_source: "fleet-ui",
+      utm_source: "mdmlab-ui",
       utm_table: `table-${selectedTableName}`,
     });
 
-    const href = `https://fleetdm.com/guides/osquery-consider-joining-against-the-users-table?${queryString}`;
+    const href = `https://mdmlabdm.com/guides/osquery-consider-joining-against-the-users-table?${queryString}`;
     const classNames = classnames(
       `${baseClass}__footnote`,
       `${baseClass}__footnote-link`

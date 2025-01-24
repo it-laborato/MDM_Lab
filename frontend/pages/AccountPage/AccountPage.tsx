@@ -182,7 +182,7 @@ const AccountPage = ({ router }: IAccountPageProps): JSX.Element | null => {
               <strong>This token expires.</strong> If you want an API key for a
               permanent integration, create an&nbsp;
               <CustomLink
-                url="https://fleetdm.com/docs/using-fleet/fleetctl-cli?utm_medium=fleetui&utm_campaign=get-api-token#using-fleetctl-with-an-api-only-user"
+                url="https://mdmlabdm.com/docs/using-mdmlab/mdmlabctl-cli?utm_medium=mdmlabui&utm_campaign=get-api-token#using-mdmlabctl-with-an-api-only-user"
                 text="API-only user"
                 newTab
               />
@@ -193,10 +193,10 @@ const AccountPage = ({ router }: IAccountPageProps): JSX.Element | null => {
             <SecretField secret={authToken()} />
           </div>
           <p className="token-message">
-            This token is intended for SSO users to authenticate in the fleetctl
+            This token is intended for SSO users to authenticate in the mdmlabctl
             CLI. It expires based on the{" "}
             <CustomLink
-              url="https://fleetdm.com/docs/deploying/configuration?utm_medium=fleetui&utm_campaign=get-api-token#session-duration"
+              url="https://mdmlabdm.com/docs/deploying/configuration?utm_medium=mdmlabui&utm_campaign=get-api-token#session-duration"
               text="session duration configuration"
               newTab
             />

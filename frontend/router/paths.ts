@@ -60,7 +60,7 @@ export default {
   ADMIN_ORGANIZATION_HOST_STATUS_WEBHOOK: `${URL_PREFIX}/settings/organization/host-status-webhook`,
   ADMIN_ORGANIZATION_STATISTICS: `${URL_PREFIX}/settings/organization/statistics`,
   ADMIN_ORGANIZATION_ADVANCED: `${URL_PREFIX}/settings/organization/advanced`,
-  ADMIN_ORGANIZATION_FLEET_DESKTOP: `${URL_PREFIX}/settings/organization/fleet-desktop`,
+  ADMIN_ORGANIZATION_MDMLAB_DESKTOP: `${URL_PREFIX}/settings/organization/mdmlab-desktop`,
 
   // Software pages
   SOFTWARE: `${URL_PREFIX}/software`,
@@ -80,9 +80,9 @@ export default {
   SOFTWARE_VULNERABILITY_DETAILS: (cve: string): string => {
     return `${URL_PREFIX}/software/vulnerabilities/${cve}`;
   },
-  SOFTWARE_ADD_FLEET_MAINTAINED: `${URL_PREFIX}/software/add/fleet-maintained`,
-  SOFTWARE_FLEET_MAINTAINED_DETAILS: (id: number) =>
-    `${URL_PREFIX}/software/add/fleet-maintained/${id}`,
+  SOFTWARE_ADD_MDMLAB_MAINTAINED: `${URL_PREFIX}/software/add/mdmlab-maintained`,
+  SOFTWARE_MDMLAB_MAINTAINED_DETAILS: (id: number) =>
+    `${URL_PREFIX}/software/add/mdmlab-maintained/${id}`,
   SOFTWARE_ADD_PACKAGE: `${URL_PREFIX}/software/add/package`,
   SOFTWARE_ADD_APP_STORE: `${URL_PREFIX}/software/add/app-store`,
 
@@ -133,9 +133,9 @@ export default {
   API_ONLY_USER: `${URL_PREFIX}/apionlyuser`,
 
   // error pages
-  FLEET_403: `${URL_PREFIX}/403`,
-  FLEET_404: `${URL_PREFIX}/404`,
-  FLEET_500: `${URL_PREFIX}/500`,
+  MDMLAB_403: `${URL_PREFIX}/403`,
+  MDMLAB_404: `${URL_PREFIX}/404`,
+  MDMLAB_500: `${URL_PREFIX}/500`,
 
   LOGIN: `${URL_PREFIX}/login`,
   LOGOUT: `${URL_PREFIX}/logout`,

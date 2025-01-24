@@ -6,7 +6,7 @@ interface ICheckProps {
   color?: Colors;
 }
 
-const PendingOutline = ({ color = "ui-fleet-black-50" }: ICheckProps) => {
+const PendingOutline = ({ color = "ui-mdmlab-black-50" }: ICheckProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

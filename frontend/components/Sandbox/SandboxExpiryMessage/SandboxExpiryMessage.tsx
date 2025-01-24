@@ -45,7 +45,7 @@ const SandboxExpiryMessage = ({
 
   return (
     <a
-      href="https://fleetdm.com/docs/using-fleet/learn-how-to-use-fleet#how-to-add-your-device-to-fleet"
+      href="https://mdmlabdm.com/docs/using-mdmlab/learn-how-to-use-mdmlab#how-to-add-your-device-to-mdmlab"
       target="_blank"
       rel="noreferrer"
       className={baseClass}
@@ -53,7 +53,7 @@ const SandboxExpiryMessage = ({
       <p>Your Mdmlab Sandbox expires in {expiry}.</p>
       <p>
         <b>Learn how to use Mdmlab</b>{" "}
-        <Icon name="external-link" color="core-fleet-black" />
+        <Icon name="external-link" color="core-mdmlab-black" />
       </p>
     </a>
   );

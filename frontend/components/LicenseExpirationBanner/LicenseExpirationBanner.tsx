@@ -12,11 +12,11 @@ const LicenseExpirationBanner = (): JSX.Element => {
       color="yellow"
       cta={
         <CustomLink
-          url="https://fleetdm.com/learn-more-about/downgrading"
+          url="https://mdmlabdm.com/learn-more-about/downgrading"
           text="Downgrade or renew"
           newTab
-          iconColor="core-fleet-black"
-          color="core-fleet-black"
+          iconColor="core-mdmlab-black"
+          color="core-mdmlab-black"
         />
       }
     >

@@ -136,25 +136,25 @@ const TAGGED_TEMPLATES = {
     );
   },
   editPackCtlActivityTemplate: () => {
-    return "edited a pack using fleetctl.";
+    return "edited a pack using mdmlabctl.";
   },
   editPolicyCtlActivityTemplate: () => {
-    return "edited policies using fleetctl.";
+    return "edited policies using mdmlabctl.";
   },
   editQueryCtlActivityTemplate: (activity: IActivity) => {
     const count = activity.details?.specs?.length;
     return typeof count === "undefined" || count === 1
-      ? "edited a query using fleetctl."
-      : "edited queries using fleetctl.";
+      ? "edited a query using mdmlabctl."
+      : "edited queries using mdmlabctl.";
   },
   editTeamCtlActivityTemplate: (activity: IActivity) => {
     const count = activity.details?.teams?.length;
     return count === 1 && activity.details?.teams ? (
       <>
-        edited the <b>{activity.details?.teams[0].name}</b> team using fleetctl.
+        edited the <b>{activity.details?.teams[0].name}</b> team using mdmlabctl.
       </>
     ) : (
-      "edited multiple teams using fleetctl."
+      "edited multiple teams using mdmlabctl."
     );
   },
   editAgentOptions: (activity: IActivity) => {
@@ -261,7 +261,7 @@ const TAGGED_TEMPLATES = {
       </>
     );
   },
-  fleetEnrolled: (activity: IActivity) => {
+  mdmlabEnrolled: (activity: IActivity) => {
     const hostDisplayName = activity.details?.host_display_name ? (
       <b>{activity.details.host_display_name}</b>
     ) : (
@@ -400,7 +400,7 @@ const TAGGED_TEMPLATES = {
           "apple",
           activity.details?.team_name
         )}{" "}
-        via fleetctl.
+        via mdmlabctl.
       </>
     );
   },
@@ -487,7 +487,7 @@ const TAGGED_TEMPLATES = {
           "windows",
           activity.details?.team_name
         )}{" "}
-        via fleetctl.
+        via mdmlabctl.
       </>
     );
   },
@@ -735,7 +735,7 @@ const TAGGED_TEMPLATES = {
         ) : (
           "no team"
         )}{" "}
-        via fleetctl.
+        via mdmlabctl.
       </>
     );
   },
@@ -839,7 +839,7 @@ const TAGGED_TEMPLATES = {
           "apple",
           activity.details?.team_name
         )}{" "}
-        via fleetctl.
+        via mdmlabctl.
       </>
     );
   },
@@ -1077,7 +1077,7 @@ const getDetail = (activity: IActivity, isPremiumTier: boolean) => {
       return TAGGED_TEMPLATES.userDeletedTeamRole(activity);
     }
     case ActivityType.MdmlabEnrolled: {
-      return TAGGED_TEMPLATES.fleetEnrolled(activity);
+      return TAGGED_TEMPLATES.mdmlabEnrolled(activity);
     }
     case ActivityType.MdmEnrolled: {
       return TAGGED_TEMPLATES.mdmEnrolled(activity);
@@ -1279,7 +1279,7 @@ const GlobalActivityItem = ({
   const hasDetails = ACTIVITIES_WITH_DETAILS.has(activity.type);
 
   // Add the "Mdmlab" name to the activity if needed.
-  // TODO: remove/refactor this once we have "fleet-initiated" activities.
+  // TODO: remove/refactor this once we have "mdmlab-initiated" activities.
   if (
     !activity.actor_email &&
     !activity.actor_full_name &&

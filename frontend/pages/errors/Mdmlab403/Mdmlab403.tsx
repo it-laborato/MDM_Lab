@@ -4,11 +4,11 @@ import { Link } from "react-router";
 import PATHS from "router/paths";
 
 // @ts-ignore
-import fleetLogoText from "../../../../assets/images/mdmlab-logo-text-white.svg";
+import mdmlabLogoText from "../../../../assets/images/mdmlab-logo-text-white.svg";
 // @ts-ignore
 import backgroundImg from "../../../../assets/images/403.svg";
 
-const baseClass = "fleet-403";
+const baseClass = "mdmlab-403";
 
 const Mdmlab403 = () => (
   <div className={baseClass}>
@@ -16,7 +16,7 @@ const Mdmlab403 = () => (
       <Link to={PATHS.DASHBOARD}>
         <img
           className="primary-header__logo"
-          src={fleetLogoText}
+          src={mdmlabLogoText}
           alt="Mdmlab logo"
         />
       </Link>

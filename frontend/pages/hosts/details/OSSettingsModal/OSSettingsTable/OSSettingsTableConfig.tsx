@@ -4,8 +4,8 @@ import { Column } from "react-table";
 import { IStringCellProps } from "interfaces/datatable_config";
 import { IHostMdmData } from "interfaces/host";
 import {
-  FLEET_FILEVAULT_PROFILE_DISPLAY_NAME,
-  // FLEET_FILEVAULT_PROFILE_IDENTIFIER,
+  MDMLAB_FILEVAULT_PROFILE_DISPLAY_NAME,
+  // MDMLAB_FILEVAULT_PROFILE_IDENTIFIER,
   IHostMdmProfile,
   MdmDDMProfileStatus,
   MdmProfileStatus,
@@ -166,7 +166,7 @@ const makeDarwinRows = ({ profiles, macos_settings }: IHostMdmData) => {
       // TODO: this is a brittle check for the filevault profile
       // it would be better to match on the identifier but it is not
       // currently available in the API response
-      if (p.name === FLEET_FILEVAULT_PROFILE_DISPLAY_NAME) {
+      if (p.name === MDMLAB_FILEVAULT_PROFILE_DISPLAY_NAME) {
         return { ...p, status: "action_required" };
       }
       return p;

@@ -127,7 +127,7 @@ describe("QuerySidePanel - component", () => {
     expect(icon).toBeNull();
     expect(text.closest("a")).toHaveAttribute(
       "href",
-      "https://www.fleetdm.com/tables/users"
+      "https://www.mdmlabdm.com/tables/users"
     );
     expect(text.closest("a")).toHaveAttribute("target", "_blank");
   });

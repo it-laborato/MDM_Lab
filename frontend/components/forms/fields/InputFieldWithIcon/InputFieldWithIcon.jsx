@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 
 import Icon from "components/Icon/Icon";
-import FleetIcon from "components/icons/MdmlabIcon";
+import MDMLabIcon from "components/icons/MdmlabIcon";
 import TooltipWrapper from "components/TooltipWrapper";
 import Button from "components/buttons/Button";
 import InputField from "../InputField";
@@ -141,14 +141,14 @@ class InputFieldWithIcon extends InputField {
             data-1p-ignore={ignore1Password}
           />
           {iconSvg && <Icon name={iconSvg} className={iconClasses} />}
-          {iconName && <FleetIcon name={iconName} className={iconClasses} />}
+          {iconName && <MDMLabIcon name={iconName} className={iconClasses} />}
           {clearButton && !!value && (
             <Button
               onClick={() => handleClear()}
               variant="icon"
               className={`${baseClass}__clear-button`}
             >
-              <Icon name="close-filled" color="core-fleet-black" />
+              <Icon name="close-filled" color="core-mdmlab-black" />
             </Button>
           )}
         </div>

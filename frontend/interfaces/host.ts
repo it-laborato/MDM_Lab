@@ -31,7 +31,7 @@ export default PropTypes.shape({
   platform: PropTypes.string,
   osquery_version: PropTypes.string,
   orbit_version: PropTypes.string,
-  fleet_desktop_version: PropTypes.string,
+  mdmlab_desktop_version: PropTypes.string,
   os_version: PropTypes.string,
   build: PropTypes.string,
   platform_like: PropTypes.string,
@@ -179,7 +179,7 @@ export interface IHostMdmData {
   macos_setup?: IMdmMacOsSetup;
   device_status: HostMdmDeviceStatus;
   pending_action: HostMdmPendingAction;
-  connected_to_fleet?: boolean;
+  connected_to_mdmlab?: boolean;
 }
 
 export interface IHostMaintenanceWindow {
@@ -284,7 +284,7 @@ export interface IHost {
   platform: HostPlatform;
   osquery_version: string;
   orbit_version: string | null;
-  fleet_desktop_version: string | null;
+  mdmlab_desktop_version: string | null;
   os_version: string;
   build: string;
   platform_like: string; // TODO: replace with more specific union type
@@ -337,8 +337,8 @@ export interface IHost {
 
 /*
  * IHostDevice is an extension of IHost that is returned by the /devices endpoint. It includes the
- * dep_assigned_to_fleet field, which is not returned by the /hosts endpoint.
+ * dep_assigned_to_mdmlab field, which is not returned by the /hosts endpoint.
  */
 export interface IHostDevice extends IHost {
-  dep_assigned_to_fleet: boolean;
+  dep_assigned_to_mdmlab: boolean;
 }

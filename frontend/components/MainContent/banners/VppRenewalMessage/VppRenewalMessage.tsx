@@ -19,8 +19,8 @@ const VppRenewalMessage = ({ expired }: IVppRenewalMessageProps) => {
           url="/settings/integrations/mdm/vpp"
           text="Renew VPP"
           className={`${baseClass}`}
-          color="core-fleet-black"
-          iconColor="core-fleet-black"
+          color="core-mdmlab-black"
+          iconColor="core-mdmlab-black"
         />
       }
     >

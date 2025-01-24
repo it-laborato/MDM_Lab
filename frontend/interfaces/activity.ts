@@ -34,7 +34,7 @@ export enum ActivityType {
   UserDeletedGlobalRole = "deleted_user_global_role",
   UserChangedTeamRole = "changed_user_team_role",
   UserDeletedTeamRole = "deleted_user_team_role",
-  MdmlabEnrolled = "fleet_enrolled",
+  MdmlabEnrolled = "mdmlab_enrolled",
   MdmEnrolled = "mdm_enrolled",
   MdmUnenrolled = "mdm_unenrolled",
   EditedMacosMinVersion = "edited_macos_min_version",

@@ -1,7 +1,7 @@
 import validEmail from "./index";
 
 describe("valid_email - validators", () => {
-  const validEmails = ["hi@thegnar.co", "hi@gnar.dog", "fleet@gmail.com"];
+  const validEmails = ["hi@thegnar.co", "hi@gnar.dog", "mdmlab@gmail.com"];
   const invalidEmails = ["www.thegnar.co", "bill@shakespeare"];
 
   it("returns true for valid emails", () => {

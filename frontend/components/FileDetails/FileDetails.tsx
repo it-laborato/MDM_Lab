@@ -47,7 +47,7 @@ const FileDetails = ({
         <div className={`${baseClass}__edit`}>
           <Button className={`${baseClass}__edit-button`} variant="icon">
             <label htmlFor="edit-file">
-              <Icon name="pencil" color="ui-fleet-black-75" />
+              <Icon name="pencil" color="ui-mdmlab-black-75" />
             </label>
           </Button>
           <input

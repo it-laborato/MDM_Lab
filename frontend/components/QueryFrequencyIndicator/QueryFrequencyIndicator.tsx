@@ -46,7 +46,7 @@ const QueryFrequencyIndicator = ({
       return checked ? (
         <Icon size="medium" name="warning" />
       ) : (
-        <Icon size="medium" name="clock" color="ui-fleet-black-33" />
+        <Icon size="medium" name="clock" color="ui-mdmlab-black-33" />
       );
     }
     return <Icon size="medium" name="clock" />;

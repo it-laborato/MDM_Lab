@@ -46,7 +46,7 @@ export interface IMdmlabAceProps {
   handleSubmit?: () => void;
 }
 
-const baseClass = "fleet-ace";
+const baseClass = "mdmlab-ace";
 
 const MdmlabAce = ({
   focus,
@@ -267,7 +267,7 @@ const MdmlabAce = ({
         enableLiveAutocompletion
         editorProps={{ $blockScrolling: Infinity }}
         fontSize={fontSize}
-        mode="fleet"
+        mode="mdmlab"
         minLines={2}
         maxLines={maxLines}
         name={name}
@@ -278,7 +278,7 @@ const MdmlabAce = ({
         setOptions={{ enableLinking: true }}
         showGutter={showGutter}
         showPrintMargin={false}
-        theme="fleet"
+        theme="mdmlab"
         value={value}
         placeholder={placeholder}
         width="100%"

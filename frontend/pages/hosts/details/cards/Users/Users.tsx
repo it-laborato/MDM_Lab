@@ -48,7 +48,7 @@ const Users = ({
             <>
               Check out the Mdmlab documentation for{" "}
               <CustomLink
-                url="https://fleetdm.com/learn-more-about/enable-user-collection"
+                url="https://mdmlabdm.com/learn-more-about/enable-user-collection"
                 text="steps to enable this feature"
                 newTab
               />

@@ -9,7 +9,7 @@ interface ISearchProps {
 
 const Search = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: ISearchProps) => {
   return (
     <svg

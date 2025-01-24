@@ -10,7 +10,7 @@ interface IInstallSelfServiceProps {
 
 const InstallSelfService = ({
   size = "medium",
-  color = "ui-fleet-black-50",
+  color = "ui-mdmlab-black-50",
 }: IInstallSelfServiceProps) => {
   return (
     <svg

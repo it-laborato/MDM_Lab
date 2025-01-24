@@ -31,7 +31,7 @@ export const generateTableConfig = (
       Cell: (cellProps: ITableStringCellProps) => {
         const { name, id } = cellProps.row.original;
 
-        const path = `${PATHS.SOFTWARE_FLEET_MAINTAINED_DETAILS(
+        const path = `${PATHS.SOFTWARE_MDMLAB_MAINTAINED_DETAILS(
           id
         )}?${buildQueryStringFromParams({
           team_id: teamId,

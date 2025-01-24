@@ -19,7 +19,7 @@ import PremiumFeatureMessage from "components/PremiumFeatureMessage";
 import MdmlabMaintainedAppsTable from "./MdmlabMaintainedAppsTable";
 import { ISoftwareAddPageQueryParams } from "../SoftwareAddPage";
 
-const baseClass = "software-fleet-maintained";
+const baseClass = "software-mdmlab-maintained";
 
 const DATA_STALE_TIME = 30000;
 const QUERY_OPTIONS = {
@@ -28,7 +28,7 @@ const QUERY_OPTIONS = {
 };
 
 interface IQueryKey extends ISoftwareMdmlabMaintainedAppsQueryParams {
-  scope?: "fleet-maintained-apps";
+  scope?: "mdmlab-maintained-apps";
 }
 
 interface ISoftwareMdmlabMaintainedProps {
@@ -66,7 +66,7 @@ const SoftwareMdmlabMaintained = ({
   >(
     [
       {
-        scope: "fleet-maintained-apps",
+        scope: "mdmlab-maintained-apps",
         page: currentPage,
         per_page: DEFAULT_PAGE_SIZE,
         query,

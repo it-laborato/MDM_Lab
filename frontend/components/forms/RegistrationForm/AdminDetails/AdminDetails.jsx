@@ -43,7 +43,7 @@ class AdminDetails extends Component {
 
     return (
       <form onSubmit={handleSubmit} className={className} autoComplete="off">
-        <p>Additional admins can be designated within the Fleet app.</p>
+        <p>Additional admins can be designated within the mdmlab app.</p>
         <InputField
           {...fields.name}
           label="Full name"

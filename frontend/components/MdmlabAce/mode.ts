@@ -4,7 +4,7 @@ import { osqueryTableNames, osqueryTableColumnNames } from "utilities/osquery_ta
 import { sqlBuiltinFunctions, sqlDataTypes, sqlKeyWords } from "utilities/sql_tools";
 
 ace.define(
-  "ace/mode/fleet_highlight_rules",
+  "ace/mode/mdmlab_highlight_rules",
   [
     "require",
     "exports",
@@ -100,14 +100,14 @@ ace.define(
 );
 
 ace.define(
-  "ace/mode/fleet",
+  "ace/mode/mdmlab",
   [
     "require",
     "exports",
     "module",
     "ace/lib/oop",
     "ace/mode/sql",
-    "ace/mode/fleet_highlight_rules",
+    "ace/mode/mdmlab_highlight_rules",
     "ace/range",
   ],
   function (acequire, exports, module) {
@@ -115,7 +115,7 @@ ace.define(
 
     var oop = acequire("../lib/oop");
     var TextMode = acequire("./sql").Mode;
-    var MdmlabHighlightRules = acequire("./fleet_highlight_rules")
+    var MdmlabHighlightRules = acequire("./mdmlab_highlight_rules")
       .MdmlabHighlightRules;
     var Range = acequire("../range").Range;
 
@@ -127,7 +127,7 @@ ace.define(
     (function () {
       this.lineCommentStart = "--";
 
-      this.$id = "ace/mode/fleet";
+      this.$id = "ace/mode/mdmlab";
     }.call(Mode.prototype));
 
     exports.Mode = Mode;

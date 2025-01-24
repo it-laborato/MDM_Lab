@@ -40,7 +40,7 @@ const Info = ({
     orgLogoURLLightBackground:
       appConfig.org_info.org_logo_url_light_background || "",
     orgSupportURL:
-      appConfig.org_info.contact_url || "https://fleetdm.com/company/contact",
+      appConfig.org_info.contact_url || "https://mdmlabdm.com/company/contact",
   });
 
   const {

@@ -7,7 +7,7 @@ interface ICopy {
   size?: IconSizes;
 }
 
-const Copy = ({ color = "core-fleet-blue", size = "medium" }: ICopy) => {
+const Copy = ({ color = "core-mdmlab-blue", size = "medium" }: ICopy) => {
   return (
     <svg
       width={ICON_SIZES[size]}

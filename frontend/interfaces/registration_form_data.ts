@@ -8,7 +8,7 @@ export default PropTypes.shape({
   org_name: PropTypes.string,
   org_web_url: PropTypes.string,
   org_logo_url: PropTypes.string,
-  fleet_web_address: PropTypes.string,
+  mdmlab_web_address: PropTypes.string,
 });
 
 export interface IRegistrationFormData {
@@ -19,6 +19,6 @@ export interface IRegistrationFormData {
   org_name: string;
   org_web_url: string;
   org_logo_url: string;
-  fleet_web_address: string;
+  mdmlab_web_address: string;
   server_url: string;
 }

@@ -82,7 +82,7 @@ describe("Device User Page", () => {
       const host = createMockHost() as IHostDevice;
       host.mdm.enrollment_status = "Off";
       host.platform = "darwin";
-      host.dep_assigned_to_fleet = false;
+      host.dep_assigned_to_mdmlab = false;
 
       const user = await setupTest({
         host,
@@ -99,7 +99,7 @@ describe("Device User Page", () => {
       const host = createMockHost() as IHostDevice;
       host.mdm.enrollment_status = null;
       host.platform = "darwin";
-      host.dep_assigned_to_fleet = false;
+      host.dep_assigned_to_mdmlab = false;
 
       const user = await setupTest({
         host,
@@ -116,7 +116,7 @@ describe("Device User Page", () => {
       const host = createMockHost() as IHostDevice;
       host.mdm.enrollment_status = null;
       host.platform = "darwin";
-      host.dep_assigned_to_fleet = false;
+      host.dep_assigned_to_mdmlab = false;
 
       await setupTest({
         host,
@@ -134,7 +134,7 @@ describe("Device User Page", () => {
       const host = createMockHost() as IHostDevice;
       host.mdm.enrollment_status = "On (manual)";
       host.platform = "darwin";
-      host.dep_assigned_to_fleet = false;
+      host.dep_assigned_to_mdmlab = false;
 
       await setupTest({
         host,

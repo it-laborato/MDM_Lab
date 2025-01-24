@@ -9,7 +9,7 @@ interface IChromeProps {
 
 const Chrome = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: IChromeProps) => {
   return (
     <svg

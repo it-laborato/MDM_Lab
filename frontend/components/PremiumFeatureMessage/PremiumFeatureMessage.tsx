@@ -31,7 +31,7 @@ const PremiumFeatureMessage = ({
         <p>This feature is included in Mdmlab Premium.</p>
         <div className="external-link-and-icon">
           <CustomLink
-            url="https://fleetdm.com/upgrade"
+            url="https://mdmlabdm.com/upgrade"
             text="Learn more"
             newTab
           />

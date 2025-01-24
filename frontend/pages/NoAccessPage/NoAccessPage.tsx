@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { InjectedRouter } from "react-router";
 import PATHS from "router/paths";
 
-import { CONTACT_FLEET_LINK } from "utilities/constants";
+import { CONTACT_MDMLAB_LINK } from "utilities/constants";
 
 import Button from "components/buttons/Button/Button";
 // @ts-ignore
@@ -50,7 +50,7 @@ const NoAccessPage = ({ router, orgContactUrl }: INoAccessPageProps) => {
           <p>
             To get access,{" "}
             <CustomLink
-              url={orgContactUrl || CONTACT_FLEET_LINK}
+              url={orgContactUrl || CONTACT_MDMLAB_LINK}
               text="contact your administrator"
             />
             .

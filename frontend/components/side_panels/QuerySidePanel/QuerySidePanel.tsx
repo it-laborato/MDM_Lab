@@ -73,7 +73,7 @@ const QuerySidePanel = ({
           }
         }}
       >
-        <Icon name="close" color="ui-fleet-black-50" size="small" />
+        <Icon name="close" color="ui-mdmlab-black-50" size="small" />
       </div>
       <div className={`${baseClass}__choose-table`}>
         <h2 className={`${baseClass}__header`}>
@@ -96,7 +96,7 @@ const QuerySidePanel = ({
       {examples && <QueryTableExample example={examples} />}
       {notes && <QueryTableNotes notes={notes} />}
       <CustomLink
-        url={`https://www.fleetdm.com/tables/${name}`}
+        url={`https://www.mdmlabdm.com/tables/${name}`}
         text="Source"
         newTab
       />

@@ -9,7 +9,7 @@ interface IExternalLinkProps {
 
 const ExternalLink = ({
   size = "small",
-  color = "core-fleet-blue",
+  color = "core-mdmlab-blue",
 }: IExternalLinkProps) => {
   return (
     <svg

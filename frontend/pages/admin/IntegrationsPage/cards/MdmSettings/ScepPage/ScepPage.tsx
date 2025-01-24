@@ -116,7 +116,7 @@ export const ScepCertificateContent = ({
             <div>
               Connect to your Network Device Enrollment Service (
               <CustomLink
-                url="https://www.fleetdm.com/learn-more-about/ndes"
+                url="https://www.mdmlabdm.com/learn-more-about/ndes"
                 text="NDES"
               />
               ) admin account:
@@ -213,7 +213,7 @@ export const ScepCertificateContent = ({
               />{" "}
               to configure how SCEP certificates are delivered to your hosts.{" "}
               <CustomLink
-                url="https://fleetdm.com/learn-more-about/setup-ndes"
+                url="https://mdmlabdm.com/learn-more-about/setup-ndes"
                 text="Learn more"
                 newTab
               />

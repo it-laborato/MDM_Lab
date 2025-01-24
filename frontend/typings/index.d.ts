@@ -1,5 +1,5 @@
 /**
- * A file that contains the custom typings for fleets own modules and libraries
+ * A file that contains the custom typings for mdmlabs own modules and libraries
  */
 
 // PNG assests

@@ -20,7 +20,7 @@ const WindowsAutomaticEnrollmentCard = ({
           onClick={viewDetails}
           variant="text-icon"
         >
-          Details <Icon name="chevron-right" color="core-fleet-blue" />
+          Details <Icon name="chevron-right" color="core-mdmlab-blue" />
         </Button>
       }
     >

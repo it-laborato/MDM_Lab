@@ -1,6 +1,6 @@
 # Patterns
 
-This contains the patterns that we follow in the Fleet UI.
+This contains the patterns that we follow in the mdmlab UI.
 
 > NOTE: There are always exceptions to the rules, but we try as much as possible to
 follow these patterns unless a specific use case calls for something else. These
@@ -14,7 +14,7 @@ should be discussed within the team and documented before merged.
 - [Forms](#forms)
 - [React hooks](#react-hooks)
 - [React Context](#react-context)
-- [Fleet API calls](#fleet-api-calls)
+- [mdmlab API calls](#mdmlab-api-calls)
 - [Page routing](#page-routing)
 - [Styles](#styles)
 - [Icons and images](#icons-and-images)
@@ -24,7 +24,7 @@ should be discussed within the team and documented before merged.
 
 ## Typing
 
-All Javascript and React files use Typescript, meaning the extensions are `.ts` and `.tsx`. Here are the guidelines on how we type at Fleet:
+All Javascript and React files use Typescript, meaning the extensions are `.ts` and `.tsx`. Here are the guidelines on how we type at mdmlab:
 
 - Use *[global entity interfaces](../README.md#interfaces)* when interfaces are used multiple times across the app
 - Use *local interfaces* when typing entities limited to the specific page or component
@@ -299,7 +299,7 @@ const PageOrComponent = (props) => {
 data that is desired and allows for retrieval of that data in whatever component is in need.
 View currently working contexts in the [context directory](../context).
 
-## Fleet API calls
+## mdmlab API calls
 
 The [services](../services) directory stores all API calls and is to be used in two ways:
 - A direct `async/await` assignment
@@ -401,7 +401,7 @@ const PageOrComponent = ({
 
 ## Styles
 
-Below are a few need-to-knows about what's available in Fleet's CSS:
+Below are a few need-to-knows about what's available in mdmlab's CSS:
 
 
 

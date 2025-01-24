@@ -5,7 +5,7 @@ interface IMoreProps {
   color?: Colors;
 }
 
-const More = ({ color = "core-fleet-blue" }: IMoreProps) => {
+const More = ({ color = "core-mdmlab-blue" }: IMoreProps) => {
   return (
     <svg
       width="16"

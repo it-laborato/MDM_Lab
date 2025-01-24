@@ -4,7 +4,7 @@ import { COLORS, Colors } from "styles/var/colors";
 interface ITransfer {
   color?: Colors;
 }
-const Transfer = ({ color = "core-fleet-blue" }: ITransfer) => {
+const Transfer = ({ color = "core-mdmlab-blue" }: ITransfer) => {
   return (
     <svg
       width="16"

@@ -36,7 +36,7 @@ const RefetchButton = ({ isFetching, onClick }: IRefetchButtonProps) => {
       variant="text-icon"
       className={classNames}
     >
-      <Icon name="refresh" color="core-fleet-blue" size="small" />
+      <Icon name="refresh" color="core-mdmlab-blue" size="small" />
       {buttonText}
     </Button>
   );
@@ -98,13 +98,13 @@ const generateErrorTooltip = (
         <br />
         Mdmlab couldn&apos;t populate
         <br />
-        $FLEET_VAR_HOST_END_USER_EMAIL_IDP.
+        $mdmlab_VAR_HOST_END_USER_EMAIL_IDP.
         <br />
         <CustomLink
           text="Learn more"
-          url="https://fleetdm.com/learn-more-about/idp-email"
+          url="https://mdmlabdm.com/learn-more-about/idp-email"
           newTab
-          iconColor="core-fleet-white"
+          iconColor="core-mdmlab-white"
         />
       </>
     );

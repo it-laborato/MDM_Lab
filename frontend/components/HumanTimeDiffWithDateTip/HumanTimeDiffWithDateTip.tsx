@@ -2,7 +2,7 @@ import React from "react";
 
 import { uniqueId } from "lodash";
 import { humanLastSeen, internationalTimeFormat } from "utilities/helpers";
-import { INITIAL_FLEET_DATE } from "utilities/constants";
+import { INITIAL_MDMLAB_DATE } from "utilities/constants";
 import ReactTooltip, { Place } from "react-tooltip";
 
 interface IHumanTimeDiffWithDateTip {
@@ -28,7 +28,7 @@ export const HumanTimeDiffWithDateTip = ({
 
   // There are cases where dates are set in Mdmlab to be the "zero date" which
   // serves as an indicator that a particular date isn't set.
-  if (cutoffBeforeMdmlabLaunch && timeString < INITIAL_FLEET_DATE) {
+  if (cutoffBeforeMdmlabLaunch && timeString < INITIAL_MDMLAB_DATE) {
     return <span>Never</span>;
   }
 

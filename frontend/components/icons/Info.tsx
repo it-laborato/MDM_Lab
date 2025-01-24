@@ -7,7 +7,7 @@ interface IInfoProps {
   size?: IconSizes;
 }
 
-const Info = ({ size = "small", color = "core-fleet-blue" }: IInfoProps) => {
+const Info = ({ size = "small", color = "core-mdmlab-blue" }: IInfoProps) => {
   return (
     <svg
       width={ICON_SIZES[size]}

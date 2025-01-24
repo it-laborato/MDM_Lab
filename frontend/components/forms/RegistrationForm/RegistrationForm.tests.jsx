@@ -22,13 +22,13 @@ describe("RegistrationForm - component", () => {
     expect(screen.getByText("Organization details")).toBeInTheDocument();
   });
 
-  it("renders FleetDetails on the third page", () => {
+  it("renders mdmlabDetails on the third page", () => {
     const { container } = render(<RegistrationForm page={3} />);
 
     expect(
-      container.querySelectorAll(".user-registration__container--fleet").length
+      container.querySelectorAll(".user-registration__container--mdmlab").length
     ).toEqual(1);
-    expect(screen.getByText("Set Fleet URL")).toBeInTheDocument();
+    expect(screen.getByText("Set mdmlab URL")).toBeInTheDocument();
   });
 
   it("renders ConfirmationPage on the fourth page", () => {

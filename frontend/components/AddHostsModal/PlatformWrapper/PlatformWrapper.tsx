@@ -95,7 +95,7 @@ const PlatformWrapper = ({
 
   const flagfileContent = `# Server
 --tls_hostname=${tlsHostname}
---tls_server_certs=fleet.pem
+--tls_server_certs=mdmlab.pem
 # Enrollment
 --host_identifier=instance
 --enroll_secret_path=secret.txt
@@ -147,7 +147,7 @@ const PlatformWrapper = ({
     evt.preventDefault();
 
     if (certificate && isValidPemCertificate(certificate)) {
-      const filename = "fleet.pem";
+      const filename = "mdmlab.pem";
       const file = new global.window.File([certificate], filename, {
         type: "application/x-pem-file",
       });
@@ -164,7 +164,7 @@ const PlatformWrapper = ({
 
   const renderMdmlabCertificateBlock = (type: "plain" | "tooltip") => {
     return (
-      <div className={`${baseClass}__advanced--fleet-certificate`}>
+      <div className={`${baseClass}__advanced--mdmlab-certificate`}>
         {type === "plain" ? (
           <div className={`${baseClass}__advanced--heading`}>
             Download your Mdmlab certificate
@@ -196,11 +196,11 @@ const PlatformWrapper = ({
               )}
               <Button
                 variant="text-icon"
-                className={`${baseClass}__fleet-certificate-download`}
+                className={`${baseClass}__mdmlab-certificate-download`}
                 onClick={onDownloadCertificate}
               >
                 Download
-                <Icon name="download" color="core-fleet-blue" size="small" />
+                <Icon name="download" color="core-mdmlab-blue" size="small" />
               </Button>
             </p>
           ) : (
@@ -219,12 +219,12 @@ const PlatformWrapper = ({
 
   const renderInstallerString = (packageType: string) => {
     return packageType === "advanced"
-      ? `fleetctl package --type=YOUR_TYPE --fleet-url=${config?.server_settings.server_url} --enroll-secret=${enrollSecret} --fleet-certificate=PATH_TO_YOUR_CERTIFICATE/fleet.pem`
-      : `fleetctl package --type=${packageType} ${
+      ? `mdmlabctl package --type=YOUR_TYPE --mdmlab-url=${config?.server_settings.server_url} --enroll-secret=${enrollSecret} --mdmlab-certificate=PATH_TO_YOUR_CERTIFICATE/mdmlab.pem`
+      : `mdmlabctl package --type=${packageType} ${
           config && !config.server_settings.scripts_disabled
             ? "--enable-scripts "
             : ""
-        }${includeMdmlabDesktop ? "--fleet-desktop " : ""}--fleet-url=${
+        }${includeMdmlabDesktop ? "--mdmlab-desktop " : ""}--mdmlab-url=${
           config?.server_settings.server_url
         } --enroll-secret=${enrollSecret}`;
   };
@@ -257,7 +257,7 @@ const PlatformWrapper = ({
             Run this command with the{" "}
             <a
               className={`${baseClass}__command-line-tool`}
-              href="https://fleetdm.com/learn-more-about/installing-fleetctl"
+              href="https://mdmlabdm.com/learn-more-about/installing-mdmlabctl"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -328,9 +328,9 @@ const PlatformWrapper = ({
   const renderPanel = (packageType: string) => {
     const CHROME_OS_INFO = {
       extensionId: "fleeedmmihkfkeemmipgmhhjemlljidg",
-      installationUrl: "https://chrome.fleetdm.com/updates.xml",
+      installationUrl: "https://chrome.mdmlabdm.com/updates.xml",
       policyForExtension: `{
-  "fleet_url": {
+  "mdmlab_url": {
     "Value": "${config?.server_settings.server_url}"
   },
   "enroll_secret": {
@@ -364,7 +364,7 @@ const PlatformWrapper = ({
             <InfoBanner className={`${baseClass}__chromeos--instructions`}>
               For a step-by-step guide, see the documentation page for{" "}
               <CustomLink
-                url="https://fleetdm.com/docs/using-fleet/adding-hosts#enroll-chromebooks"
+                url="https://mdmlabdm.com/docs/using-mdmlab/adding-hosts#enroll-chromebooks"
                 text="adding hosts"
                 newTab
                 multiline
@@ -463,7 +463,7 @@ const PlatformWrapper = ({
                     Download
                     <Icon
                       name="download"
-                      color="core-fleet-blue"
+                      color="core-mdmlab-blue"
                       size="small"
                     />
                   </Button>
@@ -488,7 +488,7 @@ const PlatformWrapper = ({
                       Download
                       <Icon
                         name="download"
-                        color="core-fleet-blue"
+                        color="core-mdmlab-blue"
                         size="small"
                       />
                     </Button>
@@ -533,7 +533,7 @@ const PlatformWrapper = ({
       <>
         {packageType !== "pkg" && (
           <Checkbox
-            name="include-fleet-desktop"
+            name="include-mdmlab-desktop"
             onChange={(value: boolean) => setIncludeMdmlabDesktop(value)}
             value={includeMdmlabDesktop}
           >

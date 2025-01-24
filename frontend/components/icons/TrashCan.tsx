@@ -8,7 +8,7 @@ interface ITrashCanProps {
 }
 
 const TrashCan = ({
-  color = "core-fleet-blue",
+  color = "core-mdmlab-blue",
   size = "medium",
 }: ITrashCanProps) => {
   return (

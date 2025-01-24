@@ -264,7 +264,7 @@ export const createMockSoftwareTitlesResponse = (
   return { ...DEFAULT_SOFTWARE_TITLES_RESPONSE_MOCK, ...overrides };
 };
 
-const DEFAULT_FLEET_MAINTAINED_APPS_MOCK: IMdmlabMaintainedApp = {
+const DEFAULT_MDMLAB_MAINTAINED_APPS_MOCK: IMdmlabMaintainedApp = {
   id: 1,
   name: "test app",
   version: "1.2.3",
@@ -275,12 +275,12 @@ export const createMockMdmlabMaintainedApp = (
   overrides?: Partial<IMdmlabMaintainedApp>
 ): IMdmlabMaintainedApp => {
   return {
-    ...DEFAULT_FLEET_MAINTAINED_APPS_MOCK,
+    ...DEFAULT_MDMLAB_MAINTAINED_APPS_MOCK,
     ...overrides,
   };
 };
 
-const DEFAULT_FLEET_MAINTAINED_APP_DETAILS_MOCK: IMdmlabMaintainedAppDetails = {
+const DEFAULT_MDMLAB_MAINTAINED_APP_DETAILS_MOCK: IMdmlabMaintainedAppDetails = {
   id: 1,
   name: "Test app",
   version: "1.2.3",
@@ -295,5 +295,5 @@ const DEFAULT_FLEET_MAINTAINED_APP_DETAILS_MOCK: IMdmlabMaintainedAppDetails = {
 export const createMockMdmlabMaintainedAppDetails = (
   overrides?: Partial<IMdmlabMaintainedAppDetails>
 ) => {
-  return { ...DEFAULT_FLEET_MAINTAINED_APP_DETAILS_MOCK, ...overrides };
+  return { ...DEFAULT_MDMLAB_MAINTAINED_APP_DETAILS_MOCK, ...overrides };
 };

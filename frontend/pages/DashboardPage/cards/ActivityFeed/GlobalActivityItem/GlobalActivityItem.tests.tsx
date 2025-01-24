@@ -134,7 +134,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("edited a pack using fleetctl.")
+      screen.getByText("edited a pack using mdmlabctl.")
     ).toBeInTheDocument();
   });
 
@@ -145,7 +145,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("edited policies using fleetctl.")
+      screen.getByText("edited policies using mdmlabctl.")
     ).toBeInTheDocument();
   });
 
@@ -156,7 +156,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("edited a query using fleetctl.")
+      screen.getByText("edited a query using mdmlabctl.")
     ).toBeInTheDocument();
   });
 
@@ -168,7 +168,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("edited queries using fleetctl.")
+      screen.getByText("edited queries using mdmlabctl.")
     ).toBeInTheDocument();
   });
 
@@ -180,7 +180,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("edited the team using fleetctl.")
+      screen.getByText("edited the team using mdmlabctl.")
     ).toBeInTheDocument();
     expect(screen.getByText("Team 1")).toBeInTheDocument();
   });
@@ -195,7 +195,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("edited multiple teams using fleetctl.")
+      screen.getByText("edited multiple teams using mdmlabctl.")
     ).toBeInTheDocument();
   });
 
@@ -1070,7 +1070,7 @@ describe("Activity Feed", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("Alphas")).toBeInTheDocument();
     expect(
-      screen.getByText(" team via fleetctl.", { exact: false })
+      screen.getByText(" team via mdmlabctl.", { exact: false })
     ).toBeInTheDocument();
     const withNoTeams = screen.queryByText("no team");
     expect(withNoTeams).toBeNull();
@@ -1125,7 +1125,7 @@ describe("Activity Feed", () => {
       screen.getByText("edited scripts", { exact: false })
     ).toBeInTheDocument();
     expect(
-      screen.getByText("for no team via fleetctl.", { exact: false })
+      screen.getByText("for no team via mdmlabctl.", { exact: false })
     ).toBeInTheDocument();
   });
 

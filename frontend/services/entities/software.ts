@@ -122,7 +122,7 @@ export interface ISoftwareMdmlabMaintainedAppsQueryParams {
 }
 
 export interface ISoftwareMdmlabMaintainedAppsResponse {
-  fleet_maintained_apps: IMdmlabMaintainedApp[];
+  mdmlab_maintained_apps: IMdmlabMaintainedApp[];
   count: number;
   apps_updated_at: string | null;
   meta: {
@@ -132,12 +132,12 @@ export interface ISoftwareMdmlabMaintainedAppsResponse {
 }
 
 export interface IMdmlabMaintainedAppResponse {
-  fleet_maintained_app: IMdmlabMaintainedAppDetails;
+  mdmlab_maintained_app: IMdmlabMaintainedAppDetails;
 }
 
 interface IAddMdmlabMaintainedAppPostBody {
   team_id: number;
-  fleet_maintained_app_id: number;
+  mdmlab_maintained_app_id: number;
   pre_install_query?: string;
   install_script?: string;
   post_install_script?: string;
@@ -403,15 +403,15 @@ export default {
   getMdmlabMaintainedApps: (
     params: ISoftwareMdmlabMaintainedAppsQueryParams
   ): Promise<ISoftwareMdmlabMaintainedAppsResponse> => {
-    const { SOFTWARE_FLEET_MAINTAINED_APPS } = endpoints;
+    const { SOFTWARE_MDMLAB_MAINTAINED_APPS } = endpoints;
     const queryStr = buildQueryStringFromParams(params);
-    const path = `${SOFTWARE_FLEET_MAINTAINED_APPS}?${queryStr}`;
+    const path = `${SOFTWARE_MDMLAB_MAINTAINED_APPS}?${queryStr}`;
     return sendRequest("GET", path);
   },
 
   getMdmlabMaintainedApp: (id: number): Promise<IMdmlabMaintainedAppResponse> => {
-    const { SOFTWARE_FLEET_MAINTAINED_APP } = endpoints;
-    const path = `${SOFTWARE_FLEET_MAINTAINED_APP(id)}`;
+    const { SOFTWARE_MDMLAB_MAINTAINED_APP } = endpoints;
+    const path = `${SOFTWARE_MDMLAB_MAINTAINED_APP(id)}`;
     return sendRequest("GET", path);
   },
 
@@ -419,11 +419,11 @@ export default {
     teamId: number,
     formData: IAddMdmlabMaintainedData
   ) => {
-    const { SOFTWARE_FLEET_MAINTAINED_APPS } = endpoints;
+    const { SOFTWARE_MDMLAB_MAINTAINED_APPS } = endpoints;
 
     const body: IAddMdmlabMaintainedAppPostBody = {
       team_id: teamId,
-      fleet_maintained_app_id: formData.appId,
+      mdmlab_maintained_app_id: formData.appId,
       pre_install_query: formData.preInstallQuery,
       install_script: formData.installScript,
       post_install_script: formData.postInstallScript,
@@ -440,6 +440,6 @@ export default {
       }
     }
 
-    return sendRequest("POST", SOFTWARE_FLEET_MAINTAINED_APPS, body);
+    return sendRequest("POST", SOFTWARE_MDMLAB_MAINTAINED_APPS, body);
   },
 };

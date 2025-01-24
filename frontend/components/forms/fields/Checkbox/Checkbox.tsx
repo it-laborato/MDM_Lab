@@ -7,7 +7,7 @@ import { IFormFieldProps } from "components/forms/FormField/FormField";
 import TooltipWrapper from "components/TooltipWrapper";
 import Icon from "components/Icon";
 
-const baseClass = "fleet-checkbox";
+const baseClass = "mdmlab-checkbox";
 
 export interface ICheckboxProps {
   children?: ReactNode;

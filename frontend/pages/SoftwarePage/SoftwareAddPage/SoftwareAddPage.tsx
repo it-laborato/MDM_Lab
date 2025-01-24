@@ -25,7 +25,7 @@ interface IAddSoftwareSubNavItem {
 const addSoftwareSubNav: IAddSoftwareSubNavItem[] = [
   {
     name: "Mdmlab-maintained",
-    pathname: PATHS.SOFTWARE_ADD_FLEET_MAINTAINED,
+    pathname: PATHS.SOFTWARE_ADD_MDMLAB_MAINTAINED,
   },
   {
     name: "App Store (VPP)",

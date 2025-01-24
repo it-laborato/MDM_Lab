@@ -45,7 +45,7 @@ export interface ILabel extends ILabelSummary {
   platform: string;
 }
 
-// corresponding to fleet>server>fleet>labels.go>LabelSpec
+// corresponding to mdmlab>server>mdmlab>labels.go>LabelSpec
 export interface ILabelSpecResponse {
   specs: {
     id: number;

@@ -34,7 +34,7 @@ const showAPIMessage = (message: string) => {
 export const getInstallErrorMessage = (e: unknown) => {
   const reason = upperFirst(trimEnd(getErrorReason(e), "."));
 
-  if (reason.includes("fleetd installed")) {
+  if (reason.includes("mdmlabd installed")) {
     return `${INSTALL_SOFTWARE_ERROR_PREFIX}. ${reason}.`;
   } else if (reason.includes("can be installed only on")) {
     return createOnlyInstallableOnMacOSMessage(reason);
@@ -54,7 +54,7 @@ export const getUninstallErrorMessage = (e: unknown) => {
   if (
     reason.includes("run script") ||
     reason.includes("running script") ||
-    reason.includes("have fleetd") ||
+    reason.includes("have mdmlabd") ||
     reason.includes("only on")
   ) {
     return `${UNINSTALL_SOFTWARE_ERROR_PREFIX} ${reason}.`;

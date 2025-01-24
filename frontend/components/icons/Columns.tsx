@@ -8,7 +8,7 @@ interface IColumnsProps {
 }
 
 const Columns = ({
-  color = "core-fleet-blue",
+  color = "core-mdmlab-blue",
   size = "medium",
 }: IColumnsProps) => {
   return (

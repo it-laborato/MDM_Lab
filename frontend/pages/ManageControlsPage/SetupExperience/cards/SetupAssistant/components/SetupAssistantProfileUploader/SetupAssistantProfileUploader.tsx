@@ -47,12 +47,12 @@ const SetupAssistantProfileUploader = ({
           <>
             {errMessage}.{" "}
             <CustomLink
-              url="https://fleetdm.com/learn-more-about/dep-profile"
+              url="https://mdmlabdm.com/learn-more-about/dep-profile"
               text="Learn more"
               className={`${baseClass}__new-tab`}
               newTab
-              color="core-fleet-black"
-              iconColor="core-fleet-white"
+              color="core-mdmlab-black"
+              iconColor="core-mdmlab-white"
             />
           </>
         );

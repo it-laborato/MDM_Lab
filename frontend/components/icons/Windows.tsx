@@ -9,7 +9,7 @@ interface IWindowsProps {
 
 const Windows = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: IWindowsProps) => {
   return (
     <svg

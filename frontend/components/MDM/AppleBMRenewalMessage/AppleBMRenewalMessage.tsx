@@ -19,8 +19,8 @@ const AppleBMRenewalMessage = ({ expired }: IAppleBMRenewalMessageProps) => {
           url="/settings/integrations/mdm/abm"
           text="Renew ABM"
           className={`${baseClass}`}
-          color="core-fleet-black"
-          iconColor="core-fleet-black"
+          color="core-mdmlab-black"
+          iconColor="core-mdmlab-black"
         />
       }
     >

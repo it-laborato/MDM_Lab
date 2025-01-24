@@ -2,7 +2,7 @@ import React from "react";
 
 import Icon from "components/Icon/Icon";
 
-const baseClass = "learn-fleet";
+const baseClass = "learn-mdmlab";
 
 const LearnMdmlab = (): JSX.Element => {
   return (
@@ -13,12 +13,12 @@ const LearnMdmlab = (): JSX.Element => {
       </p>
       <a
         className="dashboard-info-card__action-button"
-        href="https://fleetdm.com/docs/using-fleet/learn-how-to-use-fleet"
+        href="https://mdmlabdm.com/docs/using-mdmlab/learn-how-to-use-mdmlab"
         target="_blank"
         rel="noopener noreferrer"
       >
         Learn how to use Mdmlab
-        <Icon name="arrow-internal-link" color="core-fleet-blue" />
+        <Icon name="arrow-internal-link" color="core-mdmlab-blue" />
       </a>
     </div>
   );

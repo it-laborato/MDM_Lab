@@ -58,13 +58,13 @@ export default PropTypes.shape({
 // API shapes
 
 // Get a query by id
-/** GET /api/v1/fleet/queries/{id}` */
+/** GET /api/v1/mdmlab/queries/{id}` */
 export interface IGetQueryResponse {
   query: ISchedulableQuery;
 }
 
 // List global or team queries
-/**  GET /api/v1/fleet/queries?order_key={column_from_queries_table}&order_direction={asc|desc}&team_id={team_id} */
+/**  GET /api/v1/mdmlab/queries?order_key={column_from_queries_table}&order_direction={asc|desc}&team_id={team_id} */
 export interface IListQueriesResponse {
   queries: ISchedulableQuery[];
 }
@@ -81,7 +81,7 @@ export interface IQueryKeyQueriesLoadAll {
   targetedPlatform?: SelectedPlatform;
 }
 // Create a new query
-/** POST /api/v1/fleet/queries */
+/** POST /api/v1/mdmlab/queries */
 export interface ICreateQueryRequestBody {
   name: string;
   query: string;
@@ -99,7 +99,7 @@ export interface ICreateQueryRequestBody {
 // response is ISchedulableQuery
 
 // Modify a query by id
-/** PATCH /api/v1/fleet/queries/{id} */
+/** PATCH /api/v1/mdmlab/queries/{id} */
 export interface IModifyQueryRequestBody
   extends Omit<ICreateQueryRequestBody, "name" | "query"> {
   id?: number;
@@ -117,17 +117,17 @@ export interface IModifyQueryRequestBody
 // response is ISchedulableQuery // better way to indicate this?
 
 // Delete a query by name
-/** DELETE /api/v1/fleet/queries/{name} */
+/** DELETE /api/v1/mdmlab/queries/{name} */
 export interface IDeleteQueryRequestBody {
   team_id?: number; // searches for a global query if omitted
 }
 
 // Delete a query by id
-// DELETE /api/v1/fleet/queries/id/{id}
+// DELETE /api/v1/mdmlab/queries/id/{id}
 // (no body)
 
 // Delete queries by id
-/** POST /api/v1/fleet/queries/delete */
+/** POST /api/v1/mdmlab/queries/delete */
 export interface IDeleteQueriesRequestBody {
   ids: number[];
 }

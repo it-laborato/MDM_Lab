@@ -77,7 +77,7 @@ const OperatingSystems = ({
           Chromebooks automatically receive updates from Google until their
           auto-update expiration date.{" "}
           <CustomLink
-            url="https://fleetdm.com/learn-more-about/chromeos-updates"
+            url="https://mdmlabdm.com/learn-more-about/chromeos-updates"
             text="See supported devices"
             newTab
             multiline

@@ -107,7 +107,7 @@ const RefetchButton = ({
           onClick={onRefetchHost}
           variant="text-icon"
         >
-          <Icon name="refresh" color="core-fleet-blue" size="small" />
+          <Icon name="refresh" color="core-mdmlab-blue" size="small" />
           {buttonText}
         </Button>
         {tooltip && renderTooltip()}
@@ -360,7 +360,7 @@ const HostSummary = ({
         value={
           <>
             {!osVersionRequirementMet && (
-              <Icon name="error-outline" color="ui-fleet-black-75" />
+              <Icon name="error-outline" color="ui-mdmlab-black-75" />
             )}
             <TooltipWrapper
               tipContent={
@@ -403,11 +403,11 @@ const HostSummary = ({
                   osquery: {summaryData.osquery_version}
                   <br />
                   Orbit: {summaryData.orbit_version}
-                  {summaryData.fleet_desktop_version !==
+                  {summaryData.mdmlab_desktop_version !==
                     DEFAULT_EMPTY_CELL_VALUE && (
                     <>
                       <br />
-                      Mdmlab Desktop: {summaryData.fleet_desktop_version}
+                      Mdmlab Desktop: {summaryData.mdmlab_desktop_version}
                     </>
                   )}
                 </>

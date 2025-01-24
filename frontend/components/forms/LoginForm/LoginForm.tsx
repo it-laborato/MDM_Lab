@@ -142,7 +142,7 @@ const LoginForm = ({
             variant="text-icon"
             className="back-link"
           >
-            <Icon name="chevron-left" color="core-fleet-blue" />
+            <Icon name="chevron-left" color="core-mdmlab-blue" />
             Back to login
           </Button>
           <h1>Check your email</h1>

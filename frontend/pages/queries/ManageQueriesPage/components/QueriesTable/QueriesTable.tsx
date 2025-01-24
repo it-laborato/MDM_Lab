@@ -177,7 +177,7 @@ const QueriesTable = ({
         <>
           Create a new query, or{" "}
           <CustomLink
-            url="https://fleetdm.com/docs/using-fleet/standard-query-library"
+            url="https://mdmlabdm.com/docs/using-mdmlab/standard-query-library"
             text="import Mdmlab's standard query library"
             newTab
           />

@@ -1,5 +1,5 @@
 import {
-  FLEET_FILEVAULT_PROFILE_DISPLAY_NAME,
+  MDMLAB_FILEVAULT_PROFILE_DISPLAY_NAME,
   ProfileOperationType,
 } from "interfaces/mdm";
 
@@ -13,7 +13,7 @@ import { OsSettingsTableStatusValue } from "../OSSettingsTableConfig";
 import TooltipInnerContentActionRequired from "./components/Tooltip/ActionRequired";
 
 export const isDiskEncryptionProfile = (profileName: string) => {
-  return profileName === FLEET_FILEVAULT_PROFILE_DISPLAY_NAME;
+  return profileName === MDMLAB_FILEVAULT_PROFILE_DISPLAY_NAME;
 };
 
 export type ProfileDisplayOption = {

@@ -70,7 +70,7 @@ class YamlAce extends Component {
         <AceEditor
           className={baseClass}
           mode="yaml"
-          theme="fleet"
+          theme="mdmlab"
           width="100%"
           minLines={2}
           maxLines={17}

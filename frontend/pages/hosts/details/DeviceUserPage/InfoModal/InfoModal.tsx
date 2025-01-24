@@ -26,7 +26,7 @@ const InfoModal = ({ onCancel }: IInfoModalProps): JSX.Element => {
         <p>
           Want to know what your organization can see?&nbsp;
           <CustomLink
-            url="https://fleetdm.com/transparency"
+            url="https://mdmlabdm.com/transparency"
             text="Read about transparency"
             newTab
             multiline

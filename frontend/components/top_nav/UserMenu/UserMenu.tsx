@@ -55,7 +55,7 @@ const CustomDropdownIndicator = (
     <components.DropdownIndicator {...props} className={baseClass}>
       <Icon
         name="chevron-down"
-        color="core-fleet-white"
+        color="core-mdmlab-white"
         className={`${baseClass}__icon`}
         size="small"
       />
@@ -127,7 +127,7 @@ const UserMenu = ({
       label: "Documentation",
       value: "documentation",
       onClick: () => {
-        window.open("https://fleetdm.com/docs", "_blank");
+        window.open("https://mdmlabdm.com/docs", "_blank");
       },
     },
     {
@@ -238,7 +238,7 @@ const UserMenu = ({
         backgroundColor: COLORS["ui-vibrant-blue-25"],
       },
       "&:last-child, &:nth-last-of-type(2)": {
-        borderTop: `1px solid ${COLORS["ui-fleet-black-10"]}`,
+        borderTop: `1px solid ${COLORS["ui-mdmlab-black-10"]}`,
       },
     }),
   };

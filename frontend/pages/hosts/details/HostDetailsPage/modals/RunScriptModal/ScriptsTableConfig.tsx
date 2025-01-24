@@ -141,7 +141,7 @@ export const generateTableColumnConfigs = (
               >
                 Actions
               </TooltipWrapper>
-              <Icon name="chevron-down" color="ui-fleet-black-50" />
+              <Icon name="chevron-down" color="ui-mdmlab-black-50" />
             </span>
           );
         }

@@ -1,7 +1,7 @@
 import React from "react";
 
 // @ts-ignore
-import fleetLogoText from "../../../assets/images/mdmlab-logo-text-white.svg";
+import mdmlabLogoText from "../../../assets/images/mdmlab-logo-text-white.svg";
 
 interface IAuthenticationFormWrapperProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ const AuthenticationFormWrapper = ({
   children,
 }: IAuthenticationFormWrapperProps) => (
   <div className={baseClass}>
-    <img alt="Mdmlab" src={fleetLogoText} className={`${baseClass}__logo`} />
+    <img alt="Mdmlab" src={mdmlabLogoText} className={`${baseClass}__logo`} />
     {children}
   </div>
 );

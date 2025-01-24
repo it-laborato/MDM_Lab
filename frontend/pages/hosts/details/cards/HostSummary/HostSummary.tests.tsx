@@ -48,7 +48,7 @@ describe("Host Summary section", () => {
       const summaryData = createMockHostSummary();
       const orbitVersion = summaryData.orbit_version as string;
       const osqueryVersion = summaryData.osquery_version as string;
-      const fleetdVersion = summaryData.fleet_desktop_version as string;
+      const mdmlabdVersion = summaryData.mdmlab_desktop_version as string;
 
       render(
         <HostSummary
@@ -69,11 +69,11 @@ describe("Host Summary section", () => {
         screen.getByText(new RegExp(osqueryVersion, "i"))
       ).toBeInTheDocument();
       expect(
-        screen.getByText(new RegExp(fleetdVersion, "i"))
+        screen.getByText(new RegExp(mdmlabdVersion, "i"))
       ).toBeInTheDocument();
     });
 
-    it("omit fleet desktop from tooltip if no fleet desktop version", async () => {
+    it("omit mdmlab desktop from tooltip if no mdmlab desktop version", async () => {
       const render = createCustomRenderer({
         context: {
           app: {
@@ -84,7 +84,7 @@ describe("Host Summary section", () => {
         },
       });
       const summaryData = createMockHostSummary({
-        fleet_desktop_version: null,
+        mdmlab_desktop_version: null,
       });
       const orbitVersion = summaryData.orbit_version as string;
       const osqueryVersion = summaryData.osquery_version as string;
@@ -110,7 +110,7 @@ describe("Host Summary section", () => {
       expect(screen.queryByText(/Mdmlab desktop:/i)).not.toBeInTheDocument();
     });
 
-    it("for Chromebooks, render Agent header with osquery_version that is the fleetd chrome version and no tooltip", async () => {
+    it("for Chromebooks, render Agent header with osquery_version that is the mdmlabd chrome version and no tooltip", async () => {
       const render = createCustomRenderer({
         context: {
           app: {
@@ -122,10 +122,10 @@ describe("Host Summary section", () => {
       });
       const summaryData = createMockHostSummary({
         platform: "chrome",
-        osquery_version: "fleetd-chrome 1.2.0",
+        osquery_version: "mdmlabd-chrome 1.2.0",
       });
 
-      const fleetdChromeVersion = summaryData.osquery_version as string;
+      const mdmlabdChromeVersion = summaryData.osquery_version as string;
 
       const { user } = render(
         <HostSummary
@@ -137,7 +137,7 @@ describe("Host Summary section", () => {
       );
 
       expect(screen.getByText("Agent")).toBeInTheDocument();
-      await user.hover(screen.getByText(new RegExp(fleetdChromeVersion, "i")));
+      await user.hover(screen.getByText(new RegExp(mdmlabdChromeVersion, "i")));
       expect(screen.queryByText("Osquery")).not.toBeInTheDocument();
     });
   });

@@ -14,7 +14,7 @@ describe("Avatar - component", () => {
     expect(avatar).toHaveAttribute("src", "https://example.com/avatar.png");
   });
 
-  it("renders the fleet avatar if useMdmlabAvatar is `true`", () => {
+  it("renders the mdmlab avatar if useMdmlabAvatar is `true`", () => {
     render(<Avatar useMdmlabAvatar user={{}} />);
     expect(screen.getByTestId("mdmlab-avatar")).toBeVisible();
   });

@@ -98,13 +98,13 @@ const generateColumnConfigs = (
                     delayHide={200} // need delay set to hover using clickable
                   >
                     <>
-                      This user was created using fleetctl and
+                      This user was created using mdmlabctl and
                       <br /> only has API access.{" "}
                       <CustomLink
                         text="Learn more"
                         newTab
-                        url="https://fleetdm.com/docs/using-fleet/fleetctl-cli#using-fleetctl-with-an-api-only-user"
-                        iconColor="core-fleet-white"
+                        url="https://mdmlabdm.com/docs/using-mdmlab/mdmlabctl-cli#using-mdmlabctl-with-an-api-only-user"
+                        iconColor="core-mdmlab-white"
                       />
                     </>
                   </ReactTooltip>

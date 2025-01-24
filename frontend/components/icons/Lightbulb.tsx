@@ -9,7 +9,7 @@ interface ILightbulbProps {
 
 const Lightbulb = ({
   size = "medium",
-  color = "core-fleet-blue",
+  color = "core-mdmlab-blue",
 }: ILightbulbProps) => {
   return (
     <svg

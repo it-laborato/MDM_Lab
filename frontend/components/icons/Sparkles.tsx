@@ -5,7 +5,7 @@ interface ISparklesProps {
   color?: Colors;
 }
 
-const Sparkles = ({ color = "core-fleet-blue" }: ISparklesProps) => {
+const Sparkles = ({ color = "core-mdmlab-blue" }: ISparklesProps) => {
   return (
     <svg
       width="16"

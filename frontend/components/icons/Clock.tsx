@@ -9,7 +9,7 @@ interface IClockProps {
 }
 
 const Clock = ({
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
   size = "medium",
 }: IClockProps) => {
   return (

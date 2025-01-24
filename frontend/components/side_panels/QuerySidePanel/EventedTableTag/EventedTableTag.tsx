@@ -11,13 +11,13 @@ const baseClass = "evented-table-tag";
 
 const EventedTableTag = ({ selectedTableName }: IEventedTableTagProps) => {
   const queryString = buildQueryStringFromParams({
-    utm_source: "fleet-ui",
+    utm_source: "mdmlab-ui",
     utm_table: `table-${selectedTableName}`,
   });
 
   return (
     <a
-      href={`https://fleetdm.com/guides/osquery-evented-tables-overview?${queryString}`}
+      href={`https://mdmlabdm.com/guides/osquery-evented-tables-overview?${queryString}`}
       className={baseClass}
       target="__blank"
     >

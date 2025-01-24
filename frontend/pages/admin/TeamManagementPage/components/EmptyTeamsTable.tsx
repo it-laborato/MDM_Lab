@@ -21,7 +21,7 @@ const EmptyTeamsTable = ({
           {" "}
           Want to learn more?&nbsp;
           <CustomLink
-            url="https://fleetdm.com/docs/using-fleet/teams"
+            url="https://mdmlabdm.com/docs/using-mdmlab/teams"
             text="Read about teams"
             newTab
           />

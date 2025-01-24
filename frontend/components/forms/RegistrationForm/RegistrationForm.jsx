@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 import AdminDetails from "components/forms/RegistrationForm/AdminDetails";
 import ConfirmationPage from "components/forms/RegistrationForm/ConfirmationPage";
-import FleetDetails from "components/forms/RegistrationForm/MdmlabDetails";
+import MDMLabDetails from "components/forms/RegistrationForm/MdmlabDetails";
 import OrgDetails from "components/forms/RegistrationForm/OrgDetails";
 
 const baseClass = "user-registration";
@@ -86,14 +86,14 @@ class RegistrationForm extends Component {
       `${baseClass}__field-wrapper--org`
     );
 
-    const fleetDetailsContainerClass = classnames(
+    const mdmlabDetailsContainerClass = classnames(
       `${baseClass}__container`,
-      `${baseClass}__container--fleet`
+      `${baseClass}__container--mdmlab`
     );
 
-    const fleetDetailsClass = classnames(
+    const mdmlabDetailsClass = classnames(
       `${baseClass}__field-wrapper`,
-      `${baseClass}__field-wrapper--fleet`
+      `${baseClass}__field-wrapper--mdmlab`
     );
 
     const confirmationContainerClass = classnames(
@@ -137,12 +137,12 @@ class RegistrationForm extends Component {
               currentPage={isCurrentPage(2)}
             />
           </div>
-          <div className={fleetDetailsContainerClass}>
-            <h2>Set Fleet URL</h2>
-            <FleetDetails
+          <div className={mdmlabDetailsContainerClass}>
+            <h2>Set mdmlab URL</h2>
+            <MDMLabDetails
               formData={formData}
               handleSubmit={onPageFormSubmit}
-              className={fleetDetailsClass}
+              className={mdmlabDetailsClass}
               currentPage={isCurrentPage(3)}
             />
           </div>

@@ -25,7 +25,7 @@ const TurnOnWindowsMdmCard = ({
         </Button>
       }
     >
-      Turn MDM on for Windows hosts with fleetd.
+      Turn MDM on for Windows hosts with mdmlabd.
     </SectionCard>
   );
 };

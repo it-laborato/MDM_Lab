@@ -26,7 +26,7 @@ const BackLink = ({ text, path, className }: IBackLinkProps): JSX.Element => {
       onClick={onClick}
     >
       <>
-        <Icon name="chevron-left" color="core-fleet-blue" />
+        <Icon name="chevron-left" color="core-mdmlab-blue" />
         <span>{text}</span>
       </>
     </Link>

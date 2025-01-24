@@ -10,7 +10,7 @@ type IResponses = Record<string, Record<string, Record<string, unknown>>>;
 
 const DELAY = 5000;
 
-const ENDPOINT = "/latest/fleet";
+const ENDPOINT = "/latest/mdmlab";
 
 const WILDCARDS: string[] = [":", "*", "{", "}"];
 

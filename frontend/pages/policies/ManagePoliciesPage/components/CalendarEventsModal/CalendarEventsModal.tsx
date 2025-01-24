@@ -226,7 +226,7 @@ const CalendarEventsModal = ({
           A calendar event will be created for end users if one of their hosts
           fail any of these policies.{" "}
           <CustomLink
-            url="https://www.fleetdm.com/learn-more-about/calendar-events"
+            url="https://www.mdmlabdm.com/learn-more-about/calendar-events"
             text="Learn more"
             newTab
             disableKeyboardNavigation={!formData.enabled}
@@ -239,7 +239,7 @@ const CalendarEventsModal = ({
   const renderPlaceholderModal = () => {
     return (
       <div className="placeholder">
-        <a href="https://www.fleetdm.com/learn-more-about/calendar-events">
+        <a href="https://www.mdmlabdm.com/learn-more-about/calendar-events">
           <img src={CalendarPreview} alt="Calendar preview" />
         </a>
         <div>
@@ -251,7 +251,7 @@ const CalendarEventsModal = ({
           &gt; <b>Calendars.</b>
         </div>
         <CustomLink
-          url="https://www.fleetdm.com/learn-more-about/calendar-events"
+          url="https://www.mdmlabdm.com/learn-more-about/calendar-events"
           text="Learn more"
           newTab
         />

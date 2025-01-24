@@ -598,7 +598,7 @@ describe("Host Actions Dropdown", () => {
         });
 
         expect(
-          screen.getByText(/fleetd agent with --enable-scripts/i)
+          screen.getByText(/mdmlabd agent with --enable-scripts/i)
         ).toBeInTheDocument();
       });
     });
@@ -853,7 +853,7 @@ describe("Host Actions Dropdown", () => {
         });
 
         expect(
-          screen.getByText(/fleetd agent with --enable-scripts/i)
+          screen.getByText(/mdmlabd agent with --enable-scripts/i)
         ).toBeInTheDocument();
       });
     });
@@ -989,7 +989,7 @@ describe("Host Actions Dropdown", () => {
         });
 
         expect(
-          screen.getByText(/fleetd agent with --enable-scripts/i)
+          screen.getByText(/mdmlabd agent with --enable-scripts/i)
         ).toBeInTheDocument();
       });
     });
@@ -1065,7 +1065,7 @@ describe("Host Actions Dropdown", () => {
         });
 
         expect(
-          screen.queryByText(/fleetd agent with --enable-scripts/i)
+          screen.queryByText(/mdmlabd agent with --enable-scripts/i)
         ).toBeNull();
       });
     });
@@ -1106,7 +1106,7 @@ describe("Host Actions Dropdown", () => {
         });
 
         expect(
-          screen.getByText(/fleetd agent with --enable-scripts/i)
+          screen.getByText(/mdmlabd agent with --enable-scripts/i)
         ).toBeInTheDocument();
       });
     });

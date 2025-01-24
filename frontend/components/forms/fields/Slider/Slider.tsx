@@ -15,7 +15,7 @@ interface ISliderProps {
   autoFocus?: boolean;
 }
 
-const baseClass = "fleet-slider";
+const baseClass = "mdmlab-slider";
 
 const Slider = (props: ISliderProps): JSX.Element => {
   const { onChange, value, inactiveText, activeText, autoFocus } = props;

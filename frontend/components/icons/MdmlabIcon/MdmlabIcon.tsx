@@ -9,7 +9,7 @@ interface IMdmlabIconProps {
   title?: string;
 }
 
-const baseClass = "fleeticon";
+const baseClass = "mdmlabicon";
 
 const MdmlabIcon = ({
   className,

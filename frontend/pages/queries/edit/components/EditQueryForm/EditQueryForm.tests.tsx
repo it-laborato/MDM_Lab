@@ -229,12 +229,12 @@ describe("EditQueryForm - component", () => {
     // Find the automations slider
     const automationsSlider = screen
       .getByText("Automations on")
-      .closest(".fleet-slider__wrapper") as HTMLElement;
+      .closest(".mdmlab-slider__wrapper") as HTMLElement;
     expect(automationsSlider).toBeInTheDocument();
 
     // Check if the automations are enabled
     const automationsButton = within(automationsSlider).getByRole("button");
-    expect(automationsButton).toHaveClass("fleet-slider--active");
+    expect(automationsButton).toHaveClass("mdmlab-slider--active");
 
     // Check if the warning icon is present
     const warningIcon = within(automationsSlider).getByTestId("warning-icon");

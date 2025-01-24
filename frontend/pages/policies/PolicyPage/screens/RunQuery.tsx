@@ -88,7 +88,7 @@ const RunQuery = ({
 
   const connectAndRunLiveQuery = (returnedCampaign: ICampaign) => {
     let { current: websocket }: { current: WebSocket | null } = ws;
-    websocket = new SockJS(`${BASE_URL}/v1/fleet/results`, undefined, {});
+    websocket = new SockJS(`${BASE_URL}/v1/mdmlab/results`, undefined, {});
     websocket.onopen = () => {
       setupDistributedQuery(websocket);
       setCampaignState((prevCampaignState) => ({

@@ -12,7 +12,7 @@ describe("PlatformIcon - component", () => {
   it("renders text if no icon", () => {
     const { container } = render(<PlatformIcon name="All" />);
     expect(
-      container.querySelector(".fleeticon-single-host")
+      container.querySelector(".mdmlabicon-single-host")
     ).toBeInTheDocument();
   });
 });

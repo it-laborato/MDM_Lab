@@ -219,7 +219,7 @@ const PolicyRunScriptModal = ({
             on hosts with too many pending scripts. Host counts will reset when
             new scripts are selected.{" "}
             <CustomLink
-              url="https://fleetdm.com/learn-more-about/policy-automation-run-script"
+              url="https://mdmlabdm.com/learn-more-about/policy-automation-run-script"
               text="Learn more"
               newTab
             />

@@ -9,7 +9,7 @@ interface ILinuxProps {
 
 const Linux = ({
   size = "medium",
-  color = "ui-fleet-black-75",
+  color = "ui-mdmlab-black-75",
 }: ILinuxProps) => {
   return (
     <svg

@@ -7,7 +7,7 @@ describe("ConfirmationPage - form", () => {
   const formData = {
     name: "Test User",
     email: "test@example.com",
-    org_name: "Fleet",
+    org_name: "Mdmlab",
     server_url: "http://localhost:8080",
   };
   const handleSubmitSpy = jest.fn();
