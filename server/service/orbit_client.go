@@ -20,12 +20,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/logging"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/luks"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/platform"
-	"github.com:it-laborato/MDM_Lab/pkg/retry"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/logging"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/luks"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/platform"
+	"github.com/it-laborato/MDM_Lab/pkg/retry"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/rs/zerolog/log"
 )
 

@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/stretchr/testify/require"
 )
 

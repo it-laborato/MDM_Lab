@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/optjson"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/pkg/optjson"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"golang.org/x/text/unicode/norm"
 )
 

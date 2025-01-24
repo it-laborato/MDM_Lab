@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func ExecCmd(ctx context.Context, scriptPath string, env []string) (output []byte, exitCode int, err error) {

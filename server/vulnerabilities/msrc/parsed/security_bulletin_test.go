@@ -3,7 +3,7 @@ package parsed
 import (
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/stretchr/testify/require"
 )
 

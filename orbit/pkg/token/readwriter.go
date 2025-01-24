@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/pkg/retry"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/pkg/retry"
 	"github.com/google/uuid"
 )
 

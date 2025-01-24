@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 )

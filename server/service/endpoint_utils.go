@@ -16,9 +16,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/capabilities"
-	"github.com:it-laborato/MDM_Lab/server/contexts/license"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/capabilities"
+	"github.com/it-laborato/MDM_Lab/server/contexts/license"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/go-kit/kit/endpoint"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-kit/log"

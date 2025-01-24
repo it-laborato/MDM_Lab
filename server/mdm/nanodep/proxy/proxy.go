@@ -10,9 +10,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log/ctxlog"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log/ctxlog"
 )
 
 // New creates new NanoDEP ReverseProxy. It dispatches requests using transport

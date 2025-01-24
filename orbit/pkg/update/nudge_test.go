@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/pkg/optjson"
-	"github.com:it-laborato/MDM_Lab/pkg/retry"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/pkg/optjson"
+	"github.com/it-laborato/MDM_Lab/pkg/retry"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )

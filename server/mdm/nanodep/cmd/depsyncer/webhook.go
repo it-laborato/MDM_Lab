@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/godep"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/godep"
 )
 
 // Event is a MicroMDM webhook-ish JSON structure.

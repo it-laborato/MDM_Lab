@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func (svc *Service) ListSoftware(ctx context.Context, opts mdmlab.SoftwareListOptions) ([]mdmlab.Software, *mdmlab.PaginationMetadata, error) {

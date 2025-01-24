@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/macoffice"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/macoffice"
 )
 
 func panicif(err error) {

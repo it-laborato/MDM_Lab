@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/service"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/service"
 )
 
 const enrollmentIDHeader = "X-Enrollment-ID"

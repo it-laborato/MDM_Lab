@@ -6,9 +6,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/assets"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/http/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/assets"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/http/mdm"
 )
 
 var _ mdm.CertVerifier = (*SCEPVerifier)(nil)

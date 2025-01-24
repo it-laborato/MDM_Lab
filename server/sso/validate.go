@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/beevik/etree"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	rtvalidator "github.com/mattermost/xml-roundtrip-validator"
 	dsig "github.com/russellhaering/goxmldsig"
 	"github.com/russellhaering/goxmldsig/etreeutils"

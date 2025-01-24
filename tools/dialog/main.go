@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/dialog"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/kdialog"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/zenity"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/dialog"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/kdialog"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/zenity"
 )
 
 func main() {

@@ -35,7 +35,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/pmezard/go-difflib/difflib"
 )
 

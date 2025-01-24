@@ -10,8 +10,8 @@ import (
 	"net"
 	"net/http"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log/ctxlog"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log/ctxlog"
 )
 
 // ReadAllAndReplaceBody reads all of r.Body and replaces it with a new byte buffer.

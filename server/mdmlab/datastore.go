@@ -10,14 +10,14 @@ import (
 	"math/big"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/health"
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/health"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
 	"github.com/jmoiron/sqlx"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/godep"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/godep"
 )
 
 type CarveStore interface {

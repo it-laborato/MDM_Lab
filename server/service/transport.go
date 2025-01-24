@@ -11,9 +11,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
 )

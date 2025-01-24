@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func (mw validationMiddleware) NewAppConfig(ctx context.Context, payload mdmlab.AppConfig) (*mdmlab.AppConfig, error) {

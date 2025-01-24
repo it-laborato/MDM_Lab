@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // Setup attempts to setup the current MDMlab instance. If setup is successful,

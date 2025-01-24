@@ -12,8 +12,8 @@ import (
 	"unicode/utf8"
 
 	"github.com/briandowns/spinner"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/urfave/cli/v2"
 )
 

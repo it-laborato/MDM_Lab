@@ -2,7 +2,7 @@
 package dataflattentable
 
 import (
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/dataflatten"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/dataflatten"
 	"github.com/osquery/osquery-go/plugin/table"
 )
 

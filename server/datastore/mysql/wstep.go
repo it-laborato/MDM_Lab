@@ -9,8 +9,8 @@ import (
 	"math/big"
 	"strings"
 
-	apple_mdm "github.com:it-laborato/MDM_Lab/server/mdm/apple"
-	microsoft_mdm "github.com:it-laborato/MDM_Lab/server/mdm/microsoft"
+	apple_mdm "github.com/it-laborato/MDM_Lab/server/mdm/apple"
+	microsoft_mdm "github.com/it-laborato/MDM_Lab/server/mdm/microsoft"
 )
 
 // CertStore implements storage tasks associated with MS-WSTEP messages in the MS-MDE2

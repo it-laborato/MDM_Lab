@@ -15,9 +15,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/build"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/platform"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/build"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/platform"
 	"github.com/rs/zerolog/log"
 	"github.com/theupdateframework/go-tuf/client"
 	"golang.org/x/mod/semver"

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/VividCortex/mysqlerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/go-sql-driver/mysql"
 )
 

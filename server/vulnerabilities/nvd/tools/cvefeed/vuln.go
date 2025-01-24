@@ -15,7 +15,7 @@
 package cvefeed
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
 )
 
 // Vuln is a vulnerability interface

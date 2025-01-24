@@ -3,8 +3,8 @@ package allmulti
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
 
 	"github.com/micromdm/nanolib/log"
 	"github.com/micromdm/nanolib/log/ctxlog"

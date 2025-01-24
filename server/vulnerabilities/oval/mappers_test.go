@@ -3,8 +3,8 @@ package oval
 import (
 	"testing"
 
-	oval_input "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/input"
-	oval_parsed "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
+	oval_input "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/input"
+	oval_parsed "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
 	"github.com/stretchr/testify/require"
 )
 

@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/jmoiron/sqlx"
 	"github.com/stretchr/testify/require"
 )

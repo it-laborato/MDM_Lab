@@ -1,6 +1,6 @@
 package service
 
-import "github.com:it-laborato/MDM_Lab/server/mdmlab"
+import "github.com/it-laborato/MDM_Lab/server/mdmlab"
 
 type alreadyExistsError struct {
 	mdmlab.ErrorWithUUID

@@ -4,11 +4,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/license"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mock"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/license"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mock"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/stretchr/testify/require"
 )
 

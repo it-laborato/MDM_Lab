@@ -13,10 +13,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/service"
-	"github.com:it-laborato/MDM_Lab/server/version"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/server/version"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/urfave/cli/v2"
 )

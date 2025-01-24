@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/cenkalti/backoff/v4"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	"github.com/google/uuid"

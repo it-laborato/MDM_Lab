@@ -15,8 +15,8 @@ import (
 	"time"
 
 	"github.com/Masterminds/semver"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
 )
 
 // Note Apple rejects CSRs if the key size is not 2048.

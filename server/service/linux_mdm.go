@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func (svc *Service) LinuxHostDiskEncryptionStatus(ctx context.Context, host mdmlab.Host) (mdmlab.HostMDMDiskEncryption, error) {

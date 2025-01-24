@@ -11,7 +11,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // TODO(mna): those methods are unused except for an internal tool, remove or

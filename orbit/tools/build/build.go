@@ -14,8 +14,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/packaging"
-	"github.com:it-laborato/MDM_Lab/pkg/buildpkg"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/packaging"
+	"github.com/it-laborato/MDM_Lab/pkg/buildpkg"
 	"github.com/mitchellh/gon/package/zip"
 	zlog "github.com/rs/zerolog/log"
 )
@@ -106,7 +106,7 @@ func buildOrbit(binaryPath, arch, version, commit, date string) error {
 	/* #nosec G204 -- arguments are actually well defined */
 	buildExec := exec.Command("go", "build",
 		"-o", binaryPath,
-		"-ldflags", fmt.Sprintf("-X github.com:it-laborato/MDM_Lab/orbit/pkg/build.Version=%s -X github.com:it-laborato/MDM_Lab/orbit/pkg/build.Commit=%s -X github.com:it-laborato/MDM_Lab/orbit/pkg/build.Date=%s", version, commit, date),
+		"-ldflags", fmt.Sprintf("-X github.com/it-laborato/MDM_Lab/orbit/pkg/build.Version=%s -X github.com/it-laborato/MDM_Lab/orbit/pkg/build.Commit=%s -X github.com/it-laborato/MDM_Lab/orbit/pkg/build.Date=%s", version, commit, date),
 		"./"+filepath.Join("orbit", "cmd", "orbit"),
 	)
 	buildExec.Env = append(os.Environ(), "GOOS=darwin", "GOARCH="+arch)

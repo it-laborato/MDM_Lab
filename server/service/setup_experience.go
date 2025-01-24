@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/docker/go-units"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 )
 
 type putSetupExperienceSoftwareRequest struct {

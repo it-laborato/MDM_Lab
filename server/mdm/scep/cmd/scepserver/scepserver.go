@@ -14,11 +14,11 @@ import (
 	"strconv"
 	"syscall"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/scep/csrverifier"
-	executablecsrverifier "github.com:it-laborato/MDM_Lab/server/mdm/scep/csrverifier/executable"
-	scepdepot "github.com:it-laborato/MDM_Lab/server/mdm/scep/depot"
-	"github.com:it-laborato/MDM_Lab/server/mdm/scep/depot/file"
-	scepserver "github.com:it-laborato/MDM_Lab/server/mdm/scep/server"
+	"github.com/it-laborato/MDM_Lab/server/mdm/scep/csrverifier"
+	executablecsrverifier "github.com/it-laborato/MDM_Lab/server/mdm/scep/csrverifier/executable"
+	scepdepot "github.com/it-laborato/MDM_Lab/server/mdm/scep/depot"
+	"github.com/it-laborato/MDM_Lab/server/mdm/scep/depot/file"
+	scepserver "github.com/it-laborato/MDM_Lab/server/mdm/scep/server"
 	"github.com/gorilla/mux"
 
 	"github.com/go-kit/log"

@@ -11,8 +11,8 @@ import (
 	"runtime"
 	"time"
 
-	eemdmlabctl "github.com:it-laborato/MDM_Lab/ee/mdmlabctl"
-	"github.com:it-laborato/MDM_Lab/server/version"
+	eemdmlabctl "github.com/it-laborato/MDM_Lab/ee/mdmlabctl"
+	"github.com/it-laborato/MDM_Lab/server/version"
 	"github.com/urfave/cli/v2"
 )
 

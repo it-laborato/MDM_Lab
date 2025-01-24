@@ -15,9 +15,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	nanodep_client "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	"github.com:it-laborato/MDM_Lab/server/mock"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	nanodep_client "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/mock"
 	"github.com/jmoiron/sqlx"
 	"github.com/smallstep/pkcs7"
 	"github.com/stretchr/testify/require"

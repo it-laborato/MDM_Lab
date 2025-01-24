@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 )
 
 // DefaultOptions are the default options to use when creating an update

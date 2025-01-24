@@ -3,7 +3,7 @@ package mysql
 import (
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/config"
 	"github.com/go-kit/log"
 	"github.com/ngrok/sqlmw"
 )

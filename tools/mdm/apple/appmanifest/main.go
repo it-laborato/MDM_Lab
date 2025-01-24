@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/appmanifest"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/appmanifest"
 )
 
 func main() {

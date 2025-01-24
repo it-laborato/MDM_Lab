@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/pkg/optjson"
-	"github.com:it-laborato/MDM_Lab/server/service/externalsvc"
+	"github.com/it-laborato/MDM_Lab/pkg/optjson"
+	"github.com/it-laborato/MDM_Lab/server/service/externalsvc"
 )
 
 // TeamIntegrations contains the configuration for external services'

@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/download"
+	"github.com/it-laborato/MDM_Lab/pkg/download"
 )
 
 const (

@@ -3,7 +3,7 @@ package cached_mysql
 import (
 	"encoding/json"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 type packsList []*mdmlab.Pack

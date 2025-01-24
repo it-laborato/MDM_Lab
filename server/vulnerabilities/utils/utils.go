@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // RecentVulns filters vulnerabilities based on whether the vulnerability cve is contained in 'meta'.

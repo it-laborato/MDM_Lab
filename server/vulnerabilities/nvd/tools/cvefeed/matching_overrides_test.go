@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
 )
 
 func TestMatchOverrides(t *testing.T) {

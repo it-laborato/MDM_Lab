@@ -5,10 +5,10 @@ import (
 	"crypto/rsa"
 	"errors"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/assets"
-	scepserver "github.com:it-laborato/MDM_Lab/server/mdm/scep/server"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/assets"
+	scepserver "github.com/it-laborato/MDM_Lab/server/mdm/scep/server"
 
 	"github.com/go-kit/log"
 	"github.com/smallstep/scep"

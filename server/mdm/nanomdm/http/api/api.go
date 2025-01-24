@@ -13,11 +13,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
-	mdmhttp "github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/http"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/push"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
+	mdmhttp "github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/http"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/push"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
 
 	"github.com/micromdm/nanolib/log"
 	"github.com/micromdm/nanolib/log/ctxlog"

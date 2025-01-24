@@ -11,8 +11,8 @@ import (
 
 	"golang.org/x/text/unicode/norm"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 ////////////////////////////////////////////////////////////////////////////////

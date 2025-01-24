@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/tablehelpers"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/tablehelpers"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
 )

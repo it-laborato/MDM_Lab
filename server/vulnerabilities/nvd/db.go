@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cpedict"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cpedict"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3"
 )

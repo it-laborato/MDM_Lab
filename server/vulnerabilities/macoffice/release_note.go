@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/io"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/utils"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/io"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/utils"
 )
 
 const RelNotesURL = "https://learn.microsoft.com/en-us/officeupdates/release-notes-office-for-mac"

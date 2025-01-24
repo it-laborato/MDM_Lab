@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm"
 
 	// we are using this package as we were having issues with pasrsing signed apple
 	// mobileconfig profiles with the pcks7 package we were using before.

@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // InviteMailer is used to build an email template for the invite email.

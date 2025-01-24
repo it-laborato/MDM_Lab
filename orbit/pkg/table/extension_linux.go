@@ -3,10 +3,10 @@
 package table
 
 import (
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/crowdstrike/falcon_kernel_check"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/crowdstrike/falconctl"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/cryptsetup"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/dataflattentable"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/crowdstrike/falcon_kernel_check"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/crowdstrike/falconctl"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/cryptsetup"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/dataflattentable"
 	"github.com/rs/zerolog/log"
 
 	"github.com/osquery/osquery-go"

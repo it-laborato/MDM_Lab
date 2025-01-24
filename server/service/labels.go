@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com:it-laborato/MDM_Lab/server"
-	authz_ctx "github.com:it-laborato/MDM_Lab/server/contexts/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxdb"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/contexts/license"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server"
+	authz_ctx "github.com/it-laborato/MDM_Lab/server/contexts/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxdb"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/license"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 ////////////////////////////////////////////////////////////////////////////////

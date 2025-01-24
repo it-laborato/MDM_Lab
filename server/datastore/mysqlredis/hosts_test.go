@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis/redistest"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mock"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis/redistest"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mock"
 	redigo "github.com/gomodule/redigo/redis"
 	"github.com/stretchr/testify/require"
 )

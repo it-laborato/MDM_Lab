@@ -1,7 +1,7 @@
 package oval_parsed
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // <rpmverifyfile_test> can target any file installed via RPM - but in the case of OVAL

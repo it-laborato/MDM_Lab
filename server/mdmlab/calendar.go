@@ -6,7 +6,7 @@ import (
 	"time"
 	_ "time/tzdata" // embed timezone information in the program
 
-	"github.com:it-laborato/MDM_Lab/server"
+	"github.com/it-laborato/MDM_Lab/server"
 )
 
 const (

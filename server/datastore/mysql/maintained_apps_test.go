@@ -5,9 +5,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/maintainedapps"
-	"github.com:it-laborato/MDM_Lab/server/test"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/maintainedapps"
+	"github.com/it-laborato/MDM_Lab/server/test"
 	"github.com/go-kit/kit/log"
 	"github.com/jmoiron/sqlx"
 	"github.com/stretchr/testify/require"

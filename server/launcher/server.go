@@ -10,8 +10,8 @@ import (
 	launcher "github.com/kolide/launcher/pkg/service"
 	grpc "google.golang.org/grpc"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/health"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/health"
 )
 
 // Handler extends the grpc.Server, providing Handler that allows us to serve

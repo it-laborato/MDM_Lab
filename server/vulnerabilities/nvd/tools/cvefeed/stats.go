@@ -20,8 +20,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd/schema"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd/schema"
 )
 
 var cpeParts = map[string]string{

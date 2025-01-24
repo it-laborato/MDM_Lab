@@ -4,8 +4,8 @@ import (
 	"errors"
 	"sync/atomic"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/useraction"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/useraction"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/rs/zerolog/log"
 )
 

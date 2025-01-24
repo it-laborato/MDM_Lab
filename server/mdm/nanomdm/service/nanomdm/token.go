@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/service"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/service"
 )
 
 // StaticToken holds static token bytes.

@@ -7,9 +7,9 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/packaging"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/update"
-	"github.com:it-laborato/MDM_Lab/pkg/nettest"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/packaging"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
+	"github.com/it-laborato/MDM_Lab/pkg/nettest"
 	"github.com/stretchr/testify/require"
 )
 

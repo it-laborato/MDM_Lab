@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/cenkalti/backoff/v4"
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/gomodule/redigo/redis"
 	"github.com/mna/redisc"
 )

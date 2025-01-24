@@ -12,10 +12,10 @@ import (
 	"time"
 
 	jira "github.com/andygrunwald/go-jira"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/contexts/license"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/service/externalsvc"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/license"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/service/externalsvc"
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

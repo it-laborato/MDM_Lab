@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
 )
 
 type tokenTallyDevice interface {

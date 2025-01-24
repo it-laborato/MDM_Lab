@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/scripts"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/pkg/scripts"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/stretchr/testify/require"
 )
 

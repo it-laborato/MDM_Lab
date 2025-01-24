@@ -14,8 +14,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 var ErrUnsupportedType = errors.New("unsupported file type")

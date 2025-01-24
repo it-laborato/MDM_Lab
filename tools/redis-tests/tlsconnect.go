@@ -18,7 +18,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis"
 	redigo "github.com/gomodule/redigo/redis"
 )
 

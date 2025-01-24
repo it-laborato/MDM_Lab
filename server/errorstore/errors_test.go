@@ -15,9 +15,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis/redistest"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis/redistest"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	kitlog "github.com/go-kit/log"
 	pkgErrors "github.com/pkg/errors" //nolint:depguard
 	"github.com/stretchr/testify/assert"

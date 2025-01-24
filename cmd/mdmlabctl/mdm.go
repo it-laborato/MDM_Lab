@@ -7,8 +7,8 @@ import (
 	"os"
 	"slices"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/service"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/urfave/cli/v2"
 )

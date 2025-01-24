@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
 	"github.com/theupdateframework/go-tuf/client"
 )
 

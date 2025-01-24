@@ -13,9 +13,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/process"
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/process"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
 	"github.com/rs/zerolog/log"
 )
 

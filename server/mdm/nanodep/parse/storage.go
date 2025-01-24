@@ -3,9 +3,9 @@ package parse
 import (
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/storage"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/storage/file"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/storage/mysql"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/storage/file"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/storage/mysql"
 	_ "github.com/go-sql-driver/mysql"
 )
 

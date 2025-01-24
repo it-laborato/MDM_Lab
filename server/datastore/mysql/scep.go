@@ -11,10 +11,10 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	apple_mdm "github.com:it-laborato/MDM_Lab/server/mdm/apple"
-	"github.com:it-laborato/MDM_Lab/server/mdm/assets"
-	"github.com:it-laborato/MDM_Lab/server/mdm/scep/depot"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	apple_mdm "github.com/it-laborato/MDM_Lab/server/mdm/apple"
+	"github.com/it-laborato/MDM_Lab/server/mdm/assets"
+	"github.com/it-laborato/MDM_Lab/server/mdm/scep/depot"
 )
 
 // SCEPDepot is a MySQL-backed SCEP certificate depot.

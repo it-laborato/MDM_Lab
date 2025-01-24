@@ -15,8 +15,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/packaging"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/packaging"
 	"github.com/josephspurrier/goversioninfo"
 	zlog "github.com/rs/zerolog/log"
 )
@@ -208,7 +208,7 @@ func buildTargetBinary(cmdDir string, version string, binaryPath string) error {
 		linkFlags := fmt.Sprintf("-H=windowsgui -X=main.version=%s", version)
 		buildExec = exec.Command("go", "build", "-ldflags", linkFlags, "-o", outputBinary)
 	} else {
-		linkFlags := fmt.Sprintf("-X=github.com:it-laborato/MDM_Lab/orbit/pkg/build.Version=%s", version)
+		linkFlags := fmt.Sprintf("-X=github.com/it-laborato/MDM_Lab/orbit/pkg/build.Version=%s", version)
 		buildExec = exec.Command("go", "build", "-ldflags", linkFlags, "-o", outputBinary)
 	}
 	buildExec.Env = append(os.Environ(), "GOOS=windows", "GOARCH=amd64")

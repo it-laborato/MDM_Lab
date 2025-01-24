@@ -10,13 +10,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/contexts/logging"
-	"github.com:it-laborato/MDM_Lab/server/contexts/publicip"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mail"
-	"github.com:it-laborato/MDM_Lab/server/sso"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/logging"
+	"github.com/it-laborato/MDM_Lab/server/contexts/publicip"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mail"
+	"github.com/it-laborato/MDM_Lab/server/sso"
 	"github.com/go-kit/log/level"
 )
 

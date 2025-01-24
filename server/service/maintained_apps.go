@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/maintainedapps"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/maintainedapps"
 )
 
 type addMDMlabMaintainedAppRequest struct {

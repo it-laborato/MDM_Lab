@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
 )
 
 func (ms *MultiAllStorage) IsPushCertStale(ctx context.Context, topic string, staleToken string) (bool, error) {

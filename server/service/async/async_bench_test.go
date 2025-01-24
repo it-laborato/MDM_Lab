@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/mysql"
+	"github.com/it-laborato/MDM_Lab/server/datastore/mysql"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -17,7 +17,7 @@ import (
 //
 // goos: linux
 // goarch: amd64
-// pkg: github.com:it-laborato/MDM_Lab/server/service/async
+// pkg: github.com/it-laborato/MDM_Lab/server/service/async
 // cpu: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 // PASS
 // benchmark                                           iter        time/iter
@@ -34,11 +34,11 @@ import (
 // BenchmarkLabelMembershipInsert/UpdateOnly/2000-8       2     588.03 ms/op
 // BenchmarkLabelMembershipInsert/UpdateOnly/5000-8       2     529.61 ms/op
 // BenchmarkLabelMembershipInsert/UpdateOnly/10000-8      2     609.06 ms/op
-// ok      github.com:it-laborato/MDM_Lab/server/service/async        48.363s
+// ok      github.com/it-laborato/MDM_Lab/server/service/async        48.363s
 //
 // goos: linux
 // goarch: amd64
-// pkg: github.com:it-laborato/MDM_Lab/server/service/async
+// pkg: github.com/it-laborato/MDM_Lab/server/service/async
 // cpu: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 // PASS
 // benchmark                               iter        time/iter
@@ -48,7 +48,7 @@ import (
 // BenchmarkLabelMembershipDelete/1000-8      1    1715.99 ms/op
 // BenchmarkLabelMembershipDelete/2000-8      1    1410.87 ms/op
 // BenchmarkLabelMembershipDelete/3000-8      1    1653.89 ms/op
-// ok      github.com:it-laborato/MDM_Lab/server/service/async        24.291s
+// ok      github.com/it-laborato/MDM_Lab/server/service/async        24.291s
 
 func BenchmarkLabelMembershipInsert(b *testing.B) {
 	ds := mysql.CreateMySQLDS(b)

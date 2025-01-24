@@ -5,11 +5,11 @@ import (
 	"errors"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/service/certauth"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/test"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/test/enrollment"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/service/certauth"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/test"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/test/enrollment"
 	"github.com/micromdm/plist"
 )
 

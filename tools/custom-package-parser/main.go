@@ -8,9 +8,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/pkg/file"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/file"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func main() {

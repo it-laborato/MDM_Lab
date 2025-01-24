@@ -22,8 +22,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/scripts"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/scripts"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/google/uuid"
 )
 

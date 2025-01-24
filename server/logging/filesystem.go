@@ -12,8 +12,8 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
 	"github.com/go-kit/log"
 	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 )

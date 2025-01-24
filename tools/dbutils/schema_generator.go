@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/mixer/clock"
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/datastore/mysql"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/datastore/mysql"
 	"github.com/go-kit/log"
 )
 

@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis"
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis/redistest"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis/redistest"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
 	redigo "github.com/gomodule/redigo/redis"
 	"github.com/stretchr/testify/require"
 )

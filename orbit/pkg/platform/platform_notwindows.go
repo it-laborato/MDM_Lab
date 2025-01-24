@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 	gopsutil_process "github.com/shirou/gopsutil/v3/process"
 )
 

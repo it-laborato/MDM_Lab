@@ -14,7 +14,7 @@ import (
 	"strings"
 
 	"github.com/boltdb/bolt"
-	scepdepot "github.com:it-laborato/MDM_Lab/server/mdm/scep/depot/bolt"
+	scepdepot "github.com/it-laborato/MDM_Lab/server/mdm/scep/depot/bolt"
 	"github.com/micromdm/plist"
 	apnsbuiltin "github.com/micromdm/micromdm/platform/apns/builtin"
 	"github.com/micromdm/micromdm/platform/device"

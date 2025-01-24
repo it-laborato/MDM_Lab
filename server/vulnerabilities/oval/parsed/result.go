@@ -1,6 +1,6 @@
 package oval_parsed
 
-import "github.com:it-laborato/MDM_Lab/server/mdmlab"
+import "github.com/it-laborato/MDM_Lab/server/mdmlab"
 
 type Result interface {
 	// Eval evaluates the current OVAL definition against an OS version and a list of installed software, returns all software

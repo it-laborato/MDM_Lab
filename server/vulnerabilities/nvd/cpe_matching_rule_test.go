@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
 	"github.com/stretchr/testify/require"
 )
 

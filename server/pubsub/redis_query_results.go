@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	redigo "github.com/gomodule/redigo/redis"

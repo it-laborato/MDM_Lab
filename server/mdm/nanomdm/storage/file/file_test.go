@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/test/e2e"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/test/e2e"
 )
 
 func TestFileStorage(t *testing.T) {

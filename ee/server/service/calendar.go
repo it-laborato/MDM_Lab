@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/service/calendar"
+	"github.com/it-laborato/MDM_Lab/server/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/service/calendar"
 	"github.com/go-kit/log/level"
 	"github.com/google/uuid"
 )

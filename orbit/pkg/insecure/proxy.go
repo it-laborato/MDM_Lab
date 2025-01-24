@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
 )
 
 const (

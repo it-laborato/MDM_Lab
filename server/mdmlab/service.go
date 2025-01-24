@@ -7,8 +7,8 @@ import (
 	"io"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/version"
-	"github.com:it-laborato/MDM_Lab/server/websocket"
+	"github.com/it-laborato/MDM_Lab/server/version"
+	"github.com/it-laborato/MDM_Lab/server/websocket"
 )
 
 // EnterpriseOverrides contains the methods that can be overriden by the

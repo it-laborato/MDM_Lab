@@ -3,7 +3,7 @@ package authz
 import (
 	"net/http"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 const (

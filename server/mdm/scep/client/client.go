@@ -3,7 +3,7 @@ package scepclient
 import (
 	"time"
 
-	scepserver "github.com:it-laborato/MDM_Lab/server/mdm/scep/server"
+	scepserver "github.com/it-laborato/MDM_Lab/server/mdm/scep/server"
 
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"

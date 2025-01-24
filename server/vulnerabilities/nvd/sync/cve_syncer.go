@@ -21,11 +21,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd/schema"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd/schema"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	"github.com/pandatix/nvdapi/common"
@@ -36,7 +36,7 @@ import (
 // to the directory specified in the dbDir field in the form of JSON files.
 // It stores the CVE information using the legacy feed format.
 // The reason we decided to store in the legacy format is because
-// the github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools doesn't yet support parsing
+// the github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools doesn't yet support parsing
 // the new API 2.0 JSON format.
 type CVE struct {
 	client           *http.Client
@@ -183,7 +183,7 @@ func (s *CVE) update(ctx context.Context) error {
 
 func (s *CVE) updateYearFile(year int, cves []nvdapi.CVEItem) error {
 	// The NVD legacy feed files start at year 2002.
-	// This is assumed by the github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools package.
+	// This is assumed by the github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools package.
 	if year < 2002 {
 		year = 2002
 	}

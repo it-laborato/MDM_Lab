@@ -1,7 +1,7 @@
 package oval_parsed
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 type RpmInfoTest struct {

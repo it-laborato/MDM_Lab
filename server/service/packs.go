@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 type packResponse struct {

@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/datastore/mysql/common_mysql"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/datastore/mysql/common_mysql"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 	"github.com/micromdm/nanolib/log"

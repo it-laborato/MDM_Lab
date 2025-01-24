@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func (mw metricsMiddleware) InviteNewUser(ctx context.Context, payload mdmlab.InvitePayload) (*mdmlab.Invite, error) {

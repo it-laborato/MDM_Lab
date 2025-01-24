@@ -9,12 +9,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/file"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/maintainedapps"
+	"github.com/it-laborato/MDM_Lab/pkg/file"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/maintainedapps"
 )
 
 // noCheckHash is used by homebrew to signal that a hash shouldn't be checked.

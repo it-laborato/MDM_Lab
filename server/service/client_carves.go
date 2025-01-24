@@ -6,7 +6,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // ListCarves lists the file carving sessions

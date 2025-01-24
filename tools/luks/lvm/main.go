@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/lvm"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/lvm"
 )
 
 func main() {

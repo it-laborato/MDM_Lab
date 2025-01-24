@@ -7,10 +7,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	mdm_types "github.com:it-laborato/MDM_Lab/server/mdmlab"
-	microsoft_mdm "github.com:it-laborato/MDM_Lab/server/mdm/microsoft"
-	"github.com:it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	mdm_types "github.com/it-laborato/MDM_Lab/server/mdmlab"
+	microsoft_mdm "github.com/it-laborato/MDM_Lab/server/mdm/microsoft"
+	"github.com/it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
 	"github.com/stretchr/testify/require"
 )
 

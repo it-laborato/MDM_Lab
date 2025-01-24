@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/google/go-github/v37/github"
 	"github.com/stretchr/testify/require"
 )

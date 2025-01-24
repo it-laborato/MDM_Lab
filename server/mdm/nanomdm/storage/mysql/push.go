@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
 )
 
 // RetrievePushInfo retreives push info for identifiers ids.

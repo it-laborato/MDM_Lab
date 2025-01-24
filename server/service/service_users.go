@@ -3,11 +3,11 @@ package service
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/contexts/license"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/license"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 )
 
 func (svc *Service) CreateInitialUser(ctx context.Context, p mdmlab.UserPayload) (*mdmlab.User, error) {

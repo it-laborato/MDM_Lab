@@ -14,7 +14,7 @@ import (
 
 	"github.com/cenkalti/backoff/v4"
 	"github.com/nukosuke/go-zendesk/zendesk"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
 )
 
 // Zendesk is a Zendesk client to be used to make requests to the Zendesk external service.

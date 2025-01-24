@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 )
 
 type ReadWriter struct {

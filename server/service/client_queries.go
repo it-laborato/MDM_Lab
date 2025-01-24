@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // ApplyQueries sends the list of Queries to be applied (upserted) to the

@@ -1,8 +1,8 @@
 package oval_parsed
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/utils"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/utils"
 )
 
 // DpkgInfoTest encapsulates a Dpkg info test.

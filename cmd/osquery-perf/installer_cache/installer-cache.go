@@ -5,9 +5,9 @@ import (
 	"os"
 	"sync"
 
-	"github.com:it-laborato/MDM_Lab/pkg/file"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/pkg/file"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/service"
 )
 
 // Metadata holds the metadata for software installers.

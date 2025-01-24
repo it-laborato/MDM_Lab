@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/golang-jwt/jwt/v4"
 )
 

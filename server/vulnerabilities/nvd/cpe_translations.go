@@ -10,9 +10,9 @@ import (
 	"regexp"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/download"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/download"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/google/go-github/v37/github"
 )
 

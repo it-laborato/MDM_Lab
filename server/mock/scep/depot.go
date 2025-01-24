@@ -8,7 +8,7 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/scep/depot"
+	"github.com/it-laborato/MDM_Lab/server/mdm/scep/depot"
 )
 
 var _ depot.Depot = (*Depot)(nil)

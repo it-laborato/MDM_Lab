@@ -9,10 +9,10 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/io"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/msrc"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/msrc/parsed"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/io"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/msrc"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/msrc/parsed"
 	"github.com/google/go-github/v37/github"
 )
 

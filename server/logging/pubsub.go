@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"cloud.google.com/go/pubsub"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

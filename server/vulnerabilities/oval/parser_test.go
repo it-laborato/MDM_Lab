@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	oval_input "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/input"
-	oval_parsed "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	oval_input "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/input"
+	oval_parsed "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
 	"github.com/stretchr/testify/require"
 )
 

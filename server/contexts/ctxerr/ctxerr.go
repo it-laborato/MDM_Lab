@@ -20,9 +20,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/host"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/host"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/getsentry/sentry-go"
 	"go.elastic.co/apm/v2"
 )

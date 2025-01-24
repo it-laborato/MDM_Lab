@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
-	"github.com:it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/config"
 )
 
 const awsRegionHint = "us-east-1"

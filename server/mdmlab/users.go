@@ -8,7 +8,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com:it-laborato/MDM_Lab/server"
+	"github.com/it-laborato/MDM_Lab/server"
 	"golang.org/x/crypto/bcrypt"
 )
 

@@ -8,7 +8,7 @@ import (
 	"math/big"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/cryptoutil"
+	"github.com/it-laborato/MDM_Lab/server/mdm/cryptoutil"
 )
 
 // CACert represents a new self-signed CA certificate

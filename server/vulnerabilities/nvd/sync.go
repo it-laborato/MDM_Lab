@@ -13,14 +13,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/license"
+	"github.com/it-laborato/MDM_Lab/server/contexts/license"
 
-	"github.com:it-laborato/MDM_Lab/pkg/download"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed"
-	feednvd "github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd"
+	"github.com/it-laborato/MDM_Lab/pkg/download"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed"
+	feednvd "github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com:it-laborato/MDM_Lab/pkg/certificate"
-	"github.com:it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/pkg/certificate"
+	"github.com/it-laborato/MDM_Lab/server/config"
 )
 
 func main() {

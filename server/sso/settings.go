@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	dsigtypes "github.com/russellhaering/goxmldsig/types"
 )
 

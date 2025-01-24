@@ -9,9 +9,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/retry"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/pkg/retry"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/rs/zerolog/log"
 )
 

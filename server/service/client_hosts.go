@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // GetHosts retrieves the list of all Hosts

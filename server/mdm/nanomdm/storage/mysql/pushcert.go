@@ -5,7 +5,7 @@ import (
 	"crypto/tls"
 	"strconv"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
 )
 
 func (s *MySQLStorage) RetrievePushCert(ctx context.Context, topic string) (*tls.Certificate, string, error) {

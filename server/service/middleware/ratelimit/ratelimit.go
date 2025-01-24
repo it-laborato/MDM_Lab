@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	authz_ctx "github.com:it-laborato/MDM_Lab/server/contexts/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
+	authz_ctx "github.com/it-laborato/MDM_Lab/server/contexts/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
 	"github.com/go-kit/kit/endpoint"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/throttled/throttled/v2"

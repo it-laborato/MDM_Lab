@@ -3,7 +3,7 @@ package mysql
 import (
 	"database/sql"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
 )
 
 func (s *MySQLStorage) StoreBootstrapToken(r *mdm.Request, msg *mdm.SetBootstrapToken) error {

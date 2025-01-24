@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // This file exports internal functions and methods only for testing purposes.

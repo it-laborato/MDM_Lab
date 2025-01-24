@@ -2,7 +2,7 @@
 
 package profiles
 
-import "github.com:it-laborato/MDM_Lab/server/mdmlab"
+import "github.com/it-laborato/MDM_Lab/server/mdmlab"
 
 func GetMDMlabdConfig() (*mdmlab.MDMAppleMDMlabdConfig, error) {
 	return nil, ErrNotImplemented

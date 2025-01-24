@@ -16,8 +16,8 @@ import (
 	"fmt"
 
 	"github.com/apex/log"
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/mdm"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/mdm"
 )
 
 func main() {

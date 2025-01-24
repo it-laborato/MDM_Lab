@@ -1,8 +1,8 @@
 package goval_dictionary
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval"
 	"github.com/stretchr/testify/require"
 	"testing"
 	"time"

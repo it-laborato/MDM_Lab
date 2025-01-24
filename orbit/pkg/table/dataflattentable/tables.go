@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/dataflatten"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/tablehelpers"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/dataflatten"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/tablehelpers"
 	"github.com/osquery/osquery-go"
 	"github.com/osquery/osquery-go/plugin/table"
 	"github.com/rs/zerolog"

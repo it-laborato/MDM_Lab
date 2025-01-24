@@ -14,9 +14,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd"
-	nvdsync "github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/sync"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd"
+	nvdsync "github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/sync"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

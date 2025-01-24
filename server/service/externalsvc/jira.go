@@ -10,7 +10,7 @@ import (
 
 	"github.com/andygrunwald/go-jira"
 	"github.com/cenkalti/backoff/v4"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
 )
 
 // Jira is a Jira client to be used to make requests to a jira external

@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	hostctx "github.com:it-laborato/MDM_Lab/server/contexts/host"
-	"github.com:it-laborato/MDM_Lab/server/contexts/logging"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	hostctx "github.com/it-laborato/MDM_Lab/server/contexts/host"
+	"github.com/it-laborato/MDM_Lab/server/contexts/logging"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/google/uuid"
 )
 

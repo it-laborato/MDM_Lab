@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // TriggerCronSchedule attempts to trigger an ad-hoc run of the named cron schedule.

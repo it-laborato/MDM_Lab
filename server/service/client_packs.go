@@ -3,7 +3,7 @@ package service
 import (
 	"net/url"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // ApplyPacks sends the list of Packs to be applied (upserted) to the

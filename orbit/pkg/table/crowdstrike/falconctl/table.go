@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/dataflatten"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/dataflattentable"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/tablehelpers"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/dataflatten"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/dataflattentable"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/tablehelpers"
 	"github.com/osquery/osquery-go/plugin/table"
 	"github.com/rs/zerolog"
 )

@@ -7,8 +7,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/storage"
 )
 
 // Schema contains the MySQL schema for the DEP storage.

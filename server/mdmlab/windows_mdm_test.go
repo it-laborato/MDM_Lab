@@ -3,7 +3,7 @@ package mdmlab
 import (
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm"
 	"github.com/stretchr/testify/require"
 )
 

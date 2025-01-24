@@ -16,12 +16,12 @@ import (
 	"golang.org/x/text/unicode/norm"
 	"gopkg.in/yaml.v2"
 
-	"github.com:it-laborato/MDM_Lab/pkg/optjson"
-	"github.com:it-laborato/MDM_Lab/pkg/spec"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/pkg/optjson"
+	"github.com/it-laborato/MDM_Lab/pkg/spec"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	kithttp "github.com/go-kit/kit/transport/http"
 )
 

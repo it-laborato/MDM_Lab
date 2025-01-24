@@ -15,13 +15,13 @@ import (
 	"text/template"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/migration"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/migration"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/profiles"
-	"github.com:it-laborato/MDM_Lab/pkg/file"
-	"github.com:it-laborato/MDM_Lab/pkg/retry"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/profiles"
+	"github.com/it-laborato/MDM_Lab/pkg/file"
+	"github.com/it-laborato/MDM_Lab/pkg/retry"
+	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/rs/zerolog/log"
 )
 

@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"net/http/pprof"
 
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/contexts/logging"
-	"github.com:it-laborato/MDM_Lab/server/contexts/token"
-	"github.com:it-laborato/MDM_Lab/server/errorstore"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/contexts/logging"
+	"github.com/it-laborato/MDM_Lab/server/contexts/token"
+	"github.com/it-laborato/MDM_Lab/server/errorstore"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 
 	kithttp "github.com/go-kit/kit/transport/http"
 	kitlog "github.com/go-kit/log"

@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"time"
 
-	mdm_types "github.com:it-laborato/MDM_Lab/server/mdm"
+	mdm_types "github.com/it-laborato/MDM_Lab/server/mdm"
 )
 
 const (

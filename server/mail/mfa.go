@@ -2,11 +2,11 @@ package mail
 
 import (
 	"bytes"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"html/template"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server"
+	"github.com/it-laborato/MDM_Lab/server"
 )
 
 // MFAMailer is used to build an email template for the MFA email.

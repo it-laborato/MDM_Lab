@@ -3,7 +3,7 @@ package tables
 import (
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
 	"github.com/stretchr/testify/require"
 	"howett.net/plist"
 )

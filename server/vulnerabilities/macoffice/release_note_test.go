@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/macoffice"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/macoffice"
 	"github.com/stretchr/testify/require"
 )
 

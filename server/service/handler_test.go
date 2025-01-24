@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/mock"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/mock"
 	kitlog "github.com/go-kit/log"
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus"

@@ -2,8 +2,8 @@ package goval_dictionary
 
 import (
 	"database/sql"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval"
 	kitlog "github.com/go-kit/log"
 	"github.com/stretchr/testify/require"
 	"testing"

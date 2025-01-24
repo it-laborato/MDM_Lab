@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/scripts"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/scripts"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/go-kit/log/level"
 	"github.com/jmoiron/sqlx"
 )

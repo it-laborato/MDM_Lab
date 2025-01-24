@@ -3,7 +3,7 @@ package data
 import (
 	"database/sql"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/pkg/errors"
 )
 

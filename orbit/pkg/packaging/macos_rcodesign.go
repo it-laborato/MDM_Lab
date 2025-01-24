@@ -7,8 +7,8 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com:it-laborato/MDM_Lab/pkg/retry"
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/pkg/retry"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
 )
 
 func rSign(pkgPath, cert string) error {

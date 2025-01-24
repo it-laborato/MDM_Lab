@@ -7,12 +7,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/io"
-	msrc "github.com:it-laborato/MDM_Lab/server/vulnerabilities/msrc/parsed"
-	utils "github.com:it-laborato/MDM_Lab/server/vulnerabilities/utils"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/io"
+	msrc "github.com/it-laborato/MDM_Lab/server/vulnerabilities/msrc/parsed"
+	utils "github.com/it-laborato/MDM_Lab/server/vulnerabilities/utils"
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

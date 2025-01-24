@@ -7,10 +7,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/pkg/spec"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/pkg/spec"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/text/unicode/norm"
 )

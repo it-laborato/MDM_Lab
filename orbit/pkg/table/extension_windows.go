@@ -5,9 +5,9 @@ package table
 import (
 	"fmt"
 
-	cisaudit "github.com:it-laborato/MDM_Lab/orbit/pkg/table/cis_audit"
-	mdmbridge "github.com:it-laborato/MDM_Lab/orbit/pkg/table/mdm"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/table/windowsupdatetable"
+	cisaudit "github.com/it-laborato/MDM_Lab/orbit/pkg/table/cis_audit"
+	mdmbridge "github.com/it-laborato/MDM_Lab/orbit/pkg/table/mdm"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/windowsupdatetable"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/sys/windows/registry"
 

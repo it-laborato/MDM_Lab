@@ -12,14 +12,14 @@ import (
 	"strconv"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	hostctx "github.com:it-laborato/MDM_Lab/server/contexts/host"
-	"github.com:it-laborato/MDM_Lab/server/contexts/logging"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	apple_mdm "github.com:it-laborato/MDM_Lab/server/mdm/apple"
-	mdmcrypto "github.com:it-laborato/MDM_Lab/server/mdm/crypto"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	hostctx "github.com/it-laborato/MDM_Lab/server/contexts/host"
+	"github.com/it-laborato/MDM_Lab/server/contexts/logging"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	apple_mdm "github.com/it-laborato/MDM_Lab/server/mdm/apple"
+	mdmcrypto "github.com/it-laborato/MDM_Lab/server/mdm/crypto"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/go-kit/log/level"
 )
 

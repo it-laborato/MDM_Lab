@@ -34,7 +34,7 @@ import (
 	"time"
 
 	"github.com/facebookincubator/flog"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/providers/lib/client"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/providers/lib/client"
 )
 
 // CVE defines the CVE data feed for synchronization.

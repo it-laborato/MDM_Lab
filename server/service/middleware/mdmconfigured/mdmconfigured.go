@@ -5,7 +5,7 @@ package mdmconfigured
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/go-kit/kit/endpoint"
 )
 

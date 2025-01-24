@@ -11,7 +11,7 @@ import (
 	"net/url"
 	"os"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
 )
 
 // LoadPEM loads certificates from a PEM file and returns a cert pool containing

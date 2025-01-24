@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/update"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
 )
 
 func main() {

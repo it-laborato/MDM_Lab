@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	redigo "github.com/gomodule/redigo/redis"
 )
 

@@ -4,7 +4,7 @@
 package luks
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // Run is a placeholder method for non-Linux builds.

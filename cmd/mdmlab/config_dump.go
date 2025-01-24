@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/config"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"

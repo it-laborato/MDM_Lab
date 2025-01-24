@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
 	"github.com/ghodss/yaml"
 	"github.com/urfave/cli/v2"
 )

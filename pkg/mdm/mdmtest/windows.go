@@ -10,11 +10,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	microsoft_mdm "github.com:it-laborato/MDM_Lab/server/mdm/microsoft"
-	"github.com:it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	microsoft_mdm "github.com/it-laborato/MDM_Lab/server/mdm/microsoft"
+	"github.com/it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
 )

@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/go-kit/log"
 	"github.com/stretchr/testify/require"
 )

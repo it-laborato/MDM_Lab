@@ -3,8 +3,8 @@ package live_query
 import (
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis/redistest"
-	"github.com:it-laborato/MDM_Lab/server/test"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis/redistest"
+	"github.com/it-laborato/MDM_Lab/server/test"
 	"github.com/go-kit/log"
 	"github.com/stretchr/testify/assert"
 )

@@ -3,12 +3,12 @@ package mock
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 //go:generate go run ./mockimpl/impl.go -o datastore_mock.go "s *DataStore" "mdmlab.Datastore"
 //go:generate go run ./mockimpl/impl.go -o datastore_installers.go "s *InstallerStore" "mdmlab.InstallerStore"
-//go:generate go run ./mockimpl/impl.go -o nanodep/storage.go "s *Storage" "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/storage.AllDEPStorage"
+//go:generate go run ./mockimpl/impl.go -o nanodep/storage.go "s *Storage" "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/storage.AllDEPStorage"
 //go:generate go run ./mockimpl/impl.go -o mdm/datastore_mdm_mock.go "fs *MDMAppleStore" "mdmlab.MDMAppleStore"
 //go:generate go run ./mockimpl/impl.go -o scep/depot.go "d *Depot" "depot.Depot"
 //go:generate go run ./mockimpl/impl.go -o mdm/bootstrap_package_store.go "s *MDMBootstrapPackageStore" "mdmlab.MDMBootstrapPackageStore"

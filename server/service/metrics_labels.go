@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func (mw metricsMiddleware) ModifyLabel(ctx context.Context, id uint, p mdmlab.ModifyLabelPayload) (*mdmlab.Label, []uint, error) {

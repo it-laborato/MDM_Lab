@@ -3,7 +3,7 @@ package useraction
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // MDMMigrator represents the minimum set of methods a migration must implement

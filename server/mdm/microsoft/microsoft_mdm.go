@@ -4,7 +4,7 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/internal/commonmdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/internal/commonmdm"
 	"github.com/smallstep/pkcs7"
 )
 

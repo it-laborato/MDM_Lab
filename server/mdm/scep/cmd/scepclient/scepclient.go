@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	scepclient "github.com:it-laborato/MDM_Lab/server/mdm/scep/client"
+	scepclient "github.com/it-laborato/MDM_Lab/server/mdm/scep/client"
 
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"

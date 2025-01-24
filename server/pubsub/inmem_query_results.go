@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 type inmemQueryResults struct {

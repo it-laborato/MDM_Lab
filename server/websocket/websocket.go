@@ -7,7 +7,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/token"
+	"github.com/it-laborato/MDM_Lab/server/contexts/token"
 	"github.com/igm/sockjs-go/v3/sockjs"
 )
 

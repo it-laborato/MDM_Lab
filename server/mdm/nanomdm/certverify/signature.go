@@ -5,7 +5,7 @@ import (
 	"crypto/x509"
 	"errors"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
 )
 
 // SignatureVerifier is a simple certificate verifier

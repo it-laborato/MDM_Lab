@@ -19,7 +19,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
 )
 
 func TestCacheEviction(t *testing.T) {

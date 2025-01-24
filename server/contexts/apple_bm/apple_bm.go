@@ -3,7 +3,7 @@ package apple_bm
 import (
 	"context"
 
-	depclient "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	depclient "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
 )
 
 type key int

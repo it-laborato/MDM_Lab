@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/ee/server/calendar/load_test"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/ee/server/calendar/load_test"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	kitlog "github.com/go-kit/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

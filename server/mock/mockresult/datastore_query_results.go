@@ -6,7 +6,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 var _ mdmlab.QueryResultStore = (*QueryResultStore)(nil)

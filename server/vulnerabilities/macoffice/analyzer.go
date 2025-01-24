@@ -8,10 +8,10 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/io"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/utils"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/io"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/utils"
 )
 
 // getLatestReleaseNotes returns the most recent Mac Office release notes asset (based on the date in the

@@ -6,7 +6,7 @@ import (
 
 // This migration exists as a "placeholder" to prevent the unexpected printing
 // of a migration inconsistency warning on MDMlab startup. The migration is
-// intentionally empty. See https://github.com:it-laborato/MDM_Lab/issues/48 for more
+// intentionally empty. See https://github.com/it-laborato/MDM_Lab/issues/48 for more
 // details.
 
 func init() {

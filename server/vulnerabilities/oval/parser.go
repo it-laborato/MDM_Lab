@@ -7,8 +7,8 @@ import (
 	"io"
 	"os"
 
-	oval_input "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/input"
-	oval_parsed "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
+	oval_input "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/input"
+	oval_parsed "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
 )
 
 func parseDefinitions(platform Platform, inputFile string, outputFile string) error {

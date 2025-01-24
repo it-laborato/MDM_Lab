@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/optjson"
+	"github.com/it-laborato/MDM_Lab/pkg/optjson"
 )
 
 // PolicyPayload holds data for policy creation.

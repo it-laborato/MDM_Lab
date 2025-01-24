@@ -14,12 +14,12 @@ import (
 	"strconv"
 
 	"github.com/docker/go-units"
-	authzctx "github.com:it-laborato/MDM_Lab/server/contexts/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	hostctx "github.com:it-laborato/MDM_Lab/server/contexts/host"
-	"github.com:it-laborato/MDM_Lab/server/contexts/logging"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	authzctx "github.com/it-laborato/MDM_Lab/server/contexts/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	hostctx "github.com/it-laborato/MDM_Lab/server/contexts/host"
+	"github.com/it-laborato/MDM_Lab/server/contexts/logging"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 )
 
 type uploadSoftwareInstallerRequest struct {

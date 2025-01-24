@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/service"
 )
 
 func printf(format string, a ...any) {

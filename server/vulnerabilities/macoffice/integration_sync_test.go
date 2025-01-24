@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/nettest"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/io"
+	"github.com/it-laborato/MDM_Lab/pkg/nettest"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/io"
 	"github.com/stretchr/testify/require"
 )
 

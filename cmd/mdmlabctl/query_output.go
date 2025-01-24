@@ -6,7 +6,7 @@ import (
 	"os"
 	"sort"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/gosuri/uilive"
 	"github.com/olekukonko/tablewriter"
 )

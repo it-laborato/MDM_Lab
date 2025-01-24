@@ -10,10 +10,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 
-	ws "github.com:it-laborato/MDM_Lab/server/websocket"
+	ws "github.com/it-laborato/MDM_Lab/server/websocket"
 	"github.com/gorilla/websocket"
 )
 

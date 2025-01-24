@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/redis/redistest"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab/policytest"
-	"github.com:it-laborato/MDM_Lab/server/test"
+	"github.com/it-laborato/MDM_Lab/server/datastore/redis/redistest"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab/policytest"
+	"github.com/it-laborato/MDM_Lab/server/test"
 )
 
 func TestRedisFailingPolicySet(t *testing.T) {

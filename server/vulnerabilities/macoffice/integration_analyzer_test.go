@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/mysql"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/test"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/macoffice"
+	"github.com/it-laborato/MDM_Lab/server/datastore/mysql"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/test"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/macoffice"
 	"github.com/stretchr/testify/require"
 )
 

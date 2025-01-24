@@ -10,8 +10,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/ghodss/yaml"
 	"github.com/hashicorp/go-multierror"
 	"golang.org/x/text/unicode/norm"

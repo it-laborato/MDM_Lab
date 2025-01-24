@@ -14,8 +14,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/tokenpki"
-	"github.com:it-laborato/MDM_Lab/server/mdm/scep/depot"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/tokenpki"
+	"github.com/it-laborato/MDM_Lab/server/mdm/scep/depot"
 )
 
 const (

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // CreateUser creates a new user, skipping the invitation process.

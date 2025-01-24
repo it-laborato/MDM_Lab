@@ -11,9 +11,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/ee/server/calendar"
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/ee/server/calendar"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

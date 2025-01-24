@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // ListSoftwareVersions retrieves the software versions installed on hosts.

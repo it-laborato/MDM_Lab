@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/pkg/optjson"
+	"github.com/it-laborato/MDM_Lab/pkg/optjson"
 	"github.com/micromdm/plist"
 )
 

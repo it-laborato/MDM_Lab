@@ -12,10 +12,10 @@ import (
 	"runtime"
 
 	"github.com/Masterminds/semver"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/update"
-	"github.com:it-laborato/MDM_Lab/pkg/file"
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
+	"github.com/it-laborato/MDM_Lab/pkg/file"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
 	"github.com/rs/zerolog/log"
 )
 

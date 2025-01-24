@@ -5,7 +5,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log"
 )
 
 // CtxKVFunc creates logger key-value pairs from a context.

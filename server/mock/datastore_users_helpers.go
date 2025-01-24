@@ -3,7 +3,7 @@ package mock
 import (
 	"context"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func UserByEmailWithUser(u *mdmlab.User) UserByEmailFunc {

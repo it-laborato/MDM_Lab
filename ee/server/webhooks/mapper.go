@@ -3,8 +3,8 @@ package webhooks
 import (
 	"net/url"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	mdmlabwebhooks "github.com:it-laborato/MDM_Lab/server/webhooks"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	mdmlabwebhooks "github.com/it-laborato/MDM_Lab/server/webhooks"
 )
 
 type Mapper struct {

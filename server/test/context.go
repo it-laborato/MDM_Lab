@@ -3,10 +3,10 @@ package test
 import (
 	"context"
 
-	authz_ctx "github.com:it-laborato/MDM_Lab/server/contexts/authz"
-	hostctx "github.com:it-laborato/MDM_Lab/server/contexts/host"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	authz_ctx "github.com/it-laborato/MDM_Lab/server/contexts/authz"
+	hostctx "github.com/it-laborato/MDM_Lab/server/contexts/host"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // UserContext returns a new context with the provided user as the viewer.

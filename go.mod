@@ -1,4 +1,4 @@
-module github.com:it-laborato/MDM_Lab
+module github.com/it-laborato/MDM_Lab
 
 go 1.23.4
 

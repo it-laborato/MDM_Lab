@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
+	"github.com/it-laborato/MDM_Lab/server/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
 )
 
 // MDMWindowsBitLockerSummary reports the number of Windows hosts being managed by MDMlab with

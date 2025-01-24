@@ -14,9 +14,9 @@ import (
 	"github.com/goreleaser/nfpm/v2/files"
 	"github.com/goreleaser/nfpm/v2/rpm"
 	"github.com/rs/zerolog/log"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/update"
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
 )
 
 func buildNFPM(opt Options, pkger nfpm.Packager) (string, error) {

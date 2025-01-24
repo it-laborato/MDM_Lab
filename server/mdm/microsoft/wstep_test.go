@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
+	"github.com/it-laborato/MDM_Lab/server"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
 	"github.com/stretchr/testify/require"
 )
 

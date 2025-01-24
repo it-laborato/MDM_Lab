@@ -7,9 +7,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/dialog"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/lvm"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/zenity"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/dialog"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/lvm"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/zenity"
 	"github.com/siderolabs/go-blockdevice/v2/encryption"
 	"github.com/siderolabs/go-blockdevice/v2/encryption/luks"
 )

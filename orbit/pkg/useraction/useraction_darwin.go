@@ -11,7 +11,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 )
 
 const defaultDialogTimeout = 30 // in seconds

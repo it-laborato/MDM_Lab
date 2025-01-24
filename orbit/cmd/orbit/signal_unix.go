@@ -15,8 +15,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/pkg/secure"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/pkg/secure"
 	"github.com/oklog/run"
 	"github.com/rs/zerolog/log"
 )

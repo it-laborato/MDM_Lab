@@ -8,10 +8,10 @@ import (
 	"encoding/pem"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	nanodep_client "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/tokenpki"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	nanodep_client "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/tokenpki"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/cryptoutil"
 )
 
 func CAKeyPair(ctx context.Context, ds mdmlab.MDMAssetRetriever) (*tls.Certificate, error) {

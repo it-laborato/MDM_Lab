@@ -8,8 +8,8 @@ import (
 	"net/url"
 
 	assetfs "github.com/elazarl/go-bindata-assetfs"
-	"github.com:it-laborato/MDM_Lab/server/bindata"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/bindata"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/go-kit/log"
 	"github.com/klauspost/compress/gzhttp"
 )

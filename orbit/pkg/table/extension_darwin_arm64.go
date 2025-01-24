@@ -4,7 +4,7 @@ package table
 
 import (
 	// ARM64 Kolide tables
-	appicons "github.com:it-laborato/MDM_Lab/orbit/pkg/table/app-icons"
+	appicons "github.com/it-laborato/MDM_Lab/orbit/pkg/table/app-icons"
 
 	"github.com/osquery/osquery-go"
 )

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server"
+	"github.com/it-laborato/MDM_Lab/server"
 	"github.com/pkg/errors"
 )
 

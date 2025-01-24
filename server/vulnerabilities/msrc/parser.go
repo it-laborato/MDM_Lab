@@ -7,9 +7,9 @@ import (
 	"os"
 	"strconv"
 
-	"github.com:it-laborato/MDM_Lab/server/ptr"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/msrc/parsed"
-	msrcxml "github.com:it-laborato/MDM_Lab/server/vulnerabilities/msrc/xml"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/msrc/parsed"
+	msrcxml "github.com/it-laborato/MDM_Lab/server/vulnerabilities/msrc/xml"
 )
 
 func ParseFeed(fPath string) (map[string]*parsed.SecurityBulletin, error) {

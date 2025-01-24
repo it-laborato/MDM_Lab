@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/ptr"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/msrc/parsed"
-	msrcxml "github.com:it-laborato/MDM_Lab/server/vulnerabilities/msrc/xml"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/msrc/parsed"
+	msrcxml "github.com/it-laborato/MDM_Lab/server/vulnerabilities/msrc/xml"
 	"github.com/stretchr/testify/require"
 )
 

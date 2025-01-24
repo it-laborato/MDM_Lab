@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/pkg/file"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/file"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -19,7 +19,7 @@ import (
 // $ GO_TEST_EXTRA_FLAGS="--timeout 20m" FLEET_INTEGRATION_TESTS_DISABLE_LOG=1 REDIS_TEST=1 MYSQL_TEST=1 MINIO_STORAGE_TEST=1 go test ./pkg/file -run zzz -bench . -benchmem | prettybench
 // goos: linux
 // goarch: amd64
-// pkg: github.com:it-laborato/MDM_Lab/pkg/file
+// pkg: github.com/it-laborato/MDM_Lab/pkg/file
 // cpu: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 // PASS
 // benchmark                                                                                            iter       time/iter      bytes alloc             allocs
@@ -41,13 +41,13 @@ import (
 // BenchmarkExtractInstallerMetadata/mdmlab-osquery.deb/file_size:_79581_kb-8                               4    308.36 ms/op       59696 B/op       90 allocs/op
 // BenchmarkExtractInstallerMetadata/htop.deb/file_size:_90_kb-8                                         822      1.96 ms/op     8446331 B/op      110 allocs/op
 // BenchmarkExtractInstallerMetadata/ruby.deb/file_size:_11_kb-8                                         649      1.66 ms/op     8448424 B/op      122 allocs/op
-// ok  	github.com:it-laborato/MDM_Lab/pkg/file	36.644s
+// ok  	github.com/it-laborato/MDM_Lab/pkg/file	36.644s
 
 // Results @0c700ca40e5d3602b6206f12232c4c123b6c4ee9 with the use of TempFileReader but not change otherwise:
 // $ GO_TEST_EXTRA_FLAGS="--timeout 20m" FLEET_INTEGRATION_TESTS_DISABLE_LOG=1 REDIS_TEST=1 MYSQL_TEST=1 MINIO_STORAGE_TEST=1 go test ./pkg/file -run zzz -bench . -benchmem | prettybench
 // goos: linux
 // goarch: amd64
-// pkg: github.com:it-laborato/MDM_Lab/pkg/file
+// pkg: github.com/it-laborato/MDM_Lab/pkg/file
 // cpu: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 // PASS
 // benchmark                                                                                            iter       time/iter      bytes alloc             allocs
@@ -69,7 +69,7 @@ import (
 // BenchmarkExtractInstallerMetadata/mdmlab-osquery.deb/file_size:_79581_kb-8                               3    335.98 ms/op       60384 B/op       90 allocs/op
 // BenchmarkExtractInstallerMetadata/htop.deb/file_size:_90_kb-8                                         732      3.16 ms/op     8446791 B/op      110 allocs/op
 // BenchmarkExtractInstallerMetadata/ruby.deb/file_size:_11_kb-8                                         578      3.48 ms/op     8449575 B/op      122 allocs/op
-// ok  	github.com:it-laborato/MDM_Lab/pkg/file	37.775s
+// ok  	github.com/it-laborato/MDM_Lab/pkg/file	37.775s
 
 // Results @64321f8d241bba9233a1de21845ac0c7a6f4dda6 with the .exe improvements (read from disk with mmap) - massively
 // better memory usage (only exe benchmarks show):
@@ -77,7 +77,7 @@ import (
 // $ GO_TEST_EXTRA_FLAGS="--timeout 20m" FLEET_INTEGRATION_TESTS_DISABLE_LOG=1 REDIS_TEST=1 MYSQL_TEST=1 MINIO_STORAGE_TEST=1 go test ./pkg/file -run zzz -bench . -benchmem | prettybench
 // goos: linux
 // goarch: amd64
-// pkg: github.com:it-laborato/MDM_Lab/pkg/file
+// pkg: github.com/it-laborato/MDM_Lab/pkg/file
 // cpu: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 // PASS
 // benchmark                                                                                            iter       time/iter      bytes alloc             allocs
@@ -86,7 +86,7 @@ import (
 // BenchmarkExtractInstallerMetadata/Notion_3.11.1.exe/file_size:_77768_kb-8                               3    337.30 ms/op       61258 B/op      521 allocs/op
 // BenchmarkExtractInstallerMetadata/Vim.exe/file_size:_10704_kb-8                                        22     47.32 ms/op       67321 B/op      604 allocs/op
 // BenchmarkExtractInstallerMetadata/Visual_Studio_Code.exe/file_size:_97156_kb-8                          3    421.23 ms/op       65573 B/op      591 allocs/op
-// ok  	github.com:it-laborato/MDM_Lab/pkg/file	35.887s
+// ok  	github.com/it-laborato/MDM_Lab/pkg/file	35.887s
 
 // Results @e5ad9300701f0aa1f7b40efffdb6944988038dc7 with the .pkg improvements
 // - massively better memory usage (only pkg benchmarks shown):
@@ -94,7 +94,7 @@ import (
 // $ GO_TEST_EXTRA_FLAGS="--timeout 20m" FLEET_INTEGRATION_TESTS_DISABLE_LOG=1 REDIS_TEST=1 MYSQL_TEST=1 MINIO_STORAGE_TEST=1 go test ./pkg/file -run zzz -bench . -benchmem | prettybench
 // goos: linux
 // goarch: amd64
-// pkg: github.com:it-laborato/MDM_Lab/pkg/file
+// pkg: github.com/it-laborato/MDM_Lab/pkg/file
 // cpu: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 // PASS
 // benchmark                                                                                            iter      time/iter      bytes alloc             allocs
@@ -105,21 +105,21 @@ import (
 // BenchmarkExtractInstallerMetadata/NordVPN.app.pkg/file_size:_155592_kb-8                                2   713.27 ms/op      223144 B/op     1866 allocs/op
 // BenchmarkExtractInstallerMetadata/Python.pkg/file_size:_44601_kb-8                                      6   247.57 ms/op      350997 B/op     5791 allocs/op
 // BenchmarkExtractInstallerMetadata/TeamViewer.app.pkg/file_size:_93051_kb-8                              2   586.15 ms/op      389312 B/op     6776 allocs/op
-// ok  	github.com:it-laborato/MDM_Lab/pkg/file	39.536s
+// ok  	github.com/it-laborato/MDM_Lab/pkg/file	39.536s
 
 // Results @532daf10bebe7c432a2b5e6c3822639c5937dc29 with the .msi improvements
 // - massively better memory usage (only msi benchmarks shown):
 // $ GO_TEST_EXTRA_FLAGS="--timeout 20m" FLEET_INTEGRATION_TESTS_DISABLE_LOG=1 REDIS_TEST=1 MYSQL_TEST=1 MINIO_STORAGE_TEST=1 go test ./pkg/file -run zzz -bench . -benchmem | prettybench
 // goos: linux
 // goarch: amd64
-// pkg: github.com:it-laborato/MDM_Lab/pkg/file
+// pkg: github.com/it-laborato/MDM_Lab/pkg/file
 // cpu: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
 // PASS
 // benchmark                                                                                            iter      time/iter    bytes alloc             allocs
 // ---------                                                                                            ----      ---------    -----------             ------
 // BenchmarkExtractInstallerMetadata/MDMlab_osquery.msi/file_size:_43775_kb-8                               6   191.69 ms/op    879274 B/op     3752 allocs/op
 // BenchmarkExtractInstallerMetadata/Go_Programming_Language_amd64_go1.22.2.msi/file_size:_61680_kb-8      4   305.72 ms/op   8430244 B/op   161054 allocs/op
-// ok  	github.com:it-laborato/MDM_Lab/pkg/file	32.193s
+// ok  	github.com/it-laborato/MDM_Lab/pkg/file	32.193s
 
 func BenchmarkExtractInstallerMetadata(b *testing.B) {
 	dents, err := os.ReadDir(filepath.Join("testdata", "installers"))

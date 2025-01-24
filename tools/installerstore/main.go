@@ -7,9 +7,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/datastore/s3"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/datastore/s3"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/urfave/cli/v2"
 )
 

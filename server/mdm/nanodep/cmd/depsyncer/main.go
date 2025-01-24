@@ -12,10 +12,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/godep"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log/stdlogfmt"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/parse"
-	depsync "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/sync"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/godep"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log/stdlogfmt"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/parse"
+	depsync "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/sync"
 )
 
 // overridden by -ldflags -X

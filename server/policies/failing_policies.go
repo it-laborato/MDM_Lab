@@ -7,8 +7,8 @@ import (
 	"errors"
 	"net/url"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

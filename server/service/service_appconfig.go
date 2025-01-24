@@ -6,13 +6,13 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server"
-	authz_ctx "github.com:it-laborato/MDM_Lab/server/contexts/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/contexts/license"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mail"
+	"github.com/it-laborato/MDM_Lab/server"
+	authz_ctx "github.com/it-laborato/MDM_Lab/server/contexts/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/license"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mail"
 )
 
 // mailError is set when an error performing mail operations

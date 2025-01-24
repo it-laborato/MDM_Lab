@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
 )
 
 func (ms *MultiAllStorage) HasCertHash(r *mdm.Request, hash string) (bool, error) {

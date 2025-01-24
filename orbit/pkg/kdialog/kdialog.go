@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/dialog"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/execuser"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/platform"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/dialog"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/execuser"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/platform"
 )
 
 const kdialogProcessName = "kdialog"

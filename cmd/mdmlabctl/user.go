@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/sethvargo/go-password/password"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/crypto/ssh/terminal"

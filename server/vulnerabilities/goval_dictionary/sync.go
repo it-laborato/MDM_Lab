@@ -2,11 +2,11 @@ package goval_dictionary
 
 import (
 	"fmt"
-	"github.com:it-laborato/MDM_Lab/pkg/download"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval"
+	"github.com/it-laborato/MDM_Lab/pkg/download"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval"
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	"net/http"

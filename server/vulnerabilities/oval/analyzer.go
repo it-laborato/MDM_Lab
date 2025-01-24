@@ -8,9 +8,9 @@ import (
 	"os"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	oval_parsed "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
-	utils "github.com:it-laborato/MDM_Lab/server/vulnerabilities/utils"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	oval_parsed "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
+	utils "github.com/it-laborato/MDM_Lab/server/vulnerabilities/utils"
 )
 
 const (

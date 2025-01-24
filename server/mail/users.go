@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server"
+	"github.com/it-laborato/MDM_Lab/server"
 )
 
 type ChangeEmailMailer struct {

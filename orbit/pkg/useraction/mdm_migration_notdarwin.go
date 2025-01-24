@@ -6,8 +6,8 @@ import (
 	"context"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/migration"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/migration"
+	"github.com/it-laborato/MDM_Lab/server/service"
 )
 
 func NewMDMMigrator(path string, frequency time.Duration, handler MDMMigratorHandler, mrw *migration.ReadWriter, mdmlabURL string, showCh chan struct{}) MDMMigrator {

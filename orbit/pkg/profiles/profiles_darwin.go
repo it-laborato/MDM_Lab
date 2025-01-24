@@ -10,8 +10,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
 	"github.com/micromdm/plist"
 )
 

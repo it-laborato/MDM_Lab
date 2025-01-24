@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com:it-laborato/MDM_Lab/pkg/spec"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/pkg/spec"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/urfave/cli/v2"
 )
 

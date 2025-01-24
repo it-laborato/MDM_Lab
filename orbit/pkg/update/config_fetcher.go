@@ -1,6 +1,6 @@
 package update
 
-import "github.com:it-laborato/MDM_Lab/server/mdmlab"
+import "github.com/it-laborato/MDM_Lab/server/mdmlab"
 
 // OrbitConfigFetcher allows fetching Orbit configuration.
 type OrbitConfigFetcher interface {

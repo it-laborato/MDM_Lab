@@ -15,10 +15,10 @@ import (
 	"os"
 
 	"github.com/mixer/clock"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/datastore/mysql"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/godep"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/datastore/mysql"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/godep"
 	kitlog "github.com/go-kit/log"
 )
 

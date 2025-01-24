@@ -1,7 +1,7 @@
 package logging
 
 import (
-	nanodep_log "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log"
+	nanodep_log "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log"
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

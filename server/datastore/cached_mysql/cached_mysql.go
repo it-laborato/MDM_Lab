@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxdb"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxdb"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/jmoiron/sqlx"
 	"github.com/patrickmn/go-cache"
 )

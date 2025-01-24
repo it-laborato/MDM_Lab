@@ -3,7 +3,7 @@ package service
 import (
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func (c *Client) CreateGlobalPolicy(name, query, description, resolution, platform string) error {

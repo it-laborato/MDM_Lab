@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage/allmulti"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage/file"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/storage/mysql"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage/allmulti"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage/file"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/storage/mysql"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"

@@ -3,7 +3,7 @@ package service
 import (
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // SearchTargets searches for the supplied targets in the MDMlab instance.

@@ -23,7 +23,7 @@ func createHttpClient(m dsl.Matcher) {
 }
 
 func txCheck(m dsl.Matcher) {
-	m.Import("github.com:it-laborato/MDM_Lab/server/datastore/mysql")
+	m.Import("github.com/it-laborato/MDM_Lab/server/datastore/mysql")
 	m.Import("github.com/jmoiron/sqlx")
 
 	isDatastoreType := func(v dsl.Var) bool {

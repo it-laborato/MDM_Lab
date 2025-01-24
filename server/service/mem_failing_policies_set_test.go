@@ -3,7 +3,7 @@ package service
 import (
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab/policytest"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab/policytest"
 )
 
 func TestMemFailingPolicySet(t *testing.T) {

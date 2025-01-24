@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/test"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/test/enrollment"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/test"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/test/enrollment"
 )
 
 // Doer executes an HTTP request.

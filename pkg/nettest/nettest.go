@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/retry"
+	"github.com/it-laborato/MDM_Lab/pkg/retry"
 )
 
 func lock(lockFilePath string) {

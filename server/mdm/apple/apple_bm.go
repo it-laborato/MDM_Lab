@@ -5,12 +5,12 @@ import (
 	"errors"
 	"net/http"
 
-	abmctx "github.com:it-laborato/MDM_Lab/server/contexts/apple_bm"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/assets"
-	depclient "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/storage"
+	abmctx "github.com/it-laborato/MDM_Lab/server/contexts/apple_bm"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/assets"
+	depclient "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/storage"
 	kitlog "github.com/go-kit/log"
 )
 

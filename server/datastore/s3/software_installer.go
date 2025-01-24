@@ -1,7 +1,7 @@
 package s3
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/config"
 )
 
 const softwareInstallersPrefix = "software-installers"

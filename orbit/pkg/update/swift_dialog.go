@@ -1,7 +1,7 @@
 package update
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/rs/zerolog/log"
 )
 

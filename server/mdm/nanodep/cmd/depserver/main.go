@@ -9,12 +9,12 @@ import (
 	"os"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	dephttp "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/http"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/http/api"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log/stdlogfmt"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/parse"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/proxy"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	dephttp "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/http"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/http/api"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log/stdlogfmt"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/parse"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/proxy"
 )
 
 // overridden by -ldflags -X

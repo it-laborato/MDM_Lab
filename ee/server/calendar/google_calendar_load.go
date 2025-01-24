@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
 	kitlog "github.com/go-kit/log"
 	"google.golang.org/api/calendar/v3"
 	"google.golang.org/api/googleapi"

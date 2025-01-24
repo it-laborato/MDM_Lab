@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/build"
-	orbit_table "github.com:it-laborato/MDM_Lab/orbit/pkg/table"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/token"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/build"
+	orbit_table "github.com/it-laborato/MDM_Lab/orbit/pkg/table"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/token"
+	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/osquery/osquery-go/plugin/table"
 )
 

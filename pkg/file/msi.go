@@ -9,7 +9,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/sassoftware/relic/v8/lib/comdoc"
 )
 

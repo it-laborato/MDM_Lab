@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/push"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/push"
 	"golang.org/x/net/http2"
 )
 

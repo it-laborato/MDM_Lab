@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	tbl_common "github.com:it-laborato/MDM_Lab/orbit/pkg/table/common"
+	tbl_common "github.com/it-laborato/MDM_Lab/orbit/pkg/table/common"
 	"github.com/osquery/osquery-go/plugin/table"
 	"github.com/rs/zerolog/log"
 )

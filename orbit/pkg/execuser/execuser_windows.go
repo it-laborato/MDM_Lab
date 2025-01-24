@@ -12,7 +12,7 @@ import (
 	"os"
 	"unsafe"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 	"golang.org/x/sys/windows"
 )
 

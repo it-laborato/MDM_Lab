@@ -11,14 +11,14 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/mysql"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	apple_mdm "github.com:it-laborato/MDM_Lab/server/mdm/apple"
-	nanodep_client "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/godep"
-	"github.com:it-laborato/MDM_Lab/server/mock"
-	mdmmock "github.com:it-laborato/MDM_Lab/server/mock/mdm"
-	"github.com:it-laborato/MDM_Lab/server/test"
+	"github.com/it-laborato/MDM_Lab/server/datastore/mysql"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	apple_mdm "github.com/it-laborato/MDM_Lab/server/mdm/apple"
+	nanodep_client "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/godep"
+	"github.com/it-laborato/MDM_Lab/server/mock"
+	mdmmock "github.com/it-laborato/MDM_Lab/server/mock/mdm"
+	"github.com/it-laborato/MDM_Lab/server/test"
 	"github.com/go-kit/log"
 	kitlog "github.com/go-kit/log"
 )

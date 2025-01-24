@@ -6,16 +6,16 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/logging"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/logging"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 
-	authz_ctx "github.com:it-laborato/MDM_Lab/server/contexts/authz"
-	hostctx "github.com:it-laborato/MDM_Lab/server/contexts/host"
-	"github.com:it-laborato/MDM_Lab/server/contexts/token"
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
+	authz_ctx "github.com/it-laborato/MDM_Lab/server/contexts/authz"
+	hostctx "github.com/it-laborato/MDM_Lab/server/contexts/host"
+	"github.com/it-laborato/MDM_Lab/server/contexts/token"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
 	"github.com/go-kit/kit/endpoint"
 )
 

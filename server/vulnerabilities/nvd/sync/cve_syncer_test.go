@@ -18,7 +18,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd/schema"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd/schema"
 	"github.com/go-kit/log"
 	"github.com/google/go-cmp/cmp"
 	"github.com/pandatix/nvdapi/v2"

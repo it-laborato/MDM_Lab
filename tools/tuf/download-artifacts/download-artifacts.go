@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
 	"github.com/google/go-github/v37/github"
 	"github.com/urfave/cli/v2"
 )

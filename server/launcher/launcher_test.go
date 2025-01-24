@@ -10,9 +10,9 @@ import (
 	"github.com/osquery/osquery-go/plugin/distributed"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/health"
-	"github.com:it-laborato/MDM_Lab/server/service/mock"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/health"
+	"github.com/it-laborato/MDM_Lab/server/service/mock"
 )
 
 func TestLauncherEnrollment(t *testing.T) {

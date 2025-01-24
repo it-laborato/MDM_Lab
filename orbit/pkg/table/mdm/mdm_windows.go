@@ -16,7 +16,7 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/platform"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/platform"
 	"github.com/google/uuid"
 	"github.com/hillu/go-ntdll"
 	"github.com/osquery/osquery-go/plugin/table"

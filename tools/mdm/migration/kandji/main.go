@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
 )
 
 var (

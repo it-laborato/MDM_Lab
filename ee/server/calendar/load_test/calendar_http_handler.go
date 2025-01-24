@@ -16,7 +16,7 @@ import (
 	"os"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
 	_ "github.com/mattn/go-sqlite3"
 	"google.golang.org/api/calendar/v3"
 )

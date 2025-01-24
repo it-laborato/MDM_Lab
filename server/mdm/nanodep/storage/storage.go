@@ -3,9 +3,9 @@ package storage
 import (
 	"errors"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/http/api"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/sync"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/http/api"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/sync"
 )
 
 // ErrNotFound is returned by AllStorage when a requested resource is not found.

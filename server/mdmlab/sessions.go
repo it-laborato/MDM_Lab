@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 )
 
 // Auth contains methods to fetch information from a valid SSO auth response

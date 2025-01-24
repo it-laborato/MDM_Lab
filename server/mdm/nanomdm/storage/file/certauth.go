@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
 )
 
 func (s *FileStorage) EnrollmentHasCertHash(r *mdm.Request, _ string) (bool, error) {

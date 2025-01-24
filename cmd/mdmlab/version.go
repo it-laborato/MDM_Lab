@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/version"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/version"
 	"github.com/spf13/cobra"
 )
 

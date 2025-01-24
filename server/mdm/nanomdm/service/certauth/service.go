@@ -1,7 +1,7 @@
 package certauth
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
 )
 
 func (s *CertAuth) Authenticate(r *mdm.Request, m *mdm.Authenticate) error {

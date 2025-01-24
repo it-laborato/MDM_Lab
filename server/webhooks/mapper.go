@@ -6,7 +6,7 @@ import (
 	"path"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // VulnMapper used for mapping vulnerabilities and their associated data into the payload that

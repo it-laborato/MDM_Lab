@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/cenkalti/backoff"
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 const baseURL = "https://gdmf.apple.com/v2/pmv"

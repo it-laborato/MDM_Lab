@@ -7,11 +7,11 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/config"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/websocket"
+	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/websocket"
 	kitlog "github.com/go-kit/log"
 	gws "github.com/gorilla/websocket"
 	"github.com/igm/sockjs-go/v3/sockjs"

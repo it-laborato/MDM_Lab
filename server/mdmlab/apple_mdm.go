@@ -11,9 +11,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/godep"
+	"github.com/it-laborato/MDM_Lab/server/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/godep"
 )
 
 type MDMAppleCommandIssuer interface {

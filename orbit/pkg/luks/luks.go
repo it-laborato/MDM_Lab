@@ -4,7 +4,7 @@ import (
 	"errors"
 	"regexp"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/dialog"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/dialog"
 )
 
 type KeyEscrower interface {

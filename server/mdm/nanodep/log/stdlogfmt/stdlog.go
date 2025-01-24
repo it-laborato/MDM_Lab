@@ -4,7 +4,7 @@ import (
 	stdlog "log"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/log"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/log"
 )
 
 // Logger wraps a standard library logger and adapts it to pkg/log.

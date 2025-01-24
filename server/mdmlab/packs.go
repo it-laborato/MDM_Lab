@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 )
 
 // MaxScheduledQueryInterval is the maximum interval value (in seconds) allowed by osquery

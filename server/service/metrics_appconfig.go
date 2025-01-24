@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func (mw metricsMiddleware) NewAppConfig(ctx context.Context, p mdmlab.AppConfig) (*mdmlab.AppConfig, error) {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/assets"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/assets"
 	"github.com/micromdm/micromdm/pkg/crypto/profileutil"
 )
 

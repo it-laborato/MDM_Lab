@@ -5,7 +5,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 func (c *Client) getRawBody(endpoint string) ([]byte, error) {

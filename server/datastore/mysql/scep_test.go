@@ -6,7 +6,7 @@ import (
 	"math/big"
 	"testing"
 
-	scep_depot "github.com:it-laborato/MDM_Lab/server/mdm/scep/depot"
+	scep_depot "github.com/it-laborato/MDM_Lab/server/mdm/scep/depot"
 	"github.com/stretchr/testify/require"
 )
 

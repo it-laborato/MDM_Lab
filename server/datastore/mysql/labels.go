@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	microsoft_mdm "github.com:it-laborato/MDM_Lab/server/mdm/microsoft"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	microsoft_mdm "github.com/it-laborato/MDM_Lab/server/mdm/microsoft"
 	"github.com/jmoiron/sqlx"
 )
 

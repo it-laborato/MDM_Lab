@@ -6,7 +6,7 @@ import (
 	"context"
 	"crypto/tls"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
 )
 
 type Response struct {

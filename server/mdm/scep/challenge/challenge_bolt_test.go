@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	challengestore "github.com:it-laborato/MDM_Lab/server/mdm/scep/challenge/bolt"
-	scepserver "github.com:it-laborato/MDM_Lab/server/mdm/scep/server"
+	challengestore "github.com/it-laborato/MDM_Lab/server/mdm/scep/challenge/bolt"
+	scepserver "github.com/it-laborato/MDM_Lab/server/mdm/scep/server"
 
 	"github.com/smallstep/scep"
 	bolt "go.etcd.io/bbolt"

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	oval_parsed "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
+	oval_parsed "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
 )
 
 type Platform string

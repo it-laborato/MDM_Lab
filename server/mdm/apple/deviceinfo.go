@@ -38,7 +38,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/micromdm/plist"
 	"github.com/smallstep/pkcs7"
 )

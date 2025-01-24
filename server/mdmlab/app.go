@@ -13,10 +13,10 @@ import (
 	"sort"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/optjson"
-	"github.com:it-laborato/MDM_Lab/pkg/rawjson"
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/pkg/optjson"
+	"github.com/it-laborato/MDM_Lab/pkg/rawjson"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 )
 
 // SMTP settings names returned from API, these map to SMTPAuthType and

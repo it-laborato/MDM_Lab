@@ -7,11 +7,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/bitlocker"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/profiles"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/scripts"
-	mdmlabscripts "github.com:it-laborato/MDM_Lab/pkg/scripts"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/bitlocker"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/profiles"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/scripts"
+	mdmlabscripts "github.com/it-laborato/MDM_Lab/pkg/scripts"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/rs/zerolog/log"
 )
 

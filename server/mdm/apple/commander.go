@@ -8,13 +8,13 @@ import (
 	"sort"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/appmanifest"
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
-	mdmcrypto "github.com:it-laborato/MDM_Lab/server/mdm/crypto"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
-	nanomdm_push "github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/push"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/appmanifest"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
+	mdmcrypto "github.com/it-laborato/MDM_Lab/server/mdm/crypto"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	nanomdm_push "github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/push"
 	"github.com/micromdm/plist"
 )
 

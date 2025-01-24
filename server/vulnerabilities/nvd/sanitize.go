@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 var nonAlphaNumeric = regexp.MustCompile(`[^a-zA-Z0-9]+`)

@@ -3,7 +3,7 @@ package nvd
 import (
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
 )
 
 type CPEMatchingRules []CPEMatchingRule

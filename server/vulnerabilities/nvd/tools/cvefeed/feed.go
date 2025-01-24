@@ -27,8 +27,8 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd/schema"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cvefeed/nvd/schema"
 )
 
 // ParseJSON parses JSON dictionary from NVD vulnerability feed

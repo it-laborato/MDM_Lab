@@ -3,7 +3,7 @@
 // keep a count of active hosts so that a limit can be applied.
 package mysqlredis
 
-import "github.com:it-laborato/MDM_Lab/server/mdmlab"
+import "github.com/it-laborato/MDM_Lab/server/mdmlab"
 
 // Datastore is the mysqlredis datastore type - it wraps the mdmlab.Datastore
 // interface to keep track of enrolled hosts and extends it to implement the

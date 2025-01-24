@@ -15,7 +15,7 @@ import (
 	"unsafe"
 
 	"github.com/digitalocean/go-smbios/smbios"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/constant"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 	"github.com/google/uuid"
 	"github.com/hectane/go-acl"
 	"github.com/rs/zerolog/log"

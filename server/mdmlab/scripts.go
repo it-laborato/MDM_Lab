@@ -10,7 +10,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com:it-laborato/MDM_Lab/pkg/scripts"
+	"github.com/it-laborato/MDM_Lab/pkg/scripts"
 )
 
 // Script represents a saved script that can be executed on a host.

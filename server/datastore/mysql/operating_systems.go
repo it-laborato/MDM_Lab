@@ -5,9 +5,9 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/datastore/mysql/common_mysql"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/datastore/mysql/common_mysql"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/jmoiron/sqlx"
 )
 

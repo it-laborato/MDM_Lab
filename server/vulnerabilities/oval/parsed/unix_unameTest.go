@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/utils"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/utils"
 )
 
 type UnixUnameTest struct {

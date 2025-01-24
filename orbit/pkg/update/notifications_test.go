@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/bitlocker"
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/scripts"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/bitlocker"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/scripts"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/require"
 )

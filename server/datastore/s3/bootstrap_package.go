@@ -1,6 +1,6 @@
 package s3
 
-import "github.com:it-laborato/MDM_Lab/server/config"
+import "github.com/it-laborato/MDM_Lab/server/config"
 
 const bootstrapPackagePrefix = "bootstrap-packages"
 

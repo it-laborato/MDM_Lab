@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
 )
 
 type queueDevice interface {

@@ -11,10 +11,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm"
-	"github.com:it-laborato/MDM_Lab/server/mdm/microsoft/admx"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdm/microsoft/admx"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )

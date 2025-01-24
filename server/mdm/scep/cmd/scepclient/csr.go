@@ -10,7 +10,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/scep/x509util"
+	"github.com/it-laborato/MDM_Lab/server/mdm/scep/x509util"
 )
 
 const (

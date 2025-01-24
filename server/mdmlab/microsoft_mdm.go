@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
+	"github.com/it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
 )
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -12,12 +12,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/datastore/mysql"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	apple_mdm "github.com:it-laborato/MDM_Lab/server/mdm/apple"
-	nanodep_client "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/godep"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/datastore/mysql"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	apple_mdm "github.com/it-laborato/MDM_Lab/server/mdm/apple"
+	nanodep_client "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/godep"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
 	kitlog "github.com/go-kit/log"
 	"github.com/stretchr/testify/require"
 )

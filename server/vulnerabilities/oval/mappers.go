@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	oval_input "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/input"
-	oval_parsed "github.com:it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
+	oval_input "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/input"
+	oval_parsed "github.com/it-laborato/MDM_Lab/server/vulnerabilities/oval/parsed"
 )
 
 // extractId discards the Namespace part of an OVAL id attr, returning only the last numeric portion.

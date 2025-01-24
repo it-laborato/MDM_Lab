@@ -22,7 +22,7 @@ import (
 	"io"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
 )
 
 // TextType represents multi-language text

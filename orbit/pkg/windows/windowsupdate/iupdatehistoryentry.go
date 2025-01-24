@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/windows/oleconv"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/windows/oleconv"
 	"github.com/go-ole/go-ole"
 	"github.com/go-ole/go-ole/oleutil"
 )

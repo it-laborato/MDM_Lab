@@ -12,11 +12,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/pkg/mdmlabhttp"
-	"github.com:it-laborato/MDM_Lab/server/ptr"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cpedict"
-	"github.com:it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/server/ptr"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/cpedict"
+	"github.com/it-laborato/MDM_Lab/server/vulnerabilities/nvd/tools/wfn"
 	"github.com/pandatix/nvdapi/common"
 	"github.com/pandatix/nvdapi/v2"
 )

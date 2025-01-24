@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com:it-laborato/MDM_Lab/orbit/pkg/go-paniclog"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/go-paniclog"
 )
 
 func main() {

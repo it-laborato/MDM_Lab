@@ -26,10 +26,10 @@ import (
 	"time"
 
 	"github.com/mixer/clock"
-	"github.com:it-laborato/MDM_Lab/server/config"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	nanodep_client "github.com:it-laborato/MDM_Lab/server/mdm/nanodep/client"
+	"github.com/it-laborato/MDM_Lab/server/config"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	nanodep_client "github.com/it-laborato/MDM_Lab/server/mdm/nanodep/client"
 	"github.com/go-kit/log"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
@@ -469,7 +469,7 @@ func createMySQLDSWithOptions(t testing.TB, opts *DatastoreTestOptions) *Datasto
 	}
 
 	cleanName := strings.ReplaceAll(
-		strings.TrimPrefix(details.Name(), "github.com:it-laborato/MDM_Lab/"), "/", "_",
+		strings.TrimPrefix(details.Name(), "github.com/it-laborato/MDM_Lab/"), "/", "_",
 	)
 	cleanName = strings.ReplaceAll(cleanName, ".", "_")
 	if len(cleanName) > 60 {

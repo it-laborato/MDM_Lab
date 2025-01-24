@@ -6,10 +6,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	hostctx "github.com:it-laborato/MDM_Lab/server/contexts/host"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	hostctx "github.com/it-laborato/MDM_Lab/server/contexts/host"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/go-kit/log/level"
 )
 

@@ -18,8 +18,8 @@ import (
 	"strings"
 
 	"github.com/beevik/etree"
-	"github.com:it-laborato/MDM_Lab/pkg/file"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/file"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/google/uuid"
 	"howett.net/plist"
 )

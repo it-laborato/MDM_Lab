@@ -9,8 +9,8 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 // ListScheduledQueriesInPackWithStats loads a pack's scheduled queries and its aggregated stats.

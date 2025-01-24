@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com:it-laborato/MDM_Lab/pkg/certificate"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/pkg/certificate"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/stretchr/testify/require"
 )
 

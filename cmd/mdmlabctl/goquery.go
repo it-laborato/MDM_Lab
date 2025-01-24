@@ -9,8 +9,8 @@ import (
 	gqconfig "github.com/AbGuthrie/goquery/v2/config"
 	gqhosts "github.com/AbGuthrie/goquery/v2/hosts"
 	gqmodels "github.com/AbGuthrie/goquery/v2/models"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/service"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/urfave/cli/v2"
 )
 

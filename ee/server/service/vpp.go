@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com:it-laborato/MDM_Lab/server/authz"
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/itunes"
-	"github.com:it-laborato/MDM_Lab/server/mdm/apple/vpp"
+	"github.com/it-laborato/MDM_Lab/server/authz"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/itunes"
+	"github.com/it-laborato/MDM_Lab/server/mdm/apple/vpp"
 )
 
 // Used for overriding the env var value in testing

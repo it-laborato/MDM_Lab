@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 type ErrorAgg struct {

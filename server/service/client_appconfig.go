@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	"github.com:it-laborato/MDM_Lab/server/version"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/version"
 )
 
 // ApplyAppConfig sends the application config to be applied to the MDMlab instance.

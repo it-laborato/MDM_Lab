@@ -12,7 +12,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/ghodss/yaml"
 	"github.com/hashicorp/go-multierror"
 )

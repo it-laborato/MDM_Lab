@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com:it-laborato/MDM_Lab/server/contexts/ctxerr"
-	"github.com:it-laborato/MDM_Lab/server/mdmlab"
-	apple_mdm "github.com:it-laborato/MDM_Lab/server/mdm/apple"
-	"github.com:it-laborato/MDM_Lab/server/mdm/nanodep/godep"
+	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	apple_mdm "github.com/it-laborato/MDM_Lab/server/mdm/apple"
+	"github.com/it-laborato/MDM_Lab/server/mdm/nanodep/godep"
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 )
