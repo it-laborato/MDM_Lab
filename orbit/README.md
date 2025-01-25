@@ -70,13 +70,13 @@ To report a bug or request a feature, [click here](https://github.com/fleetdm/fl
 To execute orbit from source directly, run the following command:
 
 ```sh
-go run github.com/fleetdm/fleet/v4/orbit/cmd/orbit \
+go run ./orbit/cmd/orbit \
     --dev-mode \
     --disable-updates \
     --root-dir /tmp/orbit \
-    --fleet-url https://localhost:8080 \
+    --mdmlab-url https://localhost:8080 \
     --insecure \
-    --enroll-secret Pz3zC0NMDdZfb3FtqiLgwoexItojrYh/ \
+    --enroll-secret OQD0dyFAwkBsPSSXGx9kTfl85GDMMko7 \
     -- --verbose
 ```
 

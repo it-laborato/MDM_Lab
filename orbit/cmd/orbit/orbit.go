@@ -18,6 +18,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/augeas"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/build"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
@@ -45,7 +46,6 @@ import (
 	"github.com/it-laborato/MDM_Lab/pkg/secure"
 	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/service"
-	"github.com/google/uuid"
 	"github.com/oklog/run"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -471,7 +471,7 @@ func main() {
 			}
 		}
 
-		if updateURL := c.String("update-url"); updateURL != update.OldMDMlabTUFURL && updateURL != update.DefaultURL {
+		if updateURL := c.String("update-url"); updateURL != update.OldFleetTUFURL && updateURL != update.DefaultURL {
 			// Migrate agents running with a custom TUF to use the new metadata file.
 			// We'll keep the old metadata file to support downgrades.
 			newMetadataFilePath := filepath.Join(c.String("root-dir"), update.MetadataFileName)
@@ -523,7 +523,7 @@ func main() {
 		opt.RootDirectory = c.String("root-dir")
 		opt.ServerURL = c.String("update-url")
 		checkAccessToNewTUF := false
-		if opt.ServerURL == update.OldMDMlabTUFURL {
+		if opt.ServerURL == update.OldFleetTUFURL {
 			//
 			// This only gets executed on orbit 1.38.0+
 			// when it is configured to connect to the old TUF server
@@ -1565,18 +1565,18 @@ func newDesktopRunner(
 	updateRoot string,
 ) *desktopRunner {
 	return &desktopRunner{
-		desktopPath:                 desktopPath,
-		updateRoot:                  updateRoot,
+		desktopPath:                  desktopPath,
+		updateRoot:                   updateRoot,
 		mdmlabURL:                    mdmlabURL,
-		trw:                         trw,
+		trw:                          trw,
 		mdmlabRootCA:                 mdmlabRootCA,
-		insecure:                    insecure,
+		insecure:                     insecure,
 		mdmlabClientCrt:              mdmlabClientCrt,
 		mdmlabClientKey:              mdmlabClientKey,
 		mdmlabAlternativeBrowserHost: mdmlabAlternativeBrowserHost,
-		interruptCh:                 make(chan struct{}),
-		executeDoneCh:               make(chan struct{}),
-		errorNotifyCh:               make(chan string),
+		interruptCh:                  make(chan struct{}),
+		executeDoneCh:                make(chan struct{}),
+		errorNotifyCh:                make(chan string),
 	}
 }
 

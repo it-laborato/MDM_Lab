@@ -42,3 +42,18 @@ make deps && make generate && make build && docker compose up -d --build && ./bu
 ```
 
 PS. допишу compose чтобы можно одной кнопкой было поднять, а не вот это вот все
+
+
+
+Комада для запуска osquery 
+
+```sh 
+go run ./orbit/cmd/orbit \
+    --dev-mode \
+    --disable-updates \
+    --root-dir /tmp/orbit \
+    --mdmlab-url https://localhost:8080 \
+    --insecure \
+    --enroll-secret {Сюда надо встваить свой enroll-secret} \
+    -- --verbose
+```
