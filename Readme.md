@@ -38,5 +38,7 @@ docker compose up -d --build
 (Все команды разом)
 
 ```sh 
-make deps && make generate && make build && docker compose up -d --build && ./build/mdmlab prepare db --dev && ./build/mdmlab serve --dev
+make deps && make generate && make build && docker compose up -d --build && ./build/mdmlab prepare db --dev && ./build/mdmlab serve --dev --dev_license --dev_expired_license
 ```
+
+PS. допишу compose чтобы можно одной кнопкой было поднять, а не вот это вот все

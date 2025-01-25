@@ -27,30 +27,30 @@ interface IPlatformSubNav {
 }
 
 const platformSubNav: IPlatformSubNav[] = [
-  {
-    name: "macOS",
-    type: "pkg",
-  },
+  // {
+  //   name: "macOS",
+  //   type: "pkg",
+  // },
   {
     name: "Windows",
     type: "msi",
   },
-  {
-    name: "Linux",
-    type: "deb",
-  },
-  {
-    name: "ChromeOS",
-    type: "chromeos",
-  },
-  {
-    name: "iOS & iPadOS",
-    type: "ios-ipados",
-  },
-  {
-    name: "Advanced",
-    type: "advanced",
-  },
+  // {
+  //   name: "Linux",
+  //   type: "deb",
+  // },
+  // {
+  //   name: "ChromeOS",
+  //   type: "chromeos",
+  // },
+  // {
+  //   name: "iOS & iPadOS",
+  //   type: "ios-ipados",
+  // },
+  // {
+  //   name: "Advanced",
+  //   type: "advanced",
+  // },
 ];
 
 interface IPlatformWrapperProps {
@@ -75,7 +75,7 @@ const PlatformWrapper = ({
   const { renderFlash } = useContext(NotificationContext);
 
   const [copyMessage, setCopyMessage] = useState<Record<string, string>>({});
-  const [includeMdmlabDesktop, setIncludeMdmlabDesktop] = useState(true);
+  // const [includeMdmlabDesktop, setIncludeMdmlabDesktop] = useState(true);
   const [showPlainOsquery, setShowPlainOsquery] = useState(false);
   const [selectedTabIndex, setSelectedTabIndex] = useState(0); // External link requires control in state
 
@@ -224,7 +224,7 @@ const PlatformWrapper = ({
           config && !config.server_settings.scripts_disabled
             ? "--enable-scripts "
             : ""
-        }${includeMdmlabDesktop ? "--mdmlab-desktop " : ""}--mdmlab-url=${
+        }--mdmlab-url=${
           config?.server_settings.server_url
         } --enroll-secret=${enrollSecret}`;
   };
@@ -531,24 +531,6 @@ const PlatformWrapper = ({
 
     return (
       <>
-        {packageType !== "pkg" && (
-          <Checkbox
-            name="include-mdmlab-desktop"
-            onChange={(value: boolean) => setIncludeMdmlabDesktop(value)}
-            value={includeMdmlabDesktop}
-          >
-            <>
-              Include&nbsp;
-              <TooltipWrapper
-                tipContent={
-                  "Include Mdmlab Desktop if you're adding workstations."
-                }
-              >
-                Mdmlab Desktop
-              </TooltipWrapper>
-            </>
-          </Checkbox>
-        )}
         <InputField
           readOnly
           inputWrapperClass={`${baseClass}__installer-input ${baseClass}__installer-input-${packageType}`}

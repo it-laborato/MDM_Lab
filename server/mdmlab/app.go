@@ -1254,6 +1254,7 @@ type LicenseInfo struct {
 }
 
 func (l *LicenseInfo) IsPremium() bool {
+	// return true
 	return l.Tier == TierPremium || l.Tier == tierBasicDeprecated || l.Tier == TierTrial
 }
 

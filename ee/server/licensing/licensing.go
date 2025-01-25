@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 const (
@@ -113,9 +113,9 @@ func validate(token *jwt.Token) (*mdmlab.LicenseInfo, error) {
 		return nil, errors.New("missing exp")
 	}
 
-	if claims.Issuer != expectedIssuer {
-		return nil, fmt.Errorf("unexpected issuer %s", claims.Issuer)
-	}
+	// if claims.Issuer != expectedIssuer {
+	// 	return nil, fmt.Errorf("unexpected issuer %s", claims.Issuer)
+	// }
 
 	return &mdmlab.LicenseInfo{
 		Tier:         claims.Tier,

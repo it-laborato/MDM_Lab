@@ -26,11 +26,6 @@ import (
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	"github.com/google/uuid"
-	"github.com/mixer/clock"
-	"github.com/ngrok/sqlmw"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/spf13/cobra"
 	"github.com/it-laborato/MDM_Lab/ee/server/licensing"
 	eeservice "github.com/it-laborato/MDM_Lab/ee/server/service"
 	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
@@ -67,6 +62,11 @@ import (
 	"github.com/it-laborato/MDM_Lab/server/service/redis_policy_set"
 	"github.com/it-laborato/MDM_Lab/server/sso"
 	"github.com/it-laborato/MDM_Lab/server/version"
+	"github.com/mixer/clock"
+	"github.com/ngrok/sqlmw"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/spf13/cobra"
 	"go.elastic.co/apm/module/apmhttp/v2"
 	_ "go.elastic.co/apm/module/apmsql/v2"
 	_ "go.elastic.co/apm/module/apmsql/v2/mysql"
@@ -121,7 +121,7 @@ the way that the MDMlab server works.
 			if err != nil {
 				initFatal(
 					err,
-					"failed to load license - for help use https://mdmlabdm.com/contact",
+					"failed to load license",
 				)
 			}
 
