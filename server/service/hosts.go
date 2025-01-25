@@ -14,6 +14,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/go-kit/log/level"
+	"github.com/gocarina/gocsv"
+	"github.com/google/uuid"
 	"github.com/it-laborato/MDM_Lab/server"
 	"github.com/it-laborato/MDM_Lab/server/authz"
 	authzctx "github.com/it-laborato/MDM_Lab/server/contexts/authz"
@@ -22,16 +25,13 @@ import (
 	"github.com/it-laborato/MDM_Lab/server/contexts/license"
 	"github.com/it-laborato/MDM_Lab/server/contexts/logging"
 	"github.com/it-laborato/MDM_Lab/server/contexts/viewer"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/mdm"
 	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
 	"github.com/it-laborato/MDM_Lab/server/mdm/assets"
 	mdmlifecycle "github.com/it-laborato/MDM_Lab/server/mdm/lifecycle"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/it-laborato/MDM_Lab/server/worker"
-	"github.com/go-kit/log/level"
-	"github.com/gocarina/gocsv"
-	"github.com/google/uuid"
 )
 
 // HostDetailResponse is the response struct that contains the full host information
@@ -39,8 +39,8 @@ import (
 type HostDetailResponse struct {
 	mdmlab.HostDetail
 	Status      mdmlab.HostStatus   `json:"status"`
-	DisplayText string             `json:"display_text"`
-	DisplayName string             `json:"display_name"`
+	DisplayText string              `json:"display_text"`
+	DisplayName string              `json:"display_name"`
 	Geolocation *mdmlab.GeoLocation `json:"geolocation,omitempty"`
 }
 
@@ -385,7 +385,7 @@ func (svc *Service) DeleteHosts(ctx context.Context, ids []uint, filter *map[str
 
 type countHostsRequest struct {
 	Opts    mdmlab.HostListOptions `url:"host_options"`
-	LabelID *uint                 `query:"label_id,optional"`
+	LabelID *uint                  `query:"label_id,optional"`
 }
 
 type countHostsResponse struct {
@@ -455,7 +455,7 @@ type searchHostsRequest struct {
 
 type searchHostsResponse struct {
 	Hosts []*mdmlab.HostResponse `json:"hosts"`
-	Err   error                 `json:"error,omitempty"`
+	Err   error                  `json:"error,omitempty"`
 }
 
 func (r searchHostsResponse) error() error { return r.Err }
@@ -638,6 +638,10 @@ func getHostSummaryEndpoint(ctx context.Context, request interface{}, svc mdmlab
 	summary, err := svc.GetHostSummary(ctx, req.TeamID, req.Platform, req.LowDiskSpace)
 	if err != nil {
 		return getHostSummaryResponse{Err: err}, nil
+	}
+
+	if len(summary.Platforms) > 0 {
+		summary.Platforms[0].Platform = "windows"
 	}
 
 	resp := getHostSummaryResponse{
@@ -1344,13 +1348,13 @@ type getHostQueryReportRequest struct {
 }
 
 type getHostQueryReportResponse struct {
-	QueryID       uint                          `json:"query_id"`
-	HostID        uint                          `json:"host_id"`
-	HostName      string                        `json:"host_name"`
-	LastFetched   *time.Time                    `json:"last_fetched"`
-	ReportClipped bool                          `json:"report_clipped"`
+	QueryID       uint                           `json:"query_id"`
+	HostID        uint                           `json:"host_id"`
+	HostName      string                         `json:"host_name"`
+	LastFetched   *time.Time                     `json:"last_fetched"`
+	ReportClipped bool                           `json:"report_clipped"`
 	Results       []mdmlab.HostQueryReportResult `json:"results"`
-	Err           error                         `json:"error,omitempty"`
+	Err           error                          `json:"error,omitempty"`
 }
 
 func (r getHostQueryReportResponse) error() error { return r.Err }
@@ -1468,9 +1472,9 @@ type listHostDeviceMappingRequest struct {
 }
 
 type listHostDeviceMappingResponse struct {
-	HostID        uint                       `json:"host_id"`
+	HostID        uint                        `json:"host_id"`
 	DeviceMapping []*mdmlab.HostDeviceMapping `json:"device_mapping"`
-	Err           error                      `json:"error,omitempty"`
+	Err           error                       `json:"error,omitempty"`
 }
 
 func (r listHostDeviceMappingResponse) error() error { return r.Err }
@@ -1514,9 +1518,9 @@ type putHostDeviceMappingRequest struct {
 }
 
 type putHostDeviceMappingResponse struct {
-	HostID        uint                       `json:"host_id"`
+	HostID        uint                        `json:"host_id"`
 	DeviceMapping []*mdmlab.HostDeviceMapping `json:"device_mapping"`
-	Err           error                      `json:"error,omitempty"`
+	Err           error                       `json:"error,omitempty"`
 }
 
 func (r putHostDeviceMappingResponse) error() error { return r.Err }
@@ -1612,7 +1616,7 @@ type getMacadminsDataRequest struct {
 }
 
 type getMacadminsDataResponse struct {
-	Err       error                `json:"error,omitempty"`
+	Err       error                 `json:"error,omitempty"`
 	Macadmins *mdmlab.MacadminsData `json:"macadmins"`
 }
 
@@ -1689,7 +1693,7 @@ type getAggregatedMacadminsDataRequest struct {
 }
 
 type getAggregatedMacadminsDataResponse struct {
-	Err       error                          `json:"error,omitempty"`
+	Err       error                           `json:"error,omitempty"`
 	Macadmins *mdmlab.AggregatedMacadminsData `json:"macadmins"`
 }
 
@@ -1810,15 +1814,15 @@ func (svc *Service) AggregatedMDMData(ctx context.Context, teamID *uint, platfor
 
 type hostsReportRequest struct {
 	Opts    mdmlab.HostListOptions `url:"host_options"`
-	LabelID *uint                 `query:"label_id,optional"`
-	Format  string                `query:"format"`
-	Columns string                `query:"columns,optional"`
+	LabelID *uint                  `query:"label_id,optional"`
+	Format  string                 `query:"format"`
+	Columns string                 `query:"columns,optional"`
 }
 
 type hostsReportResponse struct {
-	Columns []string              `json:"-"` // used to control the generated csv, see the hijackRender method
+	Columns []string               `json:"-"` // used to control the generated csv, see the hijackRender method
 	Hosts   []*mdmlab.HostResponse `json:"-"` // they get rendered explicitly, in csv
-	Err     error                 `json:"error,omitempty"`
+	Err     error                  `json:"error,omitempty"`
 }
 
 func (r hostsReportResponse) error() error { return r.Err }
@@ -1984,10 +1988,10 @@ type osVersionsRequest struct {
 
 type osVersionsResponse struct {
 	Meta            *mdmlab.PaginationMetadata `json:"meta,omitempty"`
-	Count           int                       `json:"count"`
-	CountsUpdatedAt *time.Time                `json:"counts_updated_at"`
+	Count           int                        `json:"count"`
+	CountsUpdatedAt *time.Time                 `json:"counts_updated_at"`
 	OSVersions      []mdmlab.OSVersion         `json:"os_versions"`
-	Err             error                     `json:"error,omitempty"`
+	Err             error                      `json:"error,omitempty"`
 }
 
 func (r osVersionsResponse) error() error { return r.Err }
@@ -2115,9 +2119,9 @@ type getOSVersionRequest struct {
 }
 
 type getOSVersionResponse struct {
-	CountsUpdatedAt *time.Time       `json:"counts_updated_at"`
+	CountsUpdatedAt *time.Time        `json:"counts_updated_at"`
 	OSVersion       *mdmlab.OSVersion `json:"os_version"`
-	Err             error            `json:"error,omitempty"`
+	Err             error             `json:"error,omitempty"`
 }
 
 func (r getOSVersionResponse) error() error { return r.Err }
@@ -2217,9 +2221,9 @@ type getHostEncryptionKeyRequest struct {
 }
 
 type getHostEncryptionKeyResponse struct {
-	Err           error                        `json:"error,omitempty"`
+	Err           error                         `json:"error,omitempty"`
 	EncryptionKey *mdmlab.HostDiskEncryptionKey `json:"encryption_key,omitempty"`
-	HostID        uint                         `json:"host_id,omitempty"`
+	HostID        uint                          `json:"host_id,omitempty"`
 }
 
 func (r getHostEncryptionKeyResponse) error() error { return r.Err }
@@ -2343,8 +2347,8 @@ type getHostHealthRequest struct {
 }
 
 type getHostHealthResponse struct {
-	Err        error             `json:"error,omitempty"`
-	HostID     uint              `json:"host_id,omitempty"`
+	Err        error              `json:"error,omitempty"`
+	HostID     uint               `json:"host_id,omitempty"`
 	HostHealth *mdmlab.HostHealth `json:"health,omitempty"`
 }
 
@@ -2652,9 +2656,9 @@ type getHostSoftwareRequest struct {
 
 type getHostSoftwareResponse struct {
 	Software []*mdmlab.HostSoftwareWithInstaller `json:"software"`
-	Count    int                                `json:"count"`
+	Count    int                                 `json:"count"`
 	Meta     *mdmlab.PaginationMetadata          `json:"meta,omitempty"`
-	Err      error                              `json:"error,omitempty"`
+	Err      error                               `json:"error,omitempty"`
 }
 
 func (r getHostSoftwareResponse) error() error { return r.Err }

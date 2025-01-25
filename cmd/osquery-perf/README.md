@@ -23,14 +23,14 @@ The tool should be invoked with the appropriate enroll secret. A typical
 invocation looks like:
 
 ```
-go run agent.go --enroll_secret hgh4hk3434l2jjf
+go run ./cmd/osquery-perf/agent.go --enroll_secret JP0TSbZgUUjHHzqUNpJcMsM13TJcWC5b --host_count 500 --os_templates windows_11
 ```
 
 When starting many hosts, it is a good idea to extend the intervals, and also
 the period over which the hosts are started:
 
 ```
-go run agent.go --enroll_secret hgh4hk3434l2jjf --host_count 5000 --start_period 5m --query_interval 60s --config_interval 5m
+go run ./cmd/osquery-perf/agent.go --enroll_secret=CgSw8B4BmHMReSzEGRUWBTmY3BpzR142 --os_templates windows_11 --host_count 5000 --start_period 5m --query_interval 60s --config_interval 5m
 ```
 
 This will start 5,000 hosts over a period of 5 minutes. Each host will check in

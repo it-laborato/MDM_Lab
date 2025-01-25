@@ -27,16 +27,16 @@ import (
 	"text/template"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/it-laborato/MDM_Lab/cmd/osquery-perf/installer_cache"
 	"github.com/it-laborato/MDM_Lab/pkg/file"
 	"github.com/it-laborato/MDM_Lab/pkg/mdm/mdmtest"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	apple_mdm "github.com/it-laborato/MDM_Lab/server/mdm/apple"
 	"github.com/it-laborato/MDM_Lab/server/mdm/microsoft/syncml"
 	"github.com/it-laborato/MDM_Lab/server/mdm/nanomdm/mdm"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/it-laborato/MDM_Lab/server/service"
-	"github.com/google/uuid"
 )
 
 var (
@@ -135,7 +135,7 @@ func loadSoftwareItems(fs embed.FS, path string) []map[string]string {
 }
 
 func init() {
-	loadMacOSVulnerableSoftware()
+	// loadMacOSVulnerableSoftware()
 	loadExtraVulnerableSoftware()
 	windowsSoftware = loadSoftwareItems(windowsSoftwareFS, "windows_11-software.json.bz2")
 	ubuntuSoftware = loadSoftwareItems(ubuntuSoftwareFS, "ubuntu_2204-software.json.bz2")
@@ -485,9 +485,9 @@ type agent struct {
 	// isEnrolledToMDMMu protects isEnrolledToMDM.
 	isEnrolledToMDMMu sync.Mutex
 
-	disableScriptExec   bool
+	disableScriptExec    bool
 	disableMDMlabDesktop bool
-	loggerTLSMaxLines   int
+	loggerTLSMaxLines    int
 
 	// atomic boolean is set to true when executing scripts, so that only a
 	// single goroutine at a time can execute scripts.
@@ -609,17 +609,17 @@ func newAgent(
 	)
 	if rand.Float64() < mdmProb {
 		switch agentOS {
-		case "macos":
-			macMDMClient = mdmtest.NewTestMDMClientAppleDirect(mdmtest.AppleEnrollInfo{
-				SCEPChallenge: mdmSCEPChallenge,
-				SCEPURL:       serverAddress + apple_mdm.SCEPPath,
-				MDMURL:        serverAddress + apple_mdm.MDMPath,
-			}, "MacBookPro16,1")
-			// Have the osquery agent match the MDM device serial number and UUID.
-			serialNumber = macMDMClient.SerialNumber
-			hostUUID = macMDMClient.UUID
+		// case "macos":
+		// 	macMDMClient = mdmtest.NewTestMDMClientAppleDirect(mdmtest.AppleEnrollInfo{
+		// 		SCEPChallenge: mdmSCEPChallenge,
+		// 		SCEPURL:       serverAddress + apple_mdm.SCEPPath,
+		// 		MDMURL:        serverAddress + apple_mdm.MDMPath,
+		// 	}, "MacBookPro16,1")
+		// 	// Have the osquery agent match the MDM device serial number and UUID.
+		// 	serialNumber = macMDMClient.SerialNumber
+		// 	hostUUID = macMDMClient.UUID
 
-		case "windows":
+		default:
 			// windows MDM enrollment requires orbit enrollment
 			if deviceAuthToken == nil {
 				deviceAuthToken = ptr.String(uuid.NewString())
@@ -664,11 +664,11 @@ func newAgent(
 		macMDMClient: macMDMClient,
 		winMDMClient: winMDMClient,
 
-		disableScriptExec:   disableScriptExec,
+		disableScriptExec:    disableScriptExec,
 		disableMDMlabDesktop: disableMDMlabDesktop,
-		loggerTLSMaxLines:   loggerTLSMaxLines,
-		bufferedResults:     make(map[resultLog]int),
-		scheduledQueryData:  new(sync.Map),
+		loggerTLSMaxLines:    loggerTLSMaxLines,
+		bufferedResults:      make(map[resultLog]int),
+		scheduledQueryData:   new(sync.Map),
 	}
 }
 
