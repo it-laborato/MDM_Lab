@@ -1,8 +1,6 @@
 # binaries
 *.exe
 
-!.git
-
 # output directories
 /build
 vendor
