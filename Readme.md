@@ -9,7 +9,7 @@ make deps
 
 2. Сгенерировать фронт и го файл для него
 ```sh
-make generete
+make generate
 ```
 
 3. Собрать билды 
