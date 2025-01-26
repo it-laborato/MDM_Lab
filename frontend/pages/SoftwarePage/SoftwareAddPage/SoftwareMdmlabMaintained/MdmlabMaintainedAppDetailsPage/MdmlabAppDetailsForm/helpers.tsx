@@ -43,7 +43,7 @@ const FORM_VALIDATION_CONFIG: Record<
       {
         name: "requiredLabelTargets",
         isValid: (formData) => {
-          if (formData.targetType === "All hosts") return true;
+          if (formData.targetType === "All nodes") return true;
           // there must be at least one label target selected
           return (
             Object.keys(formData.labelTargets).find(
@@ -113,12 +113,12 @@ export const generateHelpText = (installType: string, customTarget: string) => {
   if (customTarget === "labelsIncludeAny") {
     return installType === "manual" ? (
       <>
-        Software will only be available for install on hosts that{" "}
+        Software will only be available for install on nodes that{" "}
         <b>have any</b> of these labels:
       </>
     ) : (
       <>
-        Software will only be installed on hosts that <b>have any</b> of these
+        Software will only be installed on nodes that <b>have any</b> of these
         labels:
       </>
     );
@@ -127,12 +127,12 @@ export const generateHelpText = (installType: string, customTarget: string) => {
   // this is the case for labelsExcludeAny
   return installType === "manual" ? (
     <>
-      Software will only be available for install on hosts that{" "}
+      Software will only be available for install on nodes that{" "}
       <b>don&apos;t have any</b> of these labels:
     </>
   ) : (
     <>
-      Software will only be installed on hosts that <b>don&apos;t have any</b>{" "}
+      Software will only be installed on nodes that <b>don&apos;t have any</b>{" "}
       of these labels:{" "}
     </>
   );

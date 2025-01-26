@@ -55,7 +55,7 @@ const LogDestinationIndicator = ({
           <>
             Each time a query runs, the data is sent to <br />
             /var/log/osquery/osqueryd.snapshots.log <br />
-            in each host&apos;s filesystem.
+            in each node&apos;s filesystem.
           </>
         );
       case "firehose":

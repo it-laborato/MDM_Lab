@@ -17,18 +17,18 @@ export default PropTypes.shape({
   role: PropTypes.any, // eslint-disable-line react/forbid-prop-types
   // role value is included when the team is in the context of a user
   user_count: PropTypes.number,
-  host_count: PropTypes.number,
+  node_count: PropTypes.number,
   secrets: PropTypes.arrayOf(enrollSecretInterface),
 });
 
 /**
- * The id, name, description, and host count for a team entity
+ * The id, name, description, and node count for a team entity
  */
 export interface ITeamSummary {
   id: number;
   name: string;
   description?: string;
-  host_count?: number;
+  node_count?: number;
 }
 
 /**
@@ -44,7 +44,7 @@ export interface ITeam extends ITeamSummary {
     [key: string]: any;
   };
   user_count?: number;
-  host_count?: number;
+  node_count?: number;
   secrets?: IEnrollSecret[];
   role?: UserRole; // role value is included when the team is in the context of a user
   mdm?: {
@@ -67,9 +67,9 @@ export interface ITeam extends ITeamSummary {
       grace_period_days: number | null;
     };
   };
-  host_expiry_settings?: {
-    host_expiry_enabled: boolean;
-    host_expiry_window: number; // days
+  node_expiry_settings?: {
+    node_expiry_enabled: boolean;
+    node_expiry_window: number; // days
   };
 }
 
@@ -78,7 +78,7 @@ export interface ITeam extends ITeamSummary {
  */
 export type ITeamWebhookSettings = Pick<
   IWebhookSettings,
-  "vulnerabilities_webhook" | "failing_policies_webhook" | "host_status_webhook"
+  "vulnerabilities_webhook" | "failing_policies_webhook" | "node_status_webhook"
 >;
 
 /**

@@ -13,7 +13,7 @@ const DEFAULT_LABEL_MOCK: ILabel = {
   label_membership_type: "dynamic",
   display_text: "test macsss",
   count: 0,
-  host_ids: null,
+  node_ids: null,
 };
 
 export const createMockLabel = (overrides?: Partial<ILabel>): ILabel => {

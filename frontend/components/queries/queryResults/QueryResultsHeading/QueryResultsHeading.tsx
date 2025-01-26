@@ -6,8 +6,8 @@ import Spinner from "components/Spinner";
 import Button from "components/buttons/Button";
 import TooltipWrapper from "components/TooltipWrapper";
 
-const pluralizeHost = (count: number) => {
-  return strUtils.pluralize(count, "host");
+const pluralizeNode = (count: number) => {
+  return strUtils.pluralize(count, "node");
 };
 
 const baseClass = "query-results-heading";
@@ -56,7 +56,7 @@ const StopQueryButton = ({ onClickStop }: IStopQueryButtonProps) => (
 );
 
 interface IQueryResultsHeadingProps {
-  respondedHosts: number;
+  respondedNodes: number;
   targetsTotalCount: number;
   isQueryFinished: boolean;
   onClickDone: (evt: React.MouseEvent<HTMLButtonElement>) => void;
@@ -65,7 +65,7 @@ interface IQueryResultsHeadingProps {
 }
 
 const QuertResultsHeading = ({
-  respondedHosts,
+  respondedNodes,
   targetsTotalCount,
   isQueryFinished,
   onClickDone,
@@ -74,11 +74,11 @@ const QuertResultsHeading = ({
 }: IQueryResultsHeadingProps) => {
   const percentResponded =
     targetsTotalCount > 0
-      ? Math.round((respondedHosts / targetsTotalCount) * 100)
+      ? Math.round((respondedNodes / targetsTotalCount) * 100)
       : 0;
 
   const PAGE_TITLES = {
-    RUNNING: `Querying selected ${pluralizeHost(targetsTotalCount)}`,
+    RUNNING: `Querying selected ${pluralizeNode(targetsTotalCount)}`,
     FINISHED: "Query finished",
   };
 
@@ -94,18 +94,18 @@ const QuertResultsHeading = ({
           <span className={`${baseClass}__targeted-count`}>
             {targetsTotalCount.toLocaleString()}
           </span>
-          <span>&nbsp;{pluralizeHost(targetsTotalCount)} targeted</span>
+          <span>&nbsp;{pluralizeNode(targetsTotalCount)} targeted</span>
         </div>
         <div className={`${baseClass}__percent-responded`}>
           {!isQueryFinished && (
-            <span>Mdmlab is talking to your hosts,&nbsp;</span>
+            <span>Mdmlab is talking to your nodes,&nbsp;</span>
           )}
           <span>
             ({`${percentResponded}% `}
             <TooltipWrapper
               tipContent={
                 <>
-                  Hosts that respond may
+                  Nodes that respond may
                   <br /> return results, errors, or <br />
                   no results
                 </>
@@ -129,7 +129,7 @@ const QuertResultsHeading = ({
             <TooltipWrapper
               tipContent={
                 <>
-                  The hosts’ distributed interval can <br />
+                  The nodes’ distributed interval can <br />
                   impact live query response times.
                 </>
               }

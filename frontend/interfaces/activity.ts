@@ -40,7 +40,7 @@ export enum ActivityType {
   EditedMacosMinVersion = "edited_macos_min_version",
   EditedIosMinVersion = "edited_ios_min_version",
   EditedIpadosMinVersion = "edited_ipados_min_version",
-  ReadHostDiskEncryptionKey = "read_host_disk_encryption_key",
+  ReadNodeDiskEncryptionKey = "read_node_disk_encryption_key",
   /** Note: BE not renamed (yet) from macOS even though activity is also used for iOS and iPadOS */
   CreatedAppleOSProfile = "created_macos_profile",
   /** Note: BE not renamed (yet) from macOS even though activity is also used for iOS and iPadOS */
@@ -67,7 +67,7 @@ export enum ActivityType {
   DeletedMacOSSetupAssistant = "deleted_macos_setup_assistant",
   EnabledMacOSSetupEndUserAuth = "enabled_macos_setup_end_user_auth",
   DisabledMacOSSetupEndUserAuth = "disabled_macos_setup_end_user_auth",
-  TransferredHosts = "transferred_hosts",
+  TransferredNodes = "transferred_nodes",
   EnabledWindowsMdm = "enabled_windows_mdm",
   DisabledWindowsMdm = "disabled_windows_mdm",
   EnabledWindowsMdmMigration = "enabled_windows_mdm_migration",
@@ -77,9 +77,9 @@ export enum ActivityType {
   DeletedScript = "deleted_script",
   EditedScript = "edited_script",
   EditedWindowsUpdates = "edited_windows_updates",
-  LockedHost = "locked_host",
-  UnlockedHost = "unlocked_host",
-  WipedHost = "wiped_host",
+  LockedNode = "locked_node",
+  UnlockedNode = "unlocked_node",
+  WipedNode = "wiped_node",
   CreatedDeclarationProfile = "created_declaration_profile",
   DeletedDeclarationProfile = "deleted_declaration_profile",
   EditedDeclarationProfile = "edited_declaration_profile",
@@ -101,19 +101,19 @@ export enum ActivityType {
   CanceledSoftwareInstall = "canceled_software_install",
 }
 
-/** This is a subset of ActivityType that are shown only for the host past activities */
-export type IHostPastActivityType =
+/** This is a subset of ActivityType that are shown only for the node past activities */
+export type INodePastActivityType =
   | ActivityType.RanScript
-  | ActivityType.LockedHost
-  | ActivityType.UnlockedHost
+  | ActivityType.LockedNode
+  | ActivityType.UnlockedNode
   | ActivityType.InstalledSoftware
   | ActivityType.UninstalledSoftware
   | ActivityType.InstalledAppStoreApp
   | ActivityType.CanceledScript
   | ActivityType.CanceledSoftwareInstall;
 
-/** This is a subset of ActivityType that are shown only for the host upcoming activities */
-export type IHostUpcomingActivityType =
+/** This is a subset of ActivityType that are shown only for the node upcoming activities */
+export type INodeUpcomingActivityType =
   | ActivityType.RanScript
   | ActivityType.InstalledSoftware
   | ActivityType.UninstalledSoftware
@@ -130,14 +130,14 @@ export interface IActivity {
   details?: IActivityDetails;
 }
 
-export type IHostPastActivity = Omit<IActivity, "type" | "details"> & {
-  type: IHostPastActivityType;
+export type INodePastActivity = Omit<IActivity, "type" | "details"> & {
+  type: INodePastActivityType;
   details: IActivityDetails;
 };
 
-export type IHostUpcomingActivity = Omit<IActivity, "type" | "details"> & {
+export type INodeUpcomingActivity = Omit<IActivity, "type" | "details"> & {
   uuid: string;
-  type: IHostUpcomingActivityType;
+  type: INodeUpcomingActivityType;
   details: IActivityDetails;
 };
 
@@ -161,12 +161,12 @@ export interface IActivityDetails {
   user_email?: string;
   email?: string;
   role?: UserRole;
-  host_serial?: string;
-  host_display_name?: string;
-  host_display_names?: string[];
-  host_ids?: number[];
-  host_id?: number;
-  host_platform?: string;
+  node_serial?: string;
+  node_display_name?: string;
+  node_display_names?: string[];
+  node_ids?: number[];
+  node_id?: number;
+  node_platform?: string;
   installed_from_dep?: boolean;
   mdm_platform?: "microsoft" | "apple";
   minimum_version?: string;

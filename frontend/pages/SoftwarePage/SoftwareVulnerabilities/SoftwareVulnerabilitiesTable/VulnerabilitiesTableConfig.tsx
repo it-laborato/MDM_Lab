@@ -11,7 +11,7 @@ import { IVulnerability } from "interfaces/vulnerability";
 import ProbabilityOfExploit from "components/ProbabilityOfExploit/ProbabilityOfExploit";
 import TextCell from "components/TableContainer/DataTable/TextCell";
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import LinkCell from "components/TableContainer/DataTable/LinkCell";
 import TooltipWrapper from "components/TooltipWrapper";
 import { HumanTimeDiffWithDateTip } from "components/HumanTimeDiffWithDateTip";
@@ -209,7 +209,7 @@ const generateTableHeaders = (
         const titleWithTooltip = (
           <TooltipWrapper
             tipContent={
-              <>The date this vulnerability first appeared on a host.</>
+              <>The date this vulnerability first appeared on a node.</>
             }
           >
             Detected
@@ -236,31 +236,31 @@ const generateTableHeaders = (
       },
     },
     {
-      title: "Hosts",
+      title: "Nodes",
       Header: (cellProps: IHeaderProps): JSX.Element => (
         <HeaderCell
-          value="Hosts"
+          value="Nodes"
           disableSortBy={false}
           isSortedDesc={cellProps.column.isSortedDesc}
         />
       ),
       disableSortBy: false,
-      accessor: "hosts_count",
+      accessor: "nodes_count",
       Cell: (cellProps: ITextCellProps): JSX.Element => {
-        const { hosts_count } = cellProps.row.original;
-        return <TextCell value={hosts_count} />;
+        const { nodes_count } = cellProps.row.original;
+        return <TextCell value={nodes_count} />;
       },
     },
     {
       title: "",
       Header: "",
-      accessor: "linkToFilteredHosts",
+      accessor: "linkToFilteredNodes",
       disableSortBy: true,
       Cell: (cellProps: ICellProps) => {
         return (
           <>
             {cellProps.row.original && (
-              <ViewAllHostsLink
+              <ViewAllNodesLink
                 queryParams={{
                   vulnerability: cellProps.row.original.cve,
                   team_id: teamId,

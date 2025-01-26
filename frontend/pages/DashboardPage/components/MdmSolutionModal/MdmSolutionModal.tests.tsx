@@ -8,13 +8,13 @@ import MdmSolutionModal from "./MdmSolutionModal";
 
 describe("MdmSolutionModal table", () => {
   it("Renders table data normally", () => {
-    const [server_url, hosts_count] = ["a.b.c", 123];
+    const [server_url, nodes_count] = ["a.b.c", 123];
     const mdmSolutions: IMdmSolution[] = [
       {
         id: 1,
         name: "test solution",
         server_url,
-        hosts_count,
+        nodes_count,
       },
     ];
     render(
@@ -22,6 +22,6 @@ describe("MdmSolutionModal table", () => {
     );
 
     expect(screen.getByText(server_url)).toBeInTheDocument();
-    expect(screen.getByText(hosts_count)).toBeInTheDocument();
+    expect(screen.getByText(nodes_count)).toBeInTheDocument();
   });
 });

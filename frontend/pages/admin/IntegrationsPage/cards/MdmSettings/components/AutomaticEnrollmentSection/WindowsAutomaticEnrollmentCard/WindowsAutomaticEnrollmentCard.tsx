@@ -24,7 +24,7 @@ const WindowsAutomaticEnrollmentCard = ({
         </Button>
       }
     >
-      To use automatic enrollment for Windows hosts and Windows Autopilot you
+      To use automatic enrollment for Windows nodes and Windows Autopilot you
       need to connect Mdmlab to Azure AD first.
     </SectionCard>
   );

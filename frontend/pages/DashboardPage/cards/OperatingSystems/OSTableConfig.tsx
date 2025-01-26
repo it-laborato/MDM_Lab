@@ -17,7 +17,7 @@ import { ISoftwareVulnerability } from "interfaces/software";
 
 import TextCell from "components/TableContainer/DataTable/TextCell";
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import LinkCell from "components/TableContainer/DataTable/LinkCell";
 
 import VulnerabilitiesCell from "pages/SoftwarePage/components/VulnerabilitiesCell";
@@ -35,8 +35,8 @@ type IVulnCellProps = CellProps<
   IOperatingSystemVersion,
   ISoftwareVulnerability[]
 >;
-type IHostCountCellProps = INumberCellProps<IOperatingSystemVersion>;
-type IHostHeaderProps = HeaderProps<IOperatingSystemVersion>;
+type INodeCountCellProps = INumberCellProps<IOperatingSystemVersion>;
+type INodeHeaderProps = HeaderProps<IOperatingSystemVersion>;
 
 interface IOSTableConfigOptions {
   includeName?: boolean;
@@ -114,30 +114,30 @@ const generateDefaultTableHeaders = (
     },
   },
   {
-    Header: (cellProps: IHostHeaderProps) => (
+    Header: (cellProps: INodeHeaderProps) => (
       <HeaderCell
-        value="Hosts"
+        value="Nodes"
         disableSortBy={false}
         isSortedDesc={cellProps.column.isSortedDesc}
       />
     ),
 
     disableSortBy: false,
-    accessor: "hosts_count",
-    Cell: (cellProps: IHostCountCellProps) => {
-      const { hosts_count, os_version_id } = cellProps.row.original;
+    accessor: "nodes_count",
+    Cell: (cellProps: INodeCountCellProps) => {
+      const { nodes_count, os_version_id } = cellProps.row.original;
       return (
-        <span className="hosts-cell__wrapper">
-          <span className="hosts-cell__count">
-            <TextCell value={hosts_count} />
+        <span className="nodes-cell__wrapper">
+          <span className="nodes-cell__count">
+            <TextCell value={nodes_count} />
           </span>
-          <span className="hosts-cell__link">
-            <ViewAllHostsLink
+          <span className="nodes-cell__link">
+            <ViewAllNodesLink
               queryParams={{
                 os_version_id,
                 team_id: teamId,
               }}
-              className="os-hosts-link"
+              className="os-nodes-link"
             />
           </span>
         </span>

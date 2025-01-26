@@ -88,7 +88,7 @@ interface IEditQueryFormProps {
   onOpenSchemaSidebar: () => void;
   renderLiveQueryWarning: () => JSX.Element | null;
   backendValidators: { [key: string]: string };
-  hostId?: number;
+  nodeId?: number;
   queryReportsDisabled?: boolean;
   showConfirmSaveChangesModal: boolean;
   setShowConfirmSaveChangesModal: (bool: boolean) => void;
@@ -123,7 +123,7 @@ const EditQueryForm = ({
   onOpenSchemaSidebar,
   renderLiveQueryWarning,
   backendValidators,
-  hostId,
+  nodeId,
   queryReportsDisabled,
   showConfirmSaveChangesModal,
   setShowConfirmSaveChangesModal,
@@ -628,7 +628,7 @@ const EditQueryForm = ({
               onClick={() => {
                 router.push(
                   PATHS.LIVE_QUERY(queryIdForEdit) +
-                    TAGGED_TEMPLATES.queryByHostRoute(hostId, apiTeamIdForQuery)
+                    TAGGED_TEMPLATES.queryByNodeRoute(nodeId, apiTeamIdForQuery)
                 );
               }}
               disabled={disabledLiveQuery}
@@ -790,7 +790,7 @@ const EditQueryForm = ({
                 onChange={(value: boolean) =>
                   setLastEditedQueryObserverCanRun(value)
                 }
-                helpText="Users with the observer role will be able to run this query on hosts where they have access."
+                helpText="Users with the observer role will be able to run this query on nodes where they have access."
               >
                 Observers can run
               </Checkbox>
@@ -889,15 +889,15 @@ const EditQueryForm = ({
                   // this live run in performance impact. Since we DO want to count this run in those
                   // stats if the query is the same as the saved one, only set below IF the query
                   // has been changed.
-                  // TODO - product: should host details > action > query > <select existing query>
-                  // go to the host details page instead of the edit query page, where the user has
+                  // TODO - product: should node details > action > query > <select existing query>
+                  // go to the node details page instead of the edit query page, where the user has
                   // the choice to edit the query or run it live directly?
                   if (queryWasChanged) {
                     setEditingExistingQuery(true); // Persists edited query data through live query flow
                   }
                   router.push(
                     PATHS.LIVE_QUERY(queryIdForEdit) +
-                      TAGGED_TEMPLATES.queryByHostRoute(hostId, currentTeamId)
+                      TAGGED_TEMPLATES.queryByNodeRoute(nodeId, currentTeamId)
                   );
                 }}
                 disabled={disabledLiveQuery}

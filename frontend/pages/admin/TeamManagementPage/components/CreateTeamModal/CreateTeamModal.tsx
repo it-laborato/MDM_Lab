@@ -71,7 +71,7 @@ const CreateTeamModal = ({
           ignore1password
         />
         <InfoBanner className={`${baseClass}__sandbox-info`}>
-          To organize your hosts, create a team, like
+          To organize your nodes, create a team, like
           &ldquo;Workstations,&rdquo; &ldquo;Servers,&rdquo; or &ldquo;Servers
           (canary)&rdquo;.
         </InfoBanner>

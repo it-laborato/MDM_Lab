@@ -6,7 +6,7 @@ import { IPolicyWebhookPreviewPayload } from "interfaces/policy";
 
 const baseClass = "example-payload";
 
-interface IHostPreview {
+interface INodePreview {
   id: number;
   display_name: string;
   url: string;
@@ -15,7 +15,7 @@ interface IHostPreview {
 interface IExamplePayload {
   timestamp: string;
   policy: IPolicyWebhookPreviewPayload;
-  hosts: IHostPreview[];
+  nodes: INodePreview[];
 }
 
 const ExamplePayload = (): JSX.Element => {
@@ -32,20 +32,20 @@ const ExamplePayload = (): JSX.Element => {
       author_name: "John",
       author_email: "john@example.com",
       resolution: "Turn on Gatekeeper feature in System Preferences.",
-      passing_host_count: 2000,
-      failing_host_count: 300,
+      passing_node_count: 2000,
+      failing_node_count: 300,
       critical: false,
     },
-    hosts: [
+    nodes: [
       {
         id: 1,
         display_name: "macbook-1",
-        url: "https://mdmlab.example.com/hosts/1",
+        url: "https://mdmlab.example.com/nodes/1",
       },
       {
         id: 2,
         display_name: "macbbook-2",
-        url: "https://mdmlab.example.com/hosts/2",
+        url: "https://mdmlab.example.com/nodes/2",
       },
     ],
   };

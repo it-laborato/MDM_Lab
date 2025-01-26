@@ -164,7 +164,7 @@ const SoftwareVulnerabilities = ({
         } else {
           setTableData({
             count: 1,
-            counts_updated_at: data.vulnerability.hosts_count_updated_at,
+            counts_updated_at: data.vulnerability.nodes_count_updated_at,
             vulnerabilities: [data.vulnerability],
             meta: {
               has_next_results: false,

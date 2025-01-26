@@ -6,7 +6,7 @@ import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
 import TextCell from "components/TableContainer/DataTable/TextCell";
 import TooltipTruncatedTextCell from "components/TableContainer/DataTable/TooltipTruncatedTextCell";
 import TooltipWrapper from "components/TooltipWrapper";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 
 // NOTE: cellProps come from react-table
 // more info here https://react-table.tanstack.com/docs/api/useTable#cell-properties
@@ -42,7 +42,7 @@ const generateMunkiIssuesTableHeaders = (teamId?: number): IDataColumn[] => [
       const titleWithToolTip = (
         <TooltipWrapper
           tipContent={
-            <>Issues reported the last time Munki ran on each host.</>
+            <>Issues reported the last time Munki ran on each node.</>
           }
         >
           Issue
@@ -66,29 +66,29 @@ const generateMunkiIssuesTableHeaders = (teamId?: number): IDataColumn[] => [
     ),
   },
   {
-    title: "Hosts",
+    title: "Nodes",
     Header: (headerProps: IHeaderProps): JSX.Element => {
       return (
         <HeaderCell
-          value="Hosts"
+          value="Nodes"
           isSortedDesc={headerProps.column.isSortedDesc}
         />
       );
     },
     disableSortBy: false,
-    accessor: "hosts_count",
+    accessor: "nodes_count",
     Cell: (cellProps: ICellProps) => <TextCell value={cellProps.cell.value} />,
   },
   {
     title: "",
     Header: "",
-    accessor: "linkToFilteredHosts",
+    accessor: "linkToFilteredNodes",
     disableSortBy: true,
     Cell: (cellProps: ICellProps) => {
       return (
         <>
           {cellProps.row.original && (
-            <ViewAllHostsLink
+            <ViewAllNodesLink
               queryParams={{
                 munki_issue_id: cellProps.row.original.id,
                 team_id: teamId,

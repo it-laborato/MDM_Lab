@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { ISelectTargetsEntity } from "interfaces/target";
 // @ts-ignore
 import TargetIcon from "./TargetIcon";
-import { isTargetHost, isTargetLabel, isTargetTeam } from "../helpers";
+import { isTargetNode, isTargetLabel, isTargetTeam } from "../helpers";
 
 const baseClass = "target-option";
 
@@ -26,23 +26,23 @@ const TargetOption = ({
   };
 
   const renderTargetDetail = () => {
-    if (isTargetHost(target)) {
-      const { primary_ip: hostIpAddress } = target;
+    if (isTargetNode(target)) {
+      const { primary_ip: nodeIpAddress } = target;
 
-      if (!hostIpAddress) {
+      if (!nodeIpAddress) {
         return null;
       }
 
       return (
         <span>
-          <span className={`${baseClass}__ip`}>{hostIpAddress}</span>
+          <span className={`${baseClass}__ip`}>{nodeIpAddress}</span>
         </span>
       );
     }
 
     if (isTargetTeam(target) || isTargetLabel(target)) {
       return (
-        <span className={`${baseClass}__count`}>{target.count} hosts</span>
+        <span className={`${baseClass}__count`}>{target.count} nodes</span>
       );
     }
 
@@ -53,7 +53,7 @@ const TargetOption = ({
   const wrapperClassName = classnames(`${baseClass}__wrapper`, {
     "is-team": targetType === "teams",
     "is-label": targetType === "labels",
-    "is-host": targetType === "hosts",
+    "is-node": targetType === "nodes",
   });
 
   return (
@@ -65,7 +65,7 @@ const TargetOption = ({
         <div>
           <TargetIcon target={target} />
           <span className={`${baseClass}__label-label`}>
-            {displayText !== "All Hosts" ? displayText : "All hosts"}
+            {displayText !== "All Nodes" ? displayText : "All nodes"}
           </span>
         </div>
         {renderTargetDetail()}

@@ -11,7 +11,7 @@ describe("Status indicator", () => {
   });
 
   it("renders optional tooltip on hover", async () => {
-    const TOOLTIP_TEXT = "Online hosts will respond to a live query.";
+    const TOOLTIP_TEXT = "Online nodes will respond to a live query.";
     render(
       <StatusIndicator value="online" tooltip={{ tooltipText: TOOLTIP_TEXT }} />
     );

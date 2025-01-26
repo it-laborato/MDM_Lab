@@ -22,7 +22,7 @@ import {
 } from "date-fns";
 
 import { QueryParams, buildQueryStringFromParams } from "utilities/url";
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 import { ILabel } from "interfaces/label";
 import { IPack } from "interfaces/pack";
 import {
@@ -86,7 +86,7 @@ export const addGravatarUrlToResource = (resource: any): any => {
   };
 };
 
-export const createHostsByPolicyPath = (
+export const createNodesByPolicyPath = (
   policyId: number,
   policyResponse: PolicyResponse,
   teamId?: number | null
@@ -98,7 +98,7 @@ export const createHostsByPolicyPath = (
   })}`;
 };
 
-/** Removes Apple OS Prefix from host.os_version. */
+/** Removes Apple OS Prefix from node.os_version. */
 export const removeOSPrefix = (version: string): string => {
   return version.replace(/^(macOS |iOS |iPadOS )/i, "");
 };
@@ -132,8 +132,8 @@ export const compareVersions = (version1: string, version2: string) => {
 const labelSlug = (label: ILabel): string => {
   const { id, name } = label;
 
-  if (name === "All Hosts") {
-    return "all-hosts";
+  if (name === "All Nodes") {
+    return "all-nodes";
   }
 
   return `labels/${id}`;
@@ -142,7 +142,7 @@ const labelSlug = (label: ILabel): string => {
 const isLabel = (target: ISelectTargetsEntity) => {
   return "label_type" in target;
 };
-const isHost = (target: ISelectTargetsEntity) => {
+const isNode = (target: ISelectTargetsEntity) => {
   return "display_name" in target;
 };
 
@@ -154,12 +154,12 @@ const filterTarget = (targetType: string) => {
       return target.target_type === targetType && !isNaN(id) ? [id] : [];
     }
     switch (targetType) {
-      case "hosts":
-        return isHost(target) && !isNaN(id) ? [id] : [];
+      case "nodes":
+        return isNode(target) && !isNaN(id) ? [id] : [];
       case "labels":
         return isLabel(target) && !isNaN(id) ? [id] : [];
       case "teams":
-        return !isHost(target) && !isLabel(target) && !isNaN(id) ? [id] : [];
+        return !isNode(target) && !isLabel(target) && !isNaN(id) ? [id] : [];
       default:
         return [];
     }
@@ -201,12 +201,12 @@ export const formatSelectedTargetsForApi = (
 ): ISelectedTargetsForApi => {
   const targets = selectedTargets || [];
   // TODO: can flatMap be removed?
-  const hostIds = flatMap(targets, filterTarget("hosts"));
+  const nodeIds = flatMap(targets, filterTarget("nodes"));
   const labelIds = flatMap(targets, filterTarget("labels"));
   const teamIds = flatMap(targets, filterTarget("teams"));
 
   return {
-    hosts: hostIds.sort(),
+    nodes: nodeIds.sort(),
     labels: labelIds.sort(),
     teams: teamIds.sort(),
   };
@@ -215,8 +215,8 @@ export const formatSelectedTargetsForApi = (
 export const formatPackTargetsForApi = (
   targets: ISelectTargetsEntity[]
 ): IPackTargets => {
-  const { hosts, labels, teams } = formatSelectedTargetsForApi(targets);
-  return { host_ids: hosts, label_ids: labels, team_ids: teams };
+  const { nodes, labels, teams } = formatSelectedTargetsForApi(targets);
+  return { node_ids: nodes, label_ids: labels, team_ids: teams };
 };
 
 export const formatScheduledQueryForServer = (
@@ -423,7 +423,7 @@ export const formatTeamForClient = (team: ITeam): ITeam => {
 };
 
 export const formatPackForClient = (pack: IPack): IPack => {
-  pack.host_ids ||= [];
+  pack.node_ids ||= [];
   pack.label_ids ||= [];
   pack.team_ids ||= [];
   return pack;
@@ -549,7 +549,7 @@ export const inMilliseconds = (nanoseconds: number): number => {
   return nanoseconds / NANOSECONDS_PER_MILLISECOND;
 };
 
-export const humanHostLastSeen = (lastSeen: string): string => {
+export const humanNodeLastSeen = (lastSeen: string): string => {
   if (!lastSeen || lastSeen < INITIAL_MDMLAB_DATE) {
     return "Never";
   }
@@ -559,19 +559,19 @@ export const humanHostLastSeen = (lastSeen: string): string => {
   return formatDistanceToNow(new Date(lastSeen), { addSuffix: true });
 };
 
-export const humanHostEnrolled = (enrolled: string): string => {
+export const humanNodeEnrolled = (enrolled: string): string => {
   if (!enrolled || enrolled < INITIAL_MDMLAB_DATE) {
     return "Never";
   }
   return formatDistanceToNow(new Date(enrolled), { addSuffix: true });
 };
 
-export const humanHostMemory = (bytes: number): string => {
+export const humanNodeMemory = (bytes: number): string => {
   return `${inGigaBytes(bytes)} GB`;
 };
 
-export const humanHostDetailUpdated = (detailUpdated?: string): string => {
-  // Handles the case when a host has checked in to Mdmlab but
+export const humanNodeDetailUpdated = (detailUpdated?: string): string => {
+  // Handles the case when a node has checked in to Mdmlab but
   // its details haven't been updated.
   if (!detailUpdated || detailUpdated < INITIAL_MDMLAB_DATE) {
     return "unavailable";
@@ -583,7 +583,7 @@ export const humanHostDetailUpdated = (detailUpdated?: string): string => {
   }
 };
 
-/** Unlike humanHost helper functions, there are no Mdmlab-related date restrictions */
+/** Unlike humanNode helper functions, there are no Mdmlab-related date restrictions */
 export const humanLastSeen = (lastSeen: string): string => {
   if (!lastSeen) {
     return "Never";
@@ -610,7 +610,7 @@ export const internationalTimeFormat = (date: number | Date): string => {
   );
 };
 
-export const hostTeamName = (teamName: string | null): string => {
+export const nodeTeamName = (teamName: string | null): string => {
   if (!teamName) {
     return "No team";
   }
@@ -761,15 +761,15 @@ export const getSortedTeamOptions = memoize((teams: ITeam[]) =>
     .sort((a, b) => sortUtils.caseInsensitiveAsc(a.label, b.label))
 );
 
-// returns a mixture of props from host
+// returns a mixture of props from node
 export const normalizeEmptyValues = (
-  hostData: Partial<IHost>
+  nodeData: Partial<INode>
 ): Record<
   string,
   number | string | boolean | Record<string, number | string | boolean>
 > => {
   return reduce(
-    hostData,
+    nodeData,
     (result, value, key) => {
       if (
         (Number.isFinite(value) && value !== 0) ||
@@ -845,9 +845,9 @@ export const getSoftwareBundleTooltipJSX = (bundle: string) => (
 );
 
 export const TAGGED_TEMPLATES = {
-  queryByHostRoute: (hostId?: number | null, teamId?: number | null) => {
+  queryByNodeRoute: (nodeId?: number | null, teamId?: number | null) => {
     const queryString = buildQueryStringFromParams({
-      host_id: hostId || undefined,
+      node_id: nodeId || undefined,
       team_id: teamId,
     });
 
@@ -913,7 +913,7 @@ export default {
   addGravatarUrlToResource,
   removeOSPrefix,
   compareVersions,
-  createHostsByPolicyPath,
+  createNodesByPolicyPath,
   formatLabelResponse,
   formatFloatAsPercentage,
   formatSeverity,
@@ -931,14 +931,14 @@ export default {
   getUniqueColsAreNumTypeFromRows,
   getCustomDropdownOptions,
   greyCell,
-  humanHostLastSeen,
-  humanHostEnrolled,
-  humanHostMemory,
-  humanHostDetailUpdated,
+  humanNodeLastSeen,
+  humanNodeEnrolled,
+  humanNodeMemory,
+  humanNodeDetailUpdated,
   humanLastSeen,
   internationalTimeFormat,
   internallyTruncateText,
-  hostTeamName,
+  nodeTeamName,
   humanQueryLastRun,
   inMilliseconds,
   hasLicenseExpired,

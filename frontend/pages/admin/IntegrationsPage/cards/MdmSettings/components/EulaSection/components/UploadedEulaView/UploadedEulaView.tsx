@@ -21,7 +21,7 @@ const UploadedEulaView = ({
     <div className={baseClass}>
       <p>
         Require end users to agree to a EULA when they first setup their new
-        macOS hosts.{" "}
+        macOS nodes.{" "}
         <CustomLink
           url="https://mdmlabdm.com/docs/using-mdmlab/mdm-macos-setup-experience#end-user-authentication-and-eula"
           text="Learn more"

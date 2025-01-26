@@ -100,7 +100,7 @@ const IdpSection = () => {
       <form>
         <p>
           Connect Mdmlab to your identity provider to require end users to
-          authenticate when they first setup their new macOS hosts.{" "}
+          authenticate when they first setup their new macOS nodes.{" "}
           <CustomLink
             url="https://mdmlabdm.com/learn-more-about/end-user-authentication"
             text="Learn more"

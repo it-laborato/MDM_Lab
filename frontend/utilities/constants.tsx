@@ -172,8 +172,8 @@ export const DEFAULT_QUERY: ISchedulableQuery = {
 export const DEFAULT_CAMPAIGN = {
   created_at: "",
   errors: [],
-  hosts: [],
-  hosts_count: {
+  nodes: [],
+  nodes_count: {
     total: 0,
     successful: 0,
     failed: 0,
@@ -198,14 +198,14 @@ export const DEFAULT_CAMPAIGN_STATE = {
   queryPosition: {},
   queryResultsToggle: null,
   runQueryMilliseconds: 0,
-  selectRelatedHostTarget: false,
+  selectRelatedNodeTarget: false,
   targetsCount: 0,
   targetsError: null,
   campaign: { ...DEFAULT_CAMPAIGN },
 };
 
 const PLATFORM_LABEL_NAMES_FROM_API = [
-  "All Hosts",
+  "All Nodes",
   "All Linux",
   "CentOS Linux",
   "macOS",
@@ -243,7 +243,7 @@ export const PLATFORM_LABEL_DISPLAY_NAMES: Record<
   PlatformLabelNameFromAPI,
   string
 > = {
-  "All Hosts": "All hosts",
+  "All Nodes": "All nodes",
   "All Linux": "Linux",
   "CentOS Linux": "CentOS Linux",
   macOS: "macOS",
@@ -259,7 +259,7 @@ export const PLATFORM_LABEL_DISPLAY_TYPES: Record<
   PlatformLabelNameFromAPI,
   string
 > = {
-  "All Hosts": "all",
+  "All Nodes": "all",
   "All Linux": "platform",
   "CentOS Linux": "platform",
   macOS: "platform",
@@ -275,7 +275,7 @@ export const PLATFORM_LABEL_DISPLAY_TYPES: Record<
 export const LABEL_DISPLAY_MAP: Partial<
   Record<PlatformLabelNameFromAPI, string>
 > = {
-  "All Hosts": "All hosts",
+  "All Nodes": "All nodes",
   "All Linux": "Linux",
   chrome: "ChromeOS",
   "MS Windows": "Windows",
@@ -323,10 +323,10 @@ export const SCHEDULE_PLATFORM_DROPDOWN_OPTIONS: ISchedulePlatformDropdownOption
 ];
 
 export const HOSTS_SEARCH_BOX_PLACEHOLDER =
-  "Search name, hostname, UUID, serial number, or private IP address";
+  "Search name, nodename, UUID, serial number, or private IP address";
 
 export const HOSTS_SEARCH_BOX_TOOLTIP =
-  "Search hosts by name, hostname, UUID, serial number, or private IP address";
+  "Search nodes by name, nodename, UUID, serial number, or private IP address";
 
 export const VULNERABILITIES_SEARCH_BOX_TOOLTIP =
   'To search for an exact CVE, surround the string in double quotes (e.g. "CVE-2024-1234")';
@@ -342,14 +342,14 @@ export const MDM_STATUS_TOOLTIP: Record<string, string | React.ReactNode> = {
   ),
   "On (manual)": (
     <span>
-      MDM was turned on manually (macOS), or hosts were automatically migrated
+      MDM was turned on manually (macOS), or nodes were automatically migrated
       with mdmlabd (Windows). End users can turn MDM off.
     </span>
   ),
   Off: undefined, // no tooltip specified
   Pending: (
     <span>
-      Hosts ordered via Apple Business Manager <br /> (ABM). These will
+      Nodes ordered via Apple Business Manager <br /> (ABM). These will
       automatically enroll to Mdmlab <br /> and turn on MDM when they&apos;re
       unboxed.
     </span>

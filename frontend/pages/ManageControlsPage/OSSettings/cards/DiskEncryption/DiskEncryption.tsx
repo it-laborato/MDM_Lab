@@ -168,7 +168,7 @@ const DiskEncryption = ({
       </TooltipWrapper>
       , and{" "}
       <TooltipWrapper tipContent={getTipContent("linux")}>Linux</TooltipWrapper>{" "}
-      hosts.
+      nodes.
     </>
   );
 
@@ -204,7 +204,7 @@ const DiskEncryption = ({
                 Turn on disk encryption
               </Checkbox>
               <p>
-                If turned on, hosts&apos; disk encryption keys will be stored in
+                If turned on, nodes&apos; disk encryption keys will be stored in
                 Mdmlab{" "}
                 <CustomLink
                   text="Learn more"

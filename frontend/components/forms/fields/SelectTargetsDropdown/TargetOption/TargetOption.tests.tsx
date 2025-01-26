@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { noop } from "lodash";
 
 import { createMockLabel } from "__mocks__/labelsMock";
-import createMockHost from "__mocks__/hostMock";
+import createMockNode from "__mocks__/nodeMock";
 import TargetOption from "./TargetOption";
 
 describe("TargetOption - component", () => {
@@ -23,20 +23,20 @@ describe("TargetOption - component", () => {
       />
     );
     expect(container.querySelectorAll(".is-label").length).toEqual(1);
-    expect(screen.getByText(`20 hosts`)).toBeInTheDocument();
+    expect(screen.getByText(`20 nodes`)).toBeInTheDocument();
   });
 
-  it("renders a host option for host targets", () => {
+  it("renders a node option for node targets", () => {
     const { container } = render(
       <TargetOption
         onSelect={noop}
         onMoreInfoClick={onMoreInfoClick}
-        target={createMockHost({ target_type: "hosts", platform: "windows" })}
+        target={createMockNode({ target_type: "nodes", platform: "windows" })}
       />
     );
-    expect(container.querySelectorAll(".is-host").length).toEqual(1);
+    expect(container.querySelectorAll(".is-node").length).toEqual(1);
     expect(container.querySelectorAll("i.mdmlabicon-windows").length).toEqual(1);
-    expect(screen.getByText(createMockHost().primary_ip)).toBeInTheDocument();
+    expect(screen.getByText(createMockNode().primary_ip)).toBeInTheDocument();
   });
 
   it("calls the onSelect prop when + icon button is clicked", () => {
@@ -45,7 +45,7 @@ describe("TargetOption - component", () => {
       <TargetOption
         onMoreInfoClick={onMoreInfoClick}
         onSelect={onSelectSpy}
-        target={createMockHost()}
+        target={createMockNode()}
       />
     );
 
@@ -64,7 +64,7 @@ describe("TargetOption - component", () => {
       <TargetOption
         onSelect={noop}
         onMoreInfoClick={onMoreInfoClick}
-        target={createMockHost()}
+        target={createMockNode()}
       />
     );
 

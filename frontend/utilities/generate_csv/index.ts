@@ -4,8 +4,8 @@ import { ICampaignError } from "interfaces/campaign";
 import { format } from "date-fns";
 
 const reorderCSVFields = (tableHeaders: string[]) => {
-  const result = tableHeaders.filter((field) => field !== "host_display_name");
-  result.unshift("host_display_name");
+  const result = tableHeaders.filter((field) => field !== "node_display_name");
+  result.unshift("node_display_name");
 
   return result;
 };
@@ -19,13 +19,13 @@ export const generateCSVQueryResults = <T extends object>(
   rows: Row[],
   filename: string,
   tableHeaders: Column<T>[] | string[],
-  omitHostDisplayName?: boolean
+  omitNodeDisplayName?: boolean
 ) => {
   return new global.window.File(
     [
       convertToCSV({
         objArray: rows.map((r) => r.original),
-        fieldSortFunc: omitHostDisplayName ? undefined : reorderCSVFields,
+        fieldSortFunc: omitNodeDisplayName ? undefined : reorderCSVFields,
         tableHeaders,
       }),
     ],
@@ -38,7 +38,7 @@ export const generateCSVQueryResults = <T extends object>(
 
 // Live policy results only
 export const generateCSVPolicyResults = (
-  rows: { host: string; status: string }[],
+  rows: { node: string; status: string }[],
   filename: string
 ) => {
   return new global.window.File([convertToCSV({ objArray: rows })], filename, {

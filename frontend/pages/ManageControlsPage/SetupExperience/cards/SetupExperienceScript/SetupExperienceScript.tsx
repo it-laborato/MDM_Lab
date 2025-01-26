@@ -70,7 +70,7 @@ const SetupExperienceScript = ({
       <div className={`${baseClass}__content`}>
         <div className={`${baseClass}__description-container`}>
           <p className={`${baseClass}__description`}>
-            Upload a script to run on hosts that automatically enroll to Mdmlab.
+            Upload a script to run on nodes that automatically enroll to Mdmlab.
           </p>
           <CustomLink
             className={`${baseClass}__learn-how-link`}

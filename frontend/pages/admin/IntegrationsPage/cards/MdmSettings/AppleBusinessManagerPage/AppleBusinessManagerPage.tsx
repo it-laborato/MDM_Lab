@@ -38,7 +38,7 @@ const AddAbmMessage = ({ onAddAbm }: IAddAbmMessageProps) => {
     <div className={`${baseClass}__add-adm-message`}>
       <h2>Add your ABM</h2>
       <p>
-        Automatically enroll newly purchased Apple hosts when they&apos;re first
+        Automatically enroll newly purchased Apple nodes when they&apos;re first
         unboxed and set up by your end users.
       </p>
       <Button variant="brand" onClick={onAddAbm}>
@@ -150,7 +150,7 @@ const AppleBusinessManagerPage = ({ router }: { router: InjectedRouter }) => {
           router={router}
           header="Turn on Apple MDM"
           info="To add your ABM and enable automatic enrollment for macOS, iOS, and
-        iPadOS hosts, first turn on Apple MDM."
+        iPadOS nodes, first turn on Apple MDM."
         />
       );
     }
@@ -176,7 +176,7 @@ const AppleBusinessManagerPage = ({ router }: { router: InjectedRouter }) => {
       return (
         <>
           <p>
-            Add your ABM to automatically enroll newly purchased Apple hosts
+            Add your ABM to automatically enroll newly purchased Apple nodes
             when they&apos;re first unboxed and set up by your end users.
           </p>
           <AppleBusinessManagerTable

@@ -16,8 +16,8 @@ import FileSaver from "file-saver";
 
 import { AppContext } from "context/app";
 import { NotificationContext } from "context/notification";
-import scriptAPI, { IHostScriptsResponse } from "services/entities/scripts";
-import { IHostScript } from "interfaces/script";
+import scriptAPI, { INodeScriptsResponse } from "services/entities/scripts";
+import { INodeScript } from "interfaces/script";
 import { IApiError, getErrorReason } from "interfaces/errors";
 
 import Modal from "components/Modal";
@@ -30,28 +30,28 @@ import CustomLink from "components/CustomLink";
 import DataError from "components/DataError";
 import paths from "router/paths";
 import ActionsDropdown from "components/ActionsDropdown";
-import { generateActionDropdownOptions } from "pages/hosts/details/HostDetailsPage/modals/RunScriptModal/ScriptsTableConfig";
+import { generateActionDropdownOptions } from "pages/nodes/details/NodeDetailsPage/modals/RunScriptModal/ScriptsTableConfig";
 
 const baseClass = "script-details-modal";
 
-type PartialOrFullHostScript =
-  | Pick<IHostScript, "script_id" | "name"> // Use on Scripts page does not include last_execution
-  | IHostScript;
+type PartialOrFullNodeScript =
+  | Pick<INodeScript, "script_id" | "name"> // Use on Scripts page does not include last_execution
+  | INodeScript;
 
 interface IScriptDetailsModalProps {
   onCancel: () => void;
   onDelete: () => void;
-  /** Help text on manage scripts page's modal but not on host detail's page modal */
+  /** Help text on manage scripts page's modal but not on node detail's page modal */
   runScriptHelpText?: boolean;
-  /** Host actions dropdown on host details page's modal but not on manage scripts page's modal */
-  showHostScriptActions?: boolean;
+  /** Node actions dropdown on node details page's modal but not on manage scripts page's modal */
+  showNodeScriptActions?: boolean;
   setRunScriptRequested?: (value: boolean) => void;
-  hostId?: number | null;
-  hostTeamId?: number | null;
-  refetchHostScripts?: <TPageData>(
+  nodeId?: number | null;
+  nodeTeamId?: number | null;
+  refetchNodeScripts?: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<IHostScriptsResponse, IApiError>>;
-  selectedScriptDetails?: PartialOrFullHostScript;
+  ) => Promise<QueryObserverResult<INodeScriptsResponse, IApiError>>;
+  selectedScriptDetails?: PartialOrFullNodeScript;
   selectedScriptContent?: string;
   isLoadingScriptContent?: boolean;
   isScriptContentError?: Error | null;
@@ -63,11 +63,11 @@ const ScriptDetailsModal = ({
   onCancel,
   onDelete,
   runScriptHelpText = false,
-  showHostScriptActions = false,
+  showNodeScriptActions = false,
   setRunScriptRequested,
-  hostId,
-  hostTeamId,
-  refetchHostScripts,
+  nodeId,
+  nodeTeamId,
+  refetchNodeScripts,
   selectedScriptDetails,
   selectedScriptContent,
   isLoadingScriptContent,
@@ -139,8 +139,8 @@ const ScriptDetailsModal = ({
   };
 
   const onSelectMoreActions = useCallback(
-    async (action: string, script: IHostScript) => {
-      if (hostId && !!setRunScriptRequested && !!refetchHostScripts) {
+    async (action: string, script: INodeScript) => {
+      if (nodeId && !!setRunScriptRequested && !!refetchNodeScripts) {
         switch (action) {
           case "showRunDetails": {
             if (script.last_execution?.execution_id) {
@@ -153,14 +153,14 @@ const ScriptDetailsModal = ({
             try {
               setRunScriptRequested && setRunScriptRequested(true);
               await scriptAPI.runScript({
-                host_id: hostId,
+                node_id: nodeId,
                 script_id: script.script_id,
               });
               renderFlash(
                 "success",
-                "Script is running or will run when the host comes online."
+                "Script is running or will run when the node comes online."
               );
-              refetchHostScripts();
+              refetchNodeScripts();
 
               onCancel(); // Running a script returns to run script modal
             } catch (e) {
@@ -174,10 +174,10 @@ const ScriptDetailsModal = ({
       }
     },
     [
-      hostId,
+      nodeId,
       onClickRunDetails,
       setRunScriptRequested,
-      refetchHostScripts,
+      refetchNodeScripts,
       renderFlash,
       onCancel,
     ]
@@ -214,22 +214,22 @@ const ScriptDetailsModal = ({
         }
         primaryButtons={
           <>
-            {showHostScriptActions && selectedScriptDetails && (
+            {showNodeScriptActions && selectedScriptDetails && (
               <div className={`${baseClass}__manage-automations-wrapper`}>
                 <ActionsDropdown
                   className={`${baseClass}__manage-automations-dropdown`}
                   onChange={(value) =>
                     onSelectMoreActions(
                       value,
-                      selectedScriptDetails as IHostScript
+                      selectedScriptDetails as INodeScript
                     )
                   }
                   placeholder="More actions"
                   isSearchable={false}
                   options={generateActionDropdownOptions(
                     currentUser,
-                    hostTeamId || null,
-                    selectedScriptDetails as IHostScript
+                    nodeTeamId || null,
+                    selectedScriptDetails as INodeScript
                   )}
                   menuPlacement="top"
                 />
@@ -264,11 +264,11 @@ const ScriptDetailsModal = ({
         </Textarea>
         {runScriptHelpText && (
           <div className="form-field__help-text">
-            To run this script on a host, go to the{" "}
-            <CustomLink text="Hosts" url={paths.MANAGE_HOSTS} /> page and select
-            a host.
+            To run this script on a node, go to the{" "}
+            <CustomLink text="Nodes" url={paths.MANAGE_HOSTS} /> page and select
+            a node.
             <br />
-            To run the script across multiple hosts, add a policy automation on
+            To run the script across multiple nodes, add a policy automation on
             the <CustomLink text="Policies" url={paths.MANAGE_POLICIES} /> page.
           </div>
         )}

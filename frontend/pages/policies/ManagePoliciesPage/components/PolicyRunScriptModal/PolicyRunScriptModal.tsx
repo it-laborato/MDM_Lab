@@ -214,9 +214,9 @@ const PolicyRunScriptModal = ({
             <TooltipWrapper tipContent={compatibleTipContent}>
               compatible
             </TooltipWrapper>{" "}
-            with the host, the selected script will run when hosts fail the
-            policy. The script will not run on hosts with scripts disabled, or
-            on hosts with too many pending scripts. Host counts will reset when
+            with the node, the selected script will run when nodes fail the
+            policy. The script will not run on nodes with scripts disabled, or
+            on nodes with too many pending scripts. Node counts will reset when
             new scripts are selected.{" "}
             <CustomLink
               url="https://mdmlabdm.com/learn-more-about/policy-automation-run-script"

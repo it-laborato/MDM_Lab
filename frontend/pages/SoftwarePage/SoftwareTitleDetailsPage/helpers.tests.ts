@@ -32,7 +32,7 @@ describe("SoftwareTitleDetailsPage helpers", () => {
         },
         app_store_app: null,
         source: "apps",
-        hosts_count: 10,
+        nodes_count: 10,
       };
       const packageCardInfo = getPackageCardInfo(softwareTitle);
       expect(packageCardInfo).toEqual({
@@ -67,7 +67,7 @@ describe("SoftwareTitleDetailsPage helpers", () => {
           icon_url: "https://example.com/icon.png",
         },
         source: "apps",
-        hosts_count: 10,
+        nodes_count: 10,
       };
       const packageCardInfo = getPackageCardInfo(softwareTitle);
       expect(packageCardInfo).toEqual({

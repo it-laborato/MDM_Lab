@@ -15,7 +15,7 @@ const EmptyTeamsTable = ({
     <EmptyTable
       graphicName="empty-teams"
       header="Set up team permissions"
-      info="Keep your organization organized and efficient by ensuring every user has the correct access to the right hosts."
+      info="Keep your organization organized and efficient by ensuring every user has the correct access to the right nodes."
       additionalInfo={
         <>
           {" "}

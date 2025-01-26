@@ -29,7 +29,7 @@ interface IPoliciesTableProps {
   renderPoliciesCount: () => JSX.Element | null;
   onQueryChange: (newTableQuery: ITableQueryData) => void;
   searchQuery: string;
-  sortHeader?: "name" | "failing_host_count";
+  sortHeader?: "name" | "failing_node_count";
   sortDirection?: "asc" | "desc";
   page: number;
   resetPageIndex: boolean;

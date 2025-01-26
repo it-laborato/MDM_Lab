@@ -9,7 +9,7 @@ import {
 import TextCell from "components/TableContainer/DataTable/TextCell";
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
 import StatusIndicatorWithIcon from "components/StatusIndicatorWithIcon";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import { IndicatorStatus } from "components/StatusIndicatorWithIcon/StatusIndicatorWithIcon";
 
 export interface IStatusCellValue {
@@ -75,7 +75,7 @@ const defaultTableHeaders: IDataColumn[] = [
     },
   },
   {
-    title: "macOS hosts",
+    title: "macOS nodes",
     Header: (cellProps: IHeaderProps) => (
       <HeaderCell
         value={cellProps.column.title}
@@ -84,7 +84,7 @@ const defaultTableHeaders: IDataColumn[] = [
       />
     ),
     disableSortBy: true,
-    accessor: "macosHosts",
+    accessor: "macosNodes",
     Cell: ({ cell: { value: aggregateCount } }: ICellProps) => {
       return (
         <div className="disk-encryption-table__aggregate-table-data">
@@ -94,7 +94,7 @@ const defaultTableHeaders: IDataColumn[] = [
     },
   },
   {
-    title: "Windows hosts",
+    title: "Windows nodes",
     Header: (cellProps: IHeaderProps) => (
       <HeaderCell
         value={cellProps.column.title}
@@ -103,13 +103,13 @@ const defaultTableHeaders: IDataColumn[] = [
       />
     ),
     disableSortBy: true,
-    accessor: "windowsHosts",
+    accessor: "windowsNodes",
     Cell: ({ cell: { value: aggregateCount } }: ICellProps) => {
       return <TextCell value={aggregateCount} />;
     },
   },
   {
-    title: "Linux hosts",
+    title: "Linux nodes",
     Header: (cellProps: IHeaderProps) => (
       <HeaderCell
         value={cellProps.column.title}
@@ -118,7 +118,7 @@ const defaultTableHeaders: IDataColumn[] = [
       />
     ),
     disableSortBy: true,
-    accessor: "linuxHosts",
+    accessor: "linuxNodes",
     Cell: ({ cell: { value: aggregateCount } }: ICellProps) => {
       return <TextCell value={aggregateCount} />;
     },
@@ -126,13 +126,13 @@ const defaultTableHeaders: IDataColumn[] = [
   {
     title: "",
     Header: "",
-    accessor: "linkToFilteredHosts",
+    accessor: "linkToFilteredNodes",
     disableSortBy: true,
     Cell: (cellProps: ICellProps) => {
       return (
         <>
           {cellProps.row.original && (
-            <ViewAllHostsLink className="view-hosts-link" rowHover noLink />
+            <ViewAllNodesLink className="view-nodes-link" rowHover noLink />
           )}
         </>
       );
@@ -150,14 +150,14 @@ const STATUS_CELL_VALUES: Record<DiskEncryptionStatus, IStatusCellValue> = {
     statusName: "success",
     value: "verified",
     tooltip:
-      "These hosts turned disk encryption on and sent their key to Mdmlab. Mdmlab verified with osquery.",
+      "These nodes turned disk encryption on and sent their key to Mdmlab. Mdmlab verified with osquery.",
   },
   verifying: {
     displayName: "Verifying",
     statusName: "successPartial",
     value: "verifying",
     tooltip:
-      "These hosts acknowledged the MDM command to turn on disk encryption. Mdmlab is verifying with " +
+      "These nodes acknowledged the MDM command to turn on disk encryption. Mdmlab is verifying with " +
       "osquery and retrieving the disk encryption key. This may take up to one hour.",
   },
   action_required: {
@@ -176,7 +176,7 @@ const STATUS_CELL_VALUES: Record<DiskEncryptionStatus, IStatusCellValue> = {
     statusName: "pendingPartial",
     value: "enforcing",
     tooltip:
-      "These hosts will receive the MDM command to turn on disk encryption when the hosts come online.",
+      "These nodes will receive the MDM command to turn on disk encryption when the nodes come online.",
   },
   failed: {
     displayName: "Failed",
@@ -188,7 +188,7 @@ const STATUS_CELL_VALUES: Record<DiskEncryptionStatus, IStatusCellValue> = {
     statusName: "pendingPartial",
     value: "removing_enforcement",
     tooltip:
-      "These hosts will receive the MDM command to turn off disk encryption when the hosts come online.",
+      "These nodes will receive the MDM command to turn off disk encryption when the nodes come online.",
   },
 };
 
@@ -213,9 +213,9 @@ export const generateTableData = (
     statusAggregate: IDiskEncryptionStatusAggregate
   ) => ({
     status: STATUS_CELL_VALUES[status],
-    macosHosts: statusAggregate.macos,
-    windowsHosts: statusAggregate.windows,
-    linuxHosts: statusAggregate.linux,
+    macosNodes: statusAggregate.macos,
+    windowsNodes: statusAggregate.windows,
+    linuxNodes: statusAggregate.linux,
     teamId: currentTeamId,
   });
 

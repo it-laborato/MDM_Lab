@@ -3,7 +3,7 @@ import { ITeam } from "interfaces/team";
 
 export const teamStub: ITeam = {
   description: "This is the test team",
-  host_count: 10,
+  node_count: 10,
   id: 1,
   name: "Test Team",
   user_count: 5,

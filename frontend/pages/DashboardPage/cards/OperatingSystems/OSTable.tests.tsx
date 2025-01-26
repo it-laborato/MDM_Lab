@@ -11,7 +11,7 @@ describe("Dashboard OS table", () => {
         osVersions={[
           {
             os_version_id: 1,
-            hosts_count: 234,
+            nodes_count: 234,
             name: "Microsoft Windows 11 Enterprise 22H2 10.0.22621",
             name_only: "Microsoft Windows 11 Enterprise 22H2",
             version: "1.2.3",
@@ -20,7 +20,7 @@ describe("Dashboard OS table", () => {
           },
           {
             os_version_id: 2,
-            hosts_count: 567,
+            nodes_count: 567,
             name: "Microsoft Windows 11 Pro 22H2 10.0.22621.3880",
             name_only: "Microsoft Windows 11 Pro 22H2",
             version: "4.5.6",
@@ -46,7 +46,7 @@ describe("Dashboard OS table", () => {
     );
 
     expect(screen.getByText("Version")).toBeInTheDocument();
-    expect(screen.getByText("Hosts")).toBeInTheDocument();
+    expect(screen.getByText("Nodes")).toBeInTheDocument();
     expect(screen.getByText("1.2.3")).toBeInTheDocument();
     expect(screen.getByText("234")).toBeInTheDocument();
     expect(screen.getByText("4.5.6")).toBeInTheDocument();

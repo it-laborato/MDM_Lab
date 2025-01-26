@@ -12,14 +12,14 @@ describe("QueryReport", () => {
         query_id: 1,
         results: [
           {
-            host_id: 1,
-            host_name: "host1",
+            node_id: 1,
+            node_name: "node1",
             last_fetched: "2020-01-01",
             columns: { col1: "value1", col2: "value2" },
           },
           {
-            host_id: 2,
-            host_name: "host2",
+            node_id: 2,
+            node_name: "node2",
             last_fetched: "2020-01-01",
             columns: { col1: "value3", col2: "value4" },
           },
@@ -41,14 +41,14 @@ describe("QueryReport", () => {
         query_id: 1,
         results: [
           {
-            host_id: 1,
-            host_name: "host1",
+            node_id: 1,
+            node_name: "node1",
             last_fetched: "2021-01-01",
             columns: { col1: "value1", col2: "value2" },
           },
           {
-            host_id: 2,
-            host_name: "host2",
+            node_id: 2,
+            node_name: "node2",
             last_fetched: "2021-01-01",
             columns: {
               col1: "value1",
@@ -73,14 +73,14 @@ describe("QueryReport", () => {
         query_id: 1,
         results: [
           {
-            host_id: 1,
-            host_name: "host1",
+            node_id: 1,
+            node_name: "node1",
             last_fetched: "2021-01-01",
             columns: { col1: "value1", col2: "value2" },
           },
           {
-            host_id: 2,
-            host_name: "host2",
+            node_id: 2,
+            node_name: "node2",
             last_fetched: "2021-01-01",
             columns: { col1: "value1", col2: "value2" },
           },

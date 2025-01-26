@@ -39,7 +39,7 @@ const LastUpdatedText = ({
 
   const tooltipContent = customTooltipText || (
     <>
-      Mdmlab periodically queries all hosts <br />
+      Mdmlab periodically queries all nodes <br />
       to retrieve {whatToRetrieve}.
     </>
   );

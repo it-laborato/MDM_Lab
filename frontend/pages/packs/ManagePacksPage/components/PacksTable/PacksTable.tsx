@@ -61,7 +61,7 @@ const PacksTable = ({
       graphicName: "empty-packs",
       header: "You don't have any packs",
       info:
-        "Query packs allow you to schedule recurring queries for your hosts.",
+        "Query packs allow you to schedule recurring queries for your nodes.",
       primaryButton: (
         <Button
           variant="brand"

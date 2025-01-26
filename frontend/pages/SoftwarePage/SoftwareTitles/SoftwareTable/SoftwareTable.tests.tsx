@@ -48,7 +48,7 @@ describe("Software table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         softwareFilter="allSoftware"
         vulnFilters={{
           vulnerable: false,
@@ -92,7 +92,7 @@ describe("Software table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         softwareFilter="allSoftware"
         vulnFilters={{
           vulnerable: false,
@@ -140,7 +140,7 @@ describe("Software table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         softwareFilter="allSoftware"
         vulnFilters={{
           vulnerable: false,
@@ -185,7 +185,7 @@ describe("Software table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         softwareFilter="installableSoftware" // Dropdown applied
         vulnFilters={{
           vulnerable: false,
@@ -234,7 +234,7 @@ describe("Software table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         softwareFilter="allSoftware"
         vulnFilters={{
           vulnerable: true,

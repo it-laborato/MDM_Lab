@@ -26,19 +26,19 @@ describe("Munki card", () => {
           id: 476,
           name: name1,
           type: "warning",
-          hosts_count: 2345,
+          nodes_count: 2345,
         },
         {
           id: 555,
           name: name2,
           type: "error",
-          hosts_count: 5432,
+          nodes_count: 5432,
         },
       ] as IMunkiIssuesAggregate[],
       [
         {
           version: "1.2.3",
-          hosts_count: 37,
+          nodes_count: 37,
         },
       ] as IMunkiVersionsAggregate[],
       undefined,
@@ -67,7 +67,7 @@ describe("Munki card", () => {
     // Issues tab
     expect(screen.getByText("Issue")).toBeInTheDocument();
     expect(screen.getByText("Type")).toBeInTheDocument();
-    expect(screen.getByText("Hosts")).toBeInTheDocument();
+    expect(screen.getByText("Nodes")).toBeInTheDocument();
 
     expect(screen.getAllByText(name1)).toHaveLength(2);
     expect(screen.getByText("Warning")).toBeInTheDocument();
@@ -82,7 +82,7 @@ describe("Munki card", () => {
     await user.click(screen.getByText("Versions"));
 
     expect(screen.getByText("Version")).toBeInTheDocument();
-    expect(screen.getByText("Hosts")).toBeInTheDocument();
+    expect(screen.getByText("Nodes")).toBeInTheDocument();
     expect(screen.getByText("1.2.3")).toBeInTheDocument();
     expect(screen.getByText("37")).toBeInTheDocument();
   });

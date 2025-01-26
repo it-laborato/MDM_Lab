@@ -130,7 +130,7 @@ const OperatingSystems = ({
     setTitleDetail?.(null);
   }, [isLoading, osInfo, setTitleDescription, setTitleDetail]);
 
-  // Renders opaque information as host information is loading
+  // Renders opaque information as node information is loading
   const opacity = isLoading || !showTitle ? { opacity: 0 } : { opacity: 1 };
 
   return (

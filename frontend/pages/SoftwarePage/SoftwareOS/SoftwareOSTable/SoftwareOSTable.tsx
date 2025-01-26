@@ -162,13 +162,13 @@ const SoftwareOSTable = ({
   }, [data, router, teamId]);
 
   const handleRowSelect = (row: IRowProps) => {
-    const hostsBySoftwareParams = {
+    const nodesBySoftwareParams = {
       os_version_id: row.original.os_version_id,
       team_id: teamId,
     };
 
     const path = `${PATHS.MANAGE_HOSTS}?${buildQueryStringFromParams(
-      hostsBySoftwareParams
+      nodesBySoftwareParams
     )}`;
 
     router.push(path);
@@ -193,7 +193,7 @@ const SoftwareOSTable = ({
               <>
                 The last time software data was <br />
                 updated, including vulnerabilities <br />
-                and host counts.
+                and node counts.
               </>
             }
           />

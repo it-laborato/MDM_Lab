@@ -32,10 +32,10 @@ describe("TargetLabelSelector component", () => {
     expect(screen.getByRole("checkbox", { name: "label 2" })).toBeVisible();
   });
 
-  it("does not render the custom target selector when the target type is 'All hosts'", () => {
+  it("does not render the custom target selector when the target type is 'All nodes'", () => {
     render(
       <TargetLabelSelector
-        selectedTargetType="All hosts"
+        selectedTargetType="All nodes"
         selectedCustomTarget="labelIncludeAny"
         customTargetOptions={[
           { value: "labelIncludeAny", label: "Include any" },

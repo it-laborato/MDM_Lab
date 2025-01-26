@@ -148,7 +148,7 @@ const EditTeamsAbmModal = ({
             wrapperClassName={`${baseClass}__form-field form-field--macos`}
             tooltip={
               <>
-                macOS hosts are automatically added to this team in Mdmlab when
+                macOS nodes are automatically added to this team in Mdmlab when
                 they appear in Apple Business Manager.
               </>
             }
@@ -164,7 +164,7 @@ const EditTeamsAbmModal = ({
             wrapperClassName={`${baseClass}__form-field form-field--ios`}
             tooltip={
               <>
-                iOS hosts are automatically added to this team in Mdmlab when
+                iOS nodes are automatically added to this team in Mdmlab when
                 they appear in Apple Business Manager.
               </>
             }
@@ -180,7 +180,7 @@ const EditTeamsAbmModal = ({
             wrapperClassName={`${baseClass}__form-field form-field--ipados`}
             tooltip={
               <>
-                iPadOS hosts are automatically added to this team in Mdmlab when
+                iPadOS nodes are automatically added to this team in Mdmlab when
                 they appear in Apple Business Manager.
               </>
             }

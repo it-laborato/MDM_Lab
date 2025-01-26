@@ -170,7 +170,7 @@ const generateTableHeaders = ({
                 {viewingTeamScope &&
                   // inherited
                   cellProps.row.original.team_id !== currentTeamId && (
-                    <InheritedBadge tooltipContent="This query runs on all hosts." />
+                    <InheritedBadge tooltipContent="This query runs on all nodes." />
                   )}
               </>
             }
@@ -228,7 +228,7 @@ const generateTableHeaders = ({
       Header: () => {
         return (
           <div>
-            <TooltipWrapper tipContent="The average performance impact across all hosts.">
+            <TooltipWrapper tipContent="The average performance impact across all nodes.">
               Performance impact
             </TooltipWrapper>
           </div>

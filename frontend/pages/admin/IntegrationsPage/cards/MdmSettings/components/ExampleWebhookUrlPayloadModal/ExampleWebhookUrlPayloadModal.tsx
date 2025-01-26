@@ -8,7 +8,7 @@ const baseClass = "example-webhook-url-payload-modal";
 
 const EXAMPLE_PAYLOAD = {
   timestamp: "0000-00-00T00:00:00Z",
-  host: {
+  node: {
     id: 1,
     uuid: "1234-5678-9101-1121",
     hardware_serial: "V2RG6Y7VYL",

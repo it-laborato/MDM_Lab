@@ -6,7 +6,7 @@ import { useErrorHandler } from "react-error-boundary";
 import { AppContext } from "context/app";
 import { PolicyContext } from "context/policy";
 import useTeamIdParam from "hooks/useTeamIdParam";
-import { IHost, IHostResponse } from "interfaces/host";
+import { INode, INodeResponse } from "interfaces/node";
 import { ILabel } from "interfaces/label";
 import {
   IPolicyFormData,
@@ -21,7 +21,7 @@ import {
 } from "interfaces/team";
 import globalPoliciesAPI from "services/entities/global_policies";
 import teamPoliciesAPI from "services/entities/team_policies";
-import hostAPI from "services/entities/hosts";
+import nodeAPI from "services/entities/nodes";
 import statusAPI from "services/entities/status";
 import { DOCUMENT_TITLE_SUFFIX, LIVE_POLICY_STEPS } from "utilities/constants";
 
@@ -41,7 +41,7 @@ interface IPolicyPageProps {
   location: {
     pathname: string;
     search: string;
-    query: { host_ids: string; team_id: string };
+    query: { node_ids: string; team_id: string };
     hash?: string;
   };
 }
@@ -140,7 +140,7 @@ const PolicyPage = ({
 
   const [step, setStep] = useState(LIVE_POLICY_STEPS[1]);
   const [selectedTargets, setSelectedTargets] = useState<ITarget[]>([]);
-  const [targetedHosts, setTargetedHosts] = useState<IHost[]>([]);
+  const [targetedNodes, setTargetedNodes] = useState<INode[]>([]);
   const [targetedLabels, setTargetedLabels] = useState<ILabel[]>([]);
   const [targetedTeams, setTargetedTeams] = useState<ITeam[]>([]);
   const [targetsTotalCount, setTargetsTotalCount] = useState(0);
@@ -184,18 +184,18 @@ const PolicyPage = ({
     }
   );
 
-  useQuery<IHostResponse, Error, IHost>(
-    "hostFromURL",
+  useQuery<INodeResponse, Error, INode>(
+    "nodeFromURL",
     () =>
-      hostAPI.loadHostDetails(parseInt(location.query.host_ids as string, 10)), // TODO(sarah): What should happen if this doesn't parse (e.g. the string is "foo")? Also, note that "1,2,3" parses as 1.
+      nodeAPI.loadNodeDetails(parseInt(location.query.node_ids as string, 10)), // TODO(sarah): What should happen if this doesn't parse (e.g. the string is "foo")? Also, note that "1,2,3" parses as 1.
     {
-      enabled: isRouteOk && !!location.query.host_ids,
+      enabled: isRouteOk && !!location.query.node_ids,
       retry: false,
-      select: (data: IHostResponse) => data.host,
-      onSuccess: (host) => {
+      select: (data: INodeResponse) => data.node,
+      onSuccess: (node) => {
         const targets = selectedTargets;
-        host.target_type = "hosts";
-        targets.push(host);
+        node.target_type = "nodes";
+        targets.push(node);
         setSelectedTargets([...targets]);
       },
     }
@@ -309,14 +309,14 @@ const PolicyPage = ({
     const step2Opts = {
       baseClass,
       selectedTargets,
-      targetedHosts,
+      targetedNodes,
       targetedLabels,
       targetedTeams,
       targetsTotalCount,
       goToQueryEditor: () => setStep(LIVE_POLICY_STEPS[1]),
       goToRunQuery: () => setStep(LIVE_POLICY_STEPS[3]),
       setSelectedTargets,
-      setTargetedHosts,
+      setTargetedNodes,
       setTargetedLabels,
       setTargetedTeams,
       setTargetsTotalCount,

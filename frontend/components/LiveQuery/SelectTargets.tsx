@@ -5,7 +5,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 import { AppContext } from "context/app";
 
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 import { ILabel, ILabelSummary } from "interfaces/label";
 import {
   ITarget,
@@ -38,7 +38,7 @@ import TooltipWrapper from "components/TooltipWrapper";
 import Icon from "components/Icon";
 import SearchField from "components/forms/fields/SearchField";
 import RevealButton from "components/buttons/RevealButton";
-import { generateTableHeaders } from "./TargetsInput/TargetsInputHostsTableConfig";
+import { generateTableHeaders } from "./TargetsInput/TargetsInputNodesTableConfig";
 
 interface ITargetPillSelectorProps {
   entity: ISelectLabel | ISelectTeam;
@@ -52,7 +52,7 @@ interface ISelectTargetsProps {
   baseClass: string;
   queryId?: number | null;
   selectedTargets: ITarget[];
-  targetedHosts: IHost[];
+  targetedNodes: INode[];
   targetedLabels: ILabel[];
   targetedTeams: ITeam[];
   goToQueryEditor: () => void;
@@ -60,7 +60,7 @@ interface ISelectTargetsProps {
   setSelectedTargets: // TODO: Refactor policy targets to streamline selectedTargets/selectedTargetsByType
   | React.Dispatch<React.SetStateAction<ITarget[]>> // Used for policies page level useState hook
     | ((value: ITarget[]) => void); // Used for queries app level QueryContext
-  setTargetedHosts: React.Dispatch<React.SetStateAction<IHost[]>>;
+  setTargetedNodes: React.Dispatch<React.SetStateAction<INode[]>>;
   setTargetedLabels: React.Dispatch<React.SetStateAction<ILabel[]>>;
   setTargetedTeams: React.Dispatch<React.SetStateAction<ITeam[]>>;
   setTargetsTotalCount: React.Dispatch<React.SetStateAction<number>>;
@@ -69,7 +69,7 @@ interface ISelectTargetsProps {
 }
 
 interface ILabelsByType {
-  allHosts: ILabelSummary[];
+  allNodes: ILabelSummary[];
   platforms: ILabelSummary[];
   other: ILabelSummary[];
 }
@@ -91,13 +91,13 @@ const isBuiltInLabel = (
 ): entity is ISelectLabel & { label_type: "builtin" } => {
   return "label_type" in entity && entity.label_type === "builtin";
 };
-const isAllHosts = (entity: ISelectTargetsEntity) =>
+const isAllNodes = (entity: ISelectTargetsEntity) =>
   "label_type" in entity &&
-  entity.name === "All Hosts" &&
+  entity.name === "All Nodes" &&
   entity.label_type === "builtin";
 
 const parseLabels = (list?: ILabelSummary[]) => {
-  const allHosts = list?.filter((l) => l.name === "All Hosts") || [];
+  const allNodes = list?.filter((l) => l.name === "All Nodes") || [];
   const platforms =
     list?.filter(
       (l) =>
@@ -108,7 +108,7 @@ const parseLabels = (list?: ILabelSummary[]) => {
     ) || [];
   const other = list?.filter((l) => l.label_type === "regular") || [];
 
-  return { allHosts, platforms, other };
+  return { allNodes, platforms, other };
 };
 
 /** Returns the index at which the sum of the names in the list exceed the maximum character length */
@@ -157,13 +157,13 @@ const SelectTargets = ({
   baseClass,
   queryId,
   selectedTargets,
-  targetedHosts,
+  targetedNodes,
   targetedLabels,
   targetedTeams,
   goToQueryEditor,
   goToRunQuery,
   setSelectedTargets,
-  setTargetedHosts,
+  setTargetedNodes,
   setTargetedLabels,
   setTargetedTeams,
   setTargetsTotalCount,
@@ -174,7 +174,7 @@ const SelectTargets = ({
   const { isPremiumTier, isOnGlobalTeam, currentUser } = useContext(AppContext);
 
   const [labels, setLabels] = useState<ILabelsByType | null>(null);
-  const [searchTextHosts, setSearchTextHosts] = useState("");
+  const [searchTextNodes, setSearchTextNodes] = useState("");
   const [searchTextTeams, setSearchTextTeams] = useState("");
   const [searchTextLabels, setSearchTextLabels] = useState("");
   const [isTeamListExpanded, setIsTeamListExpanded] = useState(false);
@@ -222,7 +222,7 @@ const SelectTargets = ({
     data: searchResults,
     isFetching: isFetchingSearchResults,
     error: errorSearchResults,
-  } = useQuery<ITargetsSearchResponse, Error, IHost[], ITargetsQueryKey[]>(
+  } = useQuery<ITargetsSearchResponse, Error, INode[], ITargetsQueryKey[]>(
     [
       {
         scope: "targetsSearch", // TODO: shared scope?
@@ -236,11 +236,11 @@ const SelectTargets = ({
       return targetsAPI.search({
         query_id: query_id || null,
         query: query || "",
-        excluded_host_ids: selected?.hosts || null,
+        excluded_node_ids: selected?.nodes || null,
       });
     },
     {
-      select: (data) => data.hosts,
+      select: (data) => data.nodes,
       enabled: !!debouncedSearchText,
       // staleTime: 5000, // TODO: try stale time if further performance optimizations are needed
     }
@@ -322,9 +322,9 @@ const SelectTargets = ({
   ]);
 
   useEffect(() => {
-    const selected = [...targetedHosts, ...targetedLabels, ...targetedTeams];
+    const selected = [...targetedNodes, ...targetedLabels, ...targetedTeams];
     setSelectedTargets(selected);
-  }, [targetedHosts, targetedLabels, targetedTeams]);
+  }, [targetedNodes, targetedLabels, targetedTeams]);
 
   useEffect(() => {
     labelsSummary && setLabels(parseLabels(labelsSummary));
@@ -332,8 +332,8 @@ const SelectTargets = ({
 
   useEffect(() => {
     setIsDebouncing(true);
-    debounceSearch(searchTextHosts);
-  }, [searchTextHosts]);
+    debounceSearch(searchTextNodes);
+  }, [searchTextNodes]);
 
   const handleClickCancel = () => {
     goToQueryEditor();
@@ -353,25 +353,25 @@ const SelectTargets = ({
     // if the length remains the same, the target was not previously selected so we want to add it now
     prevTargets.length === newTargets.length && newTargets.push(selectedEntity);
 
-    // Logic when to deselect/select "all hosts" when using more granulated filters
-    // If "all hosts" is selected
-    if (isAllHosts(selectedEntity)) {
-      // and "all hosts" is already selected, deselect it
-      if (targetedLabels.some((t) => isAllHosts(t))) {
+    // Logic when to deselect/select "all nodes" when using more granulated filters
+    // If "all nodes" is selected
+    if (isAllNodes(selectedEntity)) {
+      // and "all nodes" is already selected, deselect it
+      if (targetedLabels.some((t) => isAllNodes(t))) {
         newTargets = [];
-      } // else deselect everything but "all hosts"
+      } // else deselect everything but "all nodes"
       else {
         newTargets = [selectedEntity];
       }
       setTargetedTeams([]);
-      setTargetedHosts([]);
+      setTargetedNodes([]);
     }
-    // else deselect "all hosts"
+    // else deselect "all nodes"
     else {
-      if (targetedLabels.some((t) => isAllHosts(t))) {
+      if (targetedLabels.some((t) => isAllNodes(t))) {
         setTargetedLabels([]);
       }
-      newTargets = newTargets.filter((t) => !isAllHosts(t));
+      newTargets = newTargets.filter((t) => !isAllNodes(t));
     }
 
     isLabel(selectedEntity)
@@ -379,20 +379,20 @@ const SelectTargets = ({
       : setTargetedTeams(newTargets as ITeam[]);
   };
 
-  const handleRowSelect = (row: Row<IHost>) => {
-    setTargetedHosts((prevHosts) => prevHosts.concat(row.original));
-    setSearchTextHosts("");
+  const handleRowSelect = (row: Row<INode>) => {
+    setTargetedNodes((prevNodes) => prevNodes.concat(row.original));
+    setSearchTextNodes("");
 
-    // If "all hosts" is already selected when using host target picker, deselect "all hosts"
-    if (targetedLabels.some((t) => isAllHosts(t))) {
+    // If "all nodes" is already selected when using node target picker, deselect "all nodes"
+    if (targetedLabels.some((t) => isAllNodes(t))) {
       setTargetedLabels([]);
     }
   };
 
-  const handleRowRemove = (row: Row<IHost>) => {
-    const removedHost = row.original;
-    setTargetedHosts((prevHosts) =>
-      prevHosts.filter((h) => h.id !== removedHost.id)
+  const handleRowRemove = (row: Row<INode>) => {
+    const removedNode = row.original;
+    setTargetedNodes((prevNodes) =>
+      prevNodes.filter((h) => h.id !== removedNode.id)
     );
   };
 
@@ -508,7 +508,7 @@ const SelectTargets = ({
             centered={false}
             className={`${baseClass}__count-spinner`}
           />
-          <i style={{ color: "#8b8fa2" }}>Counting hosts</i>
+          <i style={{ color: "#8b8fa2" }}>Counting nodes</i>
         </>
       );
     }
@@ -516,7 +516,7 @@ const SelectTargets = ({
     if (errorCounts) {
       return (
         <b style={{ color: "#d66c7b", margin: 0 }}>
-          There was a problem counting hosts. Please try again later.
+          There was a problem counting nodes. Please try again later.
         </b>
       );
     }
@@ -530,7 +530,7 @@ const SelectTargets = ({
       if (total === 0 || online === 0) {
         return 0;
       }
-      // If at least 1 host is online, displays <1% instead of 0%
+      // If at least 1 node is online, displays <1% instead of 0%
       const roundPercentage =
         Math.round((online / total) * 100) === 0
           ? "<1"
@@ -540,14 +540,14 @@ const SelectTargets = ({
 
     return (
       <>
-        <b>{total.toLocaleString()}</b>&nbsp;host
+        <b>{total.toLocaleString()}</b>&nbsp;node
         {total > 1 || total === 0 ? `s` : ``} targeted&nbsp; (
         {onlinePercentage()}
         %&nbsp;
         <TooltipWrapper
           tipContent={
             <>
-              Hosts are online if they <br />
+              Nodes are online if they <br />
               have recently checked <br />
               into Mdmlab.
             </>
@@ -570,7 +570,7 @@ const SelectTargets = ({
   }
 
   const resultsTableConfig = generateTableHeaders();
-  const selectedHostsTableConfig = generateTableHeaders(handleRowRemove);
+  const selectedNodesTableConfig = generateTableHeaders(handleRowRemove);
 
   // Filter out observer teams that break live query/policy API
   const filterTeamObserverTeams = () => {
@@ -605,8 +605,8 @@ const SelectTargets = ({
     <div className={`${baseClass}__wrapper`}>
       <h1>Select targets</h1>
       <div className={`${baseClass}__target-selectors`}>
-        {!!labels?.allHosts.length &&
-          renderTargetEntitySection("", labels.allHosts)}
+        {!!labels?.allNodes.length &&
+          renderTargetEntitySection("", labels.allNodes)}
         {!!labels?.platforms?.length &&
           renderTargetEntitySection("Platforms", labels.platforms)}
         {!!teams?.length &&
@@ -622,13 +622,13 @@ const SelectTargets = ({
       <TargetsInput
         autofocus
         searchResultsTableConfig={resultsTableConfig}
-        selectedHostsTableConifg={selectedHostsTableConfig}
-        searchText={searchTextHosts}
+        selectedNodesTableConifg={selectedNodesTableConfig}
+        searchText={searchTextNodes}
         searchResults={searchResults || []}
         isTargetsLoading={isFetchingSearchResults || isDebouncing}
-        targetedHosts={targetedHosts}
+        targetedNodes={targetedNodes}
         hasFetchError={!!errorSearchResults}
-        setSearchText={setSearchTextHosts}
+        setSearchText={setSearchTextNodes}
         handleRowSelect={handleRowSelect}
         disablePagination
       />

@@ -53,7 +53,7 @@ export const VulnsNotSupported = ({
   platformText,
 }: IVulnsNotSupportedProps) => (
   <EmptyTable
-    header="Vulnerabilities are not supported for this type of host"
+    header="Vulnerabilities are not supported for this type of node"
     info={
       <>
         Interested in vulnerabilities in {platformText ?? "this platform"}?{" "}
@@ -92,14 +92,14 @@ const SoftwareVulnerabilitiesTable = ({
   const classNames = classnames(baseClass, className);
 
   const handleRowSelect = (row: IRowProps) => {
-    const hostsBySoftwareParams = {
+    const nodesBySoftwareParams = {
       vulnerability: row.original.cve,
       team_id: teamIdForApi,
     };
 
-    const path = hostsBySoftwareParams
+    const path = nodesBySoftwareParams
       ? `${PATHS.MANAGE_HOSTS}?${buildQueryStringFromParams(
-          hostsBySoftwareParams
+          nodesBySoftwareParams
         )}`
       : PATHS.MANAGE_HOSTS;
 

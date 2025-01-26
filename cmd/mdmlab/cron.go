@@ -707,8 +707,8 @@ func newWorkerIntegrationsSchedule(
 	// we clear it even if we fail to load the app config, not a likely scenario
 	// in our test environments for the needs of forced failures.
 	if !strings.Contains(appConfig.ServerSettings.ServerURL, "mdmlabdm") {
-		os.Unsetenv("FLEET_JIRA_CLIENT_FORCED_FAILURES")
-		os.Unsetenv("FLEET_ZENDESK_CLIENT_FORCED_FAILURES")
+		os.Unsetenv("MDM_LAB_JIRA_CLIENT_FORCED_FAILURES")
+		os.Unsetenv("MDM_LAB_ZENDESK_CLIENT_FORCED_FAILURES")
 	}
 
 	s := schedule.New(
@@ -750,7 +750,7 @@ func newJiraClient(opts *externalsvc.JiraOptions) (worker.JiraClient, error) {
 	// create client wrappers to introduce forced failures if configured
 	// to do so via the environment variable.
 	// format is "<modulo number>;<cve1>,<cve2>,<cve3>,..."
-	failerClient := newFailerClient(os.Getenv("FLEET_JIRA_CLIENT_FORCED_FAILURES"))
+	failerClient := newFailerClient(os.Getenv("MDM_LAB_JIRA_CLIENT_FORCED_FAILURES"))
 	if failerClient != nil {
 		failerClient.JiraClient = client
 		return failerClient, nil
@@ -767,7 +767,7 @@ func newZendeskClient(opts *externalsvc.ZendeskOptions) (worker.ZendeskClient, e
 	// create client wrappers to introduce forced failures if configured
 	// to do so via the environment variable.
 	// format is "<modulo number>;<cve1>,<cve2>,<cve3>,..."
-	failerClient := newFailerClient(os.Getenv("FLEET_ZENDESK_CLIENT_FORCED_FAILURES"))
+	failerClient := newFailerClient(os.Getenv("MDM_LAB_ZENDESK_CLIENT_FORCED_FAILURES"))
 	if failerClient != nil {
 		failerClient.ZendeskClient = client
 		return failerClient, nil
@@ -1255,11 +1255,11 @@ func newMDMAPNsPusher(
 	const name = string(mdmlab.CronAppleMDMAPNsPusher)
 
 	interval := 1 * time.Minute
-	if intervalEnv := os.Getenv("FLEET_DEV_CUSTOM_APNS_PUSHER_INTERVAL"); intervalEnv != "" {
+	if intervalEnv := os.Getenv("MDM_LAB_DEV_CUSTOM_APNS_PUSHER_INTERVAL"); intervalEnv != "" {
 		var err error
 		interval, err = time.ParseDuration(intervalEnv)
 		if err != nil {
-			level.Warn(logger).Log("msg", "invalid duration provided for FLEET_DEV_CUSTOM_APNS_PUSHER_INTERVAL, using default interval")
+			level.Warn(logger).Log("msg", "invalid duration provided for MDM_LAB_DEV_CUSTOM_APNS_PUSHER_INTERVAL, using default interval")
 			interval = 1 * time.Minute
 		}
 	}

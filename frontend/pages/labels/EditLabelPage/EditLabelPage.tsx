@@ -5,10 +5,10 @@ import { AxiosError } from "axios";
 
 import PATHS from "router/paths";
 import labelsAPI, { IGetLabelResonse } from "services/entities/labels";
-import hostAPI from "services/entities/hosts";
+import nodeAPI from "services/entities/nodes";
 import { DEFAULT_USE_QUERY_OPTIONS } from "utilities/constants";
 import { ILabel } from "interfaces/label";
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 import { NotificationContext } from "context/notification";
 
 import MainContent from "components/MainContent";
@@ -49,21 +49,21 @@ const EditLabelPage = ({ routeParams, router }: IEditLabelPageProps) => {
     }
   );
 
-  // TODO: clean this up when API allows getting hosts by
-  // host ids in a single request. We need to make another request when
-  // the label is manual to get the host data for the targeted hosts.
+  // TODO: clean this up when API allows getting nodes by
+  // node ids in a single request. We need to make another request when
+  // the label is manual to get the node data for the targeted nodes.
   const {
-    data: targetedHosts,
-    isLoading: isLoadingHosts,
-    isError: isErrorHosts,
-  } = useQuery<{ host: IHost }[], AxiosError, IHost[]>(
-    ["hosts"],
+    data: targetedNodes,
+    isLoading: isLoadingNodes,
+    isError: isErrorNodes,
+  } = useQuery<{ node: INode }[], AxiosError, INode[]>(
+    ["nodes"],
     () => {
-      return hostAPI.getHosts(label?.host_ids ?? []);
+      return nodeAPI.getNodes(label?.node_ids ?? []);
     },
     {
       ...DEFAULT_USE_QUERY_OPTIONS,
-      select: (res) => res.map((host) => host.host),
+      select: (res) => res.map((node) => node.node),
       enabled: label?.label_membership_type === "manual",
     }
   );
@@ -85,11 +85,11 @@ const EditLabelPage = ({ routeParams, router }: IEditLabelPageProps) => {
   };
 
   const renderContent = () => {
-    if (isLoadingLabel || isLoadingHosts) {
+    if (isLoadingLabel || isLoadingNodes) {
       return <Spinner />;
     }
 
-    if (isErrorLabel || isErrorHosts) {
+    if (isErrorLabel || isErrorNodes) {
       return <DataError />;
     }
 
@@ -116,10 +116,10 @@ const EditLabelPage = ({ routeParams, router }: IEditLabelPageProps) => {
       />
     ) : (
       <ManualLabelForm
-        key={targetedHosts?.toString()}
+        key={targetedNodes?.toString()}
         defaultName={label.name}
         defaultDescription={label.description}
-        defaultTargetedHosts={targetedHosts}
+        defaultTargetedNodes={targetedNodes}
         onSave={onUpdateLabel}
         onCancel={onCancelEdit}
       />

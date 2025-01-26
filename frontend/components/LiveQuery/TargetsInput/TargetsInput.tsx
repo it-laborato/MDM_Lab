@@ -2,24 +2,24 @@ import React, { useRef, useEffect, useState } from "react";
 import { Row } from "react-table";
 import { isEmpty, pullAllBy } from "lodash";
 
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 import { HOSTS_SEARCH_BOX_PLACEHOLDER } from "utilities/constants";
 
 import DataError from "components/DataError";
 // @ts-ignore
 import InputFieldWithIcon from "components/forms/fields/InputFieldWithIcon/InputFieldWithIcon";
 import TableContainer from "components/TableContainer";
-import { ITargestInputHostTableConfig } from "./TargetsInputHostsTableConfig";
+import { ITargestInputNodeTableConfig } from "./TargetsInputNodesTableConfig";
 
 interface ITargetsInputProps {
   tabIndex?: number;
   searchText: string;
-  searchResults: IHost[];
+  searchResults: INode[];
   isTargetsLoading: boolean;
   hasFetchError: boolean;
-  targetedHosts: IHost[];
-  searchResultsTableConfig: ITargestInputHostTableConfig[];
-  selectedHostsTableConifg: ITargestInputHostTableConfig[];
+  targetedNodes: INode[];
+  searchResultsTableConfig: ITargestInputNodeTableConfig[];
+  selectedNodesTableConifg: ITargestInputNodeTableConfig[];
   /** disabled pagination for the results table. The pagination is currently
    * client side pagination. Defaults to `false` */
   disablePagination?: boolean;
@@ -27,12 +27,12 @@ interface ITargetsInputProps {
   placeholder?: string;
   autofocus?: boolean;
   setSearchText: (value: string) => void;
-  handleRowSelect: (value: Row<IHost>) => void;
+  handleRowSelect: (value: Row<INode>) => void;
 }
 
 const baseClass = "targets-input";
 
-const DEFAULT_LABEL = "Target specific hosts";
+const DEFAULT_LABEL = "Target specific nodes";
 
 const TargetsInput = ({
   tabIndex,
@@ -40,9 +40,9 @@ const TargetsInput = ({
   searchResults,
   isTargetsLoading,
   hasFetchError,
-  targetedHosts,
+  targetedNodes,
   searchResultsTableConfig,
-  selectedHostsTableConifg,
+  selectedNodesTableConifg,
   disablePagination = false,
   label = DEFAULT_LABEL,
   placeholder = HOSTS_SEARCH_BOX_PLACEHOLDER,
@@ -51,8 +51,8 @@ const TargetsInput = ({
   setSearchText,
 }: ITargetsInputProps): JSX.Element => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const dropdownHosts =
-    searchResults && pullAllBy(searchResults, targetedHosts, "display_name");
+  const dropdownNodes =
+    searchResults && pullAllBy(searchResults, targetedNodes, "display_name");
 
   const [isActiveSearch, setIsActiveSearch] = useState(false);
 
@@ -98,19 +98,19 @@ const TargetsInput = ({
         />
         {isActiveSearch && (
           <div
-            className={`${baseClass}__hosts-search-dropdown`}
+            className={`${baseClass}__nodes-search-dropdown`}
             ref={dropdownRef}
           >
-            <TableContainer<Row<IHost>>
+            <TableContainer<Row<INode>>
               columnConfigs={searchResultsTableConfig}
-              data={dropdownHosts}
+              data={dropdownNodes}
               isLoading={isTargetsLoading}
               emptyComponent={() => (
                 <div className="empty-search">
                   <div className="empty-search__inner">
-                    <h4>No matching hosts.</h4>
+                    <h4>No matching nodes.</h4>
                     <p>
-                      Expecting to see hosts? Try again in a few seconds as the
+                      Expecting to see nodes? Try again in a few seconds as the
                       system catches up.
                     </p>
                   </div>
@@ -127,14 +127,14 @@ const TargetsInput = ({
           </div>
         )}
         {isSearchError && (
-          <div className={`${baseClass}__hosts-search-dropdown`}>
+          <div className={`${baseClass}__nodes-search-dropdown`}>
             <DataError />
           </div>
         )}
-        <div className={`${baseClass}__hosts-selected-table`}>
+        <div className={`${baseClass}__nodes-selected-table`}>
           <TableContainer
-            columnConfigs={selectedHostsTableConifg}
-            data={targetedHosts}
+            columnConfigs={selectedNodesTableConifg}
+            data={targetedNodes}
             isLoading={false}
             showMarkAllPages={false}
             isAllPagesSelected={false}

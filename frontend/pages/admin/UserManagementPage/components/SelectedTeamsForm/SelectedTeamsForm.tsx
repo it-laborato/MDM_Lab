@@ -49,7 +49,7 @@ const generateSelectedTeamData = (
       selectedTeams.push({
         description: teamItem.description,
         id: teamItem.id,
-        host_count: teamItem.host_count,
+        node_count: teamItem.node_count,
         user_count: teamItem.user_count,
         name: teamItem.name,
         role: teamItem.role,

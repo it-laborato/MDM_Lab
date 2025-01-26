@@ -12,21 +12,21 @@ import {
   internallyTruncateText,
 } from "utilities/helpers";
 
-const _unshiftHostname = <T extends object>(columns: Column<T>[]) => {
+const _unshiftNodename = <T extends object>(columns: Column<T>[]) => {
   const newHeaders = [...columns];
   const displayNameIndex = columns.findIndex(
-    (h) => h.id === "host_display_name"
+    (h) => h.id === "node_display_name"
   );
   if (displayNameIndex >= 0) {
-    // remove hostname header from headers
+    // remove nodename header from headers
     const [displayNameHeader] = newHeaders.splice(displayNameIndex, 1);
     // reformat title and insert at start of headers array
-    newHeaders.unshift({ ...displayNameHeader, id: "Host" });
+    newHeaders.unshift({ ...displayNameHeader, id: "Node" });
   }
-  // TODO: Remove after v5 when host_hostname is removed rom API response.
-  const hostNameIndex = columns.findIndex((h) => h.id === "host_hostname");
-  if (hostNameIndex >= 0) {
-    newHeaders.splice(hostNameIndex, 1);
+  // TODO: Remove after v5 when node_nodename is removed rom API response.
+  const nodeNameIndex = columns.findIndex((h) => h.id === "node_nodename");
+  if (nodeNameIndex >= 0) {
+    newHeaders.splice(nodeNameIndex, 1);
   }
   // end remove
   return newHeaders;
@@ -65,7 +65,7 @@ const generateColumnConfigsFromRows = <T extends Record<keyof T, unknown>>(
       };
     }
   );
-  return _unshiftHostname(columnConfigs);
+  return _unshiftNodename(columnConfigs);
 };
 
 export default generateColumnConfigsFromRows;

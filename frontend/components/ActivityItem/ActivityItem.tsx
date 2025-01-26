@@ -65,7 +65,7 @@ interface IActivityItemProps {
 }
 
 /**
- * A wrapper that will render all the common elements of a host activity item.
+ * A wrapper that will render all the common elements of a node activity item.
  * This includes the avatar, the created at timestamp, and a dash to separate
  * the activity items. The `children` will be the specific details of the activity
  * implemented in the component that uses this wrapper.

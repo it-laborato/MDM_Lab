@@ -19,11 +19,11 @@ const REQUEST_RESPONSE_MAPPINGS: IResponses = {
     // response is list of all labels excluding any expensive data operations (UI only needs label
     // name and id for this page)
     "labels?summary=true": RESPONSES.labels,
-    // request query string is hostname, uuid, or mac address; response is host detail excluding any
+    // request query string is nodename, uuid, or mac address; response is node detail excluding any
     // expensive data operations
-    "targets?query={*}": RESPONSES.hosts,
+    "targets?query={*}": RESPONSES.nodes,
     // "SchedulableQueries" to be used in developing frontend for #7765
-    "hosts/12345": RESPONSES.hostDetailsiOS,
+    "nodes/12345": RESPONSES.nodeDetailsiOS,
     queries: RESPONSES.globalQueries,
     "queries/1": RESPONSES.globalQuery1,
     "queries/2": RESPONSES.globalQuery2,
@@ -34,7 +34,7 @@ const REQUEST_RESPONSE_MAPPINGS: IResponses = {
     "queries/7": RESPONSES.globalQuery6,
     "queries/8": RESPONSES.teamQuery2,
     "queries?team_id=13": RESPONSES.teamQueries,
-    "queries/113/report?order_key=host_name&order_direction=asc":
+    "queries/113/report?order_key=node_name&order_direction=asc":
       RESPONSES.queryReport,
   },
   POST: {

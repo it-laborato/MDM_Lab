@@ -1,8 +1,8 @@
 import endpoints from "utilities/endpoints";
 import {
   IActivity,
-  IHostPastActivity,
-  IHostUpcomingActivity,
+  INodePastActivity,
+  INodeUpcomingActivity,
 } from "interfaces/activity";
 import sendRequest from "services";
 import { buildQueryStringFromParams } from "utilities/url";
@@ -20,17 +20,17 @@ export interface IActivitiesResponse {
   };
 }
 
-export interface IHostPastActivitiesResponse {
-  activities: IHostPastActivity[] | null;
+export interface INodePastActivitiesResponse {
+  activities: INodePastActivity[] | null;
   meta: {
     has_next_results: boolean;
     has_previous_results: boolean;
   };
 }
 
-export interface IHostUpcomingActivitiesResponse {
+export interface INodeUpcomingActivitiesResponse {
   count: number;
-  activities: IHostUpcomingActivity[] | null;
+  activities: INodeUpcomingActivity[] | null;
   meta: {
     has_next_results: boolean;
     has_previous_results: boolean;
@@ -58,11 +58,11 @@ export default {
     return sendRequest("GET", path);
   },
 
-  getHostPastActivities: (
+  getNodePastActivities: (
     id: number,
     page = DEFAULT_PAGE,
     perPage = DEFAULT_PAGE_SIZE
-  ): Promise<IHostPastActivitiesResponse> => {
+  ): Promise<INodePastActivitiesResponse> => {
     const { HOST_PAST_ACTIVITIES } = endpoints;
 
     const queryParams = {
@@ -77,11 +77,11 @@ export default {
     return sendRequest("GET", path);
   },
 
-  getHostUpcomingActivities: (
+  getNodeUpcomingActivities: (
     id: number,
     page = DEFAULT_PAGE,
     perPage = DEFAULT_PAGE_SIZE
-  ): Promise<IHostUpcomingActivitiesResponse> => {
+  ): Promise<INodeUpcomingActivitiesResponse> => {
     const { HOST_UPCOMING_ACTIVITIES } = endpoints;
 
     const queryParams = {
@@ -96,8 +96,8 @@ export default {
     return sendRequest("GET", path);
   },
 
-  cancelHostActivity: (hostId: number, uuid: string) => {
+  cancelNodeActivity: (nodeId: number, uuid: string) => {
     const { HOST_CANCEL_ACTIVITY } = endpoints;
-    return sendRequest("DELETE", HOST_CANCEL_ACTIVITY(hostId, uuid));
+    return sendRequest("DELETE", HOST_CANCEL_ACTIVITY(nodeId, uuid));
   },
 };

@@ -16,7 +16,7 @@ import { QueryParams } from "utilities/url";
 import { DEFAULT_USE_QUERY_OPTIONS } from "utilities/constants";
 import usersAPI from "services/entities/users";
 import configAPI from "services/entities/config";
-import hostCountAPI from "services/entities/host_count";
+import nodeCountAPI from "services/entities/node_count";
 import mdmAppleBMAPI, {
   IGetAbmTokensResponse,
 } from "services/entities/mdm_apple_bm";
@@ -85,7 +85,7 @@ const App = ({ children, location }: IAppProps): JSX.Element => {
     setAPNsExpiry,
     setVppExpiry,
     setSandboxExpiry,
-    setNoSandboxHosts,
+    setNoSandboxNodes,
   } = useContext(AppContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -150,9 +150,9 @@ const App = ({ children, location }: IAppProps): JSX.Element => {
       if (configResponse.sandbox_enabled) {
         const timestamp = await configAPI.loadSandboxExpiry();
         setSandboxExpiry(timestamp as string);
-        const hostCount = await hostCountAPI.load({});
-        const noSandboxHosts = hostCount.count === 0;
-        setNoSandboxHosts(noSandboxHosts);
+        const nodeCount = await nodeCountAPI.load({});
+        const noSandboxNodes = nodeCount.count === 0;
+        setNoSandboxNodes(noSandboxNodes);
       }
       setConfig(configResponse);
     } catch (error) {

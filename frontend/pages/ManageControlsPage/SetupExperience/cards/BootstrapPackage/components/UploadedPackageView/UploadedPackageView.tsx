@@ -25,7 +25,7 @@ const UploadedPackageView = ({
     <div className={baseClass}>
       <BootstrapPackageTable currentTeamId={currentTeamId} />
       <p>
-        This package is automatically installed on hosts that automatically
+        This package is automatically installed on nodes that automatically
         enroll to this team. Delete the package to upload a new one.{" "}
         <CustomLink
           url="https://mdmlabdm.com/docs/using-mdmlab/mdm-macos-setup-experience"

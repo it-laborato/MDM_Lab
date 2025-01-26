@@ -160,7 +160,7 @@ const generateTableHeaders = (
                 <>
                   This is the average performance
                   <br />
-                  impact across all hosts where
+                  impact across all nodes where
                   <br />
                   this query was scheduled.
                 </>

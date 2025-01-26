@@ -10,7 +10,7 @@ import { buildQueryStringFromParams } from "utilities/url";
 import diskEncryptionAPI, {
   IDiskEncryptionSummaryResponse,
 } from "services/entities/disk_encryption";
-import { HOSTS_QUERY_PARAMS } from "services/entities/hosts";
+import { HOSTS_QUERY_PARAMS } from "services/entities/nodes";
 
 import TableContainer from "components/TableContainer";
 import EmptyTable from "components/EmptyTable";

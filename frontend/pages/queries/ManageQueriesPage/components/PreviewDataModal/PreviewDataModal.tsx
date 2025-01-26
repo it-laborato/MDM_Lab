@@ -26,7 +26,7 @@ const PreviewDataModal = ({
       },
     ],
     name: "xxxxxxx",
-    hostIdentifier: "xxxxxxx",
+    nodeIdentifier: "xxxxxxx",
     calendarTime: "xxx xxx  x xx:xx:xx xxxx UTC",
     unixTime: "xxxxxxxxx",
     epoch: "xxxxxxxxx",
@@ -50,7 +50,7 @@ const PreviewDataModal = ({
             to the following JSON:
           </TooltipWrapper>
         </p>
-        <div className={`${baseClass}__host-status-webhook-preview`}>
+        <div className={`${baseClass}__node-status-webhook-preview`}>
           <pre dangerouslySetInnerHTML={{ __html: syntaxHighlight(json) }} />
         </div>
         <div className="modal-cta-wrap">

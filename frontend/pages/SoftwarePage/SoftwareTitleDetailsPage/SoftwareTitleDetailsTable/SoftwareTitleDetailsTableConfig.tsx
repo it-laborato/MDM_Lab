@@ -9,7 +9,7 @@ import PATHS from "router/paths";
 import { buildQueryStringFromParams } from "utilities/url";
 
 import TextCell from "components/TableContainer/DataTable/TextCell";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import LinkCell from "components/TableContainer/DataTable/LinkCell";
 
 import VulnerabilitiesCell from "../../components/VulnerabilitiesCell";
@@ -105,10 +105,10 @@ const generateSoftwareTitleDetailsTableConfig = ({
       },
     },
     {
-      title: "Hosts",
-      Header: "Hosts",
+      title: "Nodes",
+      Header: "Nodes",
       disableSortBy: true,
-      accessor: "hosts_count",
+      accessor: "nodes_count",
       Cell: (cellProps: INumberCellProps): JSX.Element => (
         <TextCell value={cellProps.cell.value} />
       ),
@@ -116,13 +116,13 @@ const generateSoftwareTitleDetailsTableConfig = ({
     {
       title: "",
       Header: "",
-      accessor: "linkToFilteredHosts",
+      accessor: "linkToFilteredNodes",
       disableSortBy: true,
       Cell: (cellProps: ICellProps) => {
         return (
           <>
             {cellProps.row.original && (
-              <ViewAllHostsLink
+              <ViewAllNodesLink
                 queryParams={{
                   software_version_id: cellProps.row.original.id,
                   team_id: teamId,

@@ -10,7 +10,7 @@ import HeaderCell from "components/TableContainer/DataTable/HeaderCell/HeaderCel
 
 import {
   getUniqueColsAreNumTypeFromRows,
-  humanHostLastSeen,
+  humanNodeLastSeen,
   internallyTruncateText,
 } from "utilities/helpers";
 import { IHeaderProps, IWebSocketData } from "interfaces/datatable_config";
@@ -19,21 +19,21 @@ type IQueryReportTableColumnConfig = Column<IWebSocketData>;
 type ITableHeaderProps = IHeaderProps<IWebSocketData>;
 type ITableCellProps = CellProps<IWebSocketData, string | unknown>;
 
-const _unshiftHostname = (headers: IQueryReportTableColumnConfig[]) => {
+const _unshiftNodename = (headers: IQueryReportTableColumnConfig[]) => {
   const newHeaders = [...headers];
   const displayNameIndex = headers.findIndex(
-    (h) => h.id === "host_display_name"
+    (h) => h.id === "node_display_name"
   );
   if (displayNameIndex >= 0) {
-    // remove hostname header from headers
+    // remove nodename header from headers
     const [displayNameHeader] = newHeaders.splice(displayNameIndex, 1);
     // reformat title and insert at start of headers array
-    newHeaders.unshift({ ...displayNameHeader, id: "Host" });
+    newHeaders.unshift({ ...displayNameHeader, id: "Node" });
   }
-  // TODO: Remove after v5 when host_hostname is removed rom API response.
-  const hostNameIndex = headers.findIndex((h) => h.id === "host_hostname");
-  if (hostNameIndex >= 0) {
-    newHeaders.splice(hostNameIndex, 1);
+  // TODO: Remove after v5 when node_nodename is removed rom API response.
+  const nodeNameIndex = headers.findIndex((h) => h.id === "node_nodename");
+  if (nodeNameIndex >= 0) {
+    newHeaders.splice(nodeNameIndex, 1);
   }
   // end remove
   return newHeaders;
@@ -67,7 +67,7 @@ const generateReportColumnConfigsFromResults = (
 
         // Sorts chronologically by date, but UI displays readable last fetched
         if (cellProps.column.id === "last_fetched") {
-          return <>{humanHostLastSeen(cellProps?.cell?.value)}</>;
+          return <>{humanNodeLastSeen(cellProps?.cell?.value)}</>;
         }
         // truncate columns longer than 300 characters
         const val = cellProps?.cell?.value;
@@ -85,7 +85,7 @@ const generateReportColumnConfigsFromResults = (
         : "caseInsensitive",
     };
   });
-  return _unshiftHostname(columnConfigs);
+  return _unshiftNodename(columnConfigs);
 };
 
 export default generateReportColumnConfigsFromResults;

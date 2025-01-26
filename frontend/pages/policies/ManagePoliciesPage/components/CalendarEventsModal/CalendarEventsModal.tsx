@@ -170,9 +170,9 @@ const CalendarEventsModal = ({
           dangerouslySetInnerHTML={{
             __html: syntaxHighlight({
               timestamp: "0000-00-00T00:00:00Z",
-              host_id: 1,
-              host_display_name: "Anna's MacBook Pro",
-              host_serial_number: "ABCD1234567890",
+              node_id: 1,
+              node_display_name: "Anna's MacBook Pro",
+              node_serial_number: "ABCD1234567890",
               failing_policies: [
                 {
                   id: 123,
@@ -223,7 +223,7 @@ const CalendarEventsModal = ({
           })}
         </ul>
         <span className="form-field__help-text">
-          A calendar event will be created for end users if one of their hosts
+          A calendar event will be created for end users if one of their nodes
           fail any of these policies.{" "}
           <CustomLink
             url="https://www.mdmlabdm.com/learn-more-about/calendar-events"
@@ -243,7 +243,7 @@ const CalendarEventsModal = ({
           <img src={CalendarPreview} alt="Calendar preview" />
         </a>
         <div>
-          To create calendar events for end users if their hosts fail policies,
+          To create calendar events for end users if their nodes fail policies,
           you must first connect Mdmlab to your Google Workspace service account.
         </div>
         <div>

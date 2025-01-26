@@ -14,7 +14,7 @@ interface IPreviewPayloadModalProps {
   onCancel: () => void;
 }
 
-interface IHostsAffected {
+interface INodesAffected {
   id: number;
   display_name: string;
   url: string;
@@ -22,7 +22,7 @@ interface IHostsAffected {
 }
 
 type IWebhookPayload = {
-  hosts_affected?: IHostsAffected[] | null;
+  nodes_affected?: INodesAffected[] | null;
 } & ISoftwareVulnerability;
 
 interface IJsonPayload {
@@ -44,17 +44,17 @@ const PreviewPayloadModal = ({
       cvss_score: 5.7,
       cisa_known_exploit: true,
       cve_published: "2014-10-10T00:00:00Z",
-      hosts_affected: [
+      nodes_affected: [
         {
           id: 1,
           display_name: "macbook-1",
-          url: "https://mdmlab.example.com/hosts/1",
+          url: "https://mdmlab.example.com/nodes/1",
           software_installed_paths: ["/usr/lib/some-path"],
         },
         {
           id: 2,
           display_name: "macbook-2",
-          url: "https://mdmlab.example.com/hosts/2",
+          url: "https://mdmlab.example.com/nodes/2",
         },
       ],
     },

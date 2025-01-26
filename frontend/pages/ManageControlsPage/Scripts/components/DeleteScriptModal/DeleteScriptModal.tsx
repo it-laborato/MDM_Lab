@@ -61,7 +61,7 @@ const DeleteScriptModal = ({
         <p>
           The script{" "}
           <span className={`${baseClass}__script-name`}>{scriptName}</span> will
-          run on pending hosts. After the script runs, its output and exit code
+          run on pending nodes. After the script runs, its output and exit code
           will appear in the activity feed.
         </p>
         <div className="modal-cta-wrap">

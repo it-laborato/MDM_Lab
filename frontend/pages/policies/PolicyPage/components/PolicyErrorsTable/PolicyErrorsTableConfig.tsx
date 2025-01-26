@@ -11,7 +11,7 @@ import TextCell from "components/TableContainer/DataTable/TextCell/TextCell";
 
 interface IHeaderProps {
   column: {
-    host: string;
+    node: string;
     isSortedDesc: boolean;
   };
 }
@@ -40,10 +40,10 @@ interface IDataColumn {
 const generateTableHeaders = (): IDataColumn[] => {
   const tableHeaders: IDataColumn[] = [
     {
-      title: "Host",
-      Header: "Host",
+      title: "Node",
+      Header: "Node",
       disableSortBy: true,
-      accessor: "host_display_name",
+      accessor: "node_display_name",
       Cell: (cellProps: ICellProps): JSX.Element => (
         <TextCell value={cellProps.cell.value} />
       ),
@@ -71,11 +71,11 @@ const generateTableHeaders = (): IDataColumn[] => {
 };
 
 const generateDataSet = memoize(
-  (policyHostsErrorsList: ICampaignError[] = []): ICampaignError[] => {
-    policyHostsErrorsList = policyHostsErrorsList.sort((a, b) =>
-      sortUtils.caseInsensitiveAsc(a.host_display_name, b.host_display_name)
+  (policyNodesErrorsList: ICampaignError[] = []): ICampaignError[] => {
+    policyNodesErrorsList = policyNodesErrorsList.sort((a, b) =>
+      sortUtils.caseInsensitiveAsc(a.node_display_name, b.node_display_name)
     );
-    return policyHostsErrorsList;
+    return policyNodesErrorsList;
   }
 );
 

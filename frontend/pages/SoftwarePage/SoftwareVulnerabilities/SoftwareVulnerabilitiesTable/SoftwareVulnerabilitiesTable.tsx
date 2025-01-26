@@ -185,13 +185,13 @@ const SoftwareVulnerabilitiesTable = ({
   };
 
   const handleRowSelect = (row: IRowProps) => {
-    const hostsByVulnerabilityParams = {
+    const nodesByVulnerabilityParams = {
       vulnerability: row.original.cve,
       team_id: teamId,
     };
 
     const path = `${PATHS.MANAGE_HOSTS}?${buildQueryStringFromParams(
-      hostsByVulnerabilityParams
+      nodesByVulnerabilityParams
     )}`;
 
     router.push(path);
@@ -212,7 +212,7 @@ const SoftwareVulnerabilitiesTable = ({
               <>
                 The last time software data was <br />
                 updated, including vulnerabilities <br />
-                and host counts.
+                and node counts.
               </>
             }
           />

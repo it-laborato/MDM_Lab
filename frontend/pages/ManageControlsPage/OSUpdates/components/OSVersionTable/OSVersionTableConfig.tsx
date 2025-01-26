@@ -3,7 +3,7 @@ import React from "react";
 import { IOperatingSystemVersion } from "interfaces/operating_system";
 
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import TextCell from "components/TableContainer/DataTable/TextCell";
 
 import OSTypeCell from "../OSTypeCell";
@@ -15,7 +15,7 @@ interface IOSTypeCellProps {
   };
 }
 
-interface IHostCellProps {
+interface INodeCellProps {
   row: {
     original: IOperatingSystemVersion;
   };
@@ -50,8 +50,8 @@ export const generateTableHeaders = (teamId: number) => {
       accessor: "version",
     },
     {
-      title: "Hosts",
-      accessor: "hosts_count",
+      title: "Nodes",
+      accessor: "nodes_count",
       disableSortBy: false,
       Header: (cellProps: IHeaderProps) => (
         <HeaderCell
@@ -59,28 +59,28 @@ export const generateTableHeaders = (teamId: number) => {
           isSortedDesc={cellProps.column.isSortedDesc}
         />
       ),
-      Cell: ({ row }: IHostCellProps): JSX.Element => {
-        const { hosts_count } = row.original;
-        return <TextCell value={hosts_count} />;
+      Cell: ({ row }: INodeCellProps): JSX.Element => {
+        const { nodes_count } = row.original;
+        return <TextCell value={nodes_count} />;
       },
     },
     {
       title: "",
       Header: "",
-      accessor: "linkToFilteredHosts",
+      accessor: "linkToFilteredNodes",
       disableSortBy: true,
       Cell: (cellProps: IOSTypeCellProps) => {
         return (
           <>
             {cellProps.row.original && (
-              <ViewAllHostsLink
+              <ViewAllNodesLink
                 queryParams={{
                   os_name: cellProps.row.original.name_only,
                   os_version: cellProps.row.original.version,
                   team_id: teamId,
                 }}
                 condensed
-                className="os-hosts-link"
+                className="os-nodes-link"
                 rowHover
               />
             )}

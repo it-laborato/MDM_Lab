@@ -30,14 +30,14 @@ const CSV_TITLE = "Query";
 
 const flattenResults = (results: IQueryReportResultRow[]) => {
   return results.map((result: IQueryReportResultRow) => {
-    const hostInfoColumns = {
-      host_display_name: result.host_name,
+    const nodeInfoColumns = {
+      node_display_name: result.node_name,
       last_fetched: result.last_fetched,
     };
 
-    // hostInfoColumns displays the host metadata that is returned with every query
+    // nodeInfoColumns displays the node metadata that is returned with every query
     // result.columns are the variable columns returned by the API that differ per query
-    return { ...hostInfoColumns, ...result.columns };
+    return { ...nodeInfoColumns, ...result.columns };
   });
 };
 

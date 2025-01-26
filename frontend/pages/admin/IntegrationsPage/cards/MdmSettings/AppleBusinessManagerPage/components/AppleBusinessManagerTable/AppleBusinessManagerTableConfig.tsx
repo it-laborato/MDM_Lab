@@ -95,7 +95,7 @@ export const generateTableConfig = (
           <TooltipWrapper
             tipContent={
               <>
-                macOS hosts are automatically added to this team in Mdmlab when
+                macOS nodes are automatically added to this team in Mdmlab when
                 they appear in Apple Business Manager.
               </>
             }
@@ -118,7 +118,7 @@ export const generateTableConfig = (
           <TooltipWrapper
             tipContent={
               <>
-                iOS hosts are automatically added to this team in Mdmlab when
+                iOS nodes are automatically added to this team in Mdmlab when
                 they appear in Apple Business Manager.
               </>
             }
@@ -141,7 +141,7 @@ export const generateTableConfig = (
           <TooltipWrapper
             tipContent={
               <>
-                iPadOS hosts are automatically added to this team in Mdmlab when
+                iPadOS nodes are automatically added to this team in Mdmlab when
                 they appear in Apple Business Manager.
               </>
             }

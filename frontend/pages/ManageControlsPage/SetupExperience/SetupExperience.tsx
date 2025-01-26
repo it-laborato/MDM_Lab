@@ -25,7 +25,7 @@ const SetupEmptyState = ({ router }: ISetupEmptyState) => {
 
   return (
     <EmptyTable
-      header="Setup experience for macOS hosts"
+      header="Setup experience for macOS nodes"
       info="Connect Mdmlab to the Apple Business Manager to get started."
       primaryButton={
         <Button variant="brand" onClick={onClickEmptyConnect}>
@@ -88,7 +88,7 @@ const SetupExperience = ({
   return (
     <div className={baseClass}>
       <p>
-        Customize the setup experience for macOS hosts that automatically enroll
+        Customize the setup experience for macOS nodes that automatically enroll
         in this team. Each step runs sequentially and will be required if
         enabled before the end user finishes setup.
       </p>

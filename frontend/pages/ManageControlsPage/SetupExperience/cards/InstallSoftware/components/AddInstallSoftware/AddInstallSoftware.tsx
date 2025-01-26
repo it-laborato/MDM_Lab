@@ -84,7 +84,7 @@ const AddInstallSoftware = ({
     <div className={baseClass}>
       <div className={`${baseClass}__description-container`}>
         <p className={`${baseClass}__description`}>
-          Install software on hosts that automatically enroll to Mdmlab.
+          Install software on nodes that automatically enroll to Mdmlab.
         </p>
         <CustomLink
           newTab

@@ -52,7 +52,7 @@ const DeleteAbmModal = ({
     >
       <>
         <p>
-          New hosts purchased in the <b>{tokenOrgName}</b> won&apos;t
+          New nodes purchased in the <b>{tokenOrgName}</b> won&apos;t
           automatically enroll to Mdmlab.{" "}
         </p>
         <p>

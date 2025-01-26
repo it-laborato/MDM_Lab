@@ -7,7 +7,7 @@ export type ISoftwareDropdownFilterVal =
   | "installableSoftware"
   | "selfServiceSoftware";
 
-export type IHostSoftwareDropdownFilterVal =
+export type INodeSoftwareDropdownFilterVal =
   | ISoftwareDropdownFilterVal
   | "vulnerableSoftware";
 
@@ -16,13 +16,13 @@ export const SOFTWARE_TITLES_DROPDOWN_OPTIONS = [
     disabled: false,
     label: "All software",
     value: "allSoftware",
-    helpText: "All software installed on your hosts.",
+    helpText: "All software installed on your nodes.",
   },
   {
     disabled: false,
     label: "Available for install",
     value: "installableSoftware",
-    helpText: "Software that can be installed on your hosts.",
+    helpText: "Software that can be installed on your nodes.",
   },
   {
     disabled: false,

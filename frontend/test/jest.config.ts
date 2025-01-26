@@ -39,7 +39,7 @@ const config: Config = {
   setupFilesAfterEnv: ["<rootDir>/frontend/test/test-setup.ts"],
   clearMocks: true,
   testEnvironmentOptions: {
-    url: "http://localhost:8080",
+    url: "http://localnode:8080",
     customExportConditions: [""],
   },
   transformIgnorePatterns: [`/node_modules/(?!(${esModules})/)`],

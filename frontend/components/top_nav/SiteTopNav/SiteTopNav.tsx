@@ -30,7 +30,7 @@ interface ISiteTopNavProps {
 // top nav links that match the expected UX.
 
 const REGEX_DETAIL_PAGES = {
-  HOST_DETAILS: /\/hosts\/\d+/i,
+  HOST_DETAILS: /\/nodes\/\d+/i,
   LABEL_EDIT: /\/labels\/\d+/i,
   LABEL_NEW: /\/labels\/new/i,
   PACK_EDIT: /\/packs\/\d+/i,
@@ -54,8 +54,8 @@ const REGEX_GLOBAL_PAGES = {
 
 const testDetailPage = (path: string, re: RegExp) => {
   if (re === REGEX_DETAIL_PAGES.LABEL_EDIT) {
-    // we want to match "/labels/10" but not "/hosts/manage/labels/10"
-    return path.match(re) && !path.match(/\/hosts\/manage\/labels\/\d+/); // we're using this approach because some browsers don't support regexp negative lookbehind
+    // we want to match "/labels/10" but not "/nodes/manage/labels/10"
+    return path.match(re) && !path.match(/\/nodes\/manage\/labels\/\d+/); // we're using this approach because some browsers don't support regexp negative lookbehind
   }
   return path.match(re);
 };
@@ -91,7 +91,7 @@ const SiteTopNav = ({
 
   const currentQueryParams = { ...query };
   if (isActiveGlobalPage || isActiveDetailPage) {
-    // detail pages (e.g., host details) and some manage pages (e.g., queries) aren't guaranteed to
+    // detail pages (e.g., node details) and some manage pages (e.g., queries) aren't guaranteed to
     // have a team_id in the URL that we can simply append to the top nav links so instead we need grab the team
     // id from context
     currentQueryParams.team_id =

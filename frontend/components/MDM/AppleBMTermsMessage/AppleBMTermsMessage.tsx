@@ -21,7 +21,7 @@ const AppleBMTermsMessage = () => {
         />
       }
     >
-      You can’t automatically enroll macOS, iOS, and iPadOS hosts until you
+      You can’t automatically enroll macOS, iOS, and iPadOS nodes until you
       accept the new terms and conditions for your Apple Business Manager (ABM).
       An ABM administrator can accept these terms.
     </InfoBanner>

@@ -8,7 +8,7 @@ export const CUSTOM_TARGET_OPTIONS: IDropdownOption[] = [
     label: "Include all",
     helpText: (
       <>
-        Profile will only be applied to hosts that <b>have all</b> of these
+        Profile will only be applied to nodes that <b>have all</b> of these
         labels.
       </>
     ),
@@ -19,7 +19,7 @@ export const CUSTOM_TARGET_OPTIONS: IDropdownOption[] = [
     label: "Include any",
     helpText: (
       <>
-        Profile will only be applied to hosts that <b>have any</b> of these
+        Profile will only be applied to nodes that <b>have any</b> of these
         labels.
       </>
     ),
@@ -30,7 +30,7 @@ export const CUSTOM_TARGET_OPTIONS: IDropdownOption[] = [
     label: "Exclude any",
     helpText: (
       <>
-        Profile will only be applied to hosts that <b>don&apos;t have any</b> of
+        Profile will only be applied to nodes that <b>don&apos;t have any</b> of
         these labels.
       </>
     ),

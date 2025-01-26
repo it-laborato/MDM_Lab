@@ -42,9 +42,9 @@ const RerunScriptModal = ({
         <p>
           This action will rerun script{" "}
           <span className={`${baseClass}__script-name`}>{scriptName}</span> on
-          all macOS hosts {messageSuffix}.
+          all macOS nodes {messageSuffix}.
         </p>
-        <p>This may cause the script to run more than once on some hosts.</p>
+        <p>This may cause the script to run more than once on some nodes.</p>
         <div className="modal-cta-wrap">
           <Button type="button" onClick={() => onRerun(scriptId)}>
             Rerun

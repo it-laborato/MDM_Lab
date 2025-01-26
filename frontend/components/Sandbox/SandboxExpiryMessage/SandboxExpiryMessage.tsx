@@ -9,33 +9,33 @@ const baseClass = "sandbox-expiry-message";
 
 interface ISandboxExpiryMessageProps {
   expiry: string;
-  noSandboxHosts?: boolean;
+  noSandboxNodes?: boolean;
 }
 
 const SandboxExpiryMessage = ({
   expiry,
-  noSandboxHosts,
+  noSandboxNodes,
 }: ISandboxExpiryMessageProps) => {
-  const openAddHostModal = () => {
+  const openAddNodeModal = () => {
     browserHistory.push(PATHS.MANAGE_HOSTS_ADD_HOSTS);
   };
 
-  if (noSandboxHosts) {
+  if (noSandboxNodes) {
     return (
       <div className={baseClass}>
         <p>Your Mdmlab Sandbox expires in {expiry}.</p>
         <div className={`${baseClass}__tip`}>
           <Icon name="lightbulb" size="large" />
           <p>
-            <b>Quick tip: </b> Enroll a host to get started.
+            <b>Quick tip: </b> Enroll a node to get started.
           </p>
           <form>
             <Button
-              onClick={openAddHostModal}
-              className={`${baseClass}__add-hosts`}
+              onClick={openAddNodeModal}
+              className={`${baseClass}__add-nodes`}
               variant="brand"
             >
-              <span>Add hosts</span>
+              <span>Add nodes</span>
             </Button>
           </form>
         </div>

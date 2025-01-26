@@ -45,8 +45,8 @@ const PolicyErrorsTable = ({
           variant: "text-icon",
         }}
         emptyComponent={() => (
-          <div className="no-hosts__inner">
-            <p>No hosts are online.</p>
+          <div className="no-nodes__inner">
+            <p>No nodes are online.</p>
           </div>
         )}
         onQueryChange={noop}

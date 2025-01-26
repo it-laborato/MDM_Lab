@@ -59,7 +59,7 @@ const QueryResults = ({
 }: IQueryResultsProps): JSX.Element => {
   const { lastEditedQueryBody } = useContext(QueryContext);
 
-  const { hosts_count: hostsCount, query_results: queryResults, errors } =
+  const { nodes_count: nodesCount, query_results: queryResults, errors } =
     campaign || {};
 
   const [navTabIndex, setNavTabIndex] = useState(0);
@@ -157,7 +157,7 @@ const QueryResults = ({
       <p className="no-results-message">
         Your live query returned no results.
         <span>
-          Expecting to see results? Check to see if the host
+          Expecting to see results? Check to see if the node
           {`${targetsTotalCount > 1 ? "s" : ""}`} you targeted reported
           &ldquo;Online&rdquo; or check out the &ldquo;Errors&rdquo; table.
         </span>
@@ -214,7 +214,7 @@ const QueryResults = ({
     return (
       <div className={`${baseClass}__results-table-container`}>
         <TableContainer
-          defaultSortHeader="host_display_name"
+          defaultSortHeader="node_display_name"
           columnConfigs={
             tableType === "results" ? resultsColumnConfigs : errorColumnConfigs
           }
@@ -264,7 +264,7 @@ const QueryResults = ({
   return (
     <div className={baseClass}>
       <QueryResultsHeading
-        respondedHosts={hostsCount.total}
+        respondedNodes={nodesCount.total}
         targetsTotalCount={targetsTotalCount}
         isQueryFinished={isQueryFinished}
         onClickDone={onQueryDone}
@@ -278,7 +278,7 @@ const QueryResults = ({
         >
           <div>
             <b>Results clipped.</b> A sample of this query&apos;s results and
-            errors is included below. Please target fewer hosts at once to build
+            errors is included below. Please target fewer nodes at once to build
             a full set of results.
           </div>
         </InfoBanner>

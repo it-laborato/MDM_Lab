@@ -20,7 +20,7 @@ import { IOSVersionsResponse } from "../services/entities/operating_systems";
 import { IOperatingSystemVersion } from "../interfaces/operating_system";
 
 const DEFAULT_SOFTWARE_MOCK: ISoftware = {
-  hosts_count: 1,
+  nodes_count: 1,
   id: 1,
   name: "mock software 1.app",
   version: "1.0.0",
@@ -78,7 +78,7 @@ const DEFAULT_SOFTWARE_VERSION_MOCK: ISoftwareVersion = {
   arch: "x86_64",
   generated_cpe: "cpe:test:app:1.2.3",
   vulnerabilities: [createMockSoftwareVulnerability()],
-  hosts_count: 1,
+  nodes_count: 1,
 };
 
 export const createMockSoftwareVersion = (
@@ -109,7 +109,7 @@ const DEFAULT_OS_VERSION_MOCK = {
   name_only: "macOS",
   version: "14.6.1",
   platform: "darwin",
-  hosts_count: 42,
+  nodes_count: 42,
   generated_cpes: [],
   vulnerabilities: [],
 };
@@ -162,7 +162,7 @@ const DEFAULT_SOFTWARE_TITLE_DETAILS_MOCK: ISoftwareTitleDetails = {
   software_package: null,
   app_store_app: null,
   source: "apps",
-  hosts_count: 1,
+  nodes_count: 1,
   versions: [createMockSoftwareTitleVersion()],
   bundle_identifier: "com.test.Desktop",
   versions_count: 1,
@@ -232,7 +232,7 @@ const DEFAULT_SOFTWARE_TITLE_MOCK: ISoftwareTitle = {
   name: "mock software 1.app",
   versions_count: 1,
   source: "apps",
-  hosts_count: 1,
+  nodes_count: 1,
   browser: "chrome",
   versions: [createMockSoftwareTitleVersion()],
   software_package: createMockSoftwarePackage(),

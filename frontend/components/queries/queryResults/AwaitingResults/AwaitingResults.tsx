@@ -10,7 +10,7 @@ const AwaitingResults = () => {
       graphicName="collecting-results"
       header="Phoning home..."
       info=" There are currently no results to your query. Please wait while we talk
-        to more hosts."
+        to more nodes."
       className={baseClass}
     />
   );

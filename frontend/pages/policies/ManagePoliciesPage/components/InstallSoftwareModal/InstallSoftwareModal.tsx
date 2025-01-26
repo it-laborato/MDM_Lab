@@ -124,7 +124,7 @@ const InstallSoftwareModal = ({
         perPage: SOFTWARE_TITLE_LIST_LENGTH,
         query: "",
         orderDirection: "desc",
-        orderKey: "hosts_count",
+        orderKey: "nodes_count",
         teamId,
         availableForInstall: true,
         platform: "darwin,windows,linux",
@@ -314,8 +314,8 @@ const InstallSoftwareModal = ({
             )}
           </ul>
           <span className="form-field__help-text">
-            If compatible with the host, the selected software will be installed
-            when hosts fail the policy. Host counts will reset when new software
+            If compatible with the node, the selected software will be installed
+            when nodes fail the policy. Node counts will reset when new software
             is selected.{" "}
             <CustomLink
               url="https://mdmlabdm.com/learn-more-about/policy-automation-install-software"

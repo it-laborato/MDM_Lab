@@ -68,8 +68,8 @@ describe("EditLabelPage", () => {
     render(<EditLabelPage {...routerProps} />);
 
     // waiting for the message to render
-    const selectHostsLabel = await screen.findByText("Select hosts");
+    const selectNodesLabel = await screen.findByText("Select nodes");
 
-    expect(selectHostsLabel).toBeInTheDocument();
+    expect(selectNodesLabel).toBeInTheDocument();
   });
 });

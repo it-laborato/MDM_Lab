@@ -17,7 +17,7 @@ const BootstrapPackagePreview = () => {
         The end user is allowed to continue to the next setup screen before the
         installation starts.
       </p>
-      <p>The package isn&apos;t installed on hosts that already enrolled.</p>
+      <p>The package isn&apos;t installed on nodes that already enrolled.</p>
       <img
         className={`${baseClass}__preview-img`}
         src={OsSetupPreview}

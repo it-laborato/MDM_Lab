@@ -85,14 +85,14 @@ interface ISetSandboxExpiryAction {
   sandboxExpiry: string;
 }
 
-interface ISetNoSandboxHostsAction {
+interface ISetNoSandboxNodesAction {
   type: ACTIONS.SET_NO_SANDBOX_HOSTS;
-  noSandboxHosts: boolean;
+  noSandboxNodes: boolean;
 }
 
-interface ISetFilteredHostsPathAction {
+interface ISetFilteredNodesPathAction {
   type: ACTIONS.SET_FILTERED_HOSTS_PATH;
-  filteredHostsPath: string;
+  filteredNodesPath: string;
 }
 
 interface ISetFilteredSoftwarePathAction {
@@ -120,8 +120,8 @@ type IAction =
   | ISetAPNsExpiryAction
   | ISetVppExpiryAction
   | ISetSandboxExpiryAction
-  | ISetNoSandboxHostsAction
-  | ISetFilteredHostsPathAction
+  | ISetNoSandboxNodesAction
+  | ISetFilteredNodesPathAction
   | ISetFilteredSoftwarePathAction
   | ISetFilteredQueriesPathAction
   | ISetFilteredPoliciesPathAction;
@@ -169,8 +169,8 @@ type InitialStateType = {
   apnsExpiry?: string;
   vppExpiry?: string;
   sandboxExpiry?: string;
-  noSandboxHosts?: boolean;
-  filteredHostsPath?: string;
+  noSandboxNodes?: boolean;
+  filteredNodesPath?: string;
   filteredSoftwarePath?: string;
   filteredQueriesPath?: string;
   filteredPoliciesPath?: string;
@@ -188,8 +188,8 @@ type InitialStateType = {
   setABMExpiry: (abmExpiry: IAbmExpiry) => void;
   setVppExpiry: (vppExpiry: string) => void;
   setSandboxExpiry: (sandboxExpiry: string) => void;
-  setNoSandboxHosts: (noSandboxHosts: boolean) => void;
-  setFilteredHostsPath: (filteredHostsPath: string) => void;
+  setNoSandboxNodes: (noSandboxNodes: boolean) => void;
+  setFilteredNodesPath: (filteredNodesPath: string) => void;
   setFilteredSoftwarePath: (filteredSoftwarePath: string) => void;
   setFilteredQueriesPath: (filteredQueriesPath: string) => void;
   setFilteredPoliciesPath: (filteredPoliciesPath: string) => void;
@@ -225,7 +225,7 @@ export const initialState = {
   isOnlyObserver: undefined,
   isObserverPlus: undefined,
   isNoAccess: undefined,
-  filteredHostsPath: undefined,
+  filteredNodesPath: undefined,
   filteredSoftwarePath: undefined,
   filteredQueriesPath: undefined,
   filteredPoliciesPath: undefined,
@@ -246,15 +246,15 @@ export const initialState = {
   setABMExpiry: () => null,
   setVppExpiry: () => null,
   setSandboxExpiry: () => null,
-  setNoSandboxHosts: () => null,
-  setFilteredHostsPath: () => null,
+  setNoSandboxNodes: () => null,
+  setFilteredNodesPath: () => null,
   setFilteredSoftwarePath: () => null,
   setFilteredQueriesPath: () => null,
   setFilteredPoliciesPath: () => null,
 };
 
 const detectPreview = () => {
-  return window.location.origin === "http://localhost:1337";
+  return window.location.origin === "http://localnode:1337";
 };
 
 // helper function - this is run every
@@ -407,17 +407,17 @@ const reducer = (state: InitialStateType, action: IAction) => {
       };
     }
     case ACTIONS.SET_NO_SANDBOX_HOSTS: {
-      const { noSandboxHosts } = action;
+      const { noSandboxNodes } = action;
       return {
         ...state,
-        noSandboxHosts,
+        noSandboxNodes,
       };
     }
     case ACTIONS.SET_FILTERED_HOSTS_PATH: {
-      const { filteredHostsPath } = action;
+      const { filteredNodesPath } = action;
       return {
         ...state,
-        filteredHostsPath,
+        filteredNodesPath,
       };
     }
     case ACTIONS.SET_FILTERED_SOFTWARE_PATH: {
@@ -470,8 +470,8 @@ const AppProvider = ({ children }: Props): JSX.Element => {
       willAppleBmExpire: state.willAppleBmExpire,
       willApplePnsExpire: state.willApplePnsExpire,
       willVppExpire: state.willVppExpire,
-      noSandboxHosts: state.noSandboxHosts,
-      filteredHostsPath: state.filteredHostsPath,
+      noSandboxNodes: state.noSandboxNodes,
+      filteredNodesPath: state.filteredNodesPath,
       filteredSoftwarePath: state.filteredSoftwarePath,
       filteredQueriesPath: state.filteredQueriesPath,
       filteredPoliciesPath: state.filteredPoliciesPath,
@@ -536,14 +536,14 @@ const AppProvider = ({ children }: Props): JSX.Element => {
       setSandboxExpiry: (sandboxExpiry: string) => {
         dispatch({ type: ACTIONS.SET_SANDBOX_EXPIRY, sandboxExpiry });
       },
-      setNoSandboxHosts: (noSandboxHosts: boolean) => {
+      setNoSandboxNodes: (noSandboxNodes: boolean) => {
         dispatch({
           type: ACTIONS.SET_NO_SANDBOX_HOSTS,
-          noSandboxHosts,
+          noSandboxNodes,
         });
       },
-      setFilteredHostsPath: (filteredHostsPath: string) => {
-        dispatch({ type: ACTIONS.SET_FILTERED_HOSTS_PATH, filteredHostsPath });
+      setFilteredNodesPath: (filteredNodesPath: string) => {
+        dispatch({ type: ACTIONS.SET_FILTERED_HOSTS_PATH, filteredNodesPath });
       },
       setFilteredSoftwarePath: (filteredSoftwarePath: string) => {
         dispatch({
@@ -573,7 +573,7 @@ const AppProvider = ({ children }: Props): JSX.Element => {
       state.currentTeam,
       state.currentUser,
       state.enrollSecret,
-      state.filteredHostsPath,
+      state.filteredNodesPath,
       state.filteredPoliciesPath,
       state.filteredQueriesPath,
       state.filteredSoftwarePath,
@@ -601,7 +601,7 @@ const AppProvider = ({ children }: Props): JSX.Element => {
       state.isVppExpired,
       state.isWindowsMdmEnabledAndConfigured,
       state.needsAbmTermsRenewal,
-      state.noSandboxHosts,
+      state.noSandboxNodes,
       state.sandboxExpiry,
       state.vppExpiry,
       state.willAppleBmExpire,

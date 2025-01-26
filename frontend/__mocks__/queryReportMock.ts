@@ -4,8 +4,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
   query_id: 31,
   results: [
     {
-      host_id: 1,
-      host_name: "foo",
+      node_id: 1,
+      node_name: "foo",
       last_fetched: "2021-01-19T17:08:31Z",
       columns: {
         model: "Razer Viper",
@@ -14,8 +14,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 1,
-      host_name: "foo",
+      node_id: 1,
+      node_name: "foo",
       last_fetched: "2021-01-19T17:08:31Z",
       columns: {
         model: "USB Keyboard",
@@ -23,8 +23,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "USB Reciever",
@@ -32,8 +32,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "USB Keyboard",
@@ -41,8 +41,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "YubiKey OTP+FIDO+CCID",
@@ -50,8 +50,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "Lenovo USB Optical Mouse",
@@ -59,8 +59,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "Lenovo Traditional USB Keyboard",
@@ -68,8 +68,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "Display Audio",
@@ -77,8 +77,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "USB-C Digital AV Multiport Adapter",
@@ -87,8 +87,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "USB Reciever",
@@ -96,8 +96,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "USB-C Digital AV Multiport Adapter",
@@ -106,8 +106,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 2,
-      host_name: "bar",
+      node_id: 2,
+      node_name: "bar",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "USB Reciever",
@@ -115,8 +115,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 3,
-      host_name: "zoo",
+      node_id: 3,
+      node_name: "zoo",
       last_fetched: "2022-04-09T17:20:00Z",
       columns: {
         model: "Logitech Webcam C925e",
@@ -124,8 +124,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 3,
-      host_name: "zoo",
+      node_id: 3,
+      node_name: "zoo",
       last_fetched: "2022-04-09T17:20:00Z",
       columns: {
         model: "Display Audio",
@@ -133,8 +133,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 3,
-      host_name: "zoo",
+      node_id: 3,
+      node_name: "zoo",
       last_fetched: "2022-04-09T17:20:00Z",
       columns: {
         model: "Ambient Light Sensor",
@@ -142,8 +142,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 3,
-      host_name: "zoo",
+      node_id: 3,
+      node_name: "zoo",
       last_fetched: "2022-04-09T17:20:00Z",
       columns: {
         model: "DELL Laser Mouse",
@@ -151,8 +151,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 7,
-      host_name: "Rachel's Magnificent Testing Computer of All Computers",
+      node_id: 7,
+      node_name: "Rachel's Magnificent Testing Computer of All Computers",
       last_fetched: "2023-09-21T19:03:30Z",
       columns: {
         model: "AppleUSBVHCIBCE Root Hub Simulation",
@@ -160,8 +160,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 7,
-      host_name: "Rachel's Magnificent Testing Computer of All Computers",
+      node_id: 7,
+      node_name: "Rachel's Magnificent Testing Computer of All Computers",
       last_fetched: "2023-09-21T19:03:30Z",
       columns: {
         model: "QuickFire Rapid keyboard",
@@ -170,8 +170,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 7,
-      host_name: "Rachel's Magnificent Testing Computer of All Computers",
+      node_id: 7,
+      node_name: "Rachel's Magnificent Testing Computer of All Computers",
       last_fetched: "2023-09-21T19:03:30Z",
       columns: {
         model: "Lenovo USB Optical Mouse",
@@ -179,8 +179,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 7,
-      host_name: "Rachel's Magnificent Testing Computer of All Computers",
+      node_id: 7,
+      node_name: "Rachel's Magnificent Testing Computer of All Computers",
       last_fetched: "2023-09-21T19:03:30Z",
       columns: {
         model: "YubiKey FIDO+CCID",
@@ -188,8 +188,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 4,
-      host_name: "car",
+      node_id: 4,
+      node_name: "car",
       last_fetched: "2023-01-14T12:40:30Z",
       columns: {
         model: "USB2.0 Hub",
@@ -197,8 +197,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 8,
-      host_name: "apple man",
+      node_id: 8,
+      node_name: "apple man",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "FaceTime HD Camera (Display)",
@@ -207,8 +207,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 8,
-      host_name: "apple man",
+      node_id: 8,
+      node_name: "apple man",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "Apple Internal Keyboard / Trackpad",
@@ -217,8 +217,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 8,
-      host_name: "apple man",
+      node_id: 8,
+      node_name: "apple man",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "Apple Thunderbolt Display",
@@ -227,8 +227,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 8,
-      host_name: "apple man",
+      node_id: 8,
+      node_name: "apple man",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "AppleUSBXHCI Root Hub Simulation",
@@ -237,8 +237,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 8,
-      host_name: "apple man",
+      node_id: 8,
+      node_name: "apple man",
       last_fetched: "2021-01-19T17:20:00Z",
       columns: {
         model: "Apple T2 Controller",
@@ -247,8 +247,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 5,
-      host_name: "choo",
+      node_id: 5,
+      node_name: "choo",
       last_fetched: "2023-09-03T03:40:30Z",
       columns: {
         model: "4-Port USB 2.0 Hub",
@@ -256,8 +256,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 5,
-      host_name: "choo",
+      node_id: 5,
+      node_name: "choo",
       last_fetched: "2023-09-03T03:40:30Z",
       columns: {
         model: "USB 10_100_1000 LAN",
@@ -265,8 +265,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 5,
-      host_name: "choo",
+      node_id: 5,
+      node_name: "choo",
       last_fetched: "2023-09-03T03:40:30Z",
       columns: {
         model: "Display Audio",
@@ -274,8 +274,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 5,
-      host_name: "choo",
+      node_id: 5,
+      node_name: "choo",
       last_fetched: "2023-09-03T03:40:30Z",
       columns: {
         model: "USB Mouse",
@@ -283,8 +283,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 5,
-      host_name: "choo",
+      node_id: 5,
+      node_name: "choo",
       last_fetched: "2023-09-03T03:40:30Z",
       columns: {
         model: "USB Audio",
@@ -292,8 +292,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 6,
-      host_name: "moo",
+      node_id: 6,
+      node_name: "moo",
       last_fetched: "2023-09-20T07:02:34Z",
       columns: {
         model: "Display Audio",
@@ -301,8 +301,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 6,
-      host_name: "moo",
+      node_id: 6,
+      node_name: "moo",
       last_fetched: "2023-09-20T07:02:34Z",
       columns: {
         model: "USB Reciever",
@@ -310,8 +310,8 @@ const DEFAULT_QUERY_REPORT_MOCK: IQueryReport = {
       },
     },
     {
-      host_id: 6,
-      host_name: "moo",
+      node_id: 6,
+      node_name: "moo",
       last_fetched: "2023-09-20T07:02:34Z",
       columns: {
         model: "LG Monitor Controls",

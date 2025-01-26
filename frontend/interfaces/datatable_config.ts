@@ -19,7 +19,7 @@ export type IDataColumn = Column & {
  * @param T - The type of the data in the column
  * @example
  * ```ts
- * type IHostTableColumnConfig = IColumnConfig<IHost>;
+ * type INodeTableColumnConfig = IColumnConfig<INode>;
  */
 export type IColumnConfig<T extends object> = Column<T>;
 

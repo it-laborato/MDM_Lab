@@ -8,9 +8,9 @@ import React from "react";
 
 import { QueryParams } from "utilities/url";
 
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import DataSet from "components/DataSet";
-import LastUpdatedHostCount from "components/LastUpdatedHostCount";
+import LastUpdatedNodeCount from "components/LastUpdatedNodeCount";
 
 import SoftwareIcon from "../icons/SoftwareIcon";
 
@@ -19,9 +19,9 @@ const baseClass = "software-details-summary";
 interface ISoftwareDetailsSummaryProps {
   title: string;
   type?: string;
-  hosts: number;
+  nodes: number;
   countsUpdatedAt?: string;
-  /** The query param that will be added when user clicks on "View all hosts" link */
+  /** The query param that will be added when user clicks on "View all nodes" link */
   queryParams: QueryParams;
   name?: string;
   source?: string;
@@ -32,7 +32,7 @@ interface ISoftwareDetailsSummaryProps {
 const SoftwareDetailsSummary = ({
   title,
   type,
-  hosts,
+  nodes,
   countsUpdatedAt,
   queryParams,
   name,
@@ -50,10 +50,10 @@ const SoftwareDetailsSummary = ({
 
           {!!versions && <DataSet title="Versions" value={versions} />}
           <DataSet
-            title="Hosts"
+            title="Nodes"
             value={
-              <LastUpdatedHostCount
-                hostCount={hosts === 0 ? "---" : hosts}
+              <LastUpdatedNodeCount
+                nodeCount={nodes === 0 ? "---" : nodes}
                 lastUpdatedAt={countsUpdatedAt}
               />
             }
@@ -61,9 +61,9 @@ const SoftwareDetailsSummary = ({
         </dl>
       </dl>
       <div>
-        <ViewAllHostsLink
+        <ViewAllNodesLink
           queryParams={queryParams}
-          className={`${baseClass}__hosts-link`}
+          className={`${baseClass}__nodes-link`}
         />
       </div>
     </div>

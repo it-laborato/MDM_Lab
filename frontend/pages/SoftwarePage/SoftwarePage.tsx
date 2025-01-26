@@ -304,7 +304,7 @@ const SoftwarePage = ({ children, router, location }: ISoftwarePageProps) => {
   }, [currentTeamId, router]);
 
   // Used to reset page number to 0 when modifying filters
-  // Solution reused from ManageHostPage.tsx
+  // Solution reused from ManageNodePage.tsx
   useEffect(() => {
     setResetPageIndex(false);
   }, [queryParams, page]);
@@ -404,7 +404,7 @@ const SoftwarePage = ({ children, router, location }: ISoftwarePageProps) => {
     return (
       <p>
         Manage software and search for installed software, OS, and
-        vulnerabilities {isAllTeamsSelected ? "for all hosts" : "on this team"}.
+        vulnerabilities {isAllTeamsSelected ? "for all nodes" : "on this team"}.
       </p>
     );
   };

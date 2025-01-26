@@ -68,10 +68,10 @@ const generateTableHeaders = (
     },
     // TODO: need to add this info to API
     {
-      title: "Hosts",
-      Header: "Hosts",
+      title: "Nodes",
+      Header: "Nodes",
       disableSortBy: true,
-      accessor: "host_count",
+      accessor: "node_count",
       Cell: (cellProps: ICellProps) => (
         <TextCell value={cellProps.cell.value} />
       ),
@@ -124,7 +124,7 @@ const enhanceTeamData = (teams: ITeam[]): ITeamTableData[] => {
     return {
       description: team.description,
       name: team.name,
-      host_count: team.host_count,
+      node_count: team.node_count,
       user_count: team.user_count,
       actions: generateActionDropdownOptions(),
       id: team.id,

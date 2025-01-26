@@ -54,7 +54,7 @@ describe("Activity Feed", () => {
     expect(screen.getByText("ran a live query .")).toBeInTheDocument();
   });
 
-  it("renders a live_query type activity with host count details", () => {
+  it("renders a live_query type activity with node count details", () => {
     const activity = createMockActivity({
       type: ActivityType.LiveQuery,
       details: {
@@ -64,7 +64,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("ran a live query on 10 hosts.")
+      screen.getByText("ran a live query on 10 nodes.")
     ).toBeInTheDocument();
   });
 
@@ -101,7 +101,7 @@ describe("Activity Feed", () => {
     expect(screen.getByText(/ran the/)).toBeInTheDocument();
     expect(screen.getByText("Test Query")).toBeInTheDocument();
     expect(
-      screen.getByText(/with excessive performance impact on 10 hosts\./)
+      screen.getByText(/with excessive performance impact on 10 nodes\./)
     ).toBeInTheDocument();
   });
 
@@ -547,7 +547,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("enforced disk encryption for hosts assigned to the", {
+      screen.getByText("enforced disk encryption for nodes assigned to the", {
         exact: false,
       })
     ).toBeInTheDocument();
@@ -566,7 +566,7 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("enforced disk encryption for hosts assigned to the", {
+      screen.getByText("enforced disk encryption for nodes assigned to the", {
         exact: false,
       })
     ).toBeInTheDocument();
@@ -585,7 +585,7 @@ describe("Activity Feed", () => {
 
     expect(
       screen.getByText(
-        "removed disk encryption enforcement for hosts assigned to the",
+        "removed disk encryption enforcement for nodes assigned to the",
         {
           exact: false,
         }
@@ -607,7 +607,7 @@ describe("Activity Feed", () => {
 
     expect(
       screen.getByText(
-        "removed disk encryption enforcement for hosts assigned to the",
+        "removed disk encryption enforcement for nodes assigned to the",
         {
           exact: false,
         }
@@ -619,7 +619,7 @@ describe("Activity Feed", () => {
     expect(withNoTeams).toBeNull();
   });
 
-  it("renders an 'enabled_disk_encryption' type activity for hosts with no team.", () => {
+  it("renders an 'enabled_disk_encryption' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.EnabledDiskEncryption,
       details: {},
@@ -627,12 +627,12 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("enforced disk encryption for hosts with no team.")
+      screen.getByText("enforced disk encryption for nodes with no team.")
     ).toBeInTheDocument();
     expect(screen.queryByText("assigned to the")).toBeNull();
   });
 
-  it("renders an 'enabled_macos_disk_encryption' type activity for hosts with no team.", () => {
+  it("renders an 'enabled_macos_disk_encryption' type activity for nodes with no team.", () => {
     // Test deprecated activity type
     const activity = createMockActivity({
       type: ActivityType.EnabledMacDiskEncryption,
@@ -641,12 +641,12 @@ describe("Activity Feed", () => {
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("enforced disk encryption for hosts with no team.")
+      screen.getByText("enforced disk encryption for nodes with no team.")
     ).toBeInTheDocument();
     expect(screen.queryByText("assigned to the")).toBeNull();
   });
 
-  it("renders a 'disabled_disk_encryption' type activity for hosts with no team.", () => {
+  it("renders a 'disabled_disk_encryption' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.DisabledDiskEncryption,
       details: {},
@@ -655,7 +655,7 @@ describe("Activity Feed", () => {
 
     expect(
       screen.getByText(
-        "removed disk encryption enforcement for hosts with no team.",
+        "removed disk encryption enforcement for nodes with no team.",
         {
           exact: false,
         }
@@ -664,7 +664,7 @@ describe("Activity Feed", () => {
     expect(screen.queryByText("assigned to the")).toBeNull();
   });
 
-  it("renders a 'disabled_macos_disk_encryption' type activity for hosts with no team.", () => {
+  it("renders a 'disabled_macos_disk_encryption' type activity for nodes with no team.", () => {
     // Test deprecated activity type
     const activity = createMockActivity({
       type: ActivityType.DisabledMacDiskEncryption,
@@ -674,7 +674,7 @@ describe("Activity Feed", () => {
 
     expect(
       screen.getByText(
-        "removed disk encryption enforcement for hosts with no team.",
+        "removed disk encryption enforcement for nodes with no team.",
         {
           exact: false,
         }
@@ -694,7 +694,7 @@ describe("Activity Feed", () => {
       screen.getByText((content, node) => {
         return (
           node?.innerHTML ===
-          "<b>Test User </b> changed the macOS Setup Assistant (added <b>dep-profile.json</b>) for hosts that automatically enroll to no team."
+          "<b>Test User </b> changed the macOS Setup Assistant (added <b>dep-profile.json</b>) for nodes that automatically enroll to no team."
         );
       })
     ).toBeInTheDocument();
@@ -711,7 +711,7 @@ describe("Activity Feed", () => {
       screen.getByText((content, node) => {
         return (
           node?.innerHTML ===
-          "<b>Test User </b> changed the macOS Setup Assistant (added <b>dep-profile.json</b>) for hosts  that automatically enroll to the <b>Workstations</b> team."
+          "<b>Test User </b> changed the macOS Setup Assistant (added <b>dep-profile.json</b>) for nodes  that automatically enroll to the <b>Workstations</b> team."
         );
       })
     ).toBeInTheDocument();
@@ -728,7 +728,7 @@ describe("Activity Feed", () => {
       screen.getByText((content, node) => {
         return (
           node?.innerHTML ===
-          "<b>Test User </b> changed the macOS Setup Assistant (deleted <b>dep-profile.json</b>) for hosts that automatically enroll to no team."
+          "<b>Test User </b> changed the macOS Setup Assistant (deleted <b>dep-profile.json</b>) for nodes that automatically enroll to no team."
         );
       })
     ).toBeInTheDocument();
@@ -745,7 +745,7 @@ describe("Activity Feed", () => {
       screen.getByText((content, node) => {
         return (
           node?.innerHTML ===
-          "<b>Test User </b> changed the macOS Setup Assistant (deleted <b>dep-profile.json</b>) for hosts  that automatically enroll to the <b>Workstations</b> team."
+          "<b>Test User </b> changed the macOS Setup Assistant (deleted <b>dep-profile.json</b>) for nodes  that automatically enroll to the <b>Workstations</b> team."
         );
       })
     ).toBeInTheDocument();
@@ -763,7 +763,7 @@ describe("Activity Feed", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("foo.pkg", { exact: false })).toBeInTheDocument();
     expect(
-      screen.getByText(") for macOS hosts that automatically enroll to the ", {
+      screen.getByText(") for macOS nodes that automatically enroll to the ", {
         exact: false,
       })
     ).toBeInTheDocument();
@@ -785,7 +785,7 @@ describe("Activity Feed", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("foo.pkg", { exact: false })).toBeInTheDocument();
     expect(
-      screen.getByText(") for macOS hosts that automatically enroll to the ", {
+      screen.getByText(") for macOS nodes that automatically enroll to the ", {
         exact: false,
       })
     ).toBeInTheDocument();
@@ -795,7 +795,7 @@ describe("Activity Feed", () => {
     expect(withNoTeams).toBeNull();
   });
 
-  it("renders a 'added_bootstrap_package' type activity for hosts with no team.", () => {
+  it("renders a 'added_bootstrap_package' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.AddedBootstrapPackage,
       details: { bootstrap_package_name: "foo.pkg" },
@@ -808,13 +808,13 @@ describe("Activity Feed", () => {
     expect(screen.getByText("foo.pkg", { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText(
-        ") for macOS hosts that automatically enroll to no team.",
+        ") for macOS nodes that automatically enroll to no team.",
         { exact: false }
       )
     ).toBeInTheDocument();
   });
 
-  it("renders a 'deleted_bootstrap_package' type activity for hosts with no team.", () => {
+  it("renders a 'deleted_bootstrap_package' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.DeletedBootstrapPackage,
       details: { bootstrap_package_name: "foo.pkg" },
@@ -827,7 +827,7 @@ describe("Activity Feed", () => {
     expect(screen.getByText("foo.pkg", { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText(
-        ") for macOS hosts that automatically enroll to no team.",
+        ") for macOS nodes that automatically enroll to no team.",
         { exact: false }
       )
     ).toBeInTheDocument();
@@ -842,7 +842,7 @@ describe("Activity Feed", () => {
 
     expect(
       screen.getByText(
-        "required end user authentication for macOS hosts that automatically enroll to",
+        "required end user authentication for macOS nodes that automatically enroll to",
         { exact: false }
       )
     ).toBeInTheDocument();
@@ -851,7 +851,7 @@ describe("Activity Feed", () => {
     expect(withNoTeams).toBeNull();
   });
 
-  it("renders a 'enabled_macos_setup_end_user_auth' type activity for hosts with no team.", () => {
+  it("renders a 'enabled_macos_setup_end_user_auth' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.EnabledMacOSSetupEndUserAuth,
     });
@@ -859,7 +859,7 @@ describe("Activity Feed", () => {
 
     expect(
       screen.getByText(
-        "required end user authentication for macOS hosts that automatically enroll to no team.",
+        "required end user authentication for macOS nodes that automatically enroll to no team.",
         { exact: false }
       )
     ).toBeInTheDocument();
@@ -874,7 +874,7 @@ describe("Activity Feed", () => {
 
     expect(
       screen.getByText(
-        "removed end user authentication requirement for macOS hosts that automatically enroll to",
+        "removed end user authentication requirement for macOS nodes that automatically enroll to",
         { exact: false }
       )
     ).toBeInTheDocument();
@@ -883,7 +883,7 @@ describe("Activity Feed", () => {
     expect(withNoTeams).toBeNull();
   });
 
-  it("renders a 'disabled_macos_setup_end_user_auth' type activity for hosts with no team.", () => {
+  it("renders a 'disabled_macos_setup_end_user_auth' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.DisabledMacOSSetupEndUserAuth,
     });
@@ -891,59 +891,59 @@ describe("Activity Feed", () => {
 
     expect(
       screen.getByText(
-        "removed end user authentication requirement for macOS hosts that automatically enroll to no team.",
+        "removed end user authentication requirement for macOS nodes that automatically enroll to no team.",
         { exact: false }
       )
     ).toBeInTheDocument();
   });
 
-  it("renders a 'transferred_hosts' type activity for one host transferred to no team.", () => {
+  it("renders a 'transferred_nodes' type activity for one node transferred to no team.", () => {
     const activity = createMockActivity({
-      type: ActivityType.TransferredHosts,
+      type: ActivityType.TransferredNodes,
       details: {
-        host_ids: [1],
-        host_display_names: ["foo"],
+        node_ids: [1],
+        node_display_names: ["foo"],
       },
     });
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("transferred host", { exact: false })
+      screen.getByText("transferred node", { exact: false })
     ).toBeInTheDocument();
     expect(screen.getByText("foo", { exact: false })).toBeInTheDocument();
     expect(screen.getByText("no team", { exact: false })).toBeInTheDocument();
   });
 
-  it("renders a 'transferred_hosts' type activity for one host transferred to a team.", () => {
+  it("renders a 'transferred_nodes' type activity for one node transferred to a team.", () => {
     const activity = createMockActivity({
-      type: ActivityType.TransferredHosts,
+      type: ActivityType.TransferredNodes,
       details: {
-        host_ids: [1],
-        host_display_names: ["foo"],
+        node_ids: [1],
+        node_display_names: ["foo"],
         team_name: "Alphas",
       },
     });
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("transferred host", { exact: false })
+      screen.getByText("transferred node", { exact: false })
     ).toBeInTheDocument();
     expect(screen.getByText("foo", { exact: false })).toBeInTheDocument();
     expect(screen.getByText("Alphas", { exact: false })).toBeInTheDocument();
   });
 
-  it("renders a 'transferred_hosts' type activity for multiple hosts transferred to no team.", () => {
+  it("renders a 'transferred_nodes' type activity for multiple nodes transferred to no team.", () => {
     const activity = createMockActivity({
-      type: ActivityType.TransferredHosts,
+      type: ActivityType.TransferredNodes,
       details: {
-        host_ids: [1, 2, 3],
-        host_display_names: ["foo", "bar", "baz"],
+        node_ids: [1, 2, 3],
+        node_display_names: ["foo", "bar", "baz"],
       },
     });
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("transferred 3 hosts", { exact: false })
+      screen.getByText("transferred 3 nodes", { exact: false })
     ).toBeInTheDocument();
     expect(screen.queryByText("foo")).toBeNull();
     expect(screen.queryByText("bar")).toBeNull();
@@ -951,19 +951,19 @@ describe("Activity Feed", () => {
     expect(screen.getByText("no team", { exact: false })).toBeInTheDocument();
   });
 
-  it("renders a 'transferred_hosts' type activity for multiple hosts transferred to a team.", () => {
+  it("renders a 'transferred_nodes' type activity for multiple nodes transferred to a team.", () => {
     const activity = createMockActivity({
-      type: ActivityType.TransferredHosts,
+      type: ActivityType.TransferredNodes,
       details: {
-        host_ids: [1, 2, 3],
-        host_display_names: ["foo", "bar", "baz"],
+        node_ids: [1, 2, 3],
+        node_display_names: ["foo", "bar", "baz"],
         team_name: "Alphas",
       },
     });
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(
-      screen.getByText("transferred 3 hosts", { exact: false })
+      screen.getByText("transferred 3 nodes", { exact: false })
     ).toBeInTheDocument();
     expect(screen.queryByText("foo")).toBeNull();
     expect(screen.queryByText("bar")).toBeNull();
@@ -975,7 +975,7 @@ describe("Activity Feed", () => {
     const activity = createMockActivity({
       type: ActivityType.MdmEnrolled,
       details: {
-        host_serial: "ABCD",
+        node_serial: "ABCD",
       },
     });
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
@@ -984,7 +984,7 @@ describe("Activity Feed", () => {
       screen.getByText((content, node) => {
         return (
           node?.innerHTML ===
-          "<b>Test User </b>An end user turned on MDM features for a host with serial number <b>ABCD (manual)</b>."
+          "<b>Test User </b>An end user turned on MDM features for a node with serial number <b>ABCD (manual)</b>."
         );
       })
     ).toBeInTheDocument();
@@ -994,7 +994,7 @@ describe("Activity Feed", () => {
     const activity = createMockActivity({
       type: ActivityType.MdmEnrolled,
       details: {
-        host_serial: "ABCD",
+        node_serial: "ABCD",
         installed_from_dep: true,
         mdm_platform: "apple",
       },
@@ -1005,18 +1005,18 @@ describe("Activity Feed", () => {
       screen.getByText((content, node) => {
         return (
           node?.innerHTML ===
-          "<b>Test User </b>An end user turned on MDM features for a host with serial number <b>ABCD (automatic)</b>."
+          "<b>Test User </b>An end user turned on MDM features for a node with serial number <b>ABCD (automatic)</b>."
         );
       })
     ).toBeInTheDocument();
   });
 
-  it("renders a 'mdm_enrolled' type activity for windows hosts.", () => {
+  it("renders a 'mdm_enrolled' type activity for windows nodes.", () => {
     const activity = createMockActivity({
       type: ActivityType.MdmEnrolled,
       details: {
         mdm_platform: "microsoft",
-        host_display_name: "ABCD",
+        node_display_name: "ABCD",
       },
     });
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
@@ -1098,7 +1098,7 @@ describe("Activity Feed", () => {
     expect(withNoTeams).toBeNull();
   });
 
-  it("renders an 'added_script' type activity for hosts with no team.", () => {
+  it("renders an 'added_script' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.AddedScript,
       details: { script_name: "foo.sh" },
@@ -1114,7 +1114,7 @@ describe("Activity Feed", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders an 'edited_script' type activity for hosts with no team.", () => {
+  it("renders an 'edited_script' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.EditedScript,
       details: {},
@@ -1129,7 +1129,7 @@ describe("Activity Feed", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders a 'deleted_script' type activity for hosts with no team.", () => {
+  it("renders a 'deleted_script' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.DeletedScript,
       details: { script_name: "foo.sh" },
@@ -1220,7 +1220,7 @@ describe("Activity Feed", () => {
     expect(withNoTeams).toBeNull();
   });
 
-  it("renders an 'added_software' type activity for hosts with no team.", () => {
+  it("renders an 'added_software' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.AddedSoftware,
       details: { software_title: "Foo bar", software_package: "foobar.pkg" },
@@ -1236,7 +1236,7 @@ describe("Activity Feed", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders an 'edited_software' type activity for hosts with no team.", () => {
+  it("renders an 'edited_software' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.EditedSoftware,
       details: {
@@ -1252,7 +1252,7 @@ describe("Activity Feed", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders a 'deleted_software' type activity for hosts with no team.", () => {
+  it("renders a 'deleted_software' type activity for nodes with no team.", () => {
     const activity = createMockActivity({
       type: ActivityType.DeletedSoftware,
       details: { software_title: "Foo bar", software_package: "foobar.pkg" },
@@ -1282,17 +1282,17 @@ describe("Activity Feed", () => {
     ).toBeInTheDocument();
   });
   // test for wipe activity
-  it("renders a 'wiped_host' type activity for a team", () => {
+  it("renders a 'wiped_node' type activity for a team", () => {
     const activity = createMockActivity({
-      type: ActivityType.WipedHost,
+      type: ActivityType.WipedNode,
       details: {
-        host_display_name: "Foo Host",
+        node_display_name: "Foo Node",
       },
     });
     render(<GlobalActivityItem activity={activity} isPremiumTier />);
 
     expect(screen.getByText("wiped", { exact: false })).toBeInTheDocument();
-    expect(screen.getByText("Foo Host", { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("Foo Node", { exact: false })).toBeInTheDocument();
   });
 
   it("renders the correct actor for a installed_software activity without self_service", () => {
@@ -1302,7 +1302,7 @@ describe("Activity Feed", () => {
       actor_full_name: "Test Admin",
       details: {
         software_title: "Foo Software",
-        host_display_name: "Foo Host",
+        node_display_name: "Foo Node",
       },
     });
 
@@ -1317,7 +1317,7 @@ describe("Activity Feed", () => {
       details: {
         software_title: "Foo Software",
         self_service: true,
-        host_display_name: "Foo Host",
+        node_display_name: "Foo Node",
       },
     });
 
@@ -1332,7 +1332,7 @@ describe("Activity Feed", () => {
       actor_full_name: "Test Admin",
       details: {
         software_title: "Foo Software",
-        host_display_name: "Foo Host",
+        node_display_name: "Foo Node",
       },
     });
 
@@ -1347,7 +1347,7 @@ describe("Activity Feed", () => {
       details: {
         software_title: "Foo Software",
         self_service: true,
-        host_display_name: "Foo Host",
+        node_display_name: "Foo Node",
       },
     });
 

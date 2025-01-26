@@ -1,11 +1,11 @@
 ---
 services:
-  # To test with MariaDB, set FLEET_MYSQL_IMAGE to mariadb:10.6 or the like (note MariaDB is not
+  # To test with MariaDB, set MDM_LAB_MYSQL_IMAGE to mariadb:10.6 or the like (note MariaDB is not
   # officially supported).
-  # To run in macOS M1, set FLEET_MYSQL_IMAGE=arm64v8/mysql:oracle FLEET_MYSQL_PLATFORM=linux/arm64/v8
+  # To run in macOS M1, set MDM_LAB_MYSQL_IMAGE=arm64v8/mysql:oracle MDM_LAB_MYSQL_PLATFORM=linux/arm64/v8
   mysql:
-    image: ${FLEET_MYSQL_IMAGE:-mysql:8.0.36}
-    platform: ${FLEET_MYSQL_PLATFORM:-linux/x86_64}
+    image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
+    platform: ${MDM_LAB_MYSQL_PLATFORM:-linux/x86_64}
     volumes:
       - mysql-persistent-volume:/tmp
     command: [
@@ -29,8 +29,8 @@ services:
       - "3306:3306"
 
   mysql_test:
-    image: ${FLEET_MYSQL_IMAGE:-mysql:8.0.36}
-    platform: ${FLEET_MYSQL_PLATFORM:-linux/x86_64}
+    image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
+    platform: ${MDM_LAB_MYSQL_PLATFORM:-linux/x86_64}
     # innodb-file-per-table=OFF gives ~20% speedup for test runs.
     command: [
         "mysqld",
@@ -55,8 +55,8 @@ services:
       - /tmpfs
 
   mysql_replica_test:
-    image: ${FLEET_MYSQL_IMAGE:-mysql:8.0.36}
-    platform: ${FLEET_MYSQL_PLATFORM:-linux/x86_64}
+    image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
+    platform: ${MDM_LAB_MYSQL_PLATFORM:-linux/x86_64}
     # innodb-file-per-table=OFF gives ~20% speedup for test runs.
     command: [
         "mysqld",

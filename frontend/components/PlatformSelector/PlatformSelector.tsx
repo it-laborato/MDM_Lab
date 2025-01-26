@@ -61,12 +61,12 @@ export const PlatformSelector = ({
           tipContent={
             <>
               To see targets, select{" "}
-              <b>{softwareName} &gt; Actions &gt; Edit</b>. Currently, hosts
+              <b>{softwareName} &gt; Actions &gt; Edit</b>. Currently, nodes
               that aren&apos;t targeted show an empty (---) policy status.
             </>
           }
         >
-          targeted hosts
+          targeted nodes
         </TooltipWrapper>
         .
       </span>
@@ -111,7 +111,7 @@ export const PlatformSelector = ({
         </Checkbox>
       </span>
       <div className="form-field__help-text">
-        Policy runs on all hosts with these platform(s).
+        Policy runs on all nodes with these platform(s).
         {renderInstallSoftwareHelpText()}
       </div>
     </div>

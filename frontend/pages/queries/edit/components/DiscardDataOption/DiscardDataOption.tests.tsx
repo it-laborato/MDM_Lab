@@ -19,7 +19,7 @@ describe("DiscardDataOption component", () => {
     expect(screen.getByText(/Discard data/)).toBeInTheDocument();
     expect(
       screen.getByText(
-        /The most recent results for each host will not be available in Mdmlab./
+        /The most recent results for each node will not be available in Mdmlab./
       )
     ).toBeInTheDocument();
   });
@@ -54,7 +54,7 @@ describe("DiscardDataOption component", () => {
     // normal text
     expect(
       screen.getByText(
-        /The most recent results for each host will not be available in Mdmlab./
+        /The most recent results for each node will not be available in Mdmlab./
       )
     ).toBeInTheDocument();
   });

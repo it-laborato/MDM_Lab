@@ -189,7 +189,7 @@ const ActionsDropdown = ({
     menuList: (provided) => ({
       ...provided,
       padding: PADDING["pad-small"],
-      maxHeight: "initial", // Override react-select default height of 300px to avoid scrollbar on hostactionsdropdown
+      maxHeight: "initial", // Override react-select default height of 300px to avoid scrollbar on nodeactionsdropdown
     }),
     valueContainer: (provided) => ({
       ...provided,

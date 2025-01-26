@@ -1,6 +1,6 @@
 /* eslint-disable  @typescript-eslint/explicit-module-boundary-types */
 import sendRequest from "services";
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 import { ISelectedTargetsForApi, ITargetsAPIResponse } from "interfaces/target";
 import endpoints from "utilities/endpoints";
 import appendTargetTypeToTargets from "utilities/append_target_type_to_targets";
@@ -12,7 +12,7 @@ interface ITargetsProps {
 }
 
 const defaultSelected = {
-  hosts: [],
+  nodes: [],
   labels: [],
   teams: [],
 };
@@ -20,11 +20,11 @@ const defaultSelected = {
 export interface ITargetsSearchParams {
   query_id?: number | null;
   query: string;
-  excluded_host_ids: number[] | null;
+  excluded_node_ids: number[] | null;
 }
 
 export interface ITargetsSearchResponse {
-  hosts: IHost[];
+  nodes: INode[];
 }
 
 export interface ITargetsCountParams {
@@ -40,7 +40,7 @@ export interface ITargetsCountResponse {
 // TODO: deprecated until frontend\components\forms\fields\SelectTargetsDropdown
 // is fully replaced with frontend\components\TargetsInput
 const DEPRECATED_defaultSelected = {
-  hosts: [],
+  nodes: [],
   labels: [],
 };
 
@@ -59,7 +59,7 @@ export default {
     });
   },
   search: (params: ITargetsSearchParams): Promise<ITargetsSearchResponse> => {
-    if (!params?.excluded_host_ids || !params?.query) {
+    if (!params?.excluded_node_ids || !params?.query) {
       return Promise.reject("Invalid usage: missing required parameter(s)");
     }
     const { HOSTS } = endpoints;
@@ -93,7 +93,7 @@ export default {
       return {
         ...response,
         targets: [
-          ...appendTargetTypeToTargets(targets.hosts, "hosts"),
+          ...appendTargetTypeToTargets(targets.nodes, "nodes"),
           ...appendTargetTypeToTargets(targets.labels, "labels"),
           ...appendTargetTypeToTargets(targets.teams, "teams"),
         ],

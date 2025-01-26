@@ -161,7 +161,7 @@ const ManagePolicyPage = ({
   // Functions to avoid race conditions
   const initialSearchQuery = (() => queryParams.query ?? "")();
   const initialSortHeader = (() =>
-    (queryParams?.order_key as "name" | "failing_host_count") ??
+    (queryParams?.order_key as "name" | "failing_node_count") ??
     DEFAULT_SORT_COLUMN)();
   const initialSortDirection = (() =>
     (queryParams?.order_direction as "asc" | "desc") ??
@@ -388,7 +388,7 @@ const ManagePolicyPage = ({
   };
 
   // NOTE: used to reset page number to 0 when modifying filters
-  // NOTE: Solution reused from ManageHostPage.tsx
+  // NOTE: Solution reused from ManageNodePage.tsx
   useEffect(() => {
     setResetPageIndex(false);
   }, []);
@@ -795,9 +795,9 @@ const ManagePolicyPage = ({
     if (hide) {
       return null;
     }
-    // Figure the time since the host counts were updated by finding first policy item with host_count_updated_at.
+    // Figure the time since the node counts were updated by finding first policy item with node_count_updated_at.
     const updatedAt =
-      policies?.find((p) => !!p.host_count_updated_at)?.host_count_updated_at ||
+      policies?.find((p) => !!p.node_count_updated_at)?.node_count_updated_at ||
       "";
 
     return (
@@ -807,7 +807,7 @@ const ManagePolicyPage = ({
           lastUpdatedAt={updatedAt}
           customTooltipText={
             <>
-              Counts are updated hourly. Click host
+              Counts are updated hourly. Click node
               <br />
               counts for the most up-to-date count.
             </>
@@ -984,13 +984,13 @@ const ManagePolicyPage = ({
   let teamsDropdownHelpText: string;
   if (teamIdForApi === API_NO_TEAM_ID) {
     teamsDropdownHelpText =
-      "Detect device health issues for hosts that are not on a team.";
+      "Detect device health issues for nodes that are not on a team.";
   } else if (teamIdForApi === API_ALL_TEAMS_ID) {
-    teamsDropdownHelpText = "Detect device health issues for all hosts.";
+    teamsDropdownHelpText = "Detect device health issues for all nodes.";
   } else {
     // a team is selected
     teamsDropdownHelpText =
-      "Detect device health issues for all hosts assigned to this team.";
+      "Detect device health issues for all nodes assigned to this team.";
   }
   return (
     <MainContent className={baseClass}>

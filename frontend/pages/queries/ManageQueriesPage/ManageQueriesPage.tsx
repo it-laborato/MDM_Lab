@@ -424,8 +424,8 @@ const ManageQueriesPage = ({
         <div className={`${baseClass}__description`}>
           <p>
             {isAnyTeamSelected
-              ? "Gather data about all hosts assigned to this team."
-              : "Gather data about all hosts."}
+              ? "Gather data about all nodes assigned to this team."
+              : "Gather data about all nodes."}
           </p>
         </div>
         {renderQueriesTable()}

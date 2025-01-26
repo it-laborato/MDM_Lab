@@ -46,7 +46,7 @@ describe("Software Vulnerabilities table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         showExploitedVulnerabilitiesOnly={false}
         currentPage={0}
         isLoading={false}
@@ -85,7 +85,7 @@ describe("Software Vulnerabilities table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         showExploitedVulnerabilitiesOnly={false}
         currentPage={0}
         isLoading={false}
@@ -126,7 +126,7 @@ describe("Software Vulnerabilities table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         showExploitedVulnerabilitiesOnly
         currentPage={0}
         isLoading={false}
@@ -169,7 +169,7 @@ describe("Software Vulnerabilities table", () => {
         query='"abcdefg"'
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         showExploitedVulnerabilitiesOnly={false}
         currentPage={0}
         isLoading={false}
@@ -212,7 +212,7 @@ describe("Software Vulnerabilities table", () => {
         query='"cve-2002-1000"'
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         showExploitedVulnerabilitiesOnly={false}
         currentPage={0}
         isLoading={false}
@@ -222,7 +222,7 @@ describe("Software Vulnerabilities table", () => {
 
     expect(
       screen.getByText(
-        "This is a known vulnerability (CVE), but it wasn't detected on any hosts"
+        "This is a known vulnerability (CVE), but it wasn't detected on any nodes"
       )
     ).toBeInTheDocument();
     expect(
@@ -257,7 +257,7 @@ describe("Software Vulnerabilities table", () => {
         query="cve-2002-12345"
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         showExploitedVulnerabilitiesOnly={false}
         currentPage={0}
         isLoading={false}
@@ -293,7 +293,7 @@ describe("Software Vulnerabilities table", () => {
         query="CVE-2018-16463"
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         showExploitedVulnerabilitiesOnly={false}
         currentPage={0}
         isLoading={false}
@@ -306,7 +306,7 @@ describe("Software Vulnerabilities table", () => {
     expect(screen.getByText("Probability of exploit")).toBeInTheDocument();
     expect(screen.getByText("Published")).toBeInTheDocument();
     expect(screen.getByText("Detected")).toBeInTheDocument();
-    expect(screen.getByText("Hosts")).toBeInTheDocument();
+    expect(screen.getByText("Nodes")).toBeInTheDocument();
   });
 
   it("Does not render premium only columns and disables exploited vulnerabilities dropdown", async () => {
@@ -328,7 +328,7 @@ describe("Software Vulnerabilities table", () => {
         query=""
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         showExploitedVulnerabilitiesOnly={false}
         currentPage={0}
         isLoading={false}
@@ -343,7 +343,7 @@ describe("Software Vulnerabilities table", () => {
     ).not.toBeInTheDocument();
     expect(screen.queryByText("Published")).not.toBeInTheDocument();
     expect(screen.getByText("Detected")).toBeInTheDocument();
-    expect(screen.getByText("Hosts")).toBeInTheDocument();
+    expect(screen.getByText("Nodes")).toBeInTheDocument();
 
     await user.click(screen.getByText("All vulnerabilities"));
 

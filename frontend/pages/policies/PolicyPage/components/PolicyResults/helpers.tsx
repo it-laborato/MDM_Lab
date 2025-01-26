@@ -1,9 +1,9 @@
-import { IPolicyHostResponse } from "interfaces/host";
+import { IPolicyNodeResponse } from "interfaces/node";
 
-export const getYesNoCounts = (hostResponses: IPolicyHostResponse[]) => {
-  const yesNoCounts = hostResponses.reduce(
-    (acc, hostResponse) => {
-      if (hostResponse.query_results?.length) {
+export const getYesNoCounts = (nodeResponses: IPolicyNodeResponse[]) => {
+  const yesNoCounts = nodeResponses.reduce(
+    (acc, nodeResponse) => {
+      if (nodeResponse.query_results?.length) {
         acc.yes += 1;
       } else {
         acc.no += 1;

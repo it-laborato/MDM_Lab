@@ -39,7 +39,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/controls/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
@@ -86,7 +86,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/controls/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
@@ -128,7 +128,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
     expect(screen.getByText(/policies/i)).toBeInTheDocument();
@@ -168,7 +168,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/controls/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
@@ -214,7 +214,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/controls/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
@@ -256,7 +256,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
     expect(screen.getByText(/policies/i)).toBeInTheDocument();
@@ -299,7 +299,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/controls/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
@@ -344,7 +344,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/controls/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
@@ -386,7 +386,7 @@ describe("SiteTopNav - component", () => {
 
     await user.click(screen.getByTestId("user-avatar"));
 
-    expect(screen.getByText(/hosts/i)).toBeInTheDocument();
+    expect(screen.getByText(/nodes/i)).toBeInTheDocument();
     expect(screen.getByText(/software/i)).toBeInTheDocument();
     expect(screen.getByText(/queries/i)).toBeInTheDocument();
     expect(screen.getByText(/policies/i)).toBeInTheDocument();

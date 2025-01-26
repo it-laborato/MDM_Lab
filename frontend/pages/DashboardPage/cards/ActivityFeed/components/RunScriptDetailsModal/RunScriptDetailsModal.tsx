@@ -33,7 +33,7 @@ const StatusMessageRunning = () => (
   <div className={`${baseClass}__status-message`}>
     <p>
       <Icon name="pending-outline" />
-      Script is running or will run when the host comes online.
+      Script is running or will run when the node comes online.
     </p>
   </div>
 );
@@ -66,30 +66,30 @@ const StatusMessageError = ({ message }: { message: React.ReactNode }) => (
 );
 
 interface IStatusMessageProps {
-  hostTimeout: boolean;
+  nodeTimeout: boolean;
   exitCode: number | null;
   message: string;
 }
 
 const StatusMessage = ({
-  hostTimeout,
+  nodeTimeout,
   exitCode,
   message,
 }: IStatusMessageProps) => {
   switch (exitCode) {
     case null:
-      return !hostTimeout ? (
-        // Expected API message: "A script is already running on this host. Please wait about 1 minute to let it finish."
+      return !nodeTimeout ? (
+        // Expected API message: "A script is already running on this node. Please wait about 1 minute to let it finish."
         <StatusMessageRunning />
       ) : (
-        // Expected API message: "Mdmlab hasn’t heard from the host in over 1 minute. Mdmlab doesn’t know if the script ran because the host went offline."
+        // Expected API message: "Mdmlab hasn’t heard from the node in over 1 minute. Mdmlab doesn’t know if the script ran because the node went offline."
         <StatusMessageError message={message} />
       );
     case -2:
-      // Expected API message: "Scripts are disabled for this host. To run scripts, deploy the mdmlabd agent with scripts enabled."
+      // Expected API message: "Scripts are disabled for this node. To run scripts, deploy the mdmlabd agent with scripts enabled."
       return <StatusMessageError message={message} />;
     case -1: {
-      // message should look like: "Timeout. Mdmlab stopped the script after 600 seconds to protect host performance.";
+      // message should look like: "Timeout. Mdmlab stopped the script after 600 seconds to protect node performance.";
       const timeOutValue = message.match(/(\d+\s(?:seconds))/);
 
       // should always be there, but handle cleanly if not
@@ -104,7 +104,7 @@ const StatusMessage = ({
 
       const modMessage = (
         <>
-          Timeout. Mdmlab stopped the script {varText}to protect host
+          Timeout. Mdmlab stopped the script {varText}to protect node
           performance.
         </>
       );
@@ -121,10 +121,10 @@ const StatusMessage = ({
 
 interface IScriptOutputProps {
   output: string;
-  hostname: string;
+  nodename: string;
 }
 
-const ScriptOutput = ({ output, hostname }: IScriptOutputProps) => {
+const ScriptOutput = ({ output, nodename }: IScriptOutputProps) => {
   return (
     <div className={`${baseClass}__script-output`}>
       <p>
@@ -136,7 +136,7 @@ const ScriptOutput = ({ output, hostname }: IScriptOutputProps) => {
         >
           output recorded
         </TooltipWrapper>{" "}
-        when <b>{hostname}</b> ran the script above:
+        when <b>{nodename}</b> ran the script above:
       </p>
       <Textarea className={`${baseClass}__output-textarea`}>{output}</Textarea>
     </div>
@@ -144,14 +144,14 @@ const ScriptOutput = ({ output, hostname }: IScriptOutputProps) => {
 };
 
 interface IScriptResultProps {
-  hostname: string;
+  nodename: string;
   output: string;
 }
 
-const ScriptResult = ({ hostname, output }: IScriptResultProps) => {
+const ScriptResult = ({ nodename, output }: IScriptResultProps) => {
   return (
     <div className={`${baseClass}__script-result`}>
-      <ScriptOutput output={output} hostname={hostname} />
+      <ScriptOutput output={output} nodename={nodename} />
     </div>
   );
 };
@@ -201,24 +201,24 @@ const RunScriptDetailsModal = ({
     } else if (isError) {
       content = <DataError description="Close this modal and try again." />;
     } else if (data) {
-      const hostTimedOut =
-        data.exit_code === null && data.host_timeout === true;
-      const scriptsDisabledForHost = data.exit_code === -2;
+      const nodeTimedOut =
+        data.exit_code === null && data.node_timeout === true;
+      const scriptsDisabledForNode = data.exit_code === -2;
       const scriptStillRunning =
-        data.exit_code === null && data.host_timeout === false;
+        data.exit_code === null && data.node_timeout === false;
       const showOutputText =
-        !hostTimedOut && !scriptsDisabledForHost && !scriptStillRunning;
+        !nodeTimedOut && !scriptsDisabledForNode && !scriptStillRunning;
 
       content = (
         <>
           <StatusMessage
-            hostTimeout={data.host_timeout}
+            nodeTimeout={data.node_timeout}
             exitCode={data.exit_code}
             message={data.output}
           />
           <ScriptContent content={data.script_contents} />
           {showOutputText && (
-            <ScriptResult hostname={data.hostname} output={data.output} />
+            <ScriptResult nodename={data.nodename} output={data.output} />
           )}
         </>
       );

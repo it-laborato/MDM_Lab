@@ -23,7 +23,7 @@ import teamsAPI, { ILoadTeamResponse } from "services/entities/teams";
 
 import { getCustomDropdownOptions } from "utilities/helpers";
 
-import HostStatusWebhookPreviewModal from "pages/admin/components/HostStatusWebhookPreviewModal";
+import NodeStatusWebhookPreviewModal from "pages/admin/components/NodeStatusWebhookPreviewModal";
 
 import validURL from "components/forms/validators/valid_url";
 
@@ -37,52 +37,52 @@ import SectionHeader from "components/SectionHeader";
 import Dropdown from "components/forms/fields/Dropdown";
 import Checkbox from "components/forms/fields/Checkbox";
 
-import TeamHostExpiryToggle from "./components/TeamHostExpiryToggle";
+import TeamNodeExpiryToggle from "./components/TeamNodeExpiryToggle";
 
 const baseClass = "team-settings";
 
 type ITeamSettingsFormData = {
-  teamHostExpiryEnabled: boolean;
-  teamHostExpiryWindow: number | string;
-  teamHostStatusWebhookEnabled: boolean;
-  teamHostStatusWebhookDestinationUrl: string;
-  teamHostStatusWebhookHostPercentage: number;
-  teamHostStatusWebhookWindow: number;
+  teamNodeExpiryEnabled: boolean;
+  teamNodeExpiryWindow: number | string;
+  teamNodeStatusWebhookEnabled: boolean;
+  teamNodeStatusWebhookDestinationUrl: string;
+  teamNodeStatusWebhookNodePercentage: number;
+  teamNodeStatusWebhookWindow: number;
 };
 
 type FormNames = keyof ITeamSettingsFormData;
 
-const HOST_EXPIRY_ERROR_TEXT = "Host expiry window must be a positive number.";
+const HOST_EXPIRY_ERROR_TEXT = "Node expiry window must be a positive number.";
 
 const validateTeamSettingsFormData = (
   // will never be called if global setting is not loaded, default to satisfy typechecking
-  curGlobalHostExpiryEnabled = false,
+  curGlobalNodeExpiryEnabled = false,
   curFormData: ITeamSettingsFormData
 ) => {
   const errors: Record<string, string> = {};
 
-  // validate host expiry fields
-  const numHostExpiryWindow = Number(curFormData.teamHostExpiryWindow);
+  // validate node expiry fields
+  const numNodeExpiryWindow = Number(curFormData.teamNodeExpiryWindow);
   if (
     // with no global setting, team window can't be empty if enabled
-    (!curGlobalHostExpiryEnabled &&
-      curFormData.teamHostExpiryEnabled &&
-      !numHostExpiryWindow) ||
+    (!curGlobalNodeExpiryEnabled &&
+      curFormData.teamNodeExpiryEnabled &&
+      !numNodeExpiryWindow) ||
     // if nonempty, must be a positive number
-    isNaN(numHostExpiryWindow) ||
+    isNaN(numNodeExpiryWindow) ||
     // if overriding a global setting, can be empty to disable local setting
-    numHostExpiryWindow < 0
+    numNodeExpiryWindow < 0
   ) {
-    errors.host_expiry_window = HOST_EXPIRY_ERROR_TEXT;
+    errors.node_expiry_window = HOST_EXPIRY_ERROR_TEXT;
   }
 
-  // validate host webhook fields
-  if (curFormData.teamHostStatusWebhookEnabled) {
-    if (!validURL({ url: curFormData.teamHostStatusWebhookDestinationUrl })) {
-      const errorPrefix = curFormData.teamHostStatusWebhookDestinationUrl
-        ? `${curFormData.teamHostStatusWebhookDestinationUrl} is not`
+  // validate node webhook fields
+  if (curFormData.teamNodeStatusWebhookEnabled) {
+    if (!validURL({ url: curFormData.teamNodeStatusWebhookDestinationUrl })) {
+      const errorPrefix = curFormData.teamNodeStatusWebhookDestinationUrl
+        ? `${curFormData.teamNodeStatusWebhookDestinationUrl} is not`
         : "Please enter";
-      errors.host_status_webhook_destination_url = `${errorPrefix} a valid webhook destination URL`;
+      errors.node_status_webhook_destination_url = `${errorPrefix} a valid webhook destination URL`;
     }
   }
 
@@ -91,18 +91,18 @@ const validateTeamSettingsFormData = (
 
 const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
   const [formData, setFormData] = useState<ITeamSettingsFormData>({
-    teamHostExpiryEnabled: false,
-    teamHostExpiryWindow: "" as number | string,
-    teamHostStatusWebhookEnabled: false,
-    teamHostStatusWebhookDestinationUrl: "",
-    teamHostStatusWebhookHostPercentage: 1,
-    teamHostStatusWebhookWindow: 1,
+    teamNodeExpiryEnabled: false,
+    teamNodeExpiryWindow: "" as number | string,
+    teamNodeStatusWebhookEnabled: false,
+    teamNodeStatusWebhookDestinationUrl: "",
+    teamNodeStatusWebhookNodePercentage: 1,
+    teamNodeStatusWebhookWindow: 1,
   });
   // stateful approach required since initial options come from team config api response
   const [isInitialTeamConfig, setIsInitialTeamConfig] = useState(true);
   const [
-    percentageHostsDropdownOptions,
-    setPercentageHostsDropdownOptions,
+    percentageNodesDropdownOptions,
+    setPercentageNodesDropdownOptions,
   ] = useState<IDropdownOption[]>([]);
   const [windowDropdownOptions, setWindowDropdownOptions] = useState<
     IDropdownOption[]
@@ -112,12 +112,12 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
     {}
   );
   const [
-    showHostStatusWebhookPreviewModal,
-    setShowHostStatusWebhookPreviewModal,
+    showNodeStatusWebhookPreviewModal,
+    setShowNodeStatusWebhookPreviewModal,
   ] = useState(false);
 
-  const toggleHostStatusWebhookPreviewModal = () => {
-    setShowHostStatusWebhookPreviewModal(!showHostStatusWebhookPreviewModal);
+  const toggleNodeStatusWebhookPreviewModal = () => {
+    setShowNodeStatusWebhookPreviewModal(!showNodeStatusWebhookPreviewModal);
   };
 
   const { renderFlash } = useContext(NotificationContext);
@@ -145,11 +145,11 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
     { refetchOnWindowFocus: false }
   );
   const {
-    host_expiry_settings: {
-      host_expiry_enabled: globalHostExpiryEnabled,
-      host_expiry_window: globalHostExpiryWindow,
+    node_expiry_settings: {
+      node_expiry_enabled: globalNodeExpiryEnabled,
+      node_expiry_window: globalNodeExpiryWindow,
     },
-  } = appConfig ?? { host_expiry_settings: {} };
+  } = appConfig ?? { node_expiry_settings: {} };
 
   const {
     data: teamConfig,
@@ -165,21 +165,21 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
       select: (data) => data.team,
       onSuccess: (tC) => {
         setFormData({
-          // host expiry settings
-          teamHostExpiryEnabled:
-            tC?.host_expiry_settings?.host_expiry_enabled ?? false,
-          teamHostExpiryWindow:
-            tC?.host_expiry_settings?.host_expiry_window ?? "",
-          // host status webhook settings
-          teamHostStatusWebhookEnabled:
-            tC?.webhook_settings?.host_status_webhook
-              ?.enable_host_status_webhook ?? false,
-          teamHostStatusWebhookDestinationUrl:
-            tC?.webhook_settings?.host_status_webhook?.destination_url ?? "",
-          teamHostStatusWebhookHostPercentage:
-            tC?.webhook_settings?.host_status_webhook?.host_percentage ?? 1,
-          teamHostStatusWebhookWindow:
-            tC?.webhook_settings?.host_status_webhook?.days_count ?? 1,
+          // node expiry settings
+          teamNodeExpiryEnabled:
+            tC?.node_expiry_settings?.node_expiry_enabled ?? false,
+          teamNodeExpiryWindow:
+            tC?.node_expiry_settings?.node_expiry_window ?? "",
+          // node status webhook settings
+          teamNodeStatusWebhookEnabled:
+            tC?.webhook_settings?.node_status_webhook
+              ?.enable_node_status_webhook ?? false,
+          teamNodeStatusWebhookDestinationUrl:
+            tC?.webhook_settings?.node_status_webhook?.destination_url ?? "",
+          teamNodeStatusWebhookNodePercentage:
+            tC?.webhook_settings?.node_status_webhook?.node_percentage ?? 1,
+          teamNodeStatusWebhookWindow:
+            tC?.webhook_settings?.node_status_webhook?.days_count ?? 1,
         });
       },
     }
@@ -187,10 +187,10 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
 
   useEffect(() => {
     if (isInitialTeamConfig) {
-      setPercentageHostsDropdownOptions(
+      setPercentageNodesDropdownOptions(
         getCustomDropdownOptions(
           HOST_STATUS_WEBHOOK_HOST_PERCENTAGE_DROPDOWN_OPTIONS,
-          teamConfig?.webhook_settings?.host_status_webhook?.host_percentage ??
+          teamConfig?.webhook_settings?.node_status_webhook?.node_percentage ??
             1,
           (val) => `${val}%`
         )
@@ -199,7 +199,7 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
       setWindowDropdownOptions(
         getCustomDropdownOptions(
           HOST_STATUS_WEBHOOK_WINDOW_DROPDOWN_OPTIONS,
-          teamConfig?.webhook_settings?.host_status_webhook?.days_count ?? 1,
+          teamConfig?.webhook_settings?.node_status_webhook?.days_count ?? 1,
           (val) => `${val} day${val !== 1 ? "s" : ""}`
         )
       );
@@ -214,10 +214,10 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
       const newFormData = { ...formData, [name]: value };
       setFormData(newFormData);
       setFormErrors(
-        validateTeamSettingsFormData(globalHostExpiryEnabled, newFormData)
+        validateTeamSettingsFormData(globalNodeExpiryEnabled, newFormData)
       );
     },
-    [formData, globalHostExpiryEnabled]
+    [formData, globalNodeExpiryEnabled]
   );
 
   const updateTeamSettings = useCallback(
@@ -225,31 +225,31 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
       evt.preventDefault();
 
       setUpdatingTeamSettings(true);
-      const castedHostExpiryWindow = Number(formData.teamHostExpiryWindow);
-      let enableHostExpiry;
-      if (globalHostExpiryEnabled) {
-        if (!castedHostExpiryWindow) {
-          enableHostExpiry = false;
+      const castedNodeExpiryWindow = Number(formData.teamNodeExpiryWindow);
+      let enableNodeExpiry;
+      if (globalNodeExpiryEnabled) {
+        if (!castedNodeExpiryWindow) {
+          enableNodeExpiry = false;
         } else {
-          enableHostExpiry = formData.teamHostExpiryEnabled;
+          enableNodeExpiry = formData.teamNodeExpiryEnabled;
         }
       } else {
-        enableHostExpiry = formData.teamHostExpiryEnabled;
+        enableNodeExpiry = formData.teamNodeExpiryEnabled;
       }
       teamsAPI
         .update(
           {
-            host_expiry_settings: {
-              host_expiry_enabled: enableHostExpiry,
-              host_expiry_window: castedHostExpiryWindow,
+            node_expiry_settings: {
+              node_expiry_enabled: enableNodeExpiry,
+              node_expiry_window: castedNodeExpiryWindow,
             },
             webhook_settings: {
-              host_status_webhook: {
-                enable_host_status_webhook:
-                  formData.teamHostStatusWebhookEnabled,
-                destination_url: formData.teamHostStatusWebhookDestinationUrl,
-                host_percentage: formData.teamHostStatusWebhookHostPercentage,
-                days_count: formData.teamHostStatusWebhookWindow,
+              node_status_webhook: {
+                enable_node_status_webhook:
+                  formData.teamNodeStatusWebhookEnabled,
+                destination_url: formData.teamNodeStatusWebhookDestinationUrl,
+                node_percentage: formData.teamNodeStatusWebhookNodePercentage,
+                days_count: formData.teamNodeStatusWebhookWindow,
               },
             },
           },
@@ -272,7 +272,7 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
     },
     [
       formData,
-      globalHostExpiryEnabled,
+      globalNodeExpiryEnabled,
       refetchTeamConfig,
       renderFlash,
       teamIdForApi,
@@ -290,32 +290,32 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
       <form onSubmit={updateTeamSettings}>
         <SectionHeader title="Webhook settings" />
         <Checkbox
-          name="teamHostStatusWebhookEnabled"
+          name="teamNodeStatusWebhookEnabled"
           onChange={onInputChange}
           parseTarget
-          value={formData.teamHostStatusWebhookEnabled}
-          helpText="This will trigger webhooks specific to this team, separate from the global host status webhook."
-          tooltipContent="Send an alert if a portion of your hosts go offline."
+          value={formData.teamNodeStatusWebhookEnabled}
+          helpText="This will trigger webhooks specific to this team, separate from the global node status webhook."
+          tooltipContent="Send an alert if a portion of your nodes go offline."
         >
-          Enable host status webhook
+          Enable node status webhook
         </Checkbox>
         <Button
           type="button"
           variant="text-link"
-          onClick={toggleHostStatusWebhookPreviewModal}
+          onClick={toggleNodeStatusWebhookPreviewModal}
         >
           Preview request
         </Button>
-        {formData.teamHostStatusWebhookEnabled && (
+        {formData.teamNodeStatusWebhookEnabled && (
           <>
             <InputField
               placeholder="https://server.com/example"
-              label="Host status webhook destination URL"
+              label="Node status webhook destination URL"
               onChange={onInputChange}
-              name="teamHostStatusWebhookDestinationUrl"
-              value={formData.teamHostStatusWebhookDestinationUrl}
+              name="teamNodeStatusWebhookDestinationUrl"
+              value={formData.teamNodeStatusWebhookDestinationUrl}
               parseTarget
-              error={formErrors.host_status_webhook_destination_url}
+              error={formErrors.node_status_webhook_destination_url}
               tooltip={
                 <p>
                   Provide a URL to deliver <br />
@@ -324,16 +324,16 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
               }
             />
             <Dropdown
-              label="Host status webhook %"
-              options={percentageHostsDropdownOptions}
+              label="Node status webhook %"
+              options={percentageNodesDropdownOptions}
               onChange={onInputChange}
-              name="teamHostStatusWebhookHostPercentage"
-              value={formData.teamHostStatusWebhookHostPercentage}
+              name="teamNodeStatusWebhookNodePercentage"
+              value={formData.teamNodeStatusWebhookNodePercentage}
               parseTarget
               searchable={false}
               tooltip={
                 <p>
-                  Select the minimum percentage of hosts that
+                  Select the minimum percentage of nodes that
                   <br />
                   must fail to check into Mdmlab in order to trigger
                   <br />
@@ -342,18 +342,18 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
               }
             />
             <Dropdown
-              label="Host status webhook window"
+              label="Node status webhook window"
               options={windowDropdownOptions}
               onChange={onInputChange}
-              name="teamHostStatusWebhookWindow"
-              value={formData.teamHostStatusWebhookWindow}
+              name="teamNodeStatusWebhookWindow"
+              value={formData.teamNodeStatusWebhookWindow}
               parseTarget
               searchable={false}
               tooltip={
                 <p>
                   Select the minimum number of days that the
                   <br />
-                  configured <b>Percentage of hosts</b> must fail to
+                  configured <b>Percentage of nodes</b> must fail to
                   <br />
                   check into Mdmlab in order to trigger the
                   <br />
@@ -363,28 +363,28 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
             />
           </>
         )}
-        <SectionHeader title="Host expiry settings" />
-        {globalHostExpiryEnabled !== undefined && (
-          <TeamHostExpiryToggle
-            globalHostExpiryEnabled={globalHostExpiryEnabled}
-            globalHostExpiryWindow={globalHostExpiryWindow}
-            teamExpiryEnabled={formData.teamHostExpiryEnabled}
+        <SectionHeader title="Node expiry settings" />
+        {globalNodeExpiryEnabled !== undefined && (
+          <TeamNodeExpiryToggle
+            globalNodeExpiryEnabled={globalNodeExpiryEnabled}
+            globalNodeExpiryWindow={globalNodeExpiryWindow}
+            teamExpiryEnabled={formData.teamNodeExpiryEnabled}
             setTeamExpiryEnabled={(isEnabled: boolean) =>
-              onInputChange({ name: "teamHostExpiryEnabled", value: isEnabled })
+              onInputChange({ name: "teamNodeExpiryEnabled", value: isEnabled })
             }
           />
         )}
-        {formData.teamHostExpiryEnabled && (
+        {formData.teamNodeExpiryEnabled && (
           <InputField
-            label="Host expiry window"
+            label="Node expiry window"
             // type="text" allows `validate` to differentiate between
             // non-numerical input and an empty input
             type="text"
             onChange={onInputChange}
             parseTarget
-            name="teamHostExpiryWindow"
-            value={formData.teamHostExpiryWindow}
-            error={formErrors.host_expiry_window}
+            name="teamNodeExpiryWindow"
+            value={formData.teamNodeExpiryWindow}
+            error={formErrors.node_expiry_window}
           />
         )}
         <Button
@@ -403,9 +403,9 @@ const TeamSettings = ({ location, router }: ITeamSubnavProps) => {
   return (
     <section className={`${baseClass}`}>
       {renderForm()}
-      {showHostStatusWebhookPreviewModal && (
-        <HostStatusWebhookPreviewModal
-          toggleModal={toggleHostStatusWebhookPreviewModal}
+      {showNodeStatusWebhookPreviewModal && (
+        <NodeStatusWebhookPreviewModal
+          toggleModal={toggleNodeStatusWebhookPreviewModal}
           isTeamScope
         />
       )}

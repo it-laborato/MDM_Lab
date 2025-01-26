@@ -10,9 +10,9 @@ const baseClass = "turn-on-mdm-message";
 
 interface ITurnOnMdmMessageProps {
   router: InjectedRouter;
-  /** Default: Manage your hosts */
+  /** Default: Manage your nodes */
   header?: string;
-  /** Default: MDM must be turned on to change settings on your hosts. */
+  /** Default: MDM must be turned on to change settings on your nodes. */
   info?: string;
   buttonText?: string;
 }
@@ -46,8 +46,8 @@ const TurnOnMdmMessage = ({
   return (
     <EmptyTable
       className={baseClass}
-      header={header || "Manage your hosts"}
-      info={info || "MDM must be turned on to change settings on your hosts."}
+      header={header || "Manage your nodes"}
+      info={info || "MDM must be turned on to change settings on your nodes."}
       primaryButton={renderConnectButton()}
     />
   );

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { CommaSeparatedPlatformString } from "interfaces/platform";
 import { IScript } from "./script";
 
-// Legacy PropTypes used on host interface
+// Legacy PropTypes used on node interface
 export default PropTypes.shape({
   author_email: PropTypes.string.isRequired,
   author_id: PropTypes.number.isRequired,
@@ -50,11 +50,11 @@ export interface IPolicySoftwareToInstall {
   software_title_id: number;
 }
 
-// Used on the manage hosts page and other places where aggregate stats are displayed
+// Used on the manage nodes page and other places where aggregate stats are displayed
 export interface IPolicyStats extends IPolicy {
-  passing_host_count: number;
-  failing_host_count: number;
-  host_count_updated_at: string;
+  passing_node_count: number;
+  failing_node_count: number;
+  node_count_updated_at: string;
   webhook: string;
   has_run: boolean;
   next_update_ms: number;
@@ -69,15 +69,15 @@ export interface IPolicyWebhookPreviewPayload {
   author_name: string;
   author_email: string;
   resolution: string;
-  passing_host_count: number;
-  failing_host_count: number;
+  passing_node_count: number;
+  failing_node_count: number;
   critical?: boolean;
 }
 
 export type PolicyStatusResponse = "pass" | "fail" | "";
 
-// Used on the host details page and other places where the status of individual hosts are displayed
-export interface IHostPolicy extends IPolicy {
+// Used on the node details page and other places where the status of individual nodes are displayed
+export interface INodePolicy extends IPolicy {
   response: PolicyStatusResponse;
 }
 

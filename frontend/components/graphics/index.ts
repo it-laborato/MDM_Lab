@@ -13,7 +13,7 @@ import FilePkg from "./FilePkg";
 import FileP7m from "./FileP7m";
 import FilePem from "./FilePem";
 import FileVpp from "./FileVpp";
-import EmptyHosts from "./EmptyHosts";
+import EmptyNodes from "./EmptyNodes";
 import EmptyTeams from "./EmptyTeams";
 import EmptyPacks from "./EmptyPacks";
 import EmptySchedule from "./EmptySchedule";
@@ -30,7 +30,7 @@ export const GRAPHIC_MAP = {
   "empty-users": EmptyUsers,
   "empty-policies": EmptyPolicies,
   "empty-software": EmptySoftware,
-  "empty-hosts": EmptyHosts,
+  "empty-nodes": EmptyNodes,
   "empty-teams": EmptyTeams,
   "empty-packs": EmptyPacks,
   "empty-schedule": EmptySchedule,

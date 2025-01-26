@@ -58,7 +58,7 @@ const DiscardDataOption = ({
           </Link>
         </>
       ) : (
-        "The most recent results for each host will not be available in Mdmlab."
+        "The most recent results for each node will not be available in Mdmlab."
       )}
     </div>
   );

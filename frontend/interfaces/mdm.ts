@@ -55,35 +55,35 @@ export type MdmEnrollmentStatus = keyof typeof MDM_ENROLLMENT_STATUS;
 
 export interface IMdmStatusCardData {
   status: MdmEnrollmentStatus;
-  hosts: number;
+  nodes: number;
 }
 
 export interface IMdmAggregateStatus {
-  enrolled_manual_hosts_count: number;
-  enrolled_automated_hosts_count: number;
-  unenrolled_hosts_count: number;
-  pending_hosts_count?: number;
+  enrolled_manual_nodes_count: number;
+  enrolled_automated_nodes_count: number;
+  unenrolled_nodes_count: number;
+  pending_nodes_count?: number;
 }
 
 export interface IMdmSolution {
   id: number;
   name: string | null;
   server_url: string;
-  hosts_count: number;
+  nodes_count: number;
 }
 
-/** This is the mdm solution that comes back from the host/summary/mdm
+/** This is the mdm solution that comes back from the node/summary/mdm
 request. We will always get a string for the solution name in this case  */
 export interface IMdmSummaryMdmSolution extends IMdmSolution {
   name: string;
 }
 
 interface IMdmStatus {
-  enrolled_manual_hosts_count: number;
-  enrolled_automated_hosts_count: number;
-  unenrolled_hosts_count: number;
-  pending_hosts_count?: number;
-  hosts_count: number;
+  enrolled_manual_nodes_count: number;
+  enrolled_automated_nodes_count: number;
+  unenrolled_nodes_count: number;
+  pending_nodes_count?: number;
+  nodes_count: number;
 }
 
 export interface IMdmSummaryResponse {
@@ -123,7 +123,7 @@ export type MdmDDMProfileStatus =
 
 export type ProfileOperationType = "remove" | "install";
 
-export interface IHostMdmProfile {
+export interface INodeMdmProfile {
   profile_uuid: string;
   name: string;
   operation_type: ProfileOperationType | null;
@@ -203,14 +203,14 @@ export enum BootstrapPackageStatus {
  * returned by the Mdmlab API.
  */
 export interface IMdmCommandResult {
-  host_uuid: string;
+  node_uuid: string;
   command_uuid: string;
   /** Status is the status of the command. It can be one of Acknowledged, Error, or NotNow for
 	// Apple, or 200, 400, etc for Windows.  */
   status: string;
   updated_at: string;
   request_type: string;
-  hostname: string;
+  nodename: string;
   /** Payload is a base64-encoded string containing the MDM command request */
   payload: string;
   /** Result is a base64-enconded string containing the MDM command response */

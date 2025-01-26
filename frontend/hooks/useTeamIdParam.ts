@@ -252,14 +252,14 @@ const shouldRedirectToDefaultTeam = ({
   const teamIdString = query?.team_id || "";
   const parsedTeamId = parseInt(teamIdString, 10);
 
-  // redirect non-numeric strings and negative numbers to default (e.g., `/hosts?team_id=-1` should
-  // be redirected to `/hosts`)
+  // redirect non-numeric strings and negative numbers to default (e.g., `/nodes?team_id=-1` should
+  // be redirected to `/nodes`)
   if (teamIdString.length && (isNaN(parsedTeamId) || parsedTeamId < 0)) {
     return true;
   }
 
   // coerce empty string to -1 (i.e. `ALL_TEAMS_ID`) and test again (this ensures that non-global users will be
-  // redirected to their default team when they attempt to access the `/hosts` page and also ensures
+  // redirected to their default team when they attempt to access the `/nodes` page and also ensures
   // all users are redirected to their default when they attempt to acess non-existent team ids).
   return !isValidTeamId({
     userTeams,

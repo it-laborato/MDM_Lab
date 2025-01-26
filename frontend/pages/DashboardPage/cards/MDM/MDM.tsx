@@ -22,7 +22,7 @@ import {
 
 export type IMdmSolutionTableData = Pick<
   IMdmSummaryMdmSolution,
-  "name" | "hosts_count"
+  "name" | "nodes_count"
 >;
 
 interface IRowProps extends Row {
@@ -78,7 +78,7 @@ const reduceSolutionsToObj = (mdmSolutions: IMdmSummaryMdmSolution[]) => {
     // for this case.
     const key = nextSolution.name || "Unknown";
     if (acc[key]) {
-      acc[key].hosts_count += nextSolution.hosts_count;
+      acc[key].nodes_count += nextSolution.nodes_count;
     } else {
       acc[key] = Object.assign({ ...nextSolution });
     }
@@ -124,7 +124,7 @@ const Mdm = ({
     selectedPlatformLabelId
   );
 
-  // Renders opaque information as host information is loading
+  // Renders opaque information as node information is loading
   const opacity = isFetching ? { opacity: 0 } : { opacity: 1 };
 
   const handleSolutionRowClick = (row: IRowProps) => {

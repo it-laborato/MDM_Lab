@@ -5,7 +5,7 @@
  */
 
 const HOST_ID = {
-  host: {
+  node: {
     created_at: "2021-03-31T00:00:00Z",
     updated_at: "2021-03-31T00:00:00Z",
     software: [],
@@ -16,7 +16,7 @@ const HOST_ID = {
     last_enrolled_at: "2021-03-31T00:00:00Z",
     seen_time: "2021-03-31T00:00:00ZZ",
     refetch_requested: false,
-    hostname: "myf1337d3v1c3",
+    nodename: "myf1337d3v1c3",
     display_name: "myf1337d3v1c3",
     uuid: "13371337-0000-0000-1337-133713371337",
     platform: "rhel",
@@ -76,18 +76,18 @@ const HOST_1337 = {
 
 export default {
   ALL_HOSTS: {
-    hosts: [HOST_ID.host],
+    nodes: [HOST_ID.node],
   },
   HOSTS_TEAM_ID: {
-    hosts: [{ ...HOST_ID.host, team_id: 2, team_name: "n00bz" }],
+    nodes: [{ ...HOST_ID.node, team_id: 2, team_name: "n00bz" }],
   },
   HOSTS_TEAM_1337: {
-    hosts: [HOST_1337.host],
+    nodes: [HOST_1337.node],
   },
   HOST_ID,
   HOST_1337,
   DEVICE_MAPPING: {
-    host_id: 1337,
+    node_id: 1337,
     device_mapping: null,
     foo: "bar",
   },

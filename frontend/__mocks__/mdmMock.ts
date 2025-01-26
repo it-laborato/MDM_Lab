@@ -1,4 +1,4 @@
-import { IHostMdmData } from "interfaces/host";
+import { INodeMdmData } from "interfaces/node";
 import {
   IMdmSolution,
   IMdmProfile,
@@ -9,7 +9,7 @@ const DEFAULT_MDM_SOLUTION_MOCK: IMdmSolution = {
   id: 1,
   name: "MDM Solution",
   server_url: "http://mdmsolution.com",
-  hosts_count: 5,
+  nodes_count: 5,
 };
 
 export const createMockMdmSolution = (
@@ -22,7 +22,7 @@ const DEFAULT_HOST_SUMMARY_MDM_SOLUTION_MOCK: IMdmSummaryMdmSolution = {
   id: 1,
   name: "MDM Solution",
   server_url: "http://mdmsolution.com",
-  hosts_count: 5,
+  nodes_count: 5,
 };
 
 export const createMockMdmSummaryMdmSolution = (
@@ -48,7 +48,7 @@ export const createMockMdmProfile = (
   return { ...DEFAULT_MDM_PROFILE_DATA, ...overrides };
 };
 
-const DEFAULT_HOST_MDM_DATA: IHostMdmData = {
+const DEFAULT_HOST_MDM_DATA: INodeMdmData = {
   encryption_key_available: false,
   enrollment_status: "On (automatic)",
   server_url: "http://mdmsolution.com",
@@ -74,8 +74,8 @@ const DEFAULT_HOST_MDM_DATA: IHostMdmData = {
   pending_action: "",
 };
 
-export const createMockHostMdmData = (
-  overrides?: Partial<IHostMdmData>
-): IHostMdmData => {
+export const createMockNodeMdmData = (
+  overrides?: Partial<INodeMdmData>
+): INodeMdmData => {
   return { ...DEFAULT_HOST_MDM_DATA, ...overrides };
 };

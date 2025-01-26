@@ -169,7 +169,7 @@ const ManageQueryAutomationsModal = ({
           </div>
         </div>
         <InfoBanner className={`${baseClass}__supported-platforms`}>
-          <p>Automations currently run on macOS, Windows, and Linux hosts.</p>
+          <p>Automations currently run on macOS, Windows, and Linux nodes.</p>
           <p>
             Interested in query automations for your Chromebooks? &nbsp;
             <CustomLink url={CONTACT_MDMLAB_LINK} text="Let us know" newTab />

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { IHost } from "./host";
+import { INode } from "./node";
 
 export default PropTypes.shape({
-  hosts_count: PropTypes.shape({
+  nodes_count: PropTypes.shape({
     total: PropTypes.number,
     successful: PropTypes.number, // Does not include ChromeOS results that are partially successful
     failed: PropTypes.number,
@@ -12,7 +12,7 @@ export default PropTypes.shape({
 });
 
 export interface ICampaignError {
-  host_display_name: string;
+  node_display_name: string;
   osquery_version: string;
   error: string;
 }
@@ -25,8 +25,8 @@ export interface ICampaign {
   };
   created_at: string;
   errors: ICampaignError[];
-  hosts: IHost[];
-  hosts_count: {
+  nodes: INode[];
+  nodes_count: {
     total: number;
     successful: number; // Does not include ChromeOS results that are partially successful
     failed: number;
@@ -55,7 +55,7 @@ export interface ICampaignState {
   };
   queryResultsToggle: any;
   runQueryMilliseconds: number;
-  selectRelatedHostTarget: boolean;
+  selectRelatedNodeTarget: boolean;
   targetsCount: number;
   targetsError: any;
 }

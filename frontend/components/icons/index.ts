@@ -26,8 +26,8 @@ import Policy from "./Policy";
 import Query from "./Query";
 import Search from "./Search";
 
-import LowDiskSpaceHosts from "./LowDiskSpaceHosts";
-import MissingHosts from "./MissingHosts";
+import LowDiskSpaceNodes from "./LowDiskSpaceNodes";
+import MissingNodes from "./MissingNodes";
 import Lightbulb from "./Lightbulb";
 
 import Apple from "./Apple";
@@ -90,8 +90,8 @@ export const ICON_MAP = {
   filter: Filter,
   "filter-alt": FilterAlt,
   "filter-funnel": FilterFunnel,
-  "low-disk-space-hosts": LowDiskSpaceHosts,
-  "missing-hosts": MissingHosts,
+  "low-disk-space-nodes": LowDiskSpaceNodes,
+  "missing-nodes": MissingNodes,
   lightbulb: Lightbulb,
   info: Info,
   "info-outline": InfoOutline,

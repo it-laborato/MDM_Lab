@@ -2,7 +2,7 @@ import React from "react";
 import { ISoftware } from "interfaces/software";
 
 import TextCell from "components/TableContainer/DataTable/TextCell";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 
 // NOTE: cellProps come from react-table
 // more info here https://react-table.tanstack.com/docs/api/useTable#cell-properties
@@ -47,10 +47,10 @@ const generateTableHeaders = (teamId?: number): IDataColumn[] => [
     Cell: (cellProps: ICellProps) => <TextCell value={cellProps.cell.value} />,
   },
   {
-    title: "Hosts",
-    Header: "Hosts",
+    title: "Nodes",
+    Header: "Nodes",
     disableSortBy: true,
-    accessor: "hosts_count",
+    accessor: "nodes_count",
     Cell: (cellProps: ICellProps) => <TextCell value={cellProps.cell.value} />,
   },
   {
@@ -60,7 +60,7 @@ const generateTableHeaders = (teamId?: number): IDataColumn[] => [
     accessor: "id",
     Cell: (cellProps: ICellProps) => {
       return (
-        <ViewAllHostsLink
+        <ViewAllNodesLink
           queryParams={{ software_id: cellProps.cell.value, team_id: teamId }} // TODO: Should redirect with the current team id?
           className="software-link"
           condensed

@@ -24,7 +24,7 @@ const DeletePackageModal = ({
       <>
         <p>Delete the bootstrap package to upload a new one.</p>
         <p>
-          If you need to remove the package from macOS hosts already enrolled,
+          If you need to remove the package from macOS nodes already enrolled,
           use your configuration management tool (ex. Munki, Chef, or Puppet).
         </p>
         <div className="modal-cta-wrap">

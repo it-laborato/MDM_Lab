@@ -32,7 +32,7 @@ import DeleteTeamModal from "../components/DeleteTeamModal";
 import RenameTeamModal from "../components/RenameTeamModal";
 import DeleteSecretModal from "../../../../components/EnrollSecrets/DeleteSecretModal";
 import SecretEditorModal from "../../../../components/EnrollSecrets/SecretEditorModal";
-import AddHostsModal from "../../../../components/AddHostsModal";
+import AddNodesModal from "../../../../components/AddNodesModal";
 import EnrollSecretModal from "../../../../components/EnrollSecrets/EnrollSecretModal";
 
 const baseClass = "team-details";
@@ -123,7 +123,7 @@ const TeamDetailsWrapper = ({
   });
 
   const [selectedSecret, setSelectedSecret] = useState<IEnrollSecret>();
-  const [showAddHostsModal, setShowAddHostsModal] = useState(false);
+  const [showAddNodesModal, setShowAddNodesModal] = useState(false);
   const [
     showManageEnrollSecretsModal,
     setShowManageEnrollSecretsModal,
@@ -189,9 +189,9 @@ const TeamDetailsWrapper = ({
     router.push(navPath);
   };
 
-  const toggleAddHostsModal = useCallback(() => {
-    setShowAddHostsModal(!showAddHostsModal);
-  }, [showAddHostsModal, setShowAddHostsModal]);
+  const toggleAddNodesModal = useCallback(() => {
+    setShowAddNodesModal(!showAddNodesModal);
+  }, [showAddNodesModal, setShowAddNodesModal]);
 
   const toggleManageEnrollSecretsModal = useCallback(() => {
     setShowManageEnrollSecretsModal(!showManageEnrollSecretsModal);
@@ -377,11 +377,11 @@ const TeamDetailsWrapper = ({
     );
   }
 
-  const hostCount = currentTeamDetails.host_count;
-  let hostsTotalDisplay: string | undefined;
-  if (hostCount !== undefined) {
-    hostsTotalDisplay =
-      hostCount === 1 ? `${hostCount} host` : `${hostCount} hosts`;
+  const nodeCount = currentTeamDetails.node_count;
+  let nodesTotalDisplay: string | undefined;
+  if (nodeCount !== undefined) {
+    nodesTotalDisplay =
+      nodeCount === 1 ? `${nodeCount} node` : `${nodeCount} nodes`;
   }
 
   return (
@@ -408,9 +408,9 @@ const TeamDetailsWrapper = ({
                   onChange={handleTeamChange}
                 />
               )}
-              {!!hostsTotalDisplay && (
-                <span className={`${baseClass}__host-count`}>
-                  {hostsTotalDisplay}
+              {!!nodesTotalDisplay && (
+                <span className={`${baseClass}__node-count`}>
+                  {nodesTotalDisplay}
                 </span>
               )}
             </div>
@@ -419,8 +419,8 @@ const TeamDetailsWrapper = ({
               actions={[
                 {
                   type: "primary",
-                  label: "Add hosts",
-                  onClick: toggleAddHostsModal,
+                  label: "Add nodes",
+                  onClick: toggleAddNodesModal,
                 },
                 {
                   type: "secondary",
@@ -467,13 +467,13 @@ const TeamDetailsWrapper = ({
             </TabList>
           </Tabs>
         </TabsWrapper>
-        {showAddHostsModal && (
-          <AddHostsModal
+        {showAddNodesModal && (
+          <AddNodesModal
             currentTeamName={currentTeamName}
             enrollSecret={teamSecrets?.[0]?.secret}
             isAnyTeamSelected={isAnyTeamSelected}
             isLoading={isLoadingTeams}
-            onCancel={toggleAddHostsModal}
+            onCancel={toggleAddNodesModal}
             openEnrollSecretModal={toggleManageEnrollSecretsModal}
           />
         )}

@@ -58,7 +58,7 @@ const BootstrapPackageUploader = ({
     <div className={baseClass}>
       <p>
         Upload a bootstrap package to install a configuration management tool
-        (ex. Munki, Chef, or Puppet) on hosts that automatically enroll to
+        (ex. Munki, Chef, or Puppet) on nodes that automatically enroll to
         Mdmlab.{" "}
         <CustomLink
           url="https://mdmlabdm.com/docs/using-mdmlab/mdm-macos-setup-experience#bootstrap-package"

@@ -2,14 +2,14 @@ import { IMdmAggregateStatus, IMdmSolution } from "./mdm";
 
 export interface IMunkiVersionsAggregate {
   version: string;
-  hosts_count: number;
+  nodes_count: number;
 }
 
 export interface IMunkiIssuesAggregate {
   id: number;
   name: string;
   type: "error" | "warning";
-  hosts_count: number;
+  nodes_count: number;
 }
 
 export interface IMacadminAggregate {

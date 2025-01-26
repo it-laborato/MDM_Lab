@@ -83,11 +83,11 @@ const CurrentVersionSection = ({
         lastUpdatedAt={data?.counts_updated_at}
         customTooltipText={
           <>
-            Mdmlab periodically queries all hosts to
+            Mdmlab periodically queries all nodes to
             <br />
             retrieve operating systems. Click to
             <br />
-            view hosts for the most up-to-date
+            view nodes for the most up-to-date
             <br />
             lists.
           </>

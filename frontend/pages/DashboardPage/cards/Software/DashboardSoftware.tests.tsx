@@ -10,12 +10,12 @@ describe("Dashboard software card", () => {
   const vulnSwInfo = {
     name: "ms-toolsai.jupyter",
     version: "2.3.4",
-    hostsCount: 432,
+    nodesCount: 432,
   };
   const noVulnSwInfo = {
     name: "common.extension_2",
     version: "5.6.7",
-    hostsCount: 543,
+    nodesCount: 543,
   };
 
   it("renders all software normally when present", () => {
@@ -45,7 +45,7 @@ describe("Dashboard software card", () => {
               resolved_in_version: "2023.10.1100000000",
             },
           ],
-          hosts_count: vulnSwInfo.hostsCount,
+          nodes_count: vulnSwInfo.nodesCount,
         },
         {
           id: 758,
@@ -55,7 +55,7 @@ describe("Dashboard software card", () => {
           browser: "",
           generated_cpe: "",
           vulnerabilities: null,
-          hosts_count: noVulnSwInfo.hostsCount,
+          nodes_count: noVulnSwInfo.nodesCount,
         },
       ],
     };
@@ -75,7 +75,7 @@ describe("Dashboard software card", () => {
 
     expect(screen.getByText("Name")).toBeInTheDocument();
     expect(screen.getByText("Version")).toBeInTheDocument();
-    expect(screen.getByText("Hosts")).toBeInTheDocument();
+    expect(screen.getByText("Nodes")).toBeInTheDocument();
 
     Object.keys(noVulnSwInfo).forEach((key) => {
       expect(
@@ -110,7 +110,7 @@ describe("Dashboard software card", () => {
               resolved_in_version: "2023.10.1100000000",
             },
           ],
-          hosts_count: vulnSwInfo.hostsCount,
+          nodes_count: vulnSwInfo.nodesCount,
         },
       ],
     };
@@ -130,7 +130,7 @@ describe("Dashboard software card", () => {
 
     expect(screen.getByText("Name")).toBeInTheDocument();
     expect(screen.getByText("Version")).toBeInTheDocument();
-    expect(screen.getByText("Hosts")).toBeInTheDocument();
+    expect(screen.getByText("Nodes")).toBeInTheDocument();
 
     Object.keys(vulnSwInfo).forEach((key) => {
       expect(

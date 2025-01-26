@@ -63,10 +63,10 @@ const DEFAULT_CONFIG_MOCK: IConfig = {
     contact_url: "https://mdmlabdm.com/company/contact",
   },
   server_settings: {
-    server_url: "https://localhost:8080",
+    server_url: "https://localnode:8080",
     live_query_disabled: false,
     enable_analytics: true,
-    deferred_save_host: false,
+    deferred_save_node: false,
     query_reports_disabled: false,
     scripts_disabled: false,
     ai_features_disabled: false,
@@ -98,9 +98,9 @@ const DEFAULT_CONFIG_MOCK: IConfig = {
     enable_jit_provisioning: false,
     enable_jit_role_sync: false,
   },
-  host_expiry_settings: {
-    host_expiry_enabled: false,
-    host_expiry_window: 0,
+  node_expiry_settings: {
+    node_expiry_enabled: false,
+    node_expiry_window: 0,
   },
   activity_expiry_settings: {
     activity_expiry_enabled: true,
@@ -115,22 +115,22 @@ const DEFAULT_CONFIG_MOCK: IConfig = {
     organization: "",
   },
   webhook_settings: {
-    host_status_webhook: {
-      enable_host_status_webhook: true,
+    node_status_webhook: {
+      enable_node_status_webhook: true,
       destination_url: "https://server.com",
-      host_percentage: 5,
+      node_percentage: 5,
       days_count: 7,
     },
     failing_policies_webhook: {
       enable_failing_policies_webhook: true,
       destination_url: "https://server.com",
       policy_ids: [1, 2, 3],
-      host_batch_size: 1000,
+      node_batch_size: 1000,
     },
     vulnerabilities_webhook: {
       enable_vulnerabilities_webhook: true,
       destination_url: "https://server.com",
-      host_batch_size: 1000,
+      node_batch_size: 1000,
     },
     activities_webhook: {
       enable_activities_webhook: true,
@@ -188,7 +188,7 @@ const DEFAULT_CONFIG_MOCK: IConfig = {
   },
   sandbox_enabled: false,
   features: {
-    enable_host_users: true,
+    enable_node_users: true,
     enable_software_inventory: true,
   },
   mdmlab_desktop: { transparency_url: "https://mdmlabdm.com/transparency" },

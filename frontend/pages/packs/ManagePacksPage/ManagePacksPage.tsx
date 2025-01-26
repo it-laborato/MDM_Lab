@@ -161,7 +161,7 @@ const ManagePacksPage = ({ router }: IManagePacksPageProps): JSX.Element => {
               <div className={`${baseClass}__description`}>
                 <p>
                   Manage query packs to schedule recurring queries for your
-                  hosts.
+                  nodes.
                 </p>
               </div>
             </div>

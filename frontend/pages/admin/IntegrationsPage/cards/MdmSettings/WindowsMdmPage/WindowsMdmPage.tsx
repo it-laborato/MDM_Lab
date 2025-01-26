@@ -103,8 +103,8 @@ const WindowsMdmPage = ({ router }: IWindowsMdmPageProps) => {
   };
 
   const descriptionText = mdmOn
-    ? "Turns on MDM for Windows hosts that enroll to Mdmlab (excluding servers)."
-    : "Hosts with MDM already turned on will not have MDM removed.";
+    ? "Turns on MDM for Windows nodes that enroll to Mdmlab (excluding servers)."
+    : "Nodes with MDM already turned on will not have MDM removed.";
 
   return (
     <MainContent className={baseClass}>
@@ -131,7 +131,7 @@ const WindowsMdmPage = ({ router }: IWindowsMdmPageProps) => {
               isPremiumTier ? "" : "This feature is included in Mdmlab Premium."
             }
           >
-            Automatically migrate hosts connected to another MDM solution
+            Automatically migrate nodes connected to another MDM solution
           </Checkbox>
 
           <Button variant="brand" onClick={onSaveMdm}>

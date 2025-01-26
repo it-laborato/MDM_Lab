@@ -85,7 +85,7 @@ const SecretEditorModal = ({
     >
       <div className={baseClass}>
         <div className={`${baseClass}__description`}>
-          Create or edit the generated secret to enroll hosts to{" "}
+          Create or edit the generated secret to enroll nodes to{" "}
           <b>{renderTeam()?.name}</b>:
         </div>
         <div className={`${baseClass}__secret-wrapper`}>

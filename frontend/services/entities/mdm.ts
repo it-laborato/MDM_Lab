@@ -1,5 +1,5 @@
 import {
-  IHostMdmProfile,
+  INodeMdmProfile,
   IMdmCommandResult,
   IMdmProfile,
   MdmProfileStatus,
@@ -42,7 +42,7 @@ export interface IUploadProfileApiParams {
   labelsExcludeAny?: string[];
 }
 
-export const isDDMProfile = (profile: IMdmProfile | IHostMdmProfile) => {
+export const isDDMProfile = (profile: IMdmProfile | INodeMdmProfile) => {
   return profile.profile_uuid.startsWith("d");
 };
 
@@ -91,11 +91,11 @@ export type IGetSetupExperienceSoftwareResponse = ISoftwareTitlesResponse & {
 };
 
 const mdmService = {
-  unenrollHostFromMdm: (hostId: number, timeout?: number) => {
+  unenrollNodeFromMdm: (nodeId: number, timeout?: number) => {
     const { HOST_MDM_UNENROLL } = endpoints;
     return sendRequest(
       "PATCH",
-      HOST_MDM_UNENROLL(hostId),
+      HOST_MDM_UNENROLL(nodeId),
       undefined,
       undefined,
       timeout

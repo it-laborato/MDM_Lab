@@ -79,9 +79,9 @@ export const MACADMINS_EXTENSION_TABLES: Record<string, QueryablePlatform[]> = {
 };
 
 /**
- * Host Linux OSs as defined by the Mdmlab server.
+ * Node Linux OSs as defined by the Mdmlab server.
  *
- * @see https://github.com/mdmlabdm/mdmlab/blob/5a21e2cfb029053ddad0508869eb9f1f23997bf2/server/mdmlab/hosts.go#L780
+ * @see https://github.com/mdmlabdm/mdmlab/blob/5a21e2cfb029053ddad0508869eb9f1f23997bf2/server/mdmlab/nodes.go#L780
  */
 export const HOST_LINUX_PLATFORMS = [
   "linux",
@@ -107,7 +107,7 @@ export const HOST_LINUX_PLATFORMS = [
 
 export const HOST_APPLE_PLATFORMS = ["darwin", "ios", "ipados"] as const;
 
-export type HostPlatform =
+export type NodePlatform =
   | typeof HOST_LINUX_PLATFORMS[number]
   | typeof HOST_APPLE_PLATFORMS[number]
   | "windows"
@@ -115,7 +115,7 @@ export type HostPlatform =
 
 /**
  * Checks if the provided platform is a Linux-like OS. We can recieve many
- * different types of host platforms so we need a check that will cover all
+ * different types of node platforms so we need a check that will cover all
  * the possible Linux-like platform values.
  */
 export const isLinuxLike = (platform: string) => {
@@ -130,16 +130,16 @@ export const isAppleDevice = (platform: string) => {
   );
 };
 
-export const isIPadOrIPhone = (platform: string | HostPlatform) =>
+export const isIPadOrIPhone = (platform: string | NodePlatform) =>
   ["ios", "ipados"].includes(platform);
 
 export const DISK_ENCRYPTION_SUPPORTED_LINUX_PLATFORMS = [
   "ubuntu", // covers Kubuntu
-  "rhel", // *included here to support Fedora systems. Necessary to cross-check with `os_versions` as well to confrim host is Fedora and not another, non-support rhel-like platform.
+  "rhel", // *included here to support Fedora systems. Necessary to cross-check with `os_versions` as well to confrim node is Fedora and not another, non-support rhel-like platform.
 ] as const;
 
 export const isDiskEncryptionSupportedLinuxPlatform = (
-  platform: HostPlatform,
+  platform: NodePlatform,
   os_version: string
 ) => {
   const isFedora =
@@ -157,7 +157,7 @@ const DISK_ENCRYPTION_SUPPORTED_PLATFORMS = [
 export type DiskEncryptionSupportedPlatform = typeof DISK_ENCRYPTION_SUPPORTED_PLATFORMS[number];
 
 export const platformSupportsDiskEncryption = (
-  platform: HostPlatform,
+  platform: NodePlatform,
   /** os_version necessary to differentiate Fedora from other rhel-like platforms */
   os_version?: string
 ) => {
@@ -176,7 +176,7 @@ const OS_SETTINGS_DISPLAY_PLATFORMS = [
 ];
 
 export const isOsSettingsDisplayPlatform = (
-  platform: HostPlatform,
+  platform: NodePlatform,
   os_version: string
 ) => {
   if (platform === "rhel") {

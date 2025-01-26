@@ -47,7 +47,7 @@ const Munki = ({
     setNavTabIndex(index);
   };
 
-  // Renders opaque information as host information is loading
+  // Renders opaque information as node information is loading
   const opacity = isMacAdminsFetching ? { opacity: 0 } : { opacity: 1 };
 
   return (

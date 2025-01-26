@@ -25,7 +25,7 @@ interface installIconConfig {
 const installIconMap: Record<InstallType, installIconConfig> = {
   manual: {
     iconName: "install",
-    tooltip: <>Software can be installed on Host details page.</>,
+    tooltip: <>Software can be installed on Node details page.</>,
   },
   selfService: {
     iconName: "user",
@@ -37,13 +37,13 @@ const installIconMap: Record<InstallType, installIconConfig> = {
   },
   automatic: {
     iconName: "refresh",
-    tooltip: <>Software will be automatically installed on each host.</>,
+    tooltip: <>Software will be automatically installed on each node.</>,
   },
   automaticSelfService: {
     iconName: "automatic-self-service",
     tooltip: (
       <>
-        Software will be automatically installed on each host. End users can
+        Software will be automatically installed on each node. End users can
         reinstall from <b>Mdmlab Desktop {">"} Self-service</b>.
       </>
     ),

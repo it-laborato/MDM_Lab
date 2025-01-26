@@ -22,9 +22,9 @@ const baseClass = "app-install-details";
 
 export type IAppInstallDetails = Pick<
   IActivityDetails,
-  | "host_id"
+  | "node_id"
   | "command_uuid"
-  | "host_display_name"
+  | "node_display_name"
   | "software_title"
   | "app_store_id"
   | "status"
@@ -33,7 +33,7 @@ export type IAppInstallDetails = Pick<
 export const AppInstallDetails = ({
   status,
   command_uuid = "",
-  host_display_name = "",
+  node_display_name = "",
   software_title = "",
 }: IAppInstallDetails) => {
   const { data: result, isLoading, isError } = useQuery<
@@ -87,16 +87,16 @@ export const AppInstallDetails = ({
   if (isStatusNotNow) {
     predicate = "tried to install";
     subordinate =
-      " but couldn’t because the host was locked or was running on battery power while in Power Nap. Mdmlab will try again";
+      " but couldn’t because the node was locked or was running on battery power while in Power Nap. Mdmlab will try again";
   } else {
     predicate = getInstallDetailsStatusPredicate(displayStatus);
     subordinate = status === "pending" ? " when it comes online" : "";
   }
 
-  const formattedHost = host_display_name ? (
-    <b>{host_display_name}</b>
+  const formattedNode = node_display_name ? (
+    <b>{node_display_name}</b>
   ) : (
-    "the host"
+    "the node"
   );
 
   const showCommandPayload = !!result?.payload;
@@ -109,7 +109,7 @@ export const AppInstallDetails = ({
         <div className={`${baseClass}__status-message`}>
           {!!iconName && <Icon name={iconName} />}
           <span>
-            Mdmlab {predicate} <b>{software_title}</b> on {formattedHost}
+            Mdmlab {predicate} <b>{software_title}</b> on {formattedNode}
             {subordinate}.
           </span>
         </div>
@@ -123,7 +123,7 @@ export const AppInstallDetails = ({
         )}
         {showCommandResponse && (
           <div className={`${baseClass}__script-output`}>
-            The response from {formattedHost}:
+            The response from {formattedNode}:
             <Textarea className={`${baseClass}__output-textarea`}>
               {result.result}
             </Textarea>

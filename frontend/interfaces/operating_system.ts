@@ -6,7 +6,7 @@ export interface IOperatingSystemVersion {
   name_only: string;
   version: string;
   platform: string;
-  hosts_count: number;
+  nodes_count: number;
   generated_cpes?: string[];
   vulnerabilities: ISoftwareVulnerability[];
 }

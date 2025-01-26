@@ -293,7 +293,7 @@ describe("QueriesTable", () => {
       });
 
       expect(
-        screen.getByText("This query runs on all hosts.")
+        screen.getByText("This query runs on all nodes.")
       ).toBeInTheDocument();
     });
   });

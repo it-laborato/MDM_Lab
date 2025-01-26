@@ -20,7 +20,7 @@ const TargetValue = ({
   labelExcludeAny,
 }: ITargetValueProps) => {
   if (!labelIncludeAny && !labelExcludeAny) {
-    return <>All hosts</>;
+    return <>All nodes</>;
   }
 
   let valueText = "";

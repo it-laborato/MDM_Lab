@@ -3,7 +3,7 @@ import React from "react";
 import paths from "router/paths";
 import { buildQueryStringFromParams } from "utilities/url";
 import { MdmProfileStatus } from "interfaces/mdm";
-import { HOSTS_QUERY_PARAMS } from "services/entities/hosts";
+import { HOSTS_QUERY_PARAMS } from "services/entities/nodes";
 import { ProfileStatusSummaryResponse } from "services/entities/mdm";
 
 import Spinner from "components/Spinner";
@@ -21,7 +21,7 @@ interface IProfileStatusCountProps {
   statusValue: MdmProfileStatus;
   title: string;
   teamId: number;
-  hostCount: number;
+  nodeCount: number;
   tooltipText: string;
 }
 
@@ -30,10 +30,10 @@ const ProfileStatusCount = ({
   statusValue,
   teamId,
   title,
-  hostCount,
+  nodeCount,
   tooltipText,
 }: IProfileStatusCountProps) => {
-  const linkHostsByStatus = `${paths.MANAGE_HOSTS}?${buildQueryStringFromParams(
+  const linkNodesByStatus = `${paths.MANAGE_HOSTS}?${buildQueryStringFromParams(
     {
       team_id: teamId,
       [HOSTS_QUERY_PARAMS.OS_SETTINGS]: statusValue,
@@ -49,7 +49,7 @@ const ProfileStatusCount = ({
         layout="vertical"
         valueClassName={`${baseClass}__status-indicator-value`}
       />
-      <a href={linkHostsByStatus}>{hostCount} hosts</a>
+      <a href={linkNodesByStatus}>{nodeCount} nodes</a>
     </div>
   );
 };
@@ -92,7 +92,7 @@ const ProfileStatusAggregate = ({
         statusValue={value}
         teamId={teamId}
         title={text}
-        hostCount={count}
+        nodeCount={count}
         tooltipText={tooltipText}
       />
     );

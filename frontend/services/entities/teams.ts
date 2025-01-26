@@ -58,9 +58,9 @@ export interface IUpdateTeamFormData {
       grace_period_days: number;
     };
   };
-  host_expiry_settings: {
-    host_expiry_enabled: boolean;
-    host_expiry_window: number; // days
+  node_expiry_settings: {
+    node_expiry_enabled: boolean;
+    node_expiry_window: number; // days
   };
 }
 
@@ -112,7 +112,7 @@ export default {
       webhook_settings,
       integrations,
       mdm,
-      host_expiry_settings,
+      node_expiry_settings,
     }: Partial<IUpdateTeamFormData>,
     teamId?: number
   ): Promise<ITeamConfig> => {
@@ -146,8 +146,8 @@ export default {
     if (mdm) {
       requestBody.mdm = mdm;
     }
-    if (host_expiry_settings) {
-      requestBody.host_expiry_settings = host_expiry_settings;
+    if (node_expiry_settings) {
+      requestBody.node_expiry_settings = node_expiry_settings;
     }
 
     return sendRequest("PATCH", path, requestBody);
@@ -191,11 +191,11 @@ export default {
 
     return sendRequest("DELETE", path, removeUsers);
   },
-  transferHosts: (teamId: number, hostIds: number[]) => {
+  transferNodes: (teamId: number, nodeIds: number[]) => {
     const { TEAMS_TRANSFER_HOSTS } = endpoints;
     const path = TEAMS_TRANSFER_HOSTS(teamId);
 
-    return sendRequest("POST", path, { id: hostIds });
+    return sendRequest("POST", path, { id: nodeIds });
   },
   getEnrollSecrets: (teamId: number) => {
     const { TEAMS_ENROLL_SECRETS } = endpoints;

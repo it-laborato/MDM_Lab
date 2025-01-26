@@ -58,7 +58,7 @@ const EnrollSecretModal = ({
         {team?.secrets?.length ? (
           <>
             <div className={`${baseClass}__description`}>
-              Use these secret(s) to enroll hosts to <b>{renderTeam()?.name}</b>
+              Use these secret(s) to enroll nodes to <b>{renderTeam()?.name}</b>
               :
             </div>
             <EnrollSecretTable
@@ -75,7 +75,7 @@ const EnrollSecretModal = ({
                 <b>You have no enroll secrets.</b>
               </p>
               <p>
-                Add secret(s) to enroll hosts to <b>{renderTeam()?.name}</b>.
+                Add secret(s) to enroll nodes to <b>{renderTeam()?.name}</b>.
               </p>
             </div>
           </>

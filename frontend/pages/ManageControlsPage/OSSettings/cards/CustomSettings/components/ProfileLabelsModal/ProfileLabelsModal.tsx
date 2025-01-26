@@ -13,7 +13,7 @@ const BrokenLabelWarning = () => (
     <span>
       The configuration profile is{" "}
       <TooltipWrapper
-        tipContent={`It won't be applied to new hosts because one or more labels are deleted. To apply the profile to new hosts, please delete it and upload a new profile.`}
+        tipContent={`It won't be applied to new nodes because one or more labels are deleted. To apply the profile to new nodes, please delete it and upload a new profile.`}
         underline
       >
         broken
@@ -77,7 +77,7 @@ const ProfileLabelsModal = ({
 
     return (
       <p className={`${baseClass}__description`}>
-        <b>{name}</b> profile only applies to hosts that {targetTypeText} of
+        <b>{name}</b> profile only applies to nodes that {targetTypeText} of
         these labels:
       </p>
     );

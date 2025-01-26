@@ -132,7 +132,7 @@ const NoResults = ({
     // if (errorsOnly) {
     //   return (
     //     <>
-    //       This query had trouble collecting data on some hosts. Check out the{" "}
+    //       This query had trouble collecting data on some nodes. Check out the{" "}
     //       <strong>Errors</strong> tab to see why.
     //     </>
     //   );

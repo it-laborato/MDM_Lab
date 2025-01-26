@@ -25,7 +25,7 @@ const PlatformIcon = ({
   let iconName = platformIconClass(name);
 
   if (!iconName) {
-    iconName = "single-host";
+    iconName = "single-node";
   }
 
   return (

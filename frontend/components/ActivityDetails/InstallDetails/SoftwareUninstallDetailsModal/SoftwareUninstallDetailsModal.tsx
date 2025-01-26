@@ -21,12 +21,12 @@ const baseClass = "software-uninstall-details-modal";
 
 type ISoftwareUninstallDetails = Pick<
   IActivityDetails,
-  "script_execution_id" | "host_display_name" | "software_title" | "status"
+  "script_execution_id" | "node_display_name" | "software_title" | "status"
 >;
 // TODO - rely on activity created_at for timestamp? what else?
 
 interface IUninstallStatusMessage {
-  host_display_name: string;
+  node_display_name: string;
   // TODO - improve status typing
   status: string;
   software_title: string;
@@ -34,15 +34,15 @@ interface IUninstallStatusMessage {
 }
 
 const StatusMessage = ({
-  host_display_name,
+  node_display_name,
   status,
   software_title,
   timestamp,
 }: IUninstallStatusMessage) => {
-  const formattedHost = host_display_name ? (
-    <b>{host_display_name}</b>
+  const formattedNode = node_display_name ? (
+    <b>{node_display_name}</b>
   ) : (
-    "the host"
+    "the node"
   );
 
   const isPending = isPendingStatus(status);
@@ -63,7 +63,7 @@ const StatusMessage = ({
       />
       <span>
         Mdmlab {getInstallDetailsStatusPredicate(status)} <b>{software_title}</b>{" "}
-        from {formattedHost}
+        from {formattedNode}
         {isPending ? " when it comes online" : ""}
         {displayTimeStamp}.
       </span>
@@ -80,7 +80,7 @@ const SoftwareUninstallDetailsModal = ({
 }) => {
   const SoftwareUninstallDetails = ({
     script_execution_id = "",
-    host_display_name = "",
+    node_display_name = "",
     software_title = "",
     status = "",
   }: ISoftwareUninstallDetails) => {
@@ -119,7 +119,7 @@ const SoftwareUninstallDetailsModal = ({
     return (
       <>
         <StatusMessage
-          host_display_name={host_display_name}
+          node_display_name={node_display_name}
           status={status}
           software_title={software_title}
           timestamp={scriptResult.created_at}

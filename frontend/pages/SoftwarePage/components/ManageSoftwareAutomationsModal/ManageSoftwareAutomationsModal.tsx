@@ -358,7 +358,7 @@ const ManageAutomationsModal = ({
             value={selectedIntegration?.dropdownIndex}
             label="Integration"
             wrapperClassName={`${baseClass}__form-field ${baseClass}__form-field--frequency`}
-            helpText="For each new vulnerability detected, Mdmlab will create a ticket with a list of the affected hosts."
+            helpText="For each new vulnerability detected, Mdmlab will create a ticket with a list of the affected nodes."
           />
         ) : (
           <div className={`form-field ${baseClass}__no-integrations`}>
@@ -404,7 +404,7 @@ const ManageAutomationsModal = ({
           onChange={onURLChange}
           error={errors.url}
           helpText={
-            "For each new vulnerability detected, Mdmlab will send a JSON payload to this URL with a list of the affected hosts."
+            "For each new vulnerability detected, Mdmlab will send a JSON payload to this URL with a list of the affected nodes."
           }
           placeholder="https://server.com/example"
           tooltip="Provide a URL to deliver a webhook request to."

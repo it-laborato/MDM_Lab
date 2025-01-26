@@ -211,7 +211,7 @@ export const ScepCertificateContent = ({
                 url={PATHS.CONTROLS_CUSTOM_SETTINGS}
                 text="Controls > OS Settings > Custom settings"
               />{" "}
-              to configure how SCEP certificates are delivered to your hosts.{" "}
+              to configure how SCEP certificates are delivered to your nodes.{" "}
               <CustomLink
                 url="https://mdmlabdm.com/learn-more-about/setup-ndes"
                 text="Learn more"

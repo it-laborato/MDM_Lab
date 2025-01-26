@@ -1,4 +1,4 @@
-import { IMacadminsResponse } from "interfaces/host";
+import { IMacadminsResponse } from "interfaces/node";
 
 const DEFAULT_MAC_ADMINS_MOCK: IMacadminsResponse = {
   macadmins: {

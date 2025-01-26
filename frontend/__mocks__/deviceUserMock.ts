@@ -1,7 +1,7 @@
-import { IDeviceUser } from "interfaces/host";
+import { IDeviceUser } from "interfaces/node";
 import { IDeviceSoftware } from "interfaces/software";
 import { IGetDeviceSoftwareResponse } from "services/entities/device_user";
-import { createMockHostSoftwarePackage } from "./hostMock";
+import { createMockNodeSoftwarePackage } from "./nodeMock";
 
 const DEFAULT_DEVICE_USER_MOCK: IDeviceUser = {
   email: "test@test.com",
@@ -21,7 +21,7 @@ const DEFAULT_DEVICE_SOFTWARE_MOCK: IDeviceSoftware = {
   bundle_identifier: "com.app.mock",
   status: null,
   installed_versions: null,
-  software_package: createMockHostSoftwarePackage(),
+  software_package: createMockNodeSoftwarePackage(),
   app_store_app: null,
 };
 

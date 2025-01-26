@@ -32,7 +32,7 @@ import Card from "components/Card";
 
 import SoftwareDetailsSummary from "../components/SoftwareDetailsSummary";
 import SoftwareTitleDetailsTable from "./SoftwareTitleDetailsTable";
-import DetailsNoHosts from "../components/DetailsNoHosts";
+import DetailsNoNodes from "../components/DetailsNoNodes";
 import SoftwarePackageCard from "./SoftwarePackageCard";
 import { getPackageCardInfo } from "./helpers";
 
@@ -163,7 +163,7 @@ const SoftwareTitleDetailsPage = ({
 
     if (isSoftwareTitleError) {
       return (
-        <DetailsNoHosts
+        <DetailsNoNodes
           header="Software not detected"
           details="Expecting to see software? Check back later."
         />
@@ -177,7 +177,7 @@ const SoftwareTitleDetailsPage = ({
             title={softwareTitle.name}
             type={formatSoftwareType(softwareTitle)}
             versions={softwareTitle.versions?.length ?? 0}
-            hosts={softwareTitle.hosts_count}
+            nodes={softwareTitle.nodes_count}
             countsUpdatedAt={softwareTitle.counts_updated_at}
             queryParams={{
               software_title_id: softwareId,

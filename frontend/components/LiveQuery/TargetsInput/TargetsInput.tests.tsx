@@ -2,23 +2,23 @@ import React from "react";
 import { noop } from "lodash";
 import { render, screen } from "@testing-library/react";
 
-import createMockHost from "__mocks__/hostMock";
-import { IHost } from "interfaces/host";
+import createMockNode from "__mocks__/nodeMock";
+import { INode } from "interfaces/node";
 
 import TargetsInput from "./TargetsInput";
-import { ITargestInputHostTableConfig } from "./TargetsInputHostsTableConfig";
+import { ITargestInputNodeTableConfig } from "./TargetsInputNodesTableConfig";
 
 describe("TargetsInput", () => {
   it("renders the search table based on the custom configuration passed in", () => {
-    const testHosts: IHost[] = [
-      createMockHost({
-        display_name: "testHost",
+    const testNodes: INode[] = [
+      createMockNode({
+        display_name: "testNode",
         public_ip: "123.456.789.0",
         computer_name: "testName",
       }),
     ];
 
-    const testTableConfig: ITargestInputHostTableConfig[] = [
+    const testTableConfig: ITargestInputNodeTableConfig[] = [
       {
         Header: "Name",
         accessor: "display_name",
@@ -32,12 +32,12 @@ describe("TargetsInput", () => {
     render(
       <TargetsInput
         searchText="test"
-        searchResults={testHosts}
+        searchResults={testNodes}
         isTargetsLoading={false}
         hasFetchError={false}
-        targetedHosts={[]}
+        targetedNodes={[]}
         searchResultsTableConfig={testTableConfig}
-        selectedHostsTableConifg={[]}
+        selectedNodesTableConifg={[]}
         setSearchText={noop}
         handleRowSelect={noop}
       />
@@ -45,21 +45,21 @@ describe("TargetsInput", () => {
 
     expect(screen.getByText("Name")).toBeInTheDocument();
     expect(screen.getByText("IP Address")).toBeInTheDocument();
-    expect(screen.getByText("testHost")).toBeInTheDocument();
+    expect(screen.getByText("testNode")).toBeInTheDocument();
     expect(screen.getByText("123.456.789.0")).toBeInTheDocument();
     expect(screen.queryByText("testName")).not.toBeInTheDocument();
   });
 
   it("renders the results table based on the custom configuration passed in", () => {
-    const testHosts: IHost[] = [
-      createMockHost({
-        display_name: "testHost",
+    const testNodes: INode[] = [
+      createMockNode({
+        display_name: "testNode",
         public_ip: "123.456.789.0",
         computer_name: "testName",
       }),
     ];
 
-    const testTableConfig: ITargestInputHostTableConfig[] = [
+    const testTableConfig: ITargestInputNodeTableConfig[] = [
       {
         Header: "Name",
         accessor: "display_name",
@@ -76,9 +76,9 @@ describe("TargetsInput", () => {
         searchResults={[]}
         isTargetsLoading={false}
         hasFetchError={false}
-        targetedHosts={testHosts}
+        targetedNodes={testNodes}
         searchResultsTableConfig={[]}
-        selectedHostsTableConifg={testTableConfig}
+        selectedNodesTableConifg={testTableConfig}
         setSearchText={noop}
         handleRowSelect={noop}
       />
@@ -86,7 +86,7 @@ describe("TargetsInput", () => {
 
     expect(screen.getByText("Name")).toBeInTheDocument();
     expect(screen.getByText("IP Address")).toBeInTheDocument();
-    expect(screen.getByText("testHost")).toBeInTheDocument();
+    expect(screen.getByText("testNode")).toBeInTheDocument();
     expect(screen.getByText("123.456.789.0")).toBeInTheDocument();
     expect(screen.queryByText("testName")).not.toBeInTheDocument();
   });

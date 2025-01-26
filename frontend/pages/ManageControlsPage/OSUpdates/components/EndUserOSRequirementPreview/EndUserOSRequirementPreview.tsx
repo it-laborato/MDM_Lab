@@ -23,7 +23,7 @@ const OSRequirementDescription = ({
         <>
           <h3>End user experience on Windows</h3>
           <p>
-            When a Windows host becomes aware of a new update, end users are
+            When a Windows node becomes aware of a new update, end users are
             able to defer restarts. Automatic restarts happen before 8am and
             after 5pm (end user&apos;s local time). After the deadline, restarts
             are forced regardless of active hours.

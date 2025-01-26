@@ -70,7 +70,7 @@ const OrgSettingsPage = ({ params, router }: IOrgSettingsPageProps) => {
         })
         .catch((response: { data: IApiError }) => {
           if (
-            response?.data.errors[0].reason.includes("could not dial smtp host")
+            response?.data.errors[0].reason.includes("could not dial smtp node")
           ) {
             renderFlash(
               "error",

@@ -13,7 +13,7 @@ import PATHS from "router/paths";
 
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
 import TextCell from "components/TableContainer/DataTable/TextCell";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import SoftwareNameCell from "components/TableContainer/DataTable/SoftwareNameCell";
 
 import VulnerabilitiesCell from "../../components/VulnerabilitiesCell";
@@ -27,7 +27,7 @@ type IVulnerabilitiesCellProps = CellProps<
   ISoftwareVersion,
   ISoftwareVulnerability[] | null
 >;
-type IHostCountCellProps = CellProps<ISoftwareVersion, number | undefined>;
+type INodeCountCellProps = CellProps<ISoftwareVersion, number | undefined>;
 
 type ITableHeaderProps = IHeaderProps<ISoftwareVersion>;
 
@@ -95,26 +95,26 @@ const generateTableHeaders = (
     {
       Header: (cellProps: ITableHeaderProps) => (
         <HeaderCell
-          value="Hosts"
+          value="Nodes"
           disableSortBy={false}
           isSortedDesc={cellProps.column.isSortedDesc}
         />
       ),
       disableSortBy: false,
-      accessor: "hosts_count",
-      Cell: (cellProps: IHostCountCellProps) => (
+      accessor: "nodes_count",
+      Cell: (cellProps: INodeCountCellProps) => (
         <TextCell value={cellProps.cell.value} />
       ),
     },
     {
       Header: "",
-      id: "view-all-hosts",
+      id: "view-all-nodes",
       disableSortBy: true,
       Cell: (cellProps: ITableStringCellProps) => {
         return (
           <>
             {cellProps.row.original && (
-              <ViewAllHostsLink
+              <ViewAllNodesLink
                 queryParams={{
                   software_version_id: cellProps.row.original.id,
                   team_id: teamId, // TODO: do we need team id here?

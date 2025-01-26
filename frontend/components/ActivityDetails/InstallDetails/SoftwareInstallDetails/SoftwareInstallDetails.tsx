@@ -27,12 +27,12 @@ const baseClass = "software-install-details";
 // TODO: Expand to include more details as needed
 export type IPackageInstallDetails = Pick<
   IActivityDetails,
-  "install_uuid" | "host_display_name"
+  "install_uuid" | "node_display_name"
 >;
 
 const StatusMessage = ({
   result: {
-    host_display_name,
+    node_display_name,
     software_package,
     software_title,
     status,
@@ -42,10 +42,10 @@ const StatusMessage = ({
 }: {
   result: ISoftwareInstallResult;
 }) => {
-  const formattedHost = host_display_name ? (
-    <b>{host_display_name}</b>
+  const formattedNode = node_display_name ? (
+    <b>{node_display_name}</b>
   ) : (
-    "the host"
+    "the node"
   );
 
   const timeStamp = updated_at || created_at;
@@ -62,7 +62,7 @@ const StatusMessage = ({
       <Icon name={INSTALL_DETAILS_STATUS_ICONS[status] ?? "pending-outline"} />
       <span>
         Mdmlab {getInstallDetailsStatusPredicate(status)} <b>{software_title}</b>{" "}
-        ({software_package}) on {formattedHost}
+        ({software_package}) on {formattedNode}
         {status === "pending_install" ? " when it comes online" : ""}
         {displayTimeStamp}.
       </span>
@@ -88,7 +88,7 @@ const Output = ({
 };
 
 export const SoftwareInstallDetails = ({
-  host_display_name = "",
+  node_display_name = "",
   install_uuid = "",
 }: IPackageInstallDetails) => {
   const { data: result, isLoading, isError, error } = useQuery<
@@ -129,7 +129,7 @@ export const SoftwareInstallDetails = ({
       <div className={`${baseClass}__software-install-details`}>
         <StatusMessage
           result={
-            result.host_display_name ? result : { ...result, host_display_name } // prefer result.host_display_name (it may be empty if the host was deleted) otherwise default to whatever we received via props
+            result.node_display_name ? result : { ...result, node_display_name } // prefer result.node_display_name (it may be empty if the node was deleted) otherwise default to whatever we received via props
           }
         />
         {result.status !== "pending_install" && (

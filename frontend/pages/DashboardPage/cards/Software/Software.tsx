@@ -65,7 +65,7 @@ const Software = ({
     router.push(path);
   };
 
-  // Renders opaque information as host information is loading
+  // Renders opaque information as node information is loading
   const opacity = isSoftwareFetching ? { opacity: 0 } : { opacity: 1 };
 
   return (

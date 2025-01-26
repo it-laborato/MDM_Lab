@@ -141,7 +141,7 @@ describe("Policies table", () => {
       });
 
       expect(
-        screen.getByText("This policy runs on all hosts.")
+        screen.getByText("This policy runs on all nodes.")
       ).toBeInTheDocument();
     });
   });

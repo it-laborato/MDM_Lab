@@ -20,7 +20,7 @@ const DeleteEulaModal = ({ onDelete, onCancel }: IDeleteEulaModalProps) => {
     >
       <>
         <p>
-          End users won’t be required to agree to this EULA on macOS hosts that
+          End users won’t be required to agree to this EULA on macOS nodes that
           automatically enroll.
         </p>
         <div className="modal-cta-wrap">

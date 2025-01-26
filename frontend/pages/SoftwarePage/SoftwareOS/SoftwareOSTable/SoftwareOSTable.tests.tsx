@@ -30,7 +30,7 @@ describe("Software operating systems table", () => {
         })}
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         currentPage={0}
         teamId={1}
         isLoading={false}
@@ -52,7 +52,7 @@ describe("Software operating systems table", () => {
         })}
         perPage={20}
         orderDirection="asc"
-        orderKey="hosts_count"
+        orderKey="nodes_count"
         currentPage={0}
         teamId={1}
         isLoading={false}

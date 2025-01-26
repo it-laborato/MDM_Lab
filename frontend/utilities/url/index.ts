@@ -8,7 +8,7 @@ import {
 import {
   HOSTS_QUERY_PARAMS,
   MacSettingsStatusQueryParam,
-} from "services/entities/hosts";
+} from "services/entities/nodes";
 import { isValidSoftwareAggregateStatus } from "interfaces/software";
 import { API_ALL_TEAMS_ID } from "interfaces/team";
 
@@ -19,14 +19,14 @@ type QueryParams2<T> = { [s in keyof T]: QueryValues };
 type FilteredQueryValues = string | number | boolean;
 type FilteredQueryParams = Record<string, FilteredQueryValues>;
 
-interface IMutuallyInclusiveHostParams {
+interface IMutuallyInclusiveNodeParams {
   label?: string;
   teamId?: number;
   macSettingsStatus?: MacSettingsStatusQueryParam;
   osSettings?: MdmProfileStatus;
 }
 
-interface IMutuallyExclusiveHostParams {
+interface IMutuallyExclusiveNodeParams {
   teamId?: number;
   label?: string;
   policyId?: number;
@@ -34,7 +34,7 @@ interface IMutuallyExclusiveHostParams {
   mdmId?: number;
   mdmEnrollmentStatus?: string;
   munkiIssueId?: number;
-  lowDiskSpaceHosts?: number;
+  lowDiskSpaceNodes?: number;
   softwareId?: number;
   softwareVersionId?: number;
   softwareTitleId?: number;
@@ -114,7 +114,7 @@ export const reconcileSoftwareParams = ({
   softwareTitleId,
   softwareStatus,
 }: Pick<
-  IMutuallyExclusiveHostParams,
+  IMutuallyExclusiveNodeParams,
   | "teamId"
   | "softwareId"
   | "softwareVersionId"
@@ -148,12 +148,12 @@ export const reconcileSoftwareParams = ({
   return {};
 };
 
-export const reconcileMutuallyInclusiveHostParams = ({
+export const reconcileMutuallyInclusiveNodeParams = ({
   label,
   teamId,
   macSettingsStatus,
   osSettings,
-}: IMutuallyInclusiveHostParams) => {
+}: IMutuallyInclusiveNodeParams) => {
   const reconciled: Record<string, unknown> = { team_id: teamId };
 
   if (label) {
@@ -177,7 +177,7 @@ export const reconcileMutuallyInclusiveHostParams = ({
   return reconciled;
 };
 
-export const reconcileMutuallyExclusiveHostParams = ({
+export const reconcileMutuallyExclusiveNodeParams = ({
   teamId,
   label,
   policyId,
@@ -185,7 +185,7 @@ export const reconcileMutuallyExclusiveHostParams = ({
   mdmId,
   mdmEnrollmentStatus,
   munkiIssueId,
-  lowDiskSpaceHosts,
+  lowDiskSpaceNodes,
   softwareId,
   softwareVersionId,
   softwareTitleId,
@@ -197,7 +197,7 @@ export const reconcileMutuallyExclusiveHostParams = ({
   vulnerability,
   diskEncryptionStatus,
   bootstrapPackageStatus,
-}: IMutuallyExclusiveHostParams): Record<string, unknown> => {
+}: IMutuallyExclusiveNodeParams): Record<string, unknown> => {
   if (label) {
     // backend api now allows (label + low disk space) OR (label + mdm id) OR
     // (label + mdm enrollment status). all other params are still mutually exclusive.
@@ -207,8 +207,8 @@ export const reconcileMutuallyExclusiveHostParams = ({
     if (mdmEnrollmentStatus) {
       return { mdm_enrollment_status: mdmEnrollmentStatus };
     }
-    if (lowDiskSpaceHosts) {
-      return { low_disk_space: lowDiskSpaceHosts };
+    if (lowDiskSpaceNodes) {
+      return { low_disk_space: lowDiskSpaceNodes };
     }
     return {};
   }
@@ -243,8 +243,8 @@ export const reconcileMutuallyExclusiveHostParams = ({
       return { os_name: osName, os_version: osVersion };
     case !!vulnerability:
       return { vulnerability };
-    case !!lowDiskSpaceHosts:
-      return { low_disk_space: lowDiskSpaceHosts };
+    case !!lowDiskSpaceNodes:
+      return { low_disk_space: lowDiskSpaceNodes };
     case !!osSettings:
       return { [HOSTS_QUERY_PARAMS.OS_SETTINGS]: osSettings };
     case !!diskEncryptionStatus:

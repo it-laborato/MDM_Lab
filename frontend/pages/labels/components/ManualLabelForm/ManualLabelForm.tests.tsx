@@ -3,14 +3,14 @@ import { noop } from "lodash";
 import { screen } from "@testing-library/react";
 
 import { createCustomRenderer } from "test/test-utils";
-import createMockHost from "__mocks__/hostMock";
+import createMockNode from "__mocks__/nodeMock";
 
 import ManualLabelForm, {
   LABEL_TARGET_HOSTS_INPUT_LABEL,
 } from "./ManualLabelForm";
 
 describe("ManualLabelForm", () => {
-  it("should render a Select Hosts input", () => {
+  it("should render a Select Nodes input", () => {
     const render = createCustomRenderer({ withBackendMock: true });
 
     render(<ManualLabelForm onSave={noop} onCancel={noop} />);
@@ -26,13 +26,13 @@ describe("ManualLabelForm", () => {
 
     const name = "Test Name";
     const description = "Test Description";
-    const targetedHosts = [createMockHost()];
+    const targetedNodes = [createMockNode()];
 
     const { user } = render(
       <ManualLabelForm
         onSave={onSave}
         onCancel={noop}
-        defaultTargetedHosts={targetedHosts}
+        defaultTargetedNodes={targetedNodes}
       />
     );
 
@@ -43,7 +43,7 @@ describe("ManualLabelForm", () => {
     expect(onSave).toHaveBeenCalledWith({
       name,
       description,
-      targetedHosts,
+      targetedNodes,
     });
   });
 });

@@ -1,17 +1,17 @@
 import PropTypes from "prop-types";
-import hostInterface, { IHost } from "interfaces/host";
+import nodeInterface, { INode } from "interfaces/node";
 import labelInterface, { ILabel, ILabelSummary } from "interfaces/label";
 import teamInterface, { ITeam } from "interfaces/team";
 
 export default PropTypes.oneOfType([
-  hostInterface,
+  nodeInterface,
   labelInterface,
   teamInterface,
 ]);
 
-export type ITarget = IHost | ILabel | ITeam;
+export type ITarget = INode | ILabel | ITeam;
 export interface ITargets {
-  hosts: IHost[];
+  nodes: INode[];
   labels: ILabel[];
   teams: ITeam[];
 }
@@ -24,7 +24,7 @@ export interface ITargetsAPIResponse {
   targets_online: number;
 }
 
-export interface ISelectHost extends IHost {
+export interface ISelectNode extends INode {
   target_type?: string;
 }
 
@@ -40,22 +40,22 @@ export interface ISelectTeam extends ITeam {
   display_text?: string;
 }
 
-export type ISelectTargetsEntity = ISelectHost | ISelectLabel | ISelectTeam;
+export type ISelectTargetsEntity = ISelectNode | ISelectLabel | ISelectTeam;
 
 export interface ISelectedTargetsForApi {
-  hosts: number[];
+  nodes: number[];
   labels: number[];
   teams: number[];
 }
 
 export interface ISelectedTargetsByType {
-  hosts: IHost[];
+  nodes: INode[];
   labels: ILabel[];
   teams: ITeam[];
 }
 
 export interface IPackTargets {
-  host_ids: (number | string)[];
+  node_ids: (number | string)[];
   label_ids: (number | string)[];
   team_ids: (number | string)[];
 }
@@ -64,7 +64,7 @@ export interface IPackTargets {
 export const DEFAULT_TARGETS: ITarget[] = [];
 
 export const DEFAULT_TARGETS_BY_TYPE: ISelectedTargetsByType = {
-  hosts: [],
+  nodes: [],
   labels: [],
   teams: [],
 };

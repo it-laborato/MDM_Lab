@@ -14,7 +14,7 @@ import { IHeaderProps, IStringCellProps } from "interfaces/datatable_config";
 
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
 import TextCell from "components/TableContainer/DataTable/TextCell";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import SoftwareNameCell from "components/TableContainer/DataTable/SoftwareNameCell";
 
 import VersionCell from "../../components/VersionCell";
@@ -27,11 +27,11 @@ type ISoftwareTitlesTableConfig = Column<ISoftwareTitle>;
 type ITableStringCellProps = IStringCellProps<ISoftwareTitle>;
 type IVersionsCellProps = CellProps<ISoftwareTitle, ISoftwareTitle["versions"]>;
 type IVulnerabilitiesCellProps = IVersionsCellProps;
-type IHostCountCellProps = CellProps<
+type INodeCountCellProps = CellProps<
   ISoftwareTitle,
-  ISoftwareTitle["hosts_count"]
+  ISoftwareTitle["nodes_count"]
 >;
-type IViewAllHostsLinkProps = CellProps<ISoftwareTitle>;
+type IViewAllNodesLinkProps = CellProps<ISoftwareTitle>;
 
 type ITableHeaderProps = IHeaderProps<ISoftwareTitle>;
 
@@ -174,24 +174,24 @@ const generateTableHeaders = (
     {
       Header: (cellProps: ITableHeaderProps) => (
         <HeaderCell
-          value="Hosts"
+          value="Nodes"
           disableSortBy={false}
           isSortedDesc={cellProps.column.isSortedDesc}
         />
       ),
       disableSortBy: false,
-      accessor: "hosts_count",
-      Cell: (cellProps: IHostCountCellProps) => (
+      accessor: "nodes_count",
+      Cell: (cellProps: INodeCountCellProps) => (
         <TextCell value={cellProps.cell.value} />
       ),
     },
     {
       Header: "",
-      id: "view-all-hosts",
+      id: "view-all-nodes",
       disableSortBy: true,
-      Cell: (cellProps: IViewAllHostsLinkProps) => {
+      Cell: (cellProps: IViewAllNodesLinkProps) => {
         return (
-          <ViewAllHostsLink
+          <ViewAllNodesLink
             queryParams={{
               software_title_id: cellProps.row.original.id,
               team_id: teamId, // TODO: do we need team id here?

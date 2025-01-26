@@ -3,7 +3,7 @@ import React from "react";
 import { IMdmSolution } from "interfaces/mdm";
 
 import TextCell from "components/TableContainer/DataTable/TextCell";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import TooltipWrapper from "components/TooltipWrapper";
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
 
@@ -50,7 +50,7 @@ export const generateSolutionsTableHeaders = (
         <TooltipWrapper
           tipContent={
             <>
-              The MDM server URL is used to connect hosts with the MDM service.
+              The MDM server URL is used to connect nodes with the MDM service.
               For cross-platform MDM solutions, each operating system has a
               different URL.
             </>
@@ -67,14 +67,14 @@ export const generateSolutionsTableHeaders = (
     Cell: (cellProps: ICellProps) => <TextCell value={cellProps.cell.value} />,
   },
   {
-    title: "Hosts",
-    Header: "Hosts",
+    title: "Nodes",
+    Header: "Nodes",
     disableSortBy: true,
-    accessor: "hosts_count",
+    accessor: "nodes_count",
     Cell: (cellProps: ICellProps) => (
-      <div className="host-count-cell">
+      <div className="node-count-cell">
         <TextCell value={cellProps.cell.value} className="" />
-        <ViewAllHostsLink
+        <ViewAllNodesLink
           queryParams={{ mdm_id: cellProps.row.original.id, team_id: teamId }}
           className="view-mdm-solution-link"
           platformLabelId={cellProps.row.original.selectedPlatformLabelId}

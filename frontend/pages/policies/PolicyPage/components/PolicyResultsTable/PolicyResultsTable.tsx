@@ -1,7 +1,7 @@
 import React from "react";
 import { noop } from "lodash";
 
-import { IPolicyHostResponse } from "interfaces/host";
+import { IPolicyNodeResponse } from "interfaces/node";
 import TableContainer from "components/TableContainer";
 import {
   generateTableHeaders,
@@ -13,14 +13,14 @@ import {
 const baseClass = "policy-results-table";
 
 interface IPolicyResultsTableProps {
-  hostResponses: IPolicyHostResponse[];
+  nodeResponses: IPolicyNodeResponse[];
   isLoading: boolean;
   resultsTitle?: string;
   canAddOrDeletePolicy?: boolean;
 }
 
 const PolicyResultsTable = ({
-  hostResponses,
+  nodeResponses,
   isLoading,
   resultsTitle,
   canAddOrDeletePolicy,
@@ -30,7 +30,7 @@ const PolicyResultsTable = ({
       <TableContainer
         resultsTitle={resultsTitle || "policies"}
         columnConfigs={generateTableHeaders()}
-        data={generateDataSet(hostResponses)}
+        data={generateDataSet(nodeResponses)}
         isLoading={isLoading}
         defaultSortHeader="query_results"
         defaultSortDirection="asc"
@@ -44,8 +44,8 @@ const PolicyResultsTable = ({
           variant: "text-icon",
         }}
         emptyComponent={() => (
-          <div className="no-hosts__inner">
-            <p>No hosts are online.</p>
+          <div className="no-nodes__inner">
+            <p>No nodes are online.</p>
           </div>
         )}
         onQueryChange={noop}

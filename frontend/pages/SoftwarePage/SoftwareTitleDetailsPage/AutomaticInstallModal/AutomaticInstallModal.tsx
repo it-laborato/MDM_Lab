@@ -51,7 +51,7 @@ const AutomaticInstallModal = ({
   const description =
     policies.length > 1 ? (
       <>
-        Software will be installed when hosts fail any of these policies.{" "}
+        Software will be installed when nodes fail any of these policies.{" "}
         <CustomLink
           newTab
           text="Learn more"
@@ -60,7 +60,7 @@ const AutomaticInstallModal = ({
       </>
     ) : (
       <>
-        Software will be installed when hosts fail this policy.{" "}
+        Software will be installed when nodes fail this policy.{" "}
         <CustomLink
           newTab
           text="Learn more"

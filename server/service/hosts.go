@@ -63,7 +63,7 @@ type listHostsRequest struct {
 }
 
 type listHostsResponse struct {
-	Hosts []mdmlab.HostResponse `json:"hosts"`
+	Hosts []mdmlab.HostResponse `json:"nodes"`
 	// Software is populated with the software version corresponding to the
 	// software_version_id (or software_id) filter if one is provided with the
 	// request (and it exists in the database). It is nil otherwise and absent of
@@ -522,7 +522,7 @@ type getHostRequest struct {
 }
 
 type getHostResponse struct {
-	Host *HostDetailResponse `json:"host"`
+	Host *HostDetailResponse `json:"node"`
 	Err  error               `json:"error,omitempty"`
 }
 

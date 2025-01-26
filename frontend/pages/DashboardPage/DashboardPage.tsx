@@ -18,7 +18,7 @@ import {
   IEnrollSecret,
   IEnrollSecretsResponse,
 } from "interfaces/enroll_secret";
-import { IHostSummary, IHostSummaryPlatforms } from "interfaces/host_summary";
+import { INodeSummary, INodeSummaryPlatforms } from "interfaces/node_summary";
 import { ILabelSummary } from "interfaces/label";
 import { IMacadminAggregate } from "interfaces/macadmins";
 import {
@@ -29,11 +29,10 @@ import {
 import { ISoftwareResponse, ISoftwareCountResponse } from "interfaces/software";
 import { API_ALL_TEAMS_ID, ITeam } from "interfaces/team";
 import { IConfig } from "interfaces/config";
-
 import { useTeamIdParam } from "hooks/useTeamIdParam";
 
 import enrollSecretsAPI from "services/entities/enroll_secret";
-import hostSummaryAPI from "services/entities/host_summary";
+import nodeSummaryAPI from "services/entities/node_summary";
 import macadminsAPI from "services/entities/macadmins";
 import softwareAPI, {
   ISoftwareQueryKey,
@@ -41,7 +40,7 @@ import softwareAPI, {
 } from "services/entities/software";
 import teamsAPI, { ILoadTeamsResponse } from "services/entities/teams";
 import configAPI from "services/entities/config";
-import hosts from "services/entities/hosts";
+import nodes from "services/entities/nodes";
 
 import sortUtils from "utilities/sort";
 import {
@@ -65,17 +64,17 @@ import {
   PLATFORM_NAME_TO_LABEL_NAME,
 } from "./helpers";
 import useInfoCard from "./components/InfoCard";
-import MissingHosts from "./cards/MissingHosts";
-import LowDiskSpaceHosts from "./cards/LowDiskSpaceHosts";
-import HostsSummary from "./cards/HostsSummary";
+import MissingNodes from "./cards/MissingNodes";
+import LowDiskSpaceNodes from "./cards/LowDiskSpaceNodes";
+import NodesSummary from "./cards/NodesSummary";
 import ActivityFeed from "./cards/ActivityFeed";
 import Software from "./cards/Software";
 import LearnMdmlab from "./cards/LearnMdmlab";
-import WelcomeHost from "./cards/WelcomeHost";
+import WelcomeNode from "./cards/WelcomeNode";
 import Mdm from "./cards/MDM";
 import Munki from "./cards/Munki";
 import OperatingSystems from "./cards/OperatingSystems";
-import AddHostsModal from "../../components/AddHostsModal";
+import AddNodesModal from "../../components/AddNodesModal";
 import MdmSolutionModal from "./components/MdmSolutionModal";
 import ActivityFeedAutomationsModal from "./components/ActivityFeedAutomationsModal";
 import { IAFAMFormData } from "./components/ActivityFeedAutomationsModal/ActivityFeedAutomationsModal";
@@ -150,7 +149,7 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
   const [softwareActionUrl, setSoftwareActionUrl] = useState<string>();
   const [showMdmCard, setShowMdmCard] = useState(true);
   const [showSoftwareCard, setShowSoftwareCard] = useState(false);
-  const [showAddHostsModal, setShowAddHostsModal] = useState(false);
+  const [showAddNodesModal, setShowAddNodesModal] = useState(false);
   const [showMdmSolutionModal, setShowMdmSolutionModal] = useState(false);
   const [
     showActivityFeedAutomationsModal,
@@ -161,7 +160,7 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     setUpdatingActivityFeedAutomations,
   ] = useState(false);
   const [showOperatingSystemsUI, setShowOperatingSystemsUI] = useState(false);
-  const [showHostsUI, setShowHostsUI] = useState(false); // Hides UI on first load only
+  const [showNodesUI, setShowNodesUI] = useState(false); // Hides UI on first load only
   const [mdmStatusData, setMdmStatusData] = useState<IMdmStatusCardData[]>([]);
   const [mdmSolutions, setMdmSolutions] = useState<
     IMdmSummaryMdmSolution[] | null
@@ -181,9 +180,9 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     setSelectedPlatform(platformByPathname);
   }, [pathname]);
 
-  const canEnrollHosts =
+  const canEnrollNodes =
     isGlobalAdmin || isGlobalMaintainer || isTeamAdmin || isTeamMaintainer;
-  const canEnrollGlobalHosts = isGlobalAdmin || isGlobalMaintainer;
+  const canEnrollGlobalNodes = isGlobalAdmin || isGlobalMaintainer;
   const canEditActivityFeedAutomations =
     (isGlobalAdmin || isGlobalMaintainer) && teamIdForApi === API_ALL_TEAMS_ID;
 
@@ -204,53 +203,53 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
   });
 
   const {
-    data: hostSummaryData,
-    isFetching: isHostSummaryFetching,
-    error: errorHosts,
-  } = useQuery<IHostSummary, Error, IHostSummary>(
-    ["host summary", teamIdForApi, isPremiumTier, selectedPlatform],
+    data: nodeSummaryData,
+    isFetching: isNodeSummaryFetching,
+    error: errorNodes,
+  } = useQuery<INodeSummary, Error, INodeSummary>(
+    ["node summary", teamIdForApi, isPremiumTier, selectedPlatform],
     () =>
-      hostSummaryAPI.getSummary({
+      nodeSummaryAPI.getSummary({
         teamId: teamIdForApi,
         platform: selectedPlatform !== "all" ? selectedPlatform : undefined,
         lowDiskSpace: isPremiumTier ? LOW_DISK_SPACE_GB : undefined,
       }),
     {
       enabled: isRouteOk,
-      select: (data: IHostSummary) => data,
-      onSuccess: (data: IHostSummary) => {
+      select: (data: INodeSummary) => data,
+      onSuccess: (data: INodeSummary) => {
         setLabels(data.builtin_labels);
         if (isPremiumTier) {
           setMissingCount(data.missing_30_days_count || 0);
           setLowDiskSpaceCount(data.low_disk_space_count || 0);
         }
-        const macHosts = data.platforms?.find(
-          (platform: IHostSummaryPlatforms) => platform.platform === "darwin"
+        const macNodes = data.platforms?.find(
+          (platform: INodeSummaryPlatforms) => platform.platform === "darwin"
         ) || { platform: "darwin", hosts_count: 0 };
 
-        const windowsHosts = data.platforms?.find(
-          (platform: IHostSummaryPlatforms) => platform.platform === "windows"
+        const windowsNodes = data.platforms?.find(
+          (platform: INodeSummaryPlatforms) => platform.platform === "windows"
         ) || { platform: "windows", hosts_count: 0 };
 
         const chromebooks = data.platforms?.find(
-          (platform: IHostSummaryPlatforms) => platform.platform === "chrome"
+          (platform: INodeSummaryPlatforms) => platform.platform === "chrome"
         ) || { platform: "chrome", hosts_count: 0 };
 
         const iphones = data.platforms?.find(
-          (platform: IHostSummaryPlatforms) => platform.platform === "ios"
+          (platform: INodeSummaryPlatforms) => platform.platform === "ios"
         ) || { platform: "ios", hosts_count: 0 };
 
         const ipads = data.platforms?.find(
-          (platform: IHostSummaryPlatforms) => platform.platform === "ipados"
+          (platform: INodeSummaryPlatforms) => platform.platform === "ipados"
         ) || { platform: "ipados", hosts_count: 0 };
 
-        setMacCount(macHosts.hosts_count);
-        setWindowsCount(windowsHosts.hosts_count);
+        setMacCount(macNodes.hosts_count);
+        setWindowsCount(windowsNodes.hosts_count);
         setLinuxCount(data.all_linux_count);
         setChromeCount(chromebooks.hosts_count);
         setIosCount(iphones.hosts_count);
         setIpadosCount(ipads.hosts_count);
-        setShowHostsUI(true);
+        setShowNodesUI(true);
       },
     }
   );
@@ -260,7 +259,7 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     Error,
     IEnrollSecret[]
   >(["global secrets"], () => enrollSecretsAPI.getGlobalEnrollSecrets(), {
-    enabled: isRouteOk && canEnrollGlobalHosts,
+    enabled: isRouteOk && canEnrollGlobalNodes,
     select: (data: IEnrollSecretsResponse) => data.secrets,
   });
 
@@ -277,7 +276,7 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
       return { secrets: [] };
     },
     {
-      enabled: isRouteOk && isAnyTeamSelected && canEnrollHosts,
+      enabled: isRouteOk && isAnyTeamSelected && canEnrollNodes,
       select: (data: IEnrollSecretsResponse) => data.secrets,
     }
   );
@@ -325,11 +324,11 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
                 lastUpdatedAt={data.counts_updated_at}
                 customTooltipText={
                   <>
-                    Mdmlab periodically queries all hosts to
+                    Mdmlab periodically queries all nodes to
                     <br />
                     retrieve software. Click to view
                     <br />
-                    hosts for the most up-to-date lists.
+                    nodes for the most up-to-date lists.
                   </>
                 }
               />
@@ -371,21 +370,21 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     Error
   >(
     [`mdm-${selectedPlatform}`, teamIdForApi],
-    () => hosts.getMdmSummary(selectedPlatform, teamIdForApi),
+    () => nodes.getMdmSummary(selectedPlatform, teamIdForApi),
     {
       enabled: isRouteOk && !["linux", "chrome"].includes(selectedPlatform),
       onSuccess: ({
         counts_updated_at,
         mobile_device_management_solution,
         mobile_device_management_enrollment_status: {
-          enrolled_automated_hosts_count,
-          enrolled_manual_hosts_count,
-          unenrolled_hosts_count,
-          pending_hosts_count,
-          hosts_count,
+          enrolled_automated_nodes_count,
+          enrolled_manual_nodes_count,
+          unenrolled_nodes_count,
+          pending_nodes_count,
+          nodes_count,
         },
       }) => {
-        if (hosts_count === 0 && mobile_device_management_solution === null) {
+        if (nodes_count === 0 && mobile_device_management_solution === null) {
           setShowMdmCard(false);
           return;
         }
@@ -399,18 +398,18 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
         const statusData: IMdmStatusCardData[] = [
           {
             status: "On (manual)",
-            hosts: enrolled_manual_hosts_count,
+            nodes: enrolled_manual_nodes_count,
           },
           {
             status: "On (automatic)",
-            hosts: enrolled_automated_hosts_count,
+            nodes: enrolled_automated_nodes_count,
           },
-          { status: "Off", hosts: unenrolled_hosts_count },
+          { status: "Off", nodes: unenrolled_nodes_count },
         ];
         isPremiumTier &&
           statusData.push({
             status: "Pending",
-            hosts: pending_hosts_count || 0,
+            nodes: pending_nodes_count || 0,
           });
         setMdmStatusData(statusData);
         setMdmSolutions(mobile_device_management_solution);
@@ -444,7 +443,7 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
       : setShowSoftwareCard(false);
   }, [softwareCount]);
 
-  // Sets selected platform label id for links to filtered manage host page
+  // Sets selected platform label id for links to filtered manage node page
   useEffect(() => {
     if (labels) {
       const getLabel = (
@@ -465,8 +464,8 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     }
   }, [labels, selectedPlatform]);
 
-  const toggleAddHostsModal = () => {
-    setShowAddHostsModal(!showAddHostsModal);
+  const toggleAddNodesModal = () => {
+    setShowAddNodesModal(!showAddNodesModal);
   };
 
   // This is called once on the initial rendering. The initial render of
@@ -539,23 +538,23 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     ]
   );
 
-  const HostsSummaryCard = useInfoCard({
-    title: "Hosts",
+  const NodesSummaryCard = useInfoCard({
+    title: "Nodes",
     action:
       selectedPlatform === "all"
         ? {
             type: "link",
-            text: "View all hosts",
+            text: "View all nodes",
           }
         : undefined,
     actionUrl: selectedPlatform === "all" ? paths.MANAGE_HOSTS : undefined,
     total_host_count:
-      !isHostSummaryFetching && !errorHosts
-        ? hostSummaryData?.totals_hosts_count
+      !isNodeSummaryFetching && !errorNodes
+        ? nodeSummaryData?.totals_hosts_count
         : undefined,
     showTitle: true,
     children: (
-      <HostsSummary
+      <NodesSummary
         currentTeamId={teamIdForApi}
         macCount={macCount}
         windowsCount={windowsCount}
@@ -563,36 +562,36 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
         chromeCount={chromeCount}
         iosCount={iosCount}
         ipadosCount={ipadosCount}
-        isLoadingHostsSummary={isHostSummaryFetching}
+        isLoadingNodesSummary={isNodeSummaryFetching}
         builtInLabels={labels}
-        showHostsUI={showHostsUI}
+        showNodesUI={showNodesUI}
         selectedPlatform={selectedPlatform}
-        errorHosts={!!errorHosts}
+        errorNodes={!!errorNodes}
       />
     ),
   });
 
-  const MissingHostsCard = useInfoCard({
+  const MissingNodesCard = useInfoCard({
     title: "",
     children: (
-      <MissingHosts
+      <MissingNodes
         missingCount={missingCount}
-        isLoadingHosts={isHostSummaryFetching}
-        showHostsUI={showHostsUI}
+        isLoadingNodes={isNodeSummaryFetching}
+        showNodesUI={showNodesUI}
         selectedPlatformLabelId={selectedPlatformLabelId}
         currentTeamId={teamIdForApi}
       />
     ),
   });
 
-  const LowDiskSpaceHostsCard = useInfoCard({
+  const LowDiskSpaceNodesCard = useInfoCard({
     title: "",
     children: (
-      <LowDiskSpaceHosts
+      <LowDiskSpaceNodes
         lowDiskSpaceGb={LOW_DISK_SPACE_GB}
         lowDiskSpaceCount={lowDiskSpaceCount}
-        isLoadingHosts={isHostSummaryFetching}
-        showHostsUI={showHostsUI}
+        isLoadingNodes={isNodeSummaryFetching}
+        showNodesUI={showNodesUI}
         selectedPlatformLabelId={selectedPlatformLabelId}
         currentTeamId={teamIdForApi}
         notSupported={selectedPlatform === "chrome"}
@@ -600,15 +599,15 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     ),
   });
 
-  const WelcomeHostCard = useInfoCard({
+  const WelcomeNodeCard = useInfoCard({
     title: "Welcome to Mdmlab",
     showTitle: true,
     children: (
-      <WelcomeHost
-        totalsHostsCount={
-          (hostSummaryData && hostSummaryData.totals_hosts_count) || 0
+      <WelcomeNode
+        totalsNodesCount={
+          (nodeSummaryData && nodeSummaryData.totals_hosts_count) || 0
         }
-        toggleAddHostsModal={toggleAddHostsModal}
+        toggleAddNodesModal={toggleAddNodesModal}
       />
     ),
   });
@@ -703,7 +702,7 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     titleDetail: mdmTitleDetail,
     showTitle: !isMdmFetching,
     description: (
-      <p>MDM is used to change settings and install software on your hosts.</p>
+      <p>MDM is used to change settings and install software on your nodes.</p>
     ),
     children: (
       <Mdm
@@ -738,11 +737,11 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     return (
       <div className={`${baseClass}__section`}>
         {!isAnyTeamSelected &&
-          canEnrollGlobalHosts &&
-          hostSummaryData &&
-          hostSummaryData?.totals_hosts_count < 2 && (
+          canEnrollGlobalNodes &&
+          nodeSummaryData &&
+          nodeSummaryData?.totals_hosts_count < 2 && (
             <>
-              {WelcomeHostCard}
+              {WelcomeNodeCard}
               {LearnMdmlabCard}
             </>
           )}
@@ -810,18 +809,18 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     }
   };
 
-  const renderAddHostsModal = () => {
+  const renderAddNodesModal = () => {
     const enrollSecret = isAnyTeamSelected
       ? teamSecrets?.[0].secret
       : globalSecrets?.[0].secret;
 
     return (
-      <AddHostsModal
+      <AddNodesModal
         currentTeamName={currentTeamName}
         enrollSecret={enrollSecret}
         isAnyTeamSelected={isAnyTeamSelected}
         isLoading={isLoadingTeams || isGlobalSecretsLoading}
-        onCancel={toggleAddHostsModal}
+        onCancel={toggleAddNodesModal}
       />
     );
   };
@@ -901,26 +900,26 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
             }}
           />
         </div>
-        <div className="host-sections">
+        <div className="node-sections">
           <>
-            {isHostSummaryFetching && (
+            {isNodeSummaryFetching && (
               <div className="spinner">
                 <Spinner />
               </div>
             )}
-            <div className={`${baseClass}__section`}>{HostsSummaryCard}</div>
+            <div className={`${baseClass}__section`}>{NodesSummaryCard}</div>
             {isPremiumTier &&
               selectedPlatform !== "ios" &&
               selectedPlatform !== "ipados" && (
                 <div className={`${baseClass}__section`}>
-                  {MissingHostsCard}
-                  {LowDiskSpaceHostsCard}
+                  {MissingNodesCard}
+                  {LowDiskSpaceNodesCard}
                 </div>
               )}
           </>
         </div>
         {renderCards()}
-        {showAddHostsModal && renderAddHostsModal()}
+        {showAddNodesModal && renderAddNodesModal()}
         {showMdmSolutionModal && renderMdmSolutionModal()}
         {showActivityFeedAutomationsModal && config && (
           <ActivityFeedAutomationsModal

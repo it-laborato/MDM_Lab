@@ -57,7 +57,7 @@ export default {
   ADMIN_ORGANIZATION_SSO: `${URL_PREFIX}/settings/organization/sso`,
   ADMIN_ORGANIZATION_SMTP: `${URL_PREFIX}/settings/organization/smtp`,
   ADMIN_ORGANIZATION_AGENTS: `${URL_PREFIX}/settings/organization/agents`,
-  ADMIN_ORGANIZATION_HOST_STATUS_WEBHOOK: `${URL_PREFIX}/settings/organization/host-status-webhook`,
+  ADMIN_ORGANIZATION_HOST_STATUS_WEBHOOK: `${URL_PREFIX}/settings/organization/node-status-webhook`,
   ADMIN_ORGANIZATION_STATISTICS: `${URL_PREFIX}/settings/organization/statistics`,
   ADMIN_ORGANIZATION_ADVANCED: `${URL_PREFIX}/settings/organization/advanced`,
   ADMIN_ORGANIZATION_MDMLAB_DESKTOP: `${URL_PREFIX}/settings/organization/mdmlab-desktop`,
@@ -108,12 +108,12 @@ export default {
   LIVE_QUERY: (
     queryId: number | null,
     teamId?: number,
-    hostId?: number
+    nodeId?: number
   ): string => {
     const baseUrl = `${URL_PREFIX}/queries/${queryId || "new"}/live`;
     const queryParams = buildQueryStringFromParams({
       team_id: teamId,
-      host_id: hostId,
+      node_id: nodeId,
     });
     return queryParams ? `${baseUrl}?${queryParams}` : baseUrl;
   },
@@ -139,28 +139,28 @@ export default {
 
   LOGIN: `${URL_PREFIX}/login`,
   LOGOUT: `${URL_PREFIX}/logout`,
-  MANAGE_HOSTS: `${URL_PREFIX}/hosts/manage`,
-  MANAGE_HOSTS_ADD_HOSTS: `${URL_PREFIX}/hosts/manage/?add_hosts=true`,
+  MANAGE_HOSTS: `${URL_PREFIX}/nodes/manage`,
+  MANAGE_HOSTS_ADD_HOSTS: `${URL_PREFIX}/nodes/manage/?add_nodes=true`,
   MANAGE_HOSTS_LABEL: (labelId: number | string): string => {
-    return `${URL_PREFIX}/hosts/manage/labels/${labelId}`;
+    return `${URL_PREFIX}/nodes/manage/labels/${labelId}`;
   },
   HOST_DETAILS: (id: number): string => {
-    return `${URL_PREFIX}/hosts/${id}`;
+    return `${URL_PREFIX}/nodes/${id}`;
   },
   HOST_SCRIPTS: (id: number): string => {
-    return `${URL_PREFIX}/hosts/${id}/scripts`;
+    return `${URL_PREFIX}/nodes/${id}/scripts`;
   },
   HOST_SOFTWARE: (id: number): string => {
-    return `${URL_PREFIX}/hosts/${id}/software`;
+    return `${URL_PREFIX}/nodes/${id}/software`;
   },
   HOST_QUERIES: (id: number): string => {
-    return `${URL_PREFIX}/hosts/${id}/queries`;
+    return `${URL_PREFIX}/nodes/${id}/queries`;
   },
   HOST_POLICIES: (id: number): string => {
-    return `${URL_PREFIX}/hosts/${id}/policies`;
+    return `${URL_PREFIX}/nodes/${id}/policies`;
   },
-  HOST_QUERY_REPORT: (hostId: number, queryId: number): string =>
-    `${URL_PREFIX}/hosts/${hostId}/queries/${queryId}`,
+  HOST_QUERY_REPORT: (nodeId: number, queryId: number): string =>
+    `${URL_PREFIX}/nodes/${nodeId}/queries/${queryId}`,
   DEVICE_USER_DETAILS: (deviceAuthToken: string): string => {
     return `${URL_PREFIX}/device/${deviceAuthToken}`;
   },

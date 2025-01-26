@@ -32,7 +32,7 @@ const CoreLayout = ({ children, router, location }: ICoreLayoutProps) => {
 
   // on success of an action, the table will reset its checkboxes.
   // setTimeout is to help with race conditions as table reloads
-  // in some instances (i.e. Manage Hosts)
+  // in some instances (i.e. Manage Nodes)
   useDeepEffect(() => {
     if (notification?.alertType === "success") {
       setTimeout(() => {

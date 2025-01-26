@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { IHost } from "./host";
+import { INode } from "./node";
 import { ILabel } from "./label";
 import { ITeam } from "./team";
 import { ITarget } from "./target";
@@ -13,8 +13,8 @@ export default PropTypes.shape({
   type: PropTypes.string,
   disabled: PropTypes.bool,
   query_count: PropTypes.number,
-  total_host_count: PropTypes.number,
-  host_ids: PropTypes.arrayOf(PropTypes.number),
+  total_node_count: PropTypes.number,
+  node_ids: PropTypes.arrayOf(PropTypes.number),
   label_ids: PropTypes.arrayOf(PropTypes.number),
   team_ids: PropTypes.arrayOf(PropTypes.number),
 });
@@ -36,9 +36,9 @@ export interface IPack {
   type: string;
   disabled?: boolean;
   query_count: number;
-  total_hosts_count: number;
-  hosts: IHost[];
-  host_ids: number[];
+  total_nodes_count: number;
+  nodes: INode[];
+  node_ids: number[];
   labels: ILabel[];
   label_ids: number[];
   teams: ITeam[];

@@ -8,10 +8,10 @@ describe("TurnOnMdmMessage", () => {
   it("renders with default header and info", () => {
     render(<TurnOnMdmMessage router={createMockRouter()} />);
 
-    expect(screen.getByText("Manage your hosts")).toBeInTheDocument();
+    expect(screen.getByText("Manage your nodes")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "MDM must be turned on to change settings on your hosts."
+        "MDM must be turned on to change settings on your nodes."
       )
     ).toBeInTheDocument();
   });

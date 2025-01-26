@@ -1,6 +1,6 @@
 /* Config interface is a flattened version of the mdmlab/config API response */
 import {
-  IWebhookHostStatus,
+  IWebhookNodeStatus,
   IWebhookFailingPolicies,
   IWebhookSoftwareVulnerabilities,
   IWebhookActivities,
@@ -41,7 +41,7 @@ export interface IAppleDeviceUpdates {
 }
 
 export interface IMdmConfig {
-  /** Update this URL if you're self-hosting Mdmlab and you want your hosts to talk to a different URL for MDM features. (If not configured, hosts will use the base URL of the Mdmlab instance.) */
+  /** Update this URL if you're self-nodeing Mdmlab and you want your nodes to talk to a different URL for MDM features. (If not configured, nodes will use the base URL of the Mdmlab instance.) */
   apple_server_url: string;
   enable_disk_encryption: boolean;
   /** `enabled_and_configured` only tells us if Apples MDM has been enabled and
@@ -92,7 +92,7 @@ export interface IMdmlabDesktopSettings {
 }
 
 export interface IConfigFeatures {
-  enable_host_users: boolean;
+  enable_node_users: boolean;
   enable_software_inventory: boolean;
 }
 
@@ -100,7 +100,7 @@ export interface IConfigServerSettings {
   server_url: string;
   live_query_disabled: boolean;
   enable_analytics: boolean;
-  deferred_save_host: boolean;
+  deferred_save_node: boolean;
   query_reports_disabled: boolean;
   scripts_disabled: boolean;
   ai_features_disabled: boolean;
@@ -142,9 +142,9 @@ export interface IConfig {
     enable_jit_provisioning: boolean;
     enable_jit_role_sync: boolean;
   };
-  host_expiry_settings: {
-    host_expiry_enabled: boolean;
-    host_expiry_window?: number;
+  node_expiry_settings: {
+    node_expiry_enabled: boolean;
+    node_expiry_window?: number;
   };
   activity_expiry_settings: {
     activity_expiry_enabled: boolean;
@@ -211,7 +211,7 @@ export interface IConfig {
 
 export interface IWebhookSettings {
   failing_policies_webhook: IWebhookFailingPolicies;
-  host_status_webhook: IWebhookHostStatus | null;
+  node_status_webhook: IWebhookNodeStatus | null;
   vulnerabilities_webhook: IWebhookSoftwareVulnerabilities;
   activities_webhook: IWebhookActivities;
 }
@@ -224,5 +224,5 @@ export type IAutomationsConfig = Pick<
 export const CONFIG_DEFAULT_RECENT_VULNERABILITY_MAX_AGE_IN_DAYS = 30;
 
 export interface IUserSettings {
-  hidden_host_columns: string[];
+  hidden_node_columns: string[];
 }

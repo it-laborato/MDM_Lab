@@ -8,7 +8,7 @@ import {
 import TextCell from "components/TableContainer/DataTable/TextCell";
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell";
 import StatusIndicatorWithIcon from "components/StatusIndicatorWithIcon";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 
 interface IStatusCellValue {
   displayName: string;
@@ -73,7 +73,7 @@ export const COLUMN_CONFIGS: IColumnConfig[] = [
     },
   },
   {
-    title: "Hosts",
+    title: "Nodes",
     Header: (cellProps: IHeaderProps) => (
       <HeaderCell
         value={cellProps.column.title}
@@ -81,7 +81,7 @@ export const COLUMN_CONFIGS: IColumnConfig[] = [
         disableSortBy={false}
       />
     ),
-    accessor: "hosts",
+    accessor: "nodes",
     Cell: ({ cell: { value: aggregateCount } }: ICellProps) => {
       return (
         <TextCell value={aggregateCount} formatter={(val) => <>{val}</>} />
@@ -91,14 +91,14 @@ export const COLUMN_CONFIGS: IColumnConfig[] = [
   {
     title: "",
     Header: "",
-    accessor: "linkToFilteredHosts",
+    accessor: "linkToFilteredNodes",
     disableSortBy: true,
     Cell: (cellProps: ICellProps) => {
       return (
         <>
           {cellProps.row.original && (
-            <ViewAllHostsLink
-              className="view-hosts-link"
+            <ViewAllNodesLink
+              className="view-nodes-link"
               queryParams={{
                 bootstrap_package: cellProps.row.original.status.value,
                 team_id: cellProps.row.original.teamId,
@@ -121,19 +121,19 @@ const STATUS_CELL_VALUES: Record<StatusNames, IStatusCellValue> = {
     displayName: "Installed",
     statusName: "success",
     value: BootstrapPackageStatus.INSTALLED,
-    tooltip: "The host installed the package.",
+    tooltip: "The node installed the package.",
   },
   pending: {
     displayName: "Pending",
     statusName: "pending",
     value: BootstrapPackageStatus.PENDING,
-    tooltip: "The host will install the package when it enrolls.",
+    tooltip: "The node will install the package when it enrolls.",
   },
   failed: {
     displayName: "Failed",
     statusName: "error",
     value: BootstrapPackageStatus.FAILED,
-    tooltip: "The host failed to install the package when it enrolled.",
+    tooltip: "The node failed to install the package when it enrolled.",
   },
 };
 
@@ -144,9 +144,9 @@ export const generateTableData = (
   if (!data) return [];
   const entries = Object.entries(data) as StatusEntry[];
 
-  return entries.map(([status, numHosts]) => ({
+  return entries.map(([status, numNodes]) => ({
     status: STATUS_CELL_VALUES[status],
-    hosts: numHosts,
+    nodes: numNodes,
     teamId: currentTeamId,
   }));
 };

@@ -57,10 +57,10 @@ const PolicyResults = ({
 }: IPolicyResultsProps): JSX.Element => {
   const { lastEditedQueryBody } = useContext(PolicyContext);
 
-  const { hosts: hostResponses, hosts_count: hostsCount, errors } =
+  const { nodes: nodeResponses, nodes_count: nodesCount, errors } =
     campaign || {};
 
-  const totalRowsCount = get(campaign, ["hosts_count", "successful"], 0);
+  const totalRowsCount = get(campaign, ["nodes_count", "successful"], 0);
 
   const [navTabIndex, setNavTabIndex] = useState(0);
   const [showQueryModal, setShowQueryModal] = useState(false);
@@ -68,18 +68,18 @@ const PolicyResults = ({
   const onExportResults = (evt: React.MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
 
-    if (hostResponses) {
-      const hostsExport = hostResponses.map((host) => {
+    if (nodeResponses) {
+      const nodesExport = nodeResponses.map((node) => {
         return {
-          host: host.display_name,
+          node: node.display_name,
           status:
-            host.query_results && host.query_results.length ? "yes" : "no",
+            node.query_results && node.query_results.length ? "yes" : "no",
         };
       });
 
       FileSaver.saveAs(
         generateCSVPolicyResults(
-          hostsExport,
+          nodesExport,
           generateCSVFilename(`${policyName || CSV_TITLE} - Results`)
         )
       );
@@ -137,17 +137,17 @@ const PolicyResults = ({
   };
 
   const renderPassFailPcts = () => {
-    const { yes: yesCt, no: noCt } = getYesNoCounts(hostResponses);
+    const { yes: yesCt, no: noCt } = getYesNoCounts(nodeResponses);
     return (
       <span className={`${baseClass}__results-pass-fail-pct`}>
         {" "}
         (Yes:{" "}
-        <TooltipWrapper tipContent={`${yesCt} host${yesCt !== 1 ? "s" : ""}`}>
-          {Math.ceil((yesCt / hostsCount.successful) * 100)}%
+        <TooltipWrapper tipContent={`${yesCt} node${yesCt !== 1 ? "s" : ""}`}>
+          {Math.ceil((yesCt / nodesCount.successful) * 100)}%
         </TooltipWrapper>
         , No:{" "}
-        <TooltipWrapper tipContent={`${noCt} host${noCt !== 1 ? "s" : ""}`}>
-          {Math.floor((noCt / hostsCount.successful) * 100)}%
+        <TooltipWrapper tipContent={`${noCt} node${noCt !== 1 ? "s" : ""}`}>
+          {Math.floor((noCt / nodesCount.successful) * 100)}%
         </TooltipWrapper>
         )
       </span>
@@ -156,10 +156,10 @@ const PolicyResults = ({
 
   const renderResultsTable = () => {
     const emptyResults =
-      !hostResponses || !hostResponses.length || !hostsCount.successful;
+      !nodeResponses || !nodeResponses.length || !nodesCount.successful;
     const hasNoResultsYet = !isQueryFinished && emptyResults;
     const finishedWithNoResults =
-      isQueryFinished && (!hostsCount.successful || emptyResults);
+      isQueryFinished && (!nodesCount.successful || emptyResults);
 
     if (hasNoResultsYet) {
       return <AwaitingResults />;
@@ -170,7 +170,7 @@ const PolicyResults = ({
         <p className="no-results-message">
           Your live query returned no results.
           <span>
-            Expecting to see results? Check to see if the host
+            Expecting to see results? Check to see if the node
             {`${targetsTotalCount > 1 ? "s" : ""}`} you targeted reported
             &ldquo;Online&rdquo; or check out the &ldquo;Errors&rdquo; table.
           </span>
@@ -181,8 +181,8 @@ const PolicyResults = ({
     return (
       <div className={`${baseClass}__results-table-container`}>
         <InfoBanner>
-          Hosts that responded with results are marked <strong>Yes</strong>.
-          Hosts that responded with no results are marked <strong>No</strong>.
+          Nodes that responded with results are marked <strong>Yes</strong>.
+          Nodes that responded with no results are marked <strong>No</strong>.
         </InfoBanner>
         <div className={`${baseClass}__results-table-header`}>
           <span className={`${baseClass}__results-meta`}>
@@ -197,8 +197,8 @@ const PolicyResults = ({
         </div>
         <PolicyResultsTable
           isLoading={false}
-          hostResponses={hostResponses}
-          resultsTitle="hosts"
+          nodeResponses={nodeResponses}
+          resultsTitle="nodes"
         />
       </div>
     );
@@ -233,7 +233,7 @@ const PolicyResults = ({
   return (
     <div className={baseClass}>
       <ResultsHeading
-        respondedHosts={hostsCount.total}
+        respondedNodes={nodesCount.total}
         targetsTotalCount={targetsTotalCount}
         isQueryFinished={isQueryFinished}
         onClickDone={onQueryDone}

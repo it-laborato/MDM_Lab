@@ -4,7 +4,7 @@ import { IMdmStatusCardData, MDM_ENROLLMENT_STATUS } from "interfaces/mdm";
 
 import TextCell from "components/TableContainer/DataTable/TextCell";
 import TooltipWrapper from "components/TooltipWrapper";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import { MDM_STATUS_TOOLTIP } from "utilities/constants";
 
 interface IMdmStatusData extends IMdmStatusCardData {
@@ -63,10 +63,10 @@ export const generateStatusTableHeaders = (teamId?: number): IDataColumn[] => [
     sortType: "hasLength",
   },
   {
-    title: "Hosts",
-    Header: "Hosts",
+    title: "Nodes",
+    Header: "Nodes",
     disableSortBy: true,
-    accessor: "hosts",
+    accessor: "nodes",
     Cell: (cellProps: ICellProps) => <TextCell value={cellProps.cell.value} />,
   },
   {
@@ -74,10 +74,10 @@ export const generateStatusTableHeaders = (teamId?: number): IDataColumn[] => [
     Header: "",
     disableSortBy: true,
     disableGlobalFilter: true,
-    accessor: "linkToFilteredHosts",
+    accessor: "linkToFilteredNodes",
     Cell: (cellProps: IStringCellProps) => {
       return (
-        <ViewAllHostsLink
+        <ViewAllNodesLink
           queryParams={{
             mdm_enrollment_status:
               MDM_ENROLLMENT_STATUS[cellProps.row.original.status],

@@ -8,8 +8,8 @@ export interface IScript {
   updated_at: string;
 }
 
-export const isScriptSupportedPlatform = (hostPlatform: string) =>
-  ["darwin", "windows", ...HOST_LINUX_PLATFORMS].includes(hostPlatform); // excludes chrome, ios, ipados see also https://github.com/mdmlabdm/mdmlab/blob/5a21e2cfb029053ddad0508869eb9f1f23997bf2/server/mdmlab/hosts.go#L775
+export const isScriptSupportedPlatform = (nodePlatform: string) =>
+  ["darwin", "windows", ...HOST_LINUX_PLATFORMS].includes(nodePlatform); // excludes chrome, ios, ipados see also https://github.com/mdmlabdm/mdmlab/blob/5a21e2cfb029053ddad0508869eb9f1f23997bf2/server/mdmlab/nodes.go#L775
 
 export type IScriptExecutionStatus = "ran" | "pending" | "error";
 
@@ -19,7 +19,7 @@ export interface ILastExecution {
   status: IScriptExecutionStatus;
 }
 
-export interface IHostScript {
+export interface INodeScript {
   script_id: number;
   name: string;
   last_execution: ILastExecution | null;

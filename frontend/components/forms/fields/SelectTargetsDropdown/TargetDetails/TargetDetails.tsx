@@ -3,17 +3,17 @@ import { noop } from "lodash";
 import AceEditor from "react-ace";
 import classnames from "classnames";
 
-import { humanHostMemory } from "utilities/helpers";
+import { humanNodeMemory } from "utilities/helpers";
 import MdmlabIcon from "components/icons/MdmlabIcon";
 import PlatformIcon from "components/icons/PlatformIcon";
-import { ISelectHost, ISelectLabel, ISelectTeam } from "interfaces/target";
+import { ISelectNode, ISelectLabel, ISelectTeam } from "interfaces/target";
 
-import { isTargetHost, isTargetTeam, isTargetLabel } from "../helpers";
+import { isTargetNode, isTargetTeam, isTargetLabel } from "../helpers";
 
 const baseClass = "target-details";
 
 interface ITargetDetailsProps {
-  target: ISelectHost | ISelectTeam | ISelectLabel; // Replace with Target
+  target: ISelectNode | ISelectTeam | ISelectLabel; // Replace with Target
   className?: string;
   handleBackToResults?: () => void;
 }
@@ -23,51 +23,51 @@ const TargetDetails = ({
   className = "",
   handleBackToResults = noop,
 }: ITargetDetailsProps): JSX.Element => {
-  const renderHost = (hostTarget: ISelectHost) => {
+  const renderNode = (nodeTarget: ISelectNode) => {
     const {
       display_text: displayText,
-      primary_mac: hostMac,
-      primary_ip: hostIpAddress,
+      primary_mac: nodeMac,
+      primary_ip: nodeIpAddress,
       memory,
       osquery_version: osqueryVersion,
       os_version: osVersion,
       platform,
       status,
-    } = hostTarget;
-    const hostBaseClass = "host-target";
+    } = nodeTarget;
+    const nodeBaseClass = "node-target";
     const isOnline = status === "online";
     const isOffline = status === "offline";
     const statusClassName = classnames(
-      `${hostBaseClass}__status`,
-      { [`${hostBaseClass}__status--is-online`]: isOnline },
-      { [`${hostBaseClass}__status--is-offline`]: isOffline }
+      `${nodeBaseClass}__status`,
+      { [`${nodeBaseClass}__status--is-online`]: isOnline },
+      { [`${nodeBaseClass}__status--is-offline`]: isOffline }
     );
 
     return (
-      <div className={`${hostBaseClass} ${className}`}>
+      <div className={`${nodeBaseClass} ${className}`}>
         <button
-          className={`button button--unstyled ${hostBaseClass}__back`}
+          className={`button button--unstyled ${nodeBaseClass}__back`}
           onClick={handleBackToResults}
         >
           <MdmlabIcon name="chevronleft" />
           Back
         </button>
 
-        <p className={`${hostBaseClass}__display-text`}>
-          <MdmlabIcon name="single-host" className={`${hostBaseClass}__icon`} />
+        <p className={`${nodeBaseClass}__display-text`}>
+          <MdmlabIcon name="single-node" className={`${nodeBaseClass}__icon`} />
           <span>{displayText}</span>
         </p>
         <p className={statusClassName}>
           {isOnline && (
             <MdmlabIcon
               name="success-check"
-              className={`${hostBaseClass}__icon ${hostBaseClass}__icon--online`}
+              className={`${nodeBaseClass}__icon ${nodeBaseClass}__icon--online`}
             />
           )}
           {isOffline && (
             <MdmlabIcon
               name="offline"
-              className={`${hostBaseClass}__icon ${hostBaseClass}__icon--offline`}
+              className={`${nodeBaseClass}__icon ${nodeBaseClass}__icon--offline`}
             />
           )}
           <span>{status}</span>
@@ -76,13 +76,13 @@ const TargetDetails = ({
           <tbody>
             <tr>
               <th>Private IP address</th>
-              <td>{hostIpAddress}</td>
+              <td>{nodeIpAddress}</td>
             </tr>
             <tr>
               <th>MAC address</th>
               <td>
-                <span className={`${hostBaseClass}__mac-address`}>
-                  {hostMac}
+                <span className={`${nodeBaseClass}__mac-address`}>
+                  {nodeMac}
                 </span>
               </td>
             </tr>
@@ -90,7 +90,7 @@ const TargetDetails = ({
               <th>Platform</th>
               <td>
                 <PlatformIcon name={platform} title={platform} />
-                <span className={`${hostBaseClass}__platform-text`}>
+                <span className={`${nodeBaseClass}__platform-text`}>
                   {" "}
                   {platform}
                 </span>
@@ -106,7 +106,7 @@ const TargetDetails = ({
             </tr>
             <tr>
               <th>Memory</th>
-              <td>{humanHostMemory(memory)}</td>
+              <td>{humanNodeMemory(memory)}</td>
             </tr>
           </tbody>
         </table>
@@ -137,8 +137,8 @@ const TargetDetails = ({
           <span>{displayText}</span>
         </p>
 
-        <p className={`${labelBaseClass}__hosts`}>
-          <span className={`${labelBaseClass}__hosts-count`}>
+        <p className={`${labelBaseClass}__nodes`}>
+          <span className={`${labelBaseClass}__nodes-count`}>
             <strong>{count}</strong>HOSTS
           </span>
         </p>
@@ -175,15 +175,15 @@ const TargetDetails = ({
       <div className={`${labelBaseClass} ${className}`}>
         <p className={`${labelBaseClass}__display-text`}>
           <MdmlabIcon
-            name="all-hosts"
+            name="all-nodes"
             fw
             className={`${labelBaseClass}__icon`}
           />
           <span>{displayText}</span>
         </p>
 
-        <p className={`${labelBaseClass}__hosts`}>
-          <span className={`${labelBaseClass}__hosts-count`}>
+        <p className={`${labelBaseClass}__nodes`}>
+          <span className={`${labelBaseClass}__nodes-count`}>
             <strong>{count}</strong>HOSTS
           </span>
         </p>
@@ -195,8 +195,8 @@ const TargetDetails = ({
     return <></>;
   }
 
-  if (isTargetHost(target)) {
-    return renderHost(target);
+  if (isTargetNode(target)) {
+    return renderNode(target);
   }
 
   if (isTargetLabel(target)) {

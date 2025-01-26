@@ -1,13 +1,13 @@
-import { IDeviceUserResponse } from "interfaces/host";
+import { IDeviceUserResponse } from "interfaces/node";
 import { IDeviceSoftware } from "interfaces/software";
 import sendRequest from "services";
 import endpoints from "utilities/endpoints";
 import { buildQueryStringFromParams } from "utilities/url";
-import { IHostSoftwareQueryParams } from "./hosts";
+import { INodeSoftwareQueryParams } from "./nodes";
 
-export type ILoadHostDetailsExtension = "device_mapping" | "macadmins";
+export type ILoadNodeDetailsExtension = "device_mapping" | "macadmins";
 
-export interface IDeviceSoftwareQueryKey extends IHostSoftwareQueryParams {
+export interface IDeviceSoftwareQueryKey extends INodeSoftwareQueryParams {
   scope: "device_software";
   id: string;
   softwareUpdatedAt?: string;
@@ -28,7 +28,7 @@ interface IGetDeviceDetailsRequest {
 }
 
 export default {
-  loadHostDetails: ({
+  loadNodeDetails: ({
     token,
     exclude_software,
   }: IGetDeviceDetailsRequest): Promise<IDeviceUserResponse> => {
@@ -39,9 +39,9 @@ export default {
     }
     return sendRequest("GET", path);
   },
-  loadHostDetailsExtension: (
+  loadNodeDetailsExtension: (
     deviceAuthToken: string,
-    extension: ILoadHostDetailsExtension
+    extension: ILoadNodeDetailsExtension
   ) => {
     const { DEVICE_USER_DETAILS } = endpoints;
     const path = `${DEVICE_USER_DETAILS}/${deviceAuthToken}/${extension}`;

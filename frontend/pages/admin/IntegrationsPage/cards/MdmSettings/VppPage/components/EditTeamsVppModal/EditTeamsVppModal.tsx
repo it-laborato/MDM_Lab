@@ -205,7 +205,7 @@ const EditTeamsVppModal = ({
         <p>
           If you delete a team, App Store apps will be deleted from that team,
           and policies that trigger automatic install of these apps will be
-          deleted. Installed apps won&apos;t be uninstalled from hosts.
+          deleted. Installed apps won&apos;t be uninstalled from nodes.
         </p>
         <form onSubmit={onSave} className={baseClass} autoComplete="off">
           <TooltipWrapper
@@ -240,7 +240,7 @@ const EditTeamsVppModal = ({
                   </>
                 )
               }
-              helpText="App Store apps in this VPP token’s Apple Business Manager (ABM) will only be available to install on hosts in these teams."
+              helpText="App Store apps in this VPP token’s Apple Business Manager (ABM) will only be available to install on nodes in these teams."
               disabled={isDropdownDisabled}
             />
           </TooltipWrapper>

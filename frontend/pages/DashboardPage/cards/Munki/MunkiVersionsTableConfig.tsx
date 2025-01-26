@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IMacadminsResponse } from "interfaces/host";
+import { IMacadminsResponse } from "interfaces/node";
 
 import TextCell from "components/TableContainer/DataTable/TextCell";
 
@@ -40,10 +40,10 @@ const munkiVersionsTableHeaders = [
     Cell: (cellProps: ICellProps) => <TextCell value={cellProps.cell.value} />,
   },
   {
-    title: "Hosts",
-    Header: "Hosts",
+    title: "Nodes",
+    Header: "Nodes",
     disableSortBy: true,
-    accessor: "hosts_count",
+    accessor: "nodes_count",
     Cell: (cellProps: ICellProps) => <TextCell value={cellProps.cell.value} />,
   },
 ];

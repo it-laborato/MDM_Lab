@@ -9,8 +9,8 @@ import { AppContext } from "context/app";
 import { QueryContext } from "context/query";
 import { LIVE_QUERY_STEPS, DOCUMENT_TITLE_SUFFIX } from "utilities/constants";
 import queryAPI from "services/entities/queries";
-import hostAPI from "services/entities/hosts";
-import { IHost, IHostResponse } from "interfaces/host";
+import nodeAPI from "services/entities/nodes";
+import { INode, INodeResponse } from "interfaces/node";
 import { ILabel } from "interfaces/label";
 import { ITeam } from "interfaces/team";
 import {
@@ -28,7 +28,7 @@ interface IRunQueryPageProps {
   params: Params;
   location: {
     pathname: string;
-    query: { host_id: string; team_id?: string };
+    query: { node_id: string; team_id?: string };
     search: string;
   };
 }
@@ -68,10 +68,10 @@ const RunQueryPage = ({
     setLastEditedQueryPlatforms,
   } = useContext(QueryContext);
 
-  const [queryParamHostsAdded, setQueryParamHostsAdded] = useState(false);
+  const [queryParamNodesAdded, setQueryParamNodesAdded] = useState(false);
   const [step, setStep] = useState(LIVE_QUERY_STEPS[1]);
-  const [targetedHosts, setTargetedHosts] = useState<IHost[]>(
-    selectedQueryTargetsByType.hosts
+  const [targetedNodes, setTargetedNodes] = useState<INode[]>(
+    selectedQueryTargetsByType.nodes
   );
   const [targetedLabels, setTargetedLabels] = useState<ILabel[]>(
     selectedQueryTargetsByType.labels
@@ -114,23 +114,23 @@ const RunQueryPage = ({
     onError: (error) => handlePageError(error),
   });
 
-  useQuery<IHostResponse, Error, IHost>(
-    "hostFromURL",
+  useQuery<INodeResponse, Error, INode>(
+    "nodeFromURL",
     () =>
-      hostAPI.loadHostDetails(parseInt(location.query.host_id as string, 10)),
+      nodeAPI.loadNodeDetails(parseInt(location.query.node_id as string, 10)),
     {
-      enabled: !!location.query.host_id && !queryParamHostsAdded,
-      select: (data: IHostResponse) => data.host,
-      onSuccess: (host) => {
-        setTargetedHosts((prevHosts) =>
-          prevHosts.filter((h) => h.id !== host.id).concat(host)
+      enabled: !!location.query.node_id && !queryParamNodesAdded,
+      select: (data: INodeResponse) => data.node,
+      onSuccess: (node) => {
+        setTargetedNodes((prevNodes) =>
+          prevNodes.filter((h) => h.id !== node.id).concat(node)
         );
         const targets = selectedQueryTargets;
-        host.target_type = "hosts";
-        targets.push(host);
+        node.target_type = "nodes";
+        targets.push(node);
         setSelectedQueryTargets([...targets]);
-        if (!queryParamHostsAdded) {
-          setQueryParamHostsAdded(true);
+        if (!queryParamNodesAdded) {
+          setQueryParamNodesAdded(true);
         }
         router.replace(location.pathname);
       },
@@ -139,11 +139,11 @@ const RunQueryPage = ({
 
   useEffect(() => {
     setSelectedQueryTargetsByType({
-      hosts: targetedHosts,
+      nodes: targetedNodes,
       labels: targetedLabels,
       teams: targetedTeams,
     });
-  }, [targetedLabels, targetedHosts, targetedTeams]);
+  }, [targetedLabels, targetedNodes, targetedTeams]);
 
   // Updates title that shows up on browser tabs
   useEffect(() => {
@@ -168,14 +168,14 @@ const RunQueryPage = ({
       baseClass,
       queryId,
       selectedTargets: selectedQueryTargets,
-      targetedHosts,
+      targetedNodes,
       targetedLabels,
       targetedTeams,
       targetsTotalCount,
       goToQueryEditor,
       goToRunQuery: () => setStep(LIVE_QUERY_STEPS[2]),
       setSelectedTargets: setSelectedQueryTargets,
-      setTargetedHosts,
+      setTargetedNodes,
       setTargetedLabels,
       setTargetedTeams,
       setTargetsTotalCount,

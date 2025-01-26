@@ -21,8 +21,8 @@ interface IAdvancedConfigFormData {
   domain: string;
   verifySSLCerts: boolean;
   enableStartTLS?: boolean;
-  enableHostExpiry: boolean;
-  hostExpiryWindow: string;
+  enableNodeExpiry: boolean;
+  nodeExpiryWindow: string;
   deleteActivities: boolean;
   activityExpiryWindow: number;
   disableLiveQuery: boolean;
@@ -34,14 +34,14 @@ interface IAdvancedConfigFormData {
 interface IAdvancedConfigFormErrors {
   mdmAppleServerURL?: string | null;
   domain?: string | null;
-  hostExpiryWindow?: string | null;
+  nodeExpiryWindow?: string | null;
 }
 
 const validateFormData = ({
   mdmAppleServerURL,
   domain,
-  hostExpiryWindow,
-  enableHostExpiry,
+  nodeExpiryWindow,
+  enableNodeExpiry,
 }: IAdvancedConfigFormData) => {
   const errors: Record<string, string> = {};
 
@@ -58,10 +58,10 @@ const validateFormData = ({
   }
 
   if (
-    enableHostExpiry &&
-    (!hostExpiryWindow || parseInt(hostExpiryWindow, 10) <= 0)
+    enableNodeExpiry &&
+    (!nodeExpiryWindow || parseInt(nodeExpiryWindow, 10) <= 0)
   ) {
-    errors.hostExpiryWindow = "Host expiry window must be a positive number";
+    errors.nodeExpiryWindow = "Node expiry window must be a positive number";
   }
   return errors;
 };
@@ -76,11 +76,11 @@ const Advanced = ({
     domain: appConfig.smtp_settings?.domain || "",
     verifySSLCerts: appConfig.smtp_settings?.verify_ssl_certs || false,
     enableStartTLS: appConfig.smtp_settings?.enable_start_tls,
-    enableHostExpiry:
-      appConfig.host_expiry_settings.host_expiry_enabled || false,
-    hostExpiryWindow:
-      (appConfig.host_expiry_settings.host_expiry_window &&
-        appConfig.host_expiry_settings.host_expiry_window.toString()) ||
+    enableNodeExpiry:
+      appConfig.node_expiry_settings.node_expiry_enabled || false,
+    nodeExpiryWindow:
+      (appConfig.node_expiry_settings.node_expiry_window &&
+        appConfig.node_expiry_settings.node_expiry_window.toString()) ||
       "0",
     deleteActivities:
       appConfig.activity_expiry_settings?.activity_expiry_enabled || false,
@@ -98,8 +98,8 @@ const Advanced = ({
     domain,
     verifySSLCerts,
     enableStartTLS,
-    enableHostExpiry,
-    hostExpiryWindow,
+    enableNodeExpiry,
+    nodeExpiryWindow,
     deleteActivities,
     activityExpiryWindow,
     disableLiveQuery,
@@ -157,7 +157,7 @@ const Advanced = ({
         live_query_disabled: disableLiveQuery,
         query_reports_disabled: disableQueryReports,
         scripts_disabled: disableScripts,
-        deferred_save_host: appConfig.server_settings.deferred_save_host,
+        deferred_save_node: appConfig.server_settings.deferred_save_node,
         ai_features_disabled: disableAIFeatures,
       },
       smtp_settings: {
@@ -165,9 +165,9 @@ const Advanced = ({
         verify_ssl_certs: verifySSLCerts,
         enable_start_tls: enableStartTLS || false,
       },
-      host_expiry_settings: {
-        host_expiry_enabled: enableHostExpiry,
-        host_expiry_window: parseInt(hostExpiryWindow, 10) || undefined,
+      node_expiry_settings: {
+        node_expiry_enabled: enableNodeExpiry,
+        node_expiry_window: parseInt(nodeExpiryWindow, 10) || undefined,
       },
       activity_expiry_settings: {
         activity_expiry_enabled: deleteActivities,
@@ -198,8 +198,8 @@ const Advanced = ({
               value={mdmAppleServerURL}
               parseTarget
               error={formErrors.mdmAppleServerURL}
-              tooltip="Update this URL if you're self-hosting Mdmlab and you want your hosts to talk to this URL for MDM features. If not configured, hosts will use the base URL of the Mdmlab instance."
-              helpText="If this URL changes and hosts already have MDM turned on, the end users will have to turn MDM off and back on to use MDM features."
+              tooltip="Update this URL if you're self-nodeing Mdmlab and you want your nodes to talk to this URL for MDM features. If not configured, nodes will use the base URL of the Mdmlab instance."
+              helpText="If this URL changes and nodes already have MDM turned on, the end users will have to turn MDM off and back on to use MDM features."
             />
           )}
           <InputField
@@ -258,18 +258,18 @@ const Advanced = ({
           </Checkbox>
           <Checkbox
             onChange={onInputChange}
-            name="enableHostExpiry"
-            value={enableHostExpiry}
+            name="enableNodeExpiry"
+            value={enableNodeExpiry}
             parseTarget
             tooltipContent={
               <>
                 When enabled, allows automatic cleanup of
                 <br />
-                hosts that have not communicated with Mdmlab in
+                nodes that have not communicated with Mdmlab in
                 <br />
                 the number of days specified in the{" "}
                 <strong>
-                  Host expiry
+                  Node expiry
                   <br />
                   window
                 </strong>{" "}
@@ -280,17 +280,17 @@ const Advanced = ({
               </>
             }
           >
-            Host expiry
+            Node expiry
           </Checkbox>
-          {enableHostExpiry && (
+          {enableNodeExpiry && (
             <InputField
-              label="Host expiry window"
+              label="Node expiry window"
               type="number"
               onChange={onInputChange}
-              name="hostExpiryWindow"
-              value={hostExpiryWindow}
+              name="nodeExpiryWindow"
+              value={nodeExpiryWindow}
               parseTarget
-              error={formErrors.hostExpiryWindow}
+              error={formErrors.nodeExpiryWindow}
             />
           )}
           <Checkbox

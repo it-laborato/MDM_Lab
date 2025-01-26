@@ -39,7 +39,7 @@ const convertToCSV = ({
   let fields = fieldSortFunc(tableHeadersStrings);
 
   // TODO: Revisit after v5 if column names are modified/removed from API response.
-  fields = fields.filter((field) => field !== "Host");
+  fields = fields.filter((field) => field !== "Node");
   // Revisit end
 
   const headerRow = fields.map((field) => formatFieldForCSV(field)).join(",");

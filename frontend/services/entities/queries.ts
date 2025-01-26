@@ -120,7 +120,7 @@ export default {
       });
       return Promise.resolve({
         ...campaign,
-        hosts_count: {
+        nodes_count: {
           successful: 0,
           failed: 0,
           total: 0,

@@ -9,10 +9,10 @@ import {
 describe("string utilities", () => {
   describe("enforceMdmlabSentenceCasing utility", () => {
     it("fixes a Title Cased String with no ignore words", () => {
-      expect(enforceMdmlabSentenceCasing("All Hosts")).toEqual("All hosts");
-      expect(enforceMdmlabSentenceCasing("all Hosts")).toEqual("All hosts");
-      expect(enforceMdmlabSentenceCasing("all hosts")).toEqual("All hosts");
-      expect(enforceMdmlabSentenceCasing("All HosTs ")).toEqual("All hosts");
+      expect(enforceMdmlabSentenceCasing("All Nodes")).toEqual("All nodes");
+      expect(enforceMdmlabSentenceCasing("all Nodes")).toEqual("All nodes");
+      expect(enforceMdmlabSentenceCasing("all nodes")).toEqual("All nodes");
+      expect(enforceMdmlabSentenceCasing("All HosTs ")).toEqual("All nodes");
     });
 
     it("fixes a title cased string while ignoring special words in various places ", () => {

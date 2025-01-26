@@ -106,7 +106,7 @@ const AddProfileModal = ({
     name: string;
     platform: string;
   } | null>(null);
-  const [selectedTargetType, setSelectedTargetType] = useState("All hosts");
+  const [selectedTargetType, setSelectedTargetType] = useState("All nodes");
   const [selectedLabels, setSelectedLabels] = useState<Record<string, boolean>>(
     {}
   );

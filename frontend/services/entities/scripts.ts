@@ -1,4 +1,4 @@
-import { IScript, IHostScript } from "interfaces/script";
+import { IScript, INodeScript } from "interfaces/script";
 import sendRequest from "services";
 import endpoints from "utilities/endpoints";
 import { buildQueryStringFromParams } from "utilities/url";
@@ -29,8 +29,8 @@ export interface IListScriptsQueryKey extends IListScriptsApiParams {
  * Script Result response from GET /scripts/results/:id
  */
 export interface IScriptResultResponse {
-  hostname: string;
-  host_id: number;
+  nodename: string;
+  node_id: number;
   execution_id: string;
   script_contents: string;
   script_id: number;
@@ -38,28 +38,28 @@ export interface IScriptResultResponse {
   output: string;
   message: string;
   runtime: number;
-  host_timeout: boolean;
+  node_timeout: boolean;
   created_at: string;
 }
 
 /**
- * Request params for for GET /hosts/:id/scripts
+ * Request params for for GET /nodes/:id/scripts
  */
-export interface IHostScriptsRequestParams {
-  host_id: number;
+export interface INodeScriptsRequestParams {
+  node_id: number;
   page?: number;
   per_page?: number;
 }
 
-export interface IHostScriptsQueryKey extends IHostScriptsRequestParams {
-  scope: "host_scripts";
+export interface INodeScriptsQueryKey extends INodeScriptsRequestParams {
+  scope: "node_scripts";
 }
 
 /**
- * Script response from GET /hosts/:id/scripts
+ * Script response from GET /nodes/:id/scripts
  */
-export interface IHostScriptsResponse {
-  scripts: IHostScript[];
+export interface INodeScriptsResponse {
+  scripts: INodeScript[];
   meta: {
     has_next_results: boolean;
     has_previous_results: boolean;
@@ -72,7 +72,7 @@ export interface IHostScriptsResponse {
  * https://github.com/mdmlabdm/mdmlab/blob/main/docs/Contributing/API-for-contributors.md#run-script-asynchronously
  */
 export interface IScriptRunRequest {
-  host_id: number;
+  node_id: number;
   script_id: number; // script_id is not required by the API currently, but we require it here to ensure it is always provided
   // script_contents: string; // script_contents is only supported for the CLI currently
 }
@@ -83,14 +83,14 @@ export interface IScriptRunRequest {
  * https://github.com/mdmlabdm/mdmlab/blob/main/docs/Contributing/API-for-contributors.md#run-script-asynchronously
  */
 export interface IScriptRunResponse {
-  host_id: number;
+  node_id: number;
   execution_id: string;
 }
 
 export default {
-  getHostScripts({ host_id, page, per_page }: IHostScriptsRequestParams) {
+  getNodeScripts({ node_id, page, per_page }: INodeScriptsRequestParams) {
     const { HOST_SCRIPTS } = endpoints;
-    const path = `${HOST_SCRIPTS(host_id)}?${buildQueryStringFromParams({
+    const path = `${HOST_SCRIPTS(node_id)}?${buildQueryStringFromParams({
       page,
       per_page,
     })}`;

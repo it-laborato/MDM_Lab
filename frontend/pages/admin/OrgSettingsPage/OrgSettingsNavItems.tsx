@@ -7,7 +7,7 @@ import Info from "./cards/Info";
 import WebAddress from "./cards/WebAddress";
 import Sso from "./cards/Sso";
 import Smtp from "./cards/Smtp";
-import GlobalHostStatusWebhook from "./cards/GlobalHostStatusWebhook";
+import GlobalNodeStatusWebhook from "./cards/GlobalNodeStatusWebhook";
 import Statistics from "./cards/Statistics";
 import MdmlabDesktop from "./cards/MdmlabDesktop";
 import Advanced from "./cards/Advanced";
@@ -45,10 +45,10 @@ const ORG_SETTINGS_NAV_ITEMS: ISideNavItem<IAppConfigFormProps>[] = [
     Card: Agents,
   },
   {
-    title: "Host status webhook",
-    urlSection: "host-status-webhook",
+    title: "Node status webhook",
+    urlSection: "node-status-webhook",
     path: PATHS.ADMIN_ORGANIZATION_HOST_STATUS_WEBHOOK,
-    Card: GlobalHostStatusWebhook,
+    Card: GlobalNodeStatusWebhook,
   },
   {
     title: "Usage statistics",

@@ -30,7 +30,7 @@ const SoftwareLastUpdatedInfo = (lastUpdatedAt: string) => {
         <>
           The last time software data was <br />
           updated, including vulnerabilities <br />
-          and host counts.
+          and node counts.
         </>
       }
     />
@@ -47,7 +47,7 @@ const NoVersionsDetected = (isAvailableForInstall = false): JSX.Element => {
       }
       info={
         isAvailableForInstall ? (
-          "Install this software on a host to see versions."
+          "Install this software on a node to see versions."
         ) : (
           <>
             Expecting to see versions?{" "}
@@ -89,13 +89,13 @@ const SoftwareTitleDetailsTable = ({
   countsUpdatedAt,
 }: ISoftwareTitleDetailsTableProps) => {
   const handleRowSelect = (row: IRowProps) => {
-    const hostsBySoftwareParams = {
+    const nodesBySoftwareParams = {
       software_version_id: row.original.id,
     };
 
-    const path = hostsBySoftwareParams
+    const path = nodesBySoftwareParams
       ? `${PATHS.MANAGE_HOSTS}?${buildQueryStringFromParams(
-          hostsBySoftwareParams
+          nodesBySoftwareParams
         )}`
       : PATHS.MANAGE_HOSTS;
 

@@ -53,7 +53,7 @@ interface IQueryDetailsPageProps {
       team_id?: string;
       order_key?: string;
       order_direction?: string;
-      host_id?: string;
+      node_id?: string;
     };
     search: string;
   };
@@ -72,10 +72,10 @@ const QueryDetailsPage = ({
   }
   const queryParams = location.query;
 
-  // Present when observer is redirected from host details > query
+  // Present when observer is redirected from node details > query
   // since observer does not have access to edit page
-  const hostId = queryParams?.host_id
-    ? parseInt(queryParams.host_id, 10)
+  const nodeId = queryParams?.node_id
+    ? parseInt(queryParams.node_id, 10)
     : undefined;
 
   const { currentTeamId } = useTeamIdParam({
@@ -202,7 +202,7 @@ const QueryDetailsPage = ({
     }
   );
 
-  // Used to set host's team in AppContext for RBAC action buttons
+  // Used to set node's team in AppContext for RBAC action buttons
   useEffect(() => {
     if (storedQuery?.team_id) {
       const querysTeam = availableTeams?.find(
@@ -307,7 +307,7 @@ const QueryDetailsPage = ({
                         onClick={() => {
                           queryId &&
                             router.push(
-                              PATHS.LIVE_QUERY(queryId, currentTeamId, hostId)
+                              PATHS.LIVE_QUERY(queryId, currentTeamId, nodeId)
                             );
                         }}
                         disabled={isLiveQueryDisabled}

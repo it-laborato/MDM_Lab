@@ -59,7 +59,7 @@ interface IPackTableData {
   name?: string;
   query_count?: number;
   status?: string;
-  total_hosts_count?: number;
+  total_nodes_count?: number;
   updated_at?: string;
 }
 
@@ -118,14 +118,14 @@ const generateTableHeaders = (): IDataColumn[] => {
       ),
     },
     {
-      title: "Hosts",
+      title: "Nodes",
       Header: (cellProps) => (
         <HeaderCell
           value={cellProps.column.title}
           isSortedDesc={cellProps.column.isSortedDesc}
         />
       ),
-      accessor: "total_hosts_count",
+      accessor: "total_nodes_count",
       Cell: (cellProps: ICellProps): JSX.Element => (
         <TextCell value={cellProps.cell.value} />
       ),
@@ -162,7 +162,7 @@ const enhancePackData = (packs: IPack[] | undefined): IPackTableData[] => {
         name: pack.name,
         query_count: pack.query_count,
         status: pack.disabled ? "disabled" : "enabled",
-        total_hosts_count: pack.total_hosts_count,
+        total_nodes_count: pack.total_nodes_count,
         updated_at: pack.updated_at,
       };
     });

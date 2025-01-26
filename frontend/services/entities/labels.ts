@@ -5,7 +5,7 @@ import helpers from "utilities/helpers";
 import { ILabel, ILabelSummary } from "interfaces/label";
 import { IDynamicLabelFormData } from "pages/labels/components/DynamicLabelForm/DynamicLabelForm";
 import { IManualLabelFormData } from "pages/labels/components/ManualLabelForm/ManualLabelForm";
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 
 export interface ILabelsResponse {
   labels: ILabel[];
@@ -24,11 +24,11 @@ export type IGetLabelResonse = ICreateLabelResponse;
 const isManualLabelFormData = (
   formData: IDynamicLabelFormData | IManualLabelFormData
 ): formData is IManualLabelFormData => {
-  return "targetedHosts" in formData;
+  return "targetedNodes" in formData;
 };
 
-const getUniqueHostIdentifier = (host: IHost) => {
-  return host.hardware_serial || host.uuid || host.hostname;
+const getUniqueNodeIdentifier = (node: INode) => {
+  return node.hardware_serial || node.uuid || node.nodename;
 };
 
 const generateCreateLabelBody = (
@@ -39,8 +39,8 @@ const generateCreateLabelBody = (
     return {
       name: formData.name,
       description: formData.description,
-      hosts: formData.targetedHosts.map((host) =>
-        getUniqueHostIdentifier(host)
+      nodes: formData.targetedNodes.map((node) =>
+        getUniqueNodeIdentifier(node)
       ),
     };
   }

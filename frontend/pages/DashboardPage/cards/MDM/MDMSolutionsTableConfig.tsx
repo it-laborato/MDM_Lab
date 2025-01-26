@@ -50,10 +50,10 @@ export const generateSolutionsTableHeaders = (): IDataColumn[] => [
     ),
   },
   {
-    title: "Hosts",
-    Header: "Hosts",
+    title: "Nodes",
+    Header: "Nodes",
     disableSortBy: true,
-    accessor: "hosts_count",
+    accessor: "nodes_count",
     Cell: (cellProps: ICellProps) => <TextCell value={cellProps.cell.value} />,
   },
 ];

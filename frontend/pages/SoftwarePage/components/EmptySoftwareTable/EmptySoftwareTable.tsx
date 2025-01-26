@@ -75,7 +75,7 @@ const EmptySoftwareTable = ({
         if (installableSoftwareExists) {
           return {
             header: `No ${tableName} detected`,
-            info: "Install software on your hosts to see versions.",
+            info: "Install software on your nodes to see versions.",
           };
         }
         return {

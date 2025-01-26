@@ -8,10 +8,10 @@ export default PropTypes.shape({
   query: PropTypes.string,
   label_type: PropTypes.oneOf(["regular", "builtin"]),
   label_membership_type: PropTypes.oneOf(["dynamic", "manual"]),
-  hosts_count: PropTypes.number,
+  nodes_count: PropTypes.number,
   display_text: PropTypes.string,
-  count: PropTypes.number, // seems to be a repeat of hosts_count issue #1618
-  host_ids: PropTypes.arrayOf(PropTypes.number),
+  count: PropTypes.number, // seems to be a repeat of nodes_count issue #1618
+  node_ids: PropTypes.arrayOf(PropTypes.number),
 });
 
 export type LabelType = "regular" | "builtin";
@@ -35,10 +35,10 @@ export interface ILabel extends ILabelSummary {
   uuid?: string;
   query: string;
   label_membership_type: LabelMembershipType;
-  host_count?: number; // returned for built-in labels but not custom labels
+  node_count?: number; // returned for built-in labels but not custom labels
   display_text: string;
-  count: number; // seems to be a repeat of hosts_count issue #1618
-  host_ids: number[] | null;
+  count: number; // seems to be a repeat of nodes_count issue #1618
+  node_ids: number[] | null;
   type?: "custom" | "platform" | "status" | "all";
   slug?: string; // e.g., "labels/13" | "online"
   target_type?: string; // e.g., "labels"
@@ -55,6 +55,6 @@ export interface ILabelSpecResponse {
     platform?: string; // improve to only allow possible platforms from API
     label_type?: LabelType;
     label_membership_type: LabelMembershipType;
-    hosts?: string[];
+    nodes?: string[];
   };
 }

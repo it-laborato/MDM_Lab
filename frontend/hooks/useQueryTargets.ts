@@ -1,14 +1,14 @@
 import { useQuery, UseQueryResult } from "react-query";
 import { filter, uniqueId } from "lodash";
 
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 import { ILabel } from "interfaces/label";
 import { ITeam } from "interfaces/team";
 import { ISelectedTargetsForApi } from "interfaces/target";
 import targetsAPI from "services/entities/targets";
 
 export interface ITargetsLabels {
-  allHostsLabels?: ILabel[];
+  allNodesLabels?: ILabel[];
   platformLabels?: ILabel[];
   otherLabels?: ILabel[];
   teams?: ITeam[];
@@ -18,7 +18,7 @@ export interface ITargetsLabels {
 export interface ITargetsQueryResponse extends ITargetsLabels {
   targetsTotalCount: number;
   targetsOnlinePercent: number;
-  relatedHosts?: IHost[];
+  relatedNodes?: INode[];
 }
 
 export interface ITargetsQueryKey {
@@ -51,7 +51,7 @@ const getTargets = async (
 
       const all = filter(
         labels,
-        ({ display_text: text }) => text === "All Hosts"
+        ({ display_text: text }) => text === "All Nodes"
       ).map((label) => ({ ...label, uuid: uniqueId() }));
 
       const platforms = filter(
@@ -74,7 +74,7 @@ const getTargets = async (
         all.length + platforms.length + other.length + teams.length;
 
       responseLabels = {
-        allHostsLabels: all,
+        allNodesLabels: all,
         platformLabels: platforms,
         otherLabels: other,
         teams,
@@ -89,7 +89,7 @@ const getTargets = async (
 
     return Promise.resolve({
       ...responseLabels,
-      relatedHosts: query ? [...targets.hosts] : [],
+      relatedNodes: query ? [...targets.nodes] : [],
       targetsTotalCount,
       targetsOnlinePercent,
     });

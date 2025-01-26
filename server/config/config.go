@@ -27,7 +27,7 @@ import (
 )
 
 const (
-	envPrefix = "FLEET"
+	envPrefix = "MDM_LAB"
 )
 
 // MysqlConfig defines configs related to MySQL

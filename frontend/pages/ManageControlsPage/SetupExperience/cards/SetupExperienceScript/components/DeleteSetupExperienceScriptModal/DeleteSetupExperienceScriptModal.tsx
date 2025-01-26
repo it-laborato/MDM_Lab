@@ -53,7 +53,7 @@ const DeleteSetupExperienceScriptModal = ({
           <b>{scriptName}</b>.
         </p>
         <p>
-          If the script is currently running on a host it will still complete,
+          If the script is currently running on a node it will still complete,
           but results won&apos;t appear in Mdmlab.
         </p>
         <p>You cannot undo this action.</p>

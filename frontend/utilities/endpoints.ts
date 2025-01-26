@@ -9,8 +9,8 @@ export default {
   HOST_UPCOMING_ACTIVITIES: (id: number): string => {
     return `/${API_VERSION}/mdmlab/hosts/${id}/activities/upcoming`;
   },
-  HOST_CANCEL_ACTIVITY: (hostId: number, uuid: string): string => {
-    return `/${API_VERSION}/mdmlab/hosts/${hostId}/activities/upcoming/${uuid}`;
+  HOST_CANCEL_ACTIVITY: (nodeId: number, uuid: string): string => {
+    return `/${API_VERSION}/mdmlab/hosts/${nodeId}/activities/upcoming/${uuid}`;
   },
 
   CHANGE_PASSWORD: `/${API_VERSION}/mdmlab/change_password`,
@@ -41,10 +41,10 @@ export default {
     return `/${API_VERSION}/mdmlab/device/${token}/mdm/linux/trigger_escrow`;
   },
 
-  // Host endpoints
+  // Node endpoints
   HOST_SUMMARY: `/${API_VERSION}/mdmlab/host_summary`,
-  HOST_QUERY_REPORT: (hostId: number, queryId: number) =>
-    `/${API_VERSION}/mdmlab/hosts/${hostId}/queries/${queryId}`,
+  HOST_QUERY_REPORT: (nodeId: number, queryId: number) =>
+    `/${API_VERSION}/mdmlab/hosts/${nodeId}/queries/${queryId}`,
   HOSTS: `/${API_VERSION}/mdmlab/hosts`,
   HOSTS_COUNT: `/${API_VERSION}/mdmlab/hosts/count`,
   HOSTS_DELETE: `/${API_VERSION}/mdmlab/hosts/delete`,
@@ -54,13 +54,13 @@ export default {
   HOST_LOCK: (id: number) => `/${API_VERSION}/mdmlab/hosts/${id}/lock`,
   HOST_UNLOCK: (id: number) => `/${API_VERSION}/mdmlab/hosts/${id}/unlock`,
   HOST_WIPE: (id: number) => `/${API_VERSION}/mdmlab/hosts/${id}/wipe`,
-  HOST_RESEND_PROFILE: (hostId: number, profileUUID: string) =>
-    `/${API_VERSION}/mdmlab/hosts/${hostId}/configuration_profiles/${profileUUID}/resend`,
+  HOST_RESEND_PROFILE: (nodeId: number, profileUUID: string) =>
+    `/${API_VERSION}/mdmlab/hosts/${nodeId}/configuration_profiles/${profileUUID}/resend`,
   HOST_SOFTWARE: (id: number) => `/${API_VERSION}/mdmlab/hosts/${id}/software`,
-  HOST_SOFTWARE_PACKAGE_INSTALL: (hostId: number, softwareId: number) =>
-    `/${API_VERSION}/mdmlab/hosts/${hostId}/software/${softwareId}/install`,
-  HOST_SOFTWARE_PACKAGE_UNINSTALL: (hostId: number, softwareId: number) =>
-    `/${API_VERSION}/mdmlab/hosts/${hostId}/software/${softwareId}/uninstall`,
+  HOST_SOFTWARE_PACKAGE_INSTALL: (nodeId: number, softwareId: number) =>
+    `/${API_VERSION}/mdmlab/hosts/${nodeId}/software/${softwareId}/install`,
+  HOST_SOFTWARE_PACKAGE_UNINSTALL: (nodeId: number, softwareId: number) =>
+    `/${API_VERSION}/mdmlab/hosts/${nodeId}/software/${softwareId}/uninstall`,
 
   INVITES: `/${API_VERSION}/mdmlab/invites`,
 

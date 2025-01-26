@@ -170,12 +170,12 @@ const AppleOSTargetForm = ({
   const getMinimumVersionTooltip = () => {
     return (
       <>
-        If an already enrolled host is below the minimum version,
-        <br /> the host is updated to exactly the minimum version if it&apos;s
+        If an already enrolled node is below the minimum version,
+        <br /> the node is updated to exactly the minimum version if it&apos;s
         <br /> available from Apple.
         <br />
-        <br /> If a new or wiped host is below the minimum version and
-        <br /> automatically enrolls (ADE), the host is updated to Apple&apos;s
+        <br /> If a new or wiped node is below the minimum version and
+        <br /> automatically enrolls (ADE), the node is updated to Apple&apos;s
         <br /> lastest version during Setup Assistant.
       </>
     );

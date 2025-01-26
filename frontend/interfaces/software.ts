@@ -38,7 +38,7 @@ export interface ISoftware {
   source: string; // "apps" | "ipados_apps" | "ios_apps" | "programs" | "rpm_packages" | "deb_packages" | ?
   generated_cpe: string;
   vulnerabilities: ISoftwareVulnerability[] | null;
-  hosts_count?: number;
+  nodes_count?: number;
   last_opened_at?: string | null; // e.g., "2021-08-18T15:11:35Z”
   installed_paths?: string[];
   browser?: string;
@@ -53,7 +53,7 @@ export interface ISoftwareTitleVersion {
   id: number;
   version: string;
   vulnerabilities: string[] | null; // TODO: does this return null or is it omitted?
-  hosts_count?: number;
+  nodes_count?: number;
 }
 
 export interface ISoftwareInstallPolicy {
@@ -123,7 +123,7 @@ export interface ISoftwareTitle {
   name: string;
   versions_count: number;
   source: SoftwareSource;
-  hosts_count: number;
+  nodes_count: number;
   versions: ISoftwareTitleVersion[] | null;
   software_package: ISoftwarePackage | null;
   app_store_app: IAppStoreApp | null;
@@ -136,7 +136,7 @@ export interface ISoftwareTitleDetails {
   software_package: ISoftwarePackage | null;
   app_store_app: IAppStoreApp | null;
   source: SoftwareSource;
-  hosts_count: number;
+  nodes_count: number;
   versions: ISoftwareTitleVersion[] | null;
   counts_updated_at?: string;
   bundle_identifier?: string;
@@ -168,7 +168,7 @@ export interface ISoftwareVersion {
   arch: string; // e.g., "x86_64" // TODO: on software/verions/:id?
   generated_cpe: string;
   vulnerabilities: ISoftwareVulnerability[] | null;
-  hosts_count?: number;
+  nodes_count?: number;
 }
 
 export const SOURCE_TYPE_CONVERSION = {
@@ -305,12 +305,12 @@ export const isPendingStatus = (s: string | undefined | null) =>
  * returned by the Mdmlab API.
  */
 export interface ISoftwareInstallResult {
-  host_display_name?: string;
+  node_display_name?: string;
   install_uuid: string;
   software_title: string;
   software_title_id: number;
   software_package: string;
-  host_id: number;
+  node_id: number;
   status: SoftwareInstallStatus;
   detail: string;
   output: string;
@@ -346,7 +346,7 @@ export interface ISoftwareInstallVersion {
   installed_paths: string[];
 }
 
-export interface IHostSoftwarePackage {
+export interface INodeSoftwarePackage {
   name: string;
   self_service: boolean;
   icon_url: string;
@@ -354,7 +354,7 @@ export interface IHostSoftwarePackage {
   last_install: ISoftwareLastInstall | null;
 }
 
-export interface IHostAppStoreApp {
+export interface INodeAppStoreApp {
   app_store_id: string;
   self_service: boolean;
   icon_url: string;
@@ -362,18 +362,18 @@ export interface IHostAppStoreApp {
   last_install: IAppLastInstall | null;
 }
 
-export interface IHostSoftware {
+export interface INodeSoftware {
   id: number;
   name: string;
-  software_package: IHostSoftwarePackage | null;
-  app_store_app: IHostAppStoreApp | null;
+  software_package: INodeSoftwarePackage | null;
+  app_store_app: INodeAppStoreApp | null;
   source: SoftwareSource;
   bundle_identifier?: string;
   status: Exclude<SoftwareInstallStatus, "uninstalled"> | null;
   installed_versions: ISoftwareInstallVersion[] | null;
 }
 
-export type IDeviceSoftware = IHostSoftware;
+export type IDeviceSoftware = INodeSoftware;
 
 const INSTALL_STATUS_PREDICATES: Record<
   SoftwareInstallStatus | "pending",
@@ -420,26 +420,26 @@ export const INSTALL_STATUS_ICONS: Record<
   failed_uninstall: "error-outline",
 } as const;
 
-type IHostSoftwarePackageWithLastInstall = IHostSoftwarePackage & {
+type INodeSoftwarePackageWithLastInstall = INodeSoftwarePackage & {
   last_install: ISoftwareLastInstall;
 };
 
-export const hasHostSoftwarePackageLastInstall = (
-  software: IHostSoftware
-): software is IHostSoftware & {
-  software_package: IHostSoftwarePackageWithLastInstall;
+export const hasNodeSoftwarePackageLastInstall = (
+  software: INodeSoftware
+): software is INodeSoftware & {
+  software_package: INodeSoftwarePackageWithLastInstall;
 } => {
   return !!software.software_package?.last_install;
 };
 
-type IHostAppWithLastInstall = IHostAppStoreApp & {
+type INodeAppWithLastInstall = INodeAppStoreApp & {
   last_install: IAppLastInstall;
 };
 
-export const hasHostSoftwareAppLastInstall = (
-  software: IHostSoftware
-): software is IHostSoftware & {
-  app_store_app: IHostAppWithLastInstall;
+export const hasNodeSoftwareAppLastInstall = (
+  software: INodeSoftware
+): software is INodeSoftware & {
+  app_store_app: INodeAppWithLastInstall;
 } => {
   return !!software.app_store_app?.last_install;
 };

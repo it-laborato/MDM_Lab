@@ -105,7 +105,7 @@ const STATUS_DISPLAY_OPTIONS: Record<
     iconName: "success",
     tooltip: (
       <>
-        Software is installed on these hosts (install script finished
+        Software is installed on these nodes (install script finished
         <br />
         with exit code 0). Currently, if the software is uninstalled, the
         <br />
@@ -120,7 +120,7 @@ const STATUS_DISPLAY_OPTIONS: Record<
       <>
         Mdmlab is installing/uninstalling or will
         <br />
-        do so when the host comes online.
+        do so when the node comes online.
       </>
     ),
   },
@@ -129,9 +129,9 @@ const STATUS_DISPLAY_OPTIONS: Record<
     iconName: "error",
     tooltip: (
       <>
-        These hosts failed to install/uninstall software.
+        These nodes failed to install/uninstall software.
         <br />
-        Click on a host to view error(s).
+        Click on a node to view error(s).
       </>
     ),
   },
@@ -175,7 +175,7 @@ const InstallerStatusCount = ({
       }
       value={
         <a className={`${baseClass}__status-count`} href={linkUrl}>
-          {count} hosts
+          {count} nodes
         </a>
       }
     />

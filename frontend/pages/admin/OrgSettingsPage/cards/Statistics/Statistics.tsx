@@ -36,7 +36,7 @@ const Statistics = ({
     const formDataToSubmit = {
       server_settings: {
         enable_analytics: enableUsageStatistics,
-        deferred_save_host: appConfig.server_settings.deferred_save_host,
+        deferred_save_node: appConfig.server_settings.deferred_save_node,
         query_reports_disabled:
           appConfig.server_settings.query_reports_disabled,
         scripts_disabled: appConfig.server_settings.scripts_disabled,

@@ -35,7 +35,7 @@ const AdvancedOptionsModal = ({
             maxLines={10}
             name="install-script"
             value={installScript}
-            helpText="Mdmlab will run this command on hosts to install software."
+            helpText="Mdmlab will run this command on nodes to install software."
             label="Install script"
             labelTooltip="For security agents, add the script provided by the vendor."
             isFormField

@@ -45,7 +45,7 @@ interface IEditQueryPageProps {
   params: Params;
   location: {
     pathname: string;
-    query: { host_id: string; team_id?: string };
+    query: { node_id: string; team_id?: string };
     search: string;
   };
 }
@@ -180,7 +180,7 @@ const EditQueryPage = ({
     );
   }
 
-  // Used to set host's team in AppContext for RBAC actions
+  // Used to set node's team in AppContext for RBAC actions
   useEffect(() => {
     if (storedQuery?.team_id) {
       const querysTeam = availableTeams?.find(
@@ -214,7 +214,7 @@ const EditQueryPage = ({
       // Reroute to query report page still maintains query params for live query purposes
       const baseUrl = PATHS.QUERY_DETAILS(queryId);
       const queryParams = buildQueryStringFromParams({
-        host_id: location.query.host_id,
+        node_id: location.query.node_id,
         team_id: location.query.team_id,
       });
 
@@ -412,7 +412,7 @@ const EditQueryPage = ({
             backendValidators={backendValidators}
             isQuerySaving={isQuerySaving}
             isQueryUpdating={isQueryUpdating}
-            hostId={parseInt(location.query.host_id as string, 10)}
+            nodeId={parseInt(location.query.node_id as string, 10)}
             queryReportsDisabled={
               appConfig?.server_settings.query_reports_disabled
             }

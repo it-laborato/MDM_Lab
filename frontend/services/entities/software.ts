@@ -340,8 +340,8 @@ export default {
     formData.append("post_install_script", data.postInstallScript || "");
     formData.append("uninstall_script", data.uninstallScript || "");
 
-    // clear out labels if targetType is "All hosts"
-    if (data.targetType === "All hosts") {
+    // clear out labels if targetType is "All nodes"
+    if (data.targetType === "All nodes") {
       if (orignalPackage.labels_include_any) {
         formData.append("labels_include_any", "");
       } else {

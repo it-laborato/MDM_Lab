@@ -5,7 +5,7 @@ import classnames from "classnames";
 import MdmlabIcon from "components/icons/MdmlabIcon";
 
 import { ISelectTargetsEntity } from "interfaces/target";
-import { isTargetLabel, isTargetHost } from "../helpers";
+import { isTargetLabel, isTargetNode } from "../helpers";
 
 const baseClass = "target-option";
 
@@ -16,9 +16,9 @@ interface ITargetIconProps {
 const TargetIcon = ({ target }: ITargetIconProps): JSX.Element => {
   const iconName = (): string => {
     if (isTargetLabel(target)) {
-      return target.name === "All Hosts" ? "all-hosts" : "label";
+      return target.name === "All Nodes" ? "all-nodes" : "label";
     }
-    if (isTargetHost(target)) {
+    if (isTargetNode(target)) {
       return target.platform === "darwin" ? "apple" : target.platform;
     }
     return "";
@@ -26,8 +26,8 @@ const TargetIcon = ({ target }: ITargetIconProps): JSX.Element => {
 
   const targetClasses = classnames(`${baseClass}__icon`, {
     [`${baseClass}__icon--${
-      isTargetHost(target) && target.status
-    }`]: isTargetHost(target),
+      isTargetNode(target) && target.status
+    }`]: isTargetNode(target),
   });
 
   return <MdmlabIcon name={iconName()} className={targetClasses} />;

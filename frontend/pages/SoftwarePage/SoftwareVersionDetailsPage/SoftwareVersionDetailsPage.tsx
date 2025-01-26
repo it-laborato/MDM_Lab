@@ -14,10 +14,10 @@ import softwareAPI, {
   ISoftwareVersionResponse,
   IGetSoftwareVersionQueryKey,
 } from "services/entities/software";
-import hostsCountAPI, {
-  IHostsCountQueryKey,
-  IHostsCountResponse,
-} from "services/entities/host_count";
+import nodesCountAPI, {
+  INodesCountQueryKey,
+  INodesCountResponse,
+} from "services/entities/node_count";
 import {
   ISoftwareVersion,
   formatSoftwareType,
@@ -34,7 +34,7 @@ import Card from "components/Card";
 
 import SoftwareDetailsSummary from "../components/SoftwareDetailsSummary";
 import SoftwareVulnerabilitiesTable from "../components/SoftwareVulnerabilitiesTable";
-import DetailsNoHosts from "../components/DetailsNoHosts";
+import DetailsNoNodes from "../components/DetailsNoNodes";
 import { VulnsNotSupported } from "../components/SoftwareVulnerabilitiesTable/SoftwareVulnerabilitiesTable";
 
 const baseClass = "software-version-details-page";
@@ -95,14 +95,14 @@ const SoftwareVersionDetailsPage = ({
     }
   );
 
-  const { data: hostsCount } = useQuery<
-    IHostsCountResponse,
+  const { data: nodesCount } = useQuery<
+    INodesCountResponse,
     Error,
     number,
-    IHostsCountQueryKey[]
+    INodesCountQueryKey[]
   >(
-    [{ scope: "hosts_count", softwareVersionId: versionId }],
-    ({ queryKey }) => hostsCountAPI.load(queryKey[0]),
+    [{ scope: "nodes_count", softwareVersionId: versionId }],
+    ({ queryKey }) => nodesCountAPI.load(queryKey[0]),
     {
       keepPreviousData: true,
       staleTime: 10000, // stale time can be adjusted if fresher data is desired
@@ -153,16 +153,16 @@ const SoftwareVersionDetailsPage = ({
           />
         )}
         {isSoftwareVersionError ? (
-          <DetailsNoHosts
+          <DetailsNoNodes
             header="Software not detected"
-            details="No hosts have this software installed."
+            details="No nodes have this software installed."
           />
         ) : (
           <>
             <SoftwareDetailsSummary
               title={`${softwareVersion.name}, ${softwareVersion.version}`}
               type={formatSoftwareType(softwareVersion)}
-              hosts={hostsCount ?? 0}
+              nodes={nodesCount ?? 0}
               queryParams={{
                 software_version_id: softwareVersion.id,
                 team_id: teamIdForApi,

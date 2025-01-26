@@ -179,10 +179,10 @@ const RunQuery = ({
       connectAndRunLiveQuery(returnedCampaign);
     } catch (campaignError: any) {
       const err = campaignError.toString();
-      if (err.includes("no hosts targeted")) {
+      if (err.includes("no nodes targeted")) {
         renderFlash(
           "error",
-          "Your target selections did not include any hosts. Please try again."
+          "Your target selections did not include any nodes. Please try again."
         );
       } else if (err.includes("resource already created")) {
         renderFlash(

@@ -11,7 +11,7 @@ interface IPerformanceImpactCellValue {
 }
 interface IPerformanceImpactCellProps {
   value: IPerformanceImpactCellValue;
-  isHostSpecific?: boolean;
+  isNodeSpecific?: boolean;
   customIdPrefix?: string;
 }
 
@@ -23,7 +23,7 @@ const baseClass = "performance-impact-cell";
 
 const PerformanceImpactCell = ({
   value,
-  isHostSpecific = false,
+  isNodeSpecific = false,
   customIdPrefix,
 }: IPerformanceImpactCellProps): JSX.Element => {
   const { indicator, id } = value;
@@ -74,8 +74,8 @@ const PerformanceImpactCell = ({
         return (
           <>
             Performance impact will be available when{" "}
-            {isHostSpecific ? "the" : "this"} <br />
-            query runs{isHostSpecific && " on this host"}.
+            {isNodeSpecific ? "the" : "this"} <br />
+            query runs{isNodeSpecific && " on this node"}.
           </>
         );
       default:

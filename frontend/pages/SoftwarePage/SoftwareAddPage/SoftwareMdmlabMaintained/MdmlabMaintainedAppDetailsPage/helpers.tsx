@@ -38,7 +38,7 @@ export const getMdmlabAppPolicyName = (appName: string) => {
 };
 
 export const getMdmlabAppPolicyDescription = (appName: string) => {
-  return `Policy triggers automatic install of ${appName} on each host that's missing this software.`;
+  return `Policy triggers automatic install of ${appName} on each node that's missing this software.`;
 };
 
 export const getMdmlabAppPolicyQuery = (name: string) => {

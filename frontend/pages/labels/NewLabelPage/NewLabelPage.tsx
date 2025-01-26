@@ -76,8 +76,8 @@ const NewLabelPage = ({ router, location, children }: INewLabelPageProps) => {
       <MainContent className={baseClass}>
         <h1>Add label</h1>
         <p className={`${baseClass}__page-description`}>
-          Dynamic (smart) labels are assigned to hosts if the query returns
-          results. Manual labels are assigned to selected hosts.
+          Dynamic (smart) labels are assigned to nodes if the query returns
+          results. Manual labels are assigned to selected nodes.
         </p>
         <TabsWrapper className={`${baseClass}__new-label-tabs-wrapper`}>
           <Tabs

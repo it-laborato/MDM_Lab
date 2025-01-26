@@ -49,10 +49,10 @@ const TargetChooser = ({ selectedTarget, onSelect }: ITargetChooserProps) => {
       <div className="form-field__label">Target</div>
       <Radio
         className={`${baseClass}__radio-input`}
-        label="All hosts"
-        id="all-hosts-target-radio-btn"
-        checked={selectedTarget === "All hosts"}
-        value="All hosts"
+        label="All nodes"
+        id="all-nodes-target-radio-btn"
+        checked={selectedTarget === "All nodes"}
+        value="All nodes"
         name="target-type"
         onChange={onSelect}
       />
@@ -112,7 +112,7 @@ const LabelChooser = ({
         <div className={`${baseClass}__no-labels`}>
           <span>
             <Link to={PATHS.LABEL_NEW_DYNAMIC}>Add labels</Link> to target
-            specific hosts.
+            specific nodes.
           </span>
         </div>
       );

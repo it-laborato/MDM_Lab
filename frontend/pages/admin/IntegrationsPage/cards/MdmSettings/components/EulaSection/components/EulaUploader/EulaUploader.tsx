@@ -54,7 +54,7 @@ const EulaUploader = ({ onUpload }: IEulaUploaderProps) => {
     <div className={baseClass}>
       <p>
         Require end users to agree to a EULA when they first setup their new
-        macOS hosts.{" "}
+        macOS nodes.{" "}
         <CustomLink
           url="https://mdmlabdm.com/learn-more-about/end-user-license-agreement"
           text="Learn more"

@@ -34,7 +34,7 @@ const IconCell = ({ iconName }: IIconCellProps) => {
       >
         <span className={`tooltip__tooltip-text`}>
           {/* TODO: enhance to be dynmaic */}
-          Software can be installed on Host details page.
+          Software can be installed on Node details page.
         </span>
       </ReactTooltip>
     </div>

@@ -147,7 +147,7 @@ const EndUserMigrationSection = ({ router }: IEndUserMigrationSectionProps) => {
         <SectionHeader title="End user migration workflow" />
         <EmptyTable
           className={`${baseClass}__abm-connect-message`}
-          header="Migration workflow for macOS hosts"
+          header="Migration workflow for macOS nodes"
           info="Connect to Apple Business Manager to get started."
           primaryButton={
             <Button variant="brand" onClick={onClickConnect}>
@@ -162,7 +162,7 @@ const EndUserMigrationSection = ({ router }: IEndUserMigrationSectionProps) => {
   return (
     <SettingsSection className={baseClass} title="End user migration workflow">
       <form>
-        <p>Control the end user migration workflow for macOS hosts.</p>
+        <p>Control the end user migration workflow for macOS nodes.</p>
         <img
           src={MdmMigrationPreview}
           alt="end user migration preview"

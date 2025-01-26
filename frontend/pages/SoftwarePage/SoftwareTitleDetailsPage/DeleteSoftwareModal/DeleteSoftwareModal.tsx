@@ -62,7 +62,7 @@ const DeleteSoftwareModal = ({
     >
       <>
         <p>
-          Software won&apos;t be uninstalled from existing hosts, but any
+          Software won&apos;t be uninstalled from existing nodes, but any
           pending installs and uninstalls{" "}
           {softwareInstallerName ? (
             <>
@@ -74,7 +74,7 @@ const DeleteSoftwareModal = ({
           will be canceled.
         </p>
         <p>
-          Installs or uninstalls currently running on a host will still
+          Installs or uninstalls currently running on a node will still
           complete, but results won&apos;t appear in Mdmlab.
         </p>
         <p>You cannot undo this action.</p>

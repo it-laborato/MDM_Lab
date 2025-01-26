@@ -25,7 +25,7 @@ const TurnOnWindowsMdmCard = ({
         </Button>
       }
     >
-      Turn MDM on for Windows hosts with mdmlabd.
+      Turn MDM on for Windows nodes with mdmlabd.
     </SectionCard>
   );
 };

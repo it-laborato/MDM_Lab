@@ -40,7 +40,7 @@ const DeleteAutoEnrollProfile = ({
       <>
         <p>Delete the automatic enrollment profile to upload a new one.</p>
         <p>
-          Without an automatic enrollment profile, new macOS hosts will
+          Without an automatic enrollment profile, new macOS nodes will
           automatically enroll with the default setup settings.
         </p>
         <div className="modal-cta-wrap">

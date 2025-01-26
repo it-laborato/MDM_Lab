@@ -15,7 +15,7 @@ const EmptyIntegrationsTable = ({
     <EmptyTable
       graphicName="empty-integrations"
       header="Set up integrations"
-      info="Create tickets automatically when Mdmlab detects new software vulnerabilities or hosts failing policies."
+      info="Create tickets automatically when Mdmlab detects new software vulnerabilities or nodes failing policies."
       additionalInfo={
         <>
           Want to learn more?&nbsp;

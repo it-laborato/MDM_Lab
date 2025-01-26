@@ -1,14 +1,14 @@
 import {
   ISelectTargetsEntity,
-  ISelectHost,
+  ISelectNode,
   ISelectLabel,
   ISelectTeam,
 } from "interfaces/target";
 
-export const isTargetHost = (
+export const isTargetNode = (
   target: ISelectTargetsEntity
-): target is ISelectHost => {
-  return target.target_type === "hosts";
+): target is ISelectNode => {
+  return target.target_type === "nodes";
 };
 
 export const isTargetLabel = (

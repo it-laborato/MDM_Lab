@@ -34,7 +34,7 @@ import Card from "components/Card";
 
 import SoftwareDetailsSummary from "../components/SoftwareDetailsSummary";
 import SoftwareVulnerabilitiesTable from "../components/SoftwareVulnerabilitiesTable";
-import DetailsNoHosts from "../components/DetailsNoHosts";
+import DetailsNoNodes from "../components/DetailsNoNodes";
 import { VulnsNotSupported } from "../components/SoftwareVulnerabilitiesTable/SoftwareVulnerabilitiesTable";
 
 const baseClass = "software-os-details-page";
@@ -158,15 +158,15 @@ const SoftwareOSDetailsPage = ({
           />
         )}
         {isOsVersionError || !osVersionDetails ? (
-          <DetailsNoHosts
+          <DetailsNoNodes
             header="OS not detected"
-            details="No hosts have this OS installed."
+            details="No nodes have this OS installed."
           />
         ) : (
           <>
             <SoftwareDetailsSummary
               title={osVersionDetails.name}
-              hosts={osVersionDetails.hosts_count}
+              nodes={osVersionDetails.nodes_count}
               countsUpdatedAt={counts_updated_at}
               queryParams={{
                 os_name: osVersionDetails.name_only,

@@ -1,5 +1,5 @@
 import { ICampaign, ICampaignState } from "interfaces/campaign";
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 import { useContext } from "react";
 import { NotificationContext } from "context/notification";
 
@@ -8,7 +8,7 @@ interface IResult {
   data: {
     distributed_query_execution_id: number;
     error: string | null;
-    host: IHost;
+    node: INode;
     rows: Record<string, unknown>[];
   };
 }
@@ -54,57 +54,57 @@ const updateCampaignStateFromResults = (
 ) => {
   const {
     errors = [],
-    hosts = [],
-    hosts_count: hostsCount = { total: 0, failed: 0, successful: 0 },
+    nodes = [],
+    nodes_count: nodesCount = { total: 0, failed: 0, successful: 0 },
     query_results: queryResults = [],
   } = campaign;
-  const { error, host, rows = [] } = data;
+  const { error, node, rows = [] } = data;
 
   let newErrors;
-  let newHosts;
-  let newHostsCount;
+  let newNodes;
+  let newNodesCount;
 
   if (error || error === "") {
-    const newFailed = hostsCount.failed + 1;
-    const newTotal = hostsCount.successful + newFailed;
+    const newFailed = nodesCount.failed + 1;
+    const newTotal = nodesCount.successful + newFailed;
 
     newErrors = errors.concat([
       {
-        host_display_name: host?.display_name,
-        osquery_version: host?.osquery_version,
+        node_display_name: node?.display_name,
+        osquery_version: node?.osquery_version,
         error:
           error ||
-          // Hosts with osquery version below 4.4.0 receive an empty error message
+          // Nodes with osquery version below 4.4.0 receive an empty error message
           // when the live query fails so we create our own message.
           "Error details require osquery 4.4.0+ (Launcher does not provide error details)",
       },
     ]);
-    newHostsCount = {
-      successful: hostsCount.successful,
+    newNodesCount = {
+      successful: nodesCount.successful,
       failed: newFailed,
       total: newTotal,
     };
-    newHosts = hosts;
+    newNodes = nodes;
   } else {
-    const newSuccessful = hostsCount.successful + 1;
-    const newTotal = hostsCount.failed + newSuccessful;
+    const newSuccessful = nodesCount.successful + 1;
+    const newTotal = nodesCount.failed + newSuccessful;
 
     newErrors = [...errors];
-    newHostsCount = {
+    newNodesCount = {
       successful: newSuccessful,
-      failed: hostsCount.failed,
+      failed: nodesCount.failed,
       total: newTotal,
     };
-    const newHost = { ...host, query_results: rows };
-    newHosts = hosts.concat(newHost);
+    const newNode = { ...node, query_results: rows };
+    newNodes = nodes.concat(newNode);
   }
 
   return {
     campaign: {
       ...campaign,
       errors: newErrors,
-      hosts: newHosts,
-      hosts_count: newHostsCount,
+      nodes: newNodes,
+      nodes_count: newNodesCount,
       query_results: [...queryResults, ...rows],
     },
   };

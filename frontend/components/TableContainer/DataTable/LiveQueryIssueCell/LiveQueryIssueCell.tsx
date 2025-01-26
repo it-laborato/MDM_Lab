@@ -25,9 +25,9 @@ const LiveQueryIssueCell = ({
     <>
       {displayName}{" "}
       <span
-        className={`host-issue tooltip tooltip__tooltip-icon`}
+        className={`node-issue tooltip tooltip__tooltip-icon`}
         data-tip
-        data-for={`host-issue__${rowId.toString()}`}
+        data-for={`node-issue__${rowId.toString()}`}
         data-tip-disable={false}
       >
         <Icon
@@ -40,18 +40,18 @@ const LiveQueryIssueCell = ({
         place="top"
         effect="solid"
         backgroundColor={COLORS["tooltip-bg"]}
-        id={`host-issue__${rowId.toString()}`}
+        id={`node-issue__${rowId.toString()}`}
         data-html
       >
         <span className={`tooltip__tooltip-text`}>
           {status === "offline" ? (
             <>
-              Offline hosts will not <br />
+              Offline nodes will not <br />
               respond to a live query.
             </>
           ) : (
             <>
-              This host might take up to
+              This node might take up to
               <br /> {distributedInterval} seconds to respond.
             </>
           )}

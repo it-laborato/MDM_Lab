@@ -25,19 +25,19 @@ import ConfirmSSOInvitePage from "pages/ConfirmSSOInvitePage";
 import MfaPage from "pages/MfaPage";
 import CoreLayout from "layouts/CoreLayout";
 import DashboardPage from "pages/DashboardPage";
-import DeviceUserPage from "pages/hosts/details/DeviceUserPage";
+import DeviceUserPage from "pages/nodes/details/DeviceUserPage";
 import EditPackPage from "pages/packs/EditPackPage";
 import EmailTokenRedirect from "components/EmailTokenRedirect";
 import ForgotPasswordPage from "pages/ForgotPasswordPage";
 import GatedLayout from "layouts/GatedLayout";
-import HostDetailsPage from "pages/hosts/details/HostDetailsPage";
+import NodeDetailsPage from "pages/nodes/details/NodeDetailsPage";
 import NewLabelPage from "pages/labels/NewLabelPage";
 import DynamicLabel from "pages/labels/NewLabelPage/DynamicLabel";
 import ManualLabel from "pages/labels/NewLabelPage/ManualLabel";
 import EditLabelPage from "pages/labels/EditLabelPage";
 import LoginPage, { LoginPreviewPage } from "pages/LoginPage";
 import LogoutPage from "pages/LogoutPage";
-import ManageHostsPage from "pages/hosts/ManageHostsPage";
+import ManageNodesPage from "pages/nodes/ManageNodesPage";
 import ManageQueriesPage from "pages/queries/ManageQueriesPage";
 import ManagePacksPage from "pages/packs/ManagePacksPage";
 import ManagePoliciesPage from "pages/policies/ManagePoliciesPage";
@@ -69,7 +69,7 @@ import Scripts from "pages/ManageControlsPage/Scripts/Scripts";
 import WindowsAutomaticEnrollmentPage from "pages/admin/IntegrationsPage/cards/MdmSettings/WindowsAutomaticEnrollmentPage";
 import AppleBusinessManagerPage from "pages/admin/IntegrationsPage/cards/MdmSettings/AppleBusinessManagerPage";
 import VppPage from "pages/admin/IntegrationsPage/cards/MdmSettings/VppPage";
-import HostQueryReport from "pages/hosts/details/HostQueryReport";
+import NodeQueryReport from "pages/nodes/details/NodeQueryReport";
 import SoftwarePage from "pages/SoftwarePage";
 import SoftwareTitles from "pages/SoftwarePage/SoftwareTitles";
 import SoftwareOS from "pages/SoftwarePage/SoftwareOS";
@@ -234,32 +234,32 @@ const routes = (
             </Route>
             <Route path=":label_id" component={EditLabelPage} />
           </Route>
-          <Route path="hosts">
+          <Route path="nodes">
             <IndexRedirect to="manage" />
-            <Route path="manage" component={ManageHostsPage} />
-            <Route path="manage/labels/:label_id" component={ManageHostsPage} />
-            <Route path="manage/:active_label" component={ManageHostsPage} />
+            <Route path="manage" component={ManageNodesPage} />
+            <Route path="manage/labels/:label_id" component={ManageNodesPage} />
+            <Route path="manage/:active_label" component={ManageNodesPage} />
             <Route
               path="manage/labels/:label_id/:active_label"
-              component={ManageHostsPage}
+              component={ManageNodesPage}
             />
             <Route
               path="manage/:active_label/labels/:label_id"
-              component={ManageHostsPage}
+              component={ManageNodesPage}
             />
-            <Route path=":host_id" component={HostDetailsPage}>
+            <Route path=":node_id" component={NodeDetailsPage}>
               <Redirect from="schedule" to="queries" />
-              <Route path="scripts" component={HostDetailsPage} />
-              <Route path="software" component={HostDetailsPage} />
-              <Route path="queries" component={HostDetailsPage} />
-              <Route path=":query_id" component={HostQueryReport} />
-              <Route path="policies" component={HostDetailsPage} />
+              <Route path="scripts" component={NodeDetailsPage} />
+              <Route path="software" component={NodeDetailsPage} />
+              <Route path="queries" component={NodeDetailsPage} />
+              <Route path=":query_id" component={NodeQueryReport} />
+              <Route path="policies" component={NodeDetailsPage} />
             </Route>
 
             <Route
-              // outside of '/hosts' nested routes to avoid react-tabs-specific routing issues
-              path=":host_id/queries/:query_id"
-              component={HostQueryReport}
+              // outside of '/nodes' nested routes to avoid react-tabs-specific routing issues
+              path=":node_id/queries/:query_id"
+              component={NodeQueryReport}
             />
           </Route>
           <Route component={ExcludeInSandboxRoutes}>

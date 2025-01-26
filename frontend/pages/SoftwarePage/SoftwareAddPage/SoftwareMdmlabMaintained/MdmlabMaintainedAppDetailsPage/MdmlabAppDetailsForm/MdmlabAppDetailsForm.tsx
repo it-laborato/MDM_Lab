@@ -91,7 +91,7 @@ export const InstallTypeSection = ({
           onChange={onChangeInstallType}
           helpText={
             <>
-              Manually install on the <b>Host details</b> page for each host.
+              Manually install on the <b>Node details</b> page for each node.
             </>
           }
         />
@@ -106,11 +106,11 @@ export const InstallTypeSection = ({
           onChange={onChangeInstallType}
           helpText={
             <>
-              Automatically install on each host that&apos;s{" "}
+              Automatically install on each node that&apos;s{" "}
               <TooltipWrapper
                 tipContent={
                   <>
-                    If the host already has any version of this
+                    If the node already has any version of this
                     <br /> software, it won&apos;t be installed.
                   </>
                 }
@@ -163,7 +163,7 @@ const MdmlabAppDetailsForm = ({
     postInstallScript: defaultPostInstallScript,
     uninstallScript: defaultUninstallScript,
     installType: "manual",
-    targetType: "All hosts",
+    targetType: "All nodes",
     customTarget: "labelsIncludeAny",
     labelTargets: {},
   });

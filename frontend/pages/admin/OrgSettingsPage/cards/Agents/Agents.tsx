@@ -82,7 +82,7 @@ const Agents = ({
         <form onSubmit={onFormSubmit} autoComplete="off">
           <p className={`${baseClass}__section-description`}>
             Agent options configure Mdmlab&apos;s agent (mdmlabd). When you update
-            agent options, they will be applied the next time a host checks in
+            agent options, they will be applied the next time a node checks in
             to Mdmlab.{" "}
             <CustomLink
               url="https://mdmlabdm.com/docs/configuration/agent-configuration"
@@ -93,13 +93,13 @@ const Agents = ({
           </p>
           {isPremiumTier ? (
             <InfoBanner>
-              These options are not applied to hosts on a team. To update agent
-              options for hosts on a team, head to the&nbsp;
+              These options are not applied to nodes on a team. To update agent
+              options for nodes on a team, head to the&nbsp;
               <a href={ADMIN_TEAMS}>Teams page</a>&nbsp;and select a team.
             </InfoBanner>
           ) : (
             <InfoBanner>
-              Want some hosts to have different options?&nbsp;
+              Want some nodes to have different options?&nbsp;
               <CustomLink
                 url="https://mdmlabdm.com/docs/using-mdmlab/teams"
                 text="Learn more about teams"

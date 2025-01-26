@@ -10,7 +10,7 @@ import Icon from "components/Icon/Icon";
 import TextCell from "components/TableContainer/DataTable/TextCell/TextCell";
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell/HeaderCell";
 
-import { IPolicyHostResponse } from "interfaces/host";
+import { IPolicyNodeResponse } from "interfaces/node";
 import sortUtils from "utilities/sort";
 
 interface IHeaderProps {
@@ -22,7 +22,7 @@ interface ICellProps {
     value: string;
   };
   row: {
-    original: IPolicyHostResponse;
+    original: IPolicyNodeResponse;
   };
 }
 
@@ -41,7 +41,7 @@ interface IDataColumn {
 const generateTableHeaders = (): IDataColumn[] => {
   const tableHeaders: IDataColumn[] = [
     {
-      title: "Host",
+      title: "Node",
       Header: (headerProps: IHeaderProps): JSX.Element => (
         <HeaderCell
           value={headerProps.column.title || headerProps.column.id}
@@ -87,11 +87,11 @@ const generateTableHeaders = (): IDataColumn[] => {
 };
 
 const generateDataSet = memoize(
-  (policyHostsList: IPolicyHostResponse[] = []): IPolicyHostResponse[] => {
-    policyHostsList = policyHostsList.sort((a, b) =>
+  (policyNodesList: IPolicyNodeResponse[] = []): IPolicyNodeResponse[] => {
+    policyNodesList = policyNodesList.sort((a, b) =>
       sortUtils.caseInsensitiveAsc(a.display_name, b.display_name)
     );
-    return policyHostsList;
+    return policyNodesList;
   }
 );
 

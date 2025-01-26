@@ -273,7 +273,7 @@ const SoftwareTable = ({
               <>
                 The last time software data was <br />
                 updated, including vulnerabilities <br />
-                and host counts.
+                and node counts.
               </>
             }
           />

@@ -103,9 +103,9 @@ const EditPacksPage = ({
 
   const packTargets = storedPack
     ? [
-        ...storedPack.hosts.map((host) => ({
-          ...host,
-          target_type: "hosts",
+        ...storedPack.nodes.map((node) => ({
+          ...node,
+          target_type: "nodes",
         })),
         ...storedPack.labels.map((label) => ({
           ...label,

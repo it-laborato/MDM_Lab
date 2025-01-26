@@ -2,7 +2,7 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 import { DEFAULT_EMPTY_CELL_VALUE } from "utilities/constants";
-import IssuesIndicator from "pages/hosts/components/IssuesIndicator";
+import IssuesIndicator from "pages/nodes/components/IssuesIndicator";
 
 interface IIssueCellProps<T> {
   issues: {

@@ -27,13 +27,13 @@ const AppleBMRenewalMessage = ({ expired }: IAppleBMRenewalMessageProps) => {
       {expired ? (
         <>
           Your Apple Business Manager (ABM) server token has expired. macOS,
-          iOS, and iPadOS hosts won’t automatically enroll to Mdmlab. Users with
+          iOS, and iPadOS nodes won’t automatically enroll to Mdmlab. Users with
           the admin role in Mdmlab can renew ABM.
         </>
       ) : (
         <>
           Your Apple Business Manager (ABM) server token is less than 30 days
-          from expiration. If it expires, macOS, iOS, and iPadOS hosts won’t
+          from expiration. If it expires, macOS, iOS, and iPadOS nodes won’t
           automatically enroll to Mdmlab. Users with the admin role in Mdmlab can
           renew ABM.
         </>

@@ -11,7 +11,7 @@ import TextCell from "components/TableContainer/DataTable/TextCell";
 import TooltipWrapper from "components/TooltipWrapper";
 import { HumanTimeDiffWithDateTip } from "components/HumanTimeDiffWithDateTip";
 import ProbabilityOfExploit from "components/ProbabilityOfExploit/ProbabilityOfExploit";
-import ViewAllHostsLink from "components/ViewAllHostsLink";
+import ViewAllNodesLink from "components/ViewAllNodesLink";
 import LinkCell from "components/TableContainer/DataTable/LinkCell";
 
 interface IHeaderProps {
@@ -193,7 +193,7 @@ const generateTableConfig = (
         const titleWithTooltip = (
           <TooltipWrapper
             tipContent={
-              <>The date this vulnerability first appeared on a host.</>
+              <>The date this vulnerability first appeared on a node.</>
             }
           >
             Detected
@@ -222,13 +222,13 @@ const generateTableConfig = (
     {
       title: "",
       Header: "",
-      accessor: "linkToFilteredHosts",
+      accessor: "linkToFilteredNodes",
       disableSortBy: true,
       Cell: (cellProps: ICellProps) => {
         return (
           <>
             {cellProps.row.original && (
-              <ViewAllHostsLink
+              <ViewAllNodesLink
                 queryParams={{
                   vulnerability: cellProps.row.original.cve,
                   team_id: teamId,

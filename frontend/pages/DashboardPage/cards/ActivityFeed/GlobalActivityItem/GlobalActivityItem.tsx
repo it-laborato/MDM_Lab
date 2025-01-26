@@ -23,12 +23,12 @@ const PREMIUM_ACTIVITIES = new Set([
   "applied_spec_team",
   "changed_user_team_role",
   "deleted_user_team_role",
-  "read_host_disk_encryption_key",
+  "read_node_disk_encryption_key",
   "enabled_macos_disk_encryption",
   "disabled_macos_disk_encryption",
   "enabled_macos_setup_end_user_auth",
   "disabled_macos_setup_end_user_auth",
-  "tranferred_hosts",
+  "tranferred_nodes",
   "enabled_windows_mdm_migration",
   "disabled_windows_mdm_migration",
 ]);
@@ -52,14 +52,14 @@ const getProfileMessageSuffix = (
 ) => {
   const platformDisplayName =
     platform === "apple" ? "macOS, iOS, and iPadOS" : "Windows";
-  let messageSuffix = <>all {platformDisplayName} hosts</>;
+  let messageSuffix = <>all {platformDisplayName} nodes</>;
   if (isPremiumTier) {
     messageSuffix = teamName ? (
       <>
-        {platformDisplayName} hosts assigned to the <b>{teamName}</b> team
+        {platformDisplayName} nodes assigned to the <b>{teamName}</b> team
       </>
     ) : (
-      <>{platformDisplayName} hosts with no team</>
+      <>{platformDisplayName} nodes with no team</>
     );
   }
   return messageSuffix;
@@ -93,7 +93,7 @@ const getMacOSSetupAssistantMessage = (
   return (
     <>
       {" "}
-      changed the macOS Setup Assistant ({action} <b>{name}</b>) for hosts{" "}
+      changed the macOS Setup Assistant ({action} <b>{name}</b>) for nodes{" "}
       {suffix}.
     </>
   );
@@ -122,15 +122,15 @@ const TAGGED_TEMPLATES = {
       ) : (
         <></>
       );
-    const hostCountCopy =
+    const nodeCountCopy =
       count !== undefined
-        ? ` on ${count} ${count === 1 ? "host" : "hosts"}`
+        ? ` on ${count} ${count === 1 ? "node" : "nodes"}`
         : "";
 
     return (
       <>
         <span className={`${baseClass}__details-content`}>
-          ran {queryNameCopy} {impactCopy} {hostCountCopy}.
+          ran {queryNameCopy} {impactCopy} {nodeCountCopy}.
         </span>
       </>
     );
@@ -262,19 +262,19 @@ const TAGGED_TEMPLATES = {
     );
   },
   mdmlabEnrolled: (activity: IActivity) => {
-    const hostDisplayName = activity.details?.host_display_name ? (
-      <b>{activity.details.host_display_name}</b>
+    const nodeDisplayName = activity.details?.node_display_name ? (
+      <b>{activity.details.node_display_name}</b>
     ) : (
-      "A host"
+      "A node"
     );
-    return <>{hostDisplayName} enrolled in Mdmlab.</>;
+    return <>{nodeDisplayName} enrolled in Mdmlab.</>;
   },
   mdmEnrolled: (activity: IActivity) => {
     if (activity.details?.mdm_platform === "microsoft") {
       return (
         <>
           Mobile device management (MDM) was turned on for{" "}
-          <b>{activity.details?.host_display_name} (manual)</b>.
+          <b>{activity.details?.node_display_name} (manual)</b>.
         </>
       );
     }
@@ -283,9 +283,9 @@ const TAGGED_TEMPLATES = {
     // compatibility
     return (
       <>
-        An end user turned on MDM features for a host with serial number{" "}
+        An end user turned on MDM features for a node with serial number{" "}
         <b>
-          {activity.details?.host_serial} (
+          {activity.details?.node_serial} (
           {activity.details?.installed_from_dep ? "automatic" : "manual"})
         </b>
         .
@@ -298,7 +298,7 @@ const TAGGED_TEMPLATES = {
         {activity.actor_full_name
           ? " told Mdmlab to turn off mobile device management (MDM) for"
           : "Mobile device management (MDM) was turned off for"}{" "}
-        <b>{activity.details?.host_display_name}</b>.
+        <b>{activity.details?.node_display_name}</b>.
       </>
     );
   },
@@ -330,17 +330,17 @@ const TAGGED_TEMPLATES = {
     return (
       <>
         {editedActivity} the minimum {applePlatform} version {versionSection}{" "}
-        {deadlineSection} on hosts assigned to {teamSection}.
+        {deadlineSection} on nodes assigned to {teamSection}.
       </>
     );
   },
 
-  readHostDiskEncryptionKey: (activity: IActivity) => {
+  readNodeDiskEncryptionKey: (activity: IActivity) => {
     return (
       <>
         {" "}
         viewed the disk encryption key for{" "}
-        <b>{activity.details?.host_display_name}</b>.
+        <b>{activity.details?.node_display_name}</b>.
       </>
     );
   },
@@ -493,11 +493,11 @@ const TAGGED_TEMPLATES = {
   },
   enabledDiskEncryption: (activity: IActivity) => {
     const suffix = getDiskEncryptionMessageSuffix(activity.details?.team_name);
-    return <> enforced disk encryption for hosts {suffix}.</>;
+    return <> enforced disk encryption for nodes {suffix}.</>;
   },
   disabledEncryption: (activity: IActivity) => {
     const suffix = getDiskEncryptionMessageSuffix(activity.details?.team_name);
-    return <>removed disk encryption enforcement for hosts {suffix}.</>;
+    return <>removed disk encryption enforcement for nodes {suffix}.</>;
   },
   changedMacOSSetupAssistant: (activity: IActivity) => {
     return getMacOSSetupAssistantMessage(
@@ -541,7 +541,7 @@ const TAGGED_TEMPLATES = {
         ) : (
           ""
         )}
-        for macOS hosts that automatically enroll to{" "}
+        for macOS nodes that automatically enroll to{" "}
         {activity.details?.team_name ? (
           <>
             the <b>{activity.details.team_name}</b> team
@@ -566,7 +566,7 @@ const TAGGED_TEMPLATES = {
         ) : (
           ""
         )}
-        for macOS hosts that automatically enroll to{" "}
+        for macOS nodes that automatically enroll to{" "}
         {activity.details?.team_name ? (
           <>
             the <b>{activity.details.team_name}</b> team
@@ -582,7 +582,7 @@ const TAGGED_TEMPLATES = {
     return (
       <>
         {" "}
-        required end user authentication for macOS hosts that automatically
+        required end user authentication for macOS nodes that automatically
         enroll to{" "}
         {activity.details?.team_name ? (
           <>
@@ -599,7 +599,7 @@ const TAGGED_TEMPLATES = {
     return (
       <>
         {" "}
-        removed end user authentication requirement for macOS hosts that
+        removed end user authentication requirement for macOS nodes that
         automatically enroll to{" "}
         {activity.details?.team_name ? (
           <>
@@ -612,14 +612,14 @@ const TAGGED_TEMPLATES = {
       </>
     );
   },
-  transferredHosts: (activity: IActivity) => {
-    const hostNames = activity.details?.host_display_names || [];
+  transferredNodes: (activity: IActivity) => {
+    const nodeNames = activity.details?.node_display_names || [];
     const teamName = activity.details?.team_name;
-    if (hostNames.length === 1) {
+    if (nodeNames.length === 1) {
       return (
         <>
           {" "}
-          transferred host <b>{hostNames[0]}</b> to {teamName ? "team " : ""}
+          transferred node <b>{nodeNames[0]}</b> to {teamName ? "team " : ""}
           <b>{teamName || "no team"}</b>.
         </>
       );
@@ -627,7 +627,7 @@ const TAGGED_TEMPLATES = {
     return (
       <>
         {" "}
-        transferred {hostNames.length} hosts to {teamName ? "team " : ""}
+        transferred {nodeNames.length} nodes to {teamName ? "team " : ""}
         <b>{teamName || "no team"}</b>.
       </>
     );
@@ -637,7 +637,7 @@ const TAGGED_TEMPLATES = {
     return (
       <>
         {" "}
-        told Mdmlab to turn on MDM features for all Windows hosts (servers
+        told Mdmlab to turn on MDM features for all Windows nodes (servers
         excluded).
       </>
     );
@@ -649,7 +649,7 @@ const TAGGED_TEMPLATES = {
     return (
       <>
         {" "}
-        told Mdmlab to automatically migrate Windows hosts connected to another
+        told Mdmlab to automatically migrate Windows nodes connected to another
         MDM solution.
       </>
     );
@@ -658,18 +658,18 @@ const TAGGED_TEMPLATES = {
     return (
       <>
         {" "}
-        told Mdmlab to stop migrating Windows hosts connected to another MDM
+        told Mdmlab to stop migrating Windows nodes connected to another MDM
         solution.
       </>
     );
   },
   ranScript: (activity: IActivity) => {
-    const { script_name, host_display_name } = activity.details || {};
+    const { script_name, node_display_name } = activity.details || {};
     return (
       <>
         {" "}
         ran {formatScriptNameForActivityItem(script_name)} on{" "}
-        <b>{host_display_name}</b>.
+        <b>{node_display_name}</b>.
       </>
     );
   },
@@ -748,7 +748,7 @@ const TAGGED_TEMPLATES = {
           Deadline: {activity.details?.deadline_days} days / Grace period:{" "}
           {activity.details?.grace_period_days} days
         </b>
-        ) on hosts assigned to{" "}
+        ) on nodes assigned to{" "}
         {activity.details?.team_name ? (
           <>
             the <b>{activity.details.team_name}</b> team
@@ -763,36 +763,36 @@ const TAGGED_TEMPLATES = {
   deletedMultipleSavedQuery: () => {
     return <> deleted multiple queries.</>;
   },
-  lockedHost: (activity: IActivity) => {
+  lockedNode: (activity: IActivity) => {
     return (
       <>
         {" "}
-        locked <b>{activity.details?.host_display_name}</b>.
+        locked <b>{activity.details?.node_display_name}</b>.
       </>
     );
   },
-  unlockedHost: (activity: IActivity) => {
-    if (activity.details?.host_platform === "darwin") {
+  unlockedNode: (activity: IActivity) => {
+    if (activity.details?.node_platform === "darwin") {
       return (
         <>
           {" "}
           viewed the six-digit unlock PIN for{" "}
-          <b>{activity.details?.host_display_name}</b>.
+          <b>{activity.details?.node_display_name}</b>.
         </>
       );
     }
     return (
       <>
         {" "}
-        unlocked <b>{activity.details?.host_display_name}</b>.
+        unlocked <b>{activity.details?.node_display_name}</b>.
       </>
     );
   },
-  wipedHost: (activity: IActivity) => {
+  wipedNode: (activity: IActivity) => {
     return (
       <>
         {" "}
-        wiped <b>{activity.details?.host_display_name}</b>.
+        wiped <b>{activity.details?.node_display_name}</b>.
       </>
     );
   },
@@ -849,7 +849,7 @@ const TAGGED_TEMPLATES = {
       <>
         {" "}
         resent {activity.details?.profile_name} configuration profile to{" "}
-        {activity.details?.host_display_name}.
+        {activity.details?.node_display_name}.
       </>
     );
   },
@@ -905,7 +905,7 @@ const TAGGED_TEMPLATES = {
     }
 
     const {
-      host_display_name: hostName,
+      node_display_name: nodeName,
       software_title: title,
       status,
     } = details;
@@ -919,7 +919,7 @@ const TAGGED_TEMPLATES = {
         {" "}
         {getInstallStatusPredicate(status)} <b>{title}</b>
         {showSoftwarePackage && ` (${details.software_package})`} on{" "}
-        <b>{hostName}</b>.
+        <b>{nodeName}</b>.
       </>
     );
   },
@@ -929,7 +929,7 @@ const TAGGED_TEMPLATES = {
       return TAGGED_TEMPLATES.defaultActivityTemplate(activity);
     }
 
-    const { host_display_name: hostName, software_title: title } = details;
+    const { node_display_name: nodeName, software_title: title } = details;
     const status =
       details.status === "failed" ? "failed_uninstall" : details.status;
 
@@ -942,7 +942,7 @@ const TAGGED_TEMPLATES = {
         {" "}
         {getInstallStatusPredicate(status)} software <b>{title}</b>
         {showSoftwarePackage && ` (${details.software_package})`} from{" "}
-        <b>{hostName}</b>.
+        <b>{nodeName}</b>.
       </>
     );
   },
@@ -1094,8 +1094,8 @@ const getDetail = (activity: IActivity, isPremiumTier: boolean) => {
     case ActivityType.EditedIpadosMinVersion: {
       return TAGGED_TEMPLATES.editedAppleosMinVersion("iPadOS", activity);
     }
-    case ActivityType.ReadHostDiskEncryptionKey: {
-      return TAGGED_TEMPLATES.readHostDiskEncryptionKey(activity);
+    case ActivityType.ReadNodeDiskEncryptionKey: {
+      return TAGGED_TEMPLATES.readNodeDiskEncryptionKey(activity);
     }
     case ActivityType.CreatedAppleOSProfile: {
       return TAGGED_TEMPLATES.createdAppleOSProfile(activity, isPremiumTier);
@@ -1154,8 +1154,8 @@ const getDetail = (activity: IActivity, isPremiumTier: boolean) => {
     case ActivityType.DisabledMacOSSetupEndUserAuth: {
       return TAGGED_TEMPLATES.disabledMacOSSetupEndUserAuth(activity);
     }
-    case ActivityType.TransferredHosts: {
-      return TAGGED_TEMPLATES.transferredHosts(activity);
+    case ActivityType.TransferredNodes: {
+      return TAGGED_TEMPLATES.transferredNodes(activity);
     }
     case ActivityType.EnabledWindowsMdm: {
       return TAGGED_TEMPLATES.enabledWindowsMdm();
@@ -1187,14 +1187,14 @@ const getDetail = (activity: IActivity, isPremiumTier: boolean) => {
     case ActivityType.DeletedMultipleSavedQuery: {
       return TAGGED_TEMPLATES.deletedMultipleSavedQuery();
     }
-    case ActivityType.LockedHost: {
-      return TAGGED_TEMPLATES.lockedHost(activity);
+    case ActivityType.LockedNode: {
+      return TAGGED_TEMPLATES.lockedNode(activity);
     }
-    case ActivityType.UnlockedHost: {
-      return TAGGED_TEMPLATES.unlockedHost(activity);
+    case ActivityType.UnlockedNode: {
+      return TAGGED_TEMPLATES.unlockedNode(activity);
     }
-    case ActivityType.WipedHost: {
-      return TAGGED_TEMPLATES.wipedHost(activity);
+    case ActivityType.WipedNode: {
+      return TAGGED_TEMPLATES.wipedNode(activity);
     }
     case ActivityType.CreatedDeclarationProfile: {
       return TAGGED_TEMPLATES.createdDeclarationProfile(

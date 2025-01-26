@@ -35,7 +35,7 @@ const ConfirmSaveChangesModal = ({
       <form className={`${baseClass}__form`}>
         <p>{warningText}</p>
         <p>
-          Installs or uninstalls currently running on a host will still
+          Installs or uninstalls currently running on a node will still
           complete, but results won&apos;t appear in Mdmlab.
         </p>
         <p>You cannot undo this action.</p>

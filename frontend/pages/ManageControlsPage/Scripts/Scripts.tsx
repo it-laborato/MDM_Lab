@@ -167,8 +167,8 @@ const Scripts = ({ router, currentPage, teamIdForApi }: IScriptsProps) => {
   return (
     <div className={baseClass}>
       <p className={`${baseClass}__description`}>
-        Upload scripts to remediate issues on macOS, Windows, and Linux hosts.
-        You can run scripts on individual hosts.{" "}
+        Upload scripts to remediate issues on macOS, Windows, and Linux nodes.
+        You can run scripts on individual nodes.{" "}
         <CustomLink
           text="Learn more"
           url="https://mdmlabdm.com/docs/using-mdmlab/scripts"

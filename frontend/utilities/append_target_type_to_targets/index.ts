@@ -1,43 +1,43 @@
-import { IHost } from "interfaces/host";
+import { INode } from "interfaces/node";
 import { map } from "lodash";
 
-export const parseEntityFunc = (host: IHost) => {
-  let hostCpuOutput = null;
-  if (host) {
+export const parseEntityFunc = (node: INode) => {
+  let nodeCpuOutput = null;
+  if (node) {
     let clockSpeedOutput = null;
     try {
       const clockSpeed =
-        host.cpu_brand.split("@ ")[1] || host.cpu_brand.split("@")[1];
+        node.cpu_brand.split("@ ")[1] || node.cpu_brand.split("@")[1];
       const clockSpeedFlt = parseFloat(clockSpeed.split("GHz")[0].trim());
       clockSpeedOutput = Math.floor(clockSpeedFlt * 10) / 10;
     } catch (e) {
       // Some CPU brand strings do not fit this format and we can't parse the
       // clock speed. Leave it set to 'Unknown'.
       console.log(
-        `Unable to parse clock speed from cpu_brand: ${host.cpu_brand}`
+        `Unable to parse clock speed from cpu_brand: ${node.cpu_brand}`
       );
     }
-    if (host.cpu_physical_cores || clockSpeedOutput) {
-      hostCpuOutput = `${host.cpu_physical_cores || "Unknown"} x ${
+    if (node.cpu_physical_cores || clockSpeedOutput) {
+      nodeCpuOutput = `${node.cpu_physical_cores || "Unknown"} x ${
         clockSpeedOutput || "Unknown"
       } GHz`;
     }
   }
 
   const additionalAttrs = {
-    cpu_type: hostCpuOutput,
-    target_type: "hosts",
+    cpu_type: nodeCpuOutput,
+    target_type: "nodes",
   };
 
   return {
-    ...host,
+    ...node,
     ...additionalAttrs,
   };
 };
 
 const appendTargetTypeToTargets = (targets: any, targetType: string) => {
   return map(targets, (target) => {
-    if (targetType === "hosts") {
+    if (targetType === "nodes") {
       return parseEntityFunc(target);
     }
 

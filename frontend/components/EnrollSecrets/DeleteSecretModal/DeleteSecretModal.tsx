@@ -41,7 +41,7 @@ const DeleteSecretModal = ({
     >
       <div className={baseClass}>
         <div className={`${baseClass}__description`}>
-          <p>Hosts can no longer enroll using this secret.</p>
+          <p>Nodes can no longer enroll using this secret.</p>
           <p>
             <CustomLink
               url="https://mdmlabdm.com/learn-more-about/rotating-enroll-secrets"

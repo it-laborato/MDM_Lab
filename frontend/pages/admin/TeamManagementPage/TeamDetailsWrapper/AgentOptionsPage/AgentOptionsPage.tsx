@@ -143,7 +143,7 @@ const AgentOptionsPage = ({
     <div className={`${baseClass}`}>
       <p className={`${baseClass}__page-description`}>
         Agent options configure Mdmlab&apos;s agent (mdmlabd). When you update
-        agent options, they will be applied the next time a host checks in to
+        agent options, they will be applied the next time a node checks in to
         Mdmlab.
         <br />
         <CustomLink

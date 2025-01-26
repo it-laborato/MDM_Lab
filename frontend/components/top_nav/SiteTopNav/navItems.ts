@@ -53,9 +53,18 @@ export default (
 
   const navItems: INavItem[] = [
     {
-      name: "Hosts",
+      name: "Policies",
       location: {
-        regex: new RegExp(`^${URL_PREFIX}/hosts/`),
+        regex: new RegExp(`^${URL_PREFIX}/(policies)/`),
+        pathname: PATHS.MANAGE_POLICIES,
+      },
+      withParams: { type: "query", names: ["team_id"] },
+    },
+
+    {
+      name: "Nodes",
+      location: {
+        regex: new RegExp(`^${URL_PREFIX}/nodes/`),
         pathname: PATHS.MANAGE_HOSTS,
       },
       withParams: { type: "query", names: ["team_id"] },
@@ -69,7 +78,15 @@ export default (
       exclude: !isMaintainerOrAdmin,
       withParams: { type: "query", names: ["team_id"] },
     },
-    {
+       {
+      name: "Queries",
+      location: {
+        regex: new RegExp(`^${URL_PREFIX}/queries/`),
+        pathname: PATHS.MANAGE_QUERIES,
+      },
+      withParams: { type: "query", names: ["team_id"] },
+    },
+	{
       name: "Software",
       location: {
         regex: new RegExp(`^${URL_PREFIX}/software/`),
@@ -78,23 +95,8 @@ export default (
       alwaysToPathname: true,
       withParams: { type: "query", names: ["team_id"] },
     },
-    {
-      name: "Queries",
-      location: {
-        regex: new RegExp(`^${URL_PREFIX}/queries/`),
-        pathname: PATHS.MANAGE_QUERIES,
-      },
-      withParams: { type: "query", names: ["team_id"] },
-    },
-    {
-      name: "Policies",
-      location: {
-        regex: new RegExp(`^${URL_PREFIX}/(policies)/`),
-        pathname: PATHS.MANAGE_POLICIES,
-      },
-      withParams: { type: "query", names: ["team_id"] },
-    },
-  ];
+
+    ];
 
   if (isNoAccess) {
     return [...logo];

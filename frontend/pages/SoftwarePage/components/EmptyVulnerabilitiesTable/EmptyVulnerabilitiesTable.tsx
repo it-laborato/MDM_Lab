@@ -49,7 +49,7 @@ const emptyStateDetails: Record<
   "known-vuln": {
     graphicName: "empty-search-check",
     header:
-      "This is a known vulnerability (CVE), but it wasn't detected on any hosts",
+      "This is a known vulnerability (CVE), but it wasn't detected on any nodes",
     additionalInfo: <LearnMoreLink />,
   },
 };
