@@ -206,15 +206,15 @@ export const DEFAULT_CAMPAIGN_STATE = {
 
 const PLATFORM_LABEL_NAMES_FROM_API = [
   "All Nodes",
-  "All Linux",
-  "CentOS Linux",
-  "macOS",
+  // "All Linux",
+  // "CentOS Linux",
+  // "macOS",
   "MS Windows",
-  "Red Hat Linux",
-  "Ubuntu Linux",
-  "chrome",
-  "iOS",
-  "iPadOS",
+  // "Red Hat Linux",
+  // "Ubuntu Linux",
+  // "chrome",
+  // "iOS",
+  // "iPadOS",
 ] as const;
 
 export type PlatformLabelNameFromAPI = typeof PLATFORM_LABEL_NAMES_FROM_API[number];
@@ -226,16 +226,16 @@ export const isPlatformLabelNameFromAPI = (
 };
 
 export const PLATFORM_DISPLAY_NAMES: Record<string, DisplayPlatform> = {
-  darwin: "macOS",
-  macOS: "macOS",
+  // darwin: "macOS",
+  // macOS: "macOS",
   windows: "Windows",
   Windows: "Windows",
-  linux: "Linux",
-  Linux: "Linux",
-  chrome: "ChromeOS",
-  ChromeOS: "ChromeOS",
-  ios: "iOS",
-  ipados: "iPadOS",
+  // linux: "Linux",
+  // Linux: "Linux",
+  // chrome: "ChromeOS",
+  // ChromeOS: "ChromeOS",
+  // ios: "iOS",
+  // ipados: "iPadOS",
 } as const;
 
 // as returned by the TARGETS API; based on display_text
@@ -244,15 +244,15 @@ export const PLATFORM_LABEL_DISPLAY_NAMES: Record<
   string
 > = {
   "All Nodes": "All nodes",
-  "All Linux": "Linux",
-  "CentOS Linux": "CentOS Linux",
-  macOS: "macOS",
+  // "All Linux": "Linux",
+  // "CentOS Linux": "CentOS Linux",
+  // macOS: "macOS",
   "MS Windows": "Windows",
-  "Red Hat Linux": "Red Hat Linux",
-  "Ubuntu Linux": "Ubuntu Linux",
-  chrome: "ChromeOS",
-  iOS: "iOS",
-  iPadOS: "iPadOS",
+  // "Red Hat Linux": "Red Hat Linux",
+  // "Ubuntu Linux": "Ubuntu Linux",
+  // chrome: "ChromeOS",
+  // iOS: "iOS",
+  // iPadOS: "iPadOS",
 } as const;
 
 export const PLATFORM_LABEL_DISPLAY_TYPES: Record<
@@ -260,15 +260,15 @@ export const PLATFORM_LABEL_DISPLAY_TYPES: Record<
   string
 > = {
   "All Nodes": "all",
-  "All Linux": "platform",
-  "CentOS Linux": "platform",
-  macOS: "platform",
+  // "All Linux": "platform",
+  // "CentOS Linux": "platform",
+  // macOS: "platform",
   "MS Windows": "platform",
-  "Red Hat Linux": "platform",
-  "Ubuntu Linux": "platform",
-  chrome: "platform",
-  iOS: "platform",
-  iPadOS: "platform",
+  // "Red Hat Linux": "platform",
+  // "Ubuntu Linux": "platform",
+  // chrome: "platform",
+  // iOS: "platform",
+  // iPadOS: "platform",
 } as const;
 
 // For some builtin labels, display different strings than what API returns
@@ -276,32 +276,25 @@ export const LABEL_DISPLAY_MAP: Partial<
   Record<PlatformLabelNameFromAPI, string>
 > = {
   "All Nodes": "All nodes",
-  "All Linux": "Linux",
-  chrome: "ChromeOS",
+  // "All Linux": "Linux",
+  // chrome: "ChromeOS",
   "MS Windows": "Windows",
 };
 
 export const PLATFORM_TYPE_ICONS: Record<
   Extract<
     PlatformLabelNameFromAPI,
-    "All Linux" | "macOS" | "MS Windows" | "chrome" | "iOS" | "iPadOS"
-  >,
+   "MS Windows"  >,
   IconNames
 > = {
-  "All Linux": "linux",
-  macOS: "darwin",
   "MS Windows": "windows",
-  chrome: "chrome",
-  iOS: "iOS",
-  iPadOS: "iPadOS",
 } as const;
 
 export const hasPlatformTypeIcon = (
   s: string
 ): s is Extract<
   PlatformLabelNameFromAPI,
-  "All Linux" | "macOS" | "MS Windows" | "chrome" | "iOS" | "iPadOS"
-> => {
+ "MS Windows"> => {
   return !!PLATFORM_TYPE_ICONS[s as keyof typeof PLATFORM_TYPE_ICONS];
 };
 
@@ -317,9 +310,7 @@ interface ISchedulePlatformDropdownOptions {
 
 export const SCHEDULE_PLATFORM_DROPDOWN_OPTIONS: ISchedulePlatformDropdownOptions[] = [
   { label: "All", value: "" }, // API empty string runs on all platforms
-  { label: "macOS", value: "darwin" },
   { label: "Windows", value: "windows" },
-  { label: "Linux", value: "linux" },
 ];
 
 export const HOSTS_SEARCH_BOX_PLACEHOLDER =

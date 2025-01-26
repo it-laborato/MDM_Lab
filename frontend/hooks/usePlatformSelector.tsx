@@ -27,23 +27,23 @@ const usePlatformSelector = (
   installSoftware: IPolicySoftwareToInstall | undefined,
   currentTeamId: number | undefined
 ): IPlatformSelector => {
-  const [checkDarwin, setCheckDarwin] = useState(false);
+  // const [checkDarwin, setCheckDarwin] = useState(false);
   const [checkWindows, setCheckWindows] = useState(false);
-  const [checkLinux, setCheckLinux] = useState(false);
-  const [checkChrome, setCheckChrome] = useState(false);
+  // const [checkLinux, setCheckLinux] = useState(false);
+  // const [checkChrome, setCheckChrome] = useState(false);
 
   const checksByPlatform: Record<string, boolean> = {
-    darwin: checkDarwin,
+    // darwin: checkDarwin,
     windows: checkWindows,
-    linux: checkLinux,
-    chrome: checkChrome,
+    // linux: checkLinux,
+    // chrome: checkChrome,
   };
 
   const settersByPlatform: Record<string, (val: boolean) => void> = {
-    darwin: setCheckDarwin,
+    // darwin: setCheckDarwin,
     windows: setCheckWindows,
-    linux: setCheckLinux,
-    chrome: setCheckChrome,
+    // linux: setCheckLinux,
+    // chrome: setCheckChrome,
   };
 
   const setSelectedPlatforms = (platformsToCheck: string[]) => {
@@ -69,20 +69,20 @@ const usePlatformSelector = (
     return (
       <PlatformSelector
         baseClass={baseClass}
-        checkDarwin={checkDarwin}
+        // checkDarwin={checkDarwin}
         checkWindows={checkWindows}
-        checkLinux={checkLinux}
-        checkChrome={checkChrome}
-        setCheckDarwin={setCheckDarwin}
+        // checkLinux={checkLinux}
+        // checkChrome={checkChrome}
+        // setCheckDarwin={setCheckDarwin}
         setCheckWindows={setCheckWindows}
-        setCheckLinux={setCheckLinux}
-        setCheckChrome={setCheckChrome}
+        // setCheckLinux={setCheckLinux}
+        // setCheckChrome={setCheckChrome}
         disabled={disabled}
         installSoftware={installSoftware}
         currentTeamId={currentTeamId}
       />
     );
-  }, [checkDarwin, checkWindows, checkLinux, checkChrome, disabled]);
+  }, [ checkWindows,  disabled]);
 
   return {
     setSelectedPlatforms,

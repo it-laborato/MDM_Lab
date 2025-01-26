@@ -223,32 +223,32 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
           setMissingCount(data.missing_30_days_count || 0);
           setLowDiskSpaceCount(data.low_disk_space_count || 0);
         }
-        const macNodes = data.platforms?.find(
-          (platform: INodeSummaryPlatforms) => platform.platform === "darwin"
-        ) || { platform: "darwin", hosts_count: 0 };
+        // const macNodes = data.platforms?.find(
+        //   (platform: INodeSummaryPlatforms) => platform.platform === "darwin"
+        // ) || { platform: "darwin", hosts_count: 0 };
 
         const windowsNodes = data.platforms?.find(
           (platform: INodeSummaryPlatforms) => platform.platform === "windows"
         ) || { platform: "windows", hosts_count: 0 };
 
-        const chromebooks = data.platforms?.find(
-          (platform: INodeSummaryPlatforms) => platform.platform === "chrome"
-        ) || { platform: "chrome", hosts_count: 0 };
+        // const chromebooks = data.platforms?.find(
+        //   (platform: INodeSummaryPlatforms) => platform.platform === "chrome"
+        // ) || { platform: "chrome", hosts_count: 0 };
+        //
+        // const iphones = data.platforms?.find(
+        //   (platform: INodeSummaryPlatforms) => platform.platform === "ios"
+        // ) || { platform: "ios", hosts_count: 0 };
+        //
+        // const ipads = data.platforms?.find(
+        //   (platform: INodeSummaryPlatforms) => platform.platform === "ipados"
+        // ) || { platform: "ipados", hosts_count: 0 };
 
-        const iphones = data.platforms?.find(
-          (platform: INodeSummaryPlatforms) => platform.platform === "ios"
-        ) || { platform: "ios", hosts_count: 0 };
-
-        const ipads = data.platforms?.find(
-          (platform: INodeSummaryPlatforms) => platform.platform === "ipados"
-        ) || { platform: "ipados", hosts_count: 0 };
-
-        setMacCount(macNodes.hosts_count);
+        // setMacCount(macNodes.hosts_count);
         setWindowsCount(windowsNodes.hosts_count);
-        setLinuxCount(data.all_linux_count);
-        setChromeCount(chromebooks.hosts_count);
-        setIosCount(iphones.hosts_count);
-        setIpadosCount(ipads.hosts_count);
+        // setLinuxCount(data.all_linux_count);
+        // setChromeCount(chromebooks.hosts_count);
+        // setIosCount(iphones.hosts_count);
+        // setIpadosCount(ipads.hosts_count);
         setShowNodesUI(true);
       },
     }
@@ -456,7 +456,7 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
       };
 
       if (selectedPlatform !== "all") {
-        const labelValue = PLATFORM_NAME_TO_LABEL_NAME[selectedPlatform];
+        const labelValue = PLATFORM_NAME_TO_LABEL_NAME["windows"];
         setSelectedPlatformLabelId(getLabel(labelValue, labels)?.id);
       } else {
         setSelectedPlatformLabelId(undefined);
@@ -752,15 +752,15 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     );
   };
 
-  const macOSLayout = () => (
-    <>
-      <div className={`${baseClass}__section`}>{OperatingSystemsCard}</div>
-      {showMdmCard && <div className={`${baseClass}__section`}>{MDMCard}</div>}
-      {!!munkiVersions && (
-        <div className={`${baseClass}__section`}>{MunkiCard}</div>
-      )}
-    </>
-  );
+  // const macOSLayout = () => (
+  //   <>
+  //     <div className={`${baseClass}__section`}>{OperatingSystemsCard}</div>
+  //     {showMdmCard && <div className={`${baseClass}__section`}>{MDMCard}</div>}
+  //     {!!munkiVersions && (
+  //       <div className={`${baseClass}__section`}>{MunkiCard}</div>
+  //     )}
+  //   </>
+  // );
 
   const windowsLayout = () => (
     <>
@@ -768,42 +768,42 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
       {showMdmCard && <div className={`${baseClass}__section`}>{MDMCard}</div>}
     </>
   );
-  const linuxLayout = () => null;
+  // const linuxLayout = () => null;
+  //
+  // const chromeLayout = () => (
+  //   <>
+  //     <div className={`${baseClass}__section`}>{OperatingSystemsCard}</div>
+  //   </>
+  // );
+  //
+  // const iosLayout = () => (
+  //   <>
+  //     <div className={`${baseClass}__section`}>{OperatingSystemsCard}</div>
+  //     {showMdmCard && <div className={`${baseClass}__section`}>{MDMCard}</div>}
+  //   </>
+  // );
 
-  const chromeLayout = () => (
-    <>
-      <div className={`${baseClass}__section`}>{OperatingSystemsCard}</div>
-    </>
-  );
-
-  const iosLayout = () => (
-    <>
-      <div className={`${baseClass}__section`}>{OperatingSystemsCard}</div>
-      {showMdmCard && <div className={`${baseClass}__section`}>{MDMCard}</div>}
-    </>
-  );
-
-  const ipadosLayout = () => (
-    <>
-      <div className={`${baseClass}__section`}>{OperatingSystemsCard}</div>
-      {showMdmCard && <div className={`${baseClass}__section`}>{MDMCard}</div>}
-    </>
-  );
+  // const ipadosLayout = () => (
+  //   <>
+  //     <div className={`${baseClass}__section`}>{OperatingSystemsCard}</div>
+  //     {showMdmCard && <div className={`${baseClass}__section`}>{MDMCard}</div>}
+  //   </>
+  // );
 
   const renderCards = () => {
     switch (selectedPlatform) {
-      case "darwin":
-        return macOSLayout();
+      /* case "darwin": */
+        // return macOSLayout();
       case "windows":
         return windowsLayout();
-      case "linux":
-        return linuxLayout();
-      case "chrome":
-        return chromeLayout();
-      case "ios":
-        return iosLayout();
-      case "ipados":
-        return ipadosLayout();
+      // case "linux":
+      //   return linuxLayout();
+      // case "chrome":
+      //   return chromeLayout();
+      // case "ios":
+      //   return iosLayout();
+      // case "ipados":
+      //   return ipadosLayout();
       default:
         return allLayout();
     }

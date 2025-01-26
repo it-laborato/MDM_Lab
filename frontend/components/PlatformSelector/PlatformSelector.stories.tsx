@@ -7,14 +7,14 @@ const meta: Meta<typeof PlatformSelector> = {
   title: "Components/PlatformSelector",
   component: PlatformSelector,
   args: {
-    checkDarwin: true,
+    // checkDarwin: true,
     checkWindows: true,
-    checkLinux: false,
-    checkChrome: false,
-    setCheckDarwin: noop,
+    // checkLinux: false,
+    // checkChrome: false,
+    // setCheckDarwin: noop,
     setCheckWindows: noop,
-    setCheckLinux: noop,
-    setCheckChrome: noop,
+    // setCheckLinux: noop,
+    // setCheckChrome: noop,
   },
 };
 

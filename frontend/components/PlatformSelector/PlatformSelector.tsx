@@ -10,14 +10,14 @@ import paths from "router/paths";
 
 interface IPlatformSelectorProps {
   baseClass?: string;
-  checkDarwin: boolean;
+  // checkDarwin: boolean;
   checkWindows: boolean;
-  checkLinux: boolean;
-  checkChrome: boolean;
-  setCheckDarwin: (val: boolean) => void;
+  // checkLinux: boolean;
+  // checkChrome: boolean;
+  // setCheckDarwin: (val: boolean) => void;
   setCheckWindows: (val: boolean) => void;
-  setCheckLinux: (val: boolean) => void;
-  setCheckChrome: (val: boolean) => void;
+  // setCheckLinux: (val: boolean) => void;
+  // setCheckChrome: (val: boolean) => void;
   disabled?: boolean;
   installSoftware?: IPolicySoftwareToInstall;
   currentTeamId?: number;
@@ -25,14 +25,14 @@ interface IPlatformSelectorProps {
 
 export const PlatformSelector = ({
   baseClass: parentClass,
-  checkDarwin,
+  // checkDawin,
   checkWindows,
-  checkLinux,
-  checkChrome,
-  setCheckDarwin,
+  // checkLinux,
+  // checkChrome,
+  // setCheckDarwin,
   setCheckWindows,
-  setCheckLinux,
-  setCheckChrome,
+  // setCheckLinux,
+  // setCheckChrome,
   disabled = false,
   installSoftware,
   currentTeamId,
@@ -78,14 +78,6 @@ export const PlatformSelector = ({
       <span className={labelClasses}>Target:</span>
       <span className={`${baseClass}__checkboxes`}>
         <Checkbox
-          value={checkDarwin}
-          onChange={(value: boolean) => setCheckDarwin(value)}
-          wrapperClassName={`${baseClass}__platform-checkbox-wrapper`}
-          disabled={disabled}
-        >
-          macOS
-        </Checkbox>
-        <Checkbox
           value={checkWindows}
           onChange={(value: boolean) => setCheckWindows(value)}
           wrapperClassName={`${baseClass}__platform-checkbox-wrapper`}
@@ -93,23 +85,7 @@ export const PlatformSelector = ({
         >
           Windows
         </Checkbox>
-        <Checkbox
-          value={checkLinux}
-          onChange={(value: boolean) => setCheckLinux(value)}
-          wrapperClassName={`${baseClass}__platform-checkbox-wrapper`}
-          disabled={disabled}
-        >
-          Linux
-        </Checkbox>
-        <Checkbox
-          value={checkChrome}
-          onChange={(value: boolean) => setCheckChrome(value)}
-          wrapperClassName={`${baseClass}__platform-checkbox-wrapper`}
-          disabled={disabled}
-        >
-          ChromeOS
-        </Checkbox>
-      </span>
+	  </span>
       <div className="form-field__help-text">
         Policy runs on all nodes with these platform(s).
         {renderInstallSoftwareHelpText()}

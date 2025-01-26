@@ -18,10 +18,10 @@ interface IPlatformCompatibilityProps {
 const baseClass = "platform-compatibility";
 
 const DISPLAY_ORDER = [
-  "macOS",
+  // "macOS",
   "Windows",
-  "Linux",
-  "ChromeOS",
+  // "Linux",
+  // "ChromeOS",
 ] as QueryableDisplayPlatform[];
 
 const ERROR_NO_COMPATIBLE_TABLES = Error("no tables in query");
