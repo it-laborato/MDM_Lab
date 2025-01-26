@@ -30,7 +30,7 @@ docker compose up -d --build
 
 6. Запустить сервер
 ```sh
-./build/mdmlab serve --dev
+./build/mdmlab serve --dev --dev_license
 ```
 ./build/mdmlabctl package --type=pkg --enable-scripts --mdmlab-url=https://localhost:8080 --enroll-secret=CgSw8B4BmHMReSzEGRUWBTmY3BpzR142
 после выполнения 6 пункта можно перейти на localhost:8080 и там будет страница с регистрацией
