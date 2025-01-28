@@ -76,7 +76,7 @@ go run ./orbit/cmd/orbit \
     --root-dir /tmp/orbit \
     --mdmlab-url https://localhost:8080 \
     --insecure \
-    --enroll-secret Ke7ksYUoJPYJ/rEC7bmyJ/fqblZTCYQr \
+    --enroll-secret riFaEoeLDuolUqHYWJdBVRoVBIKkMdNd \
     -- --verbose
 ```
 

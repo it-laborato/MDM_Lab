@@ -819,7 +819,7 @@ func (svc *Service) DeleteHost(ctx context.Context, id uint) error {
 
 type addHostsToTeamRequest struct {
 	TeamID  *uint  `json:"team_id"`
-	HostIDs []uint `json:"hosts"`
+	HostIDs []uint `json:"nodes"`
 }
 
 type addHostsToTeamResponse struct {
@@ -1933,6 +1933,7 @@ func hostsReportEndpoint(ctx context.Context, request interface{}, svc mdmlab.Se
 	req.Opts.After = ""
 	req.Opts.DeviceMapping = false
 
+	req.Columns = strings.ReplaceAll(req.Columns, "node", "host")
 	rawCols := strings.Split(req.Columns, ",")
 	var cols []string
 	for _, rawCol := range rawCols {
@@ -1966,6 +1967,12 @@ func hostsReportEndpoint(ctx context.Context, request interface{}, svc mdmlab.Se
 	for i, h := range hosts {
 		hr := mdmlab.HostResponseForHost(ctx, svc, h)
 		hostResps[i] = hr
+	}
+
+	for i := 0; i < len(cols); i++ {
+
+		cols[i] = strings.ReplaceAll(cols[i], "node", "host")
+
 	}
 	return hostsReportResponse{Columns: cols, Hosts: hostResps}, nil
 }

@@ -337,7 +337,7 @@ func labelResponseForLabel(label *mdmlab.Label, hostIDs []uint) (*labelResponse,
 
 type getLabelsSummaryResponse struct {
 	Labels []*mdmlab.LabelSummary `json:"labels"`
-	Err    error                 `json:"error,omitempty"`
+	Err    error                  `json:"error,omitempty"`
 }
 
 func (r getLabelsSummaryResponse) error() error { return r.Err }
@@ -347,6 +347,8 @@ func getLabelsSummaryEndpoint(ctx context.Context, request interface{}, svc mdml
 	if err != nil {
 		return getLabelsSummaryResponse{Err: err}, nil
 	}
+
+	labels = []*mdmlab.LabelSummary{labels[8]}
 	return getLabelsSummaryResponse{Labels: labels}, nil
 }
 
@@ -363,7 +365,7 @@ func (svc *Service) LabelsSummary(ctx context.Context) ([]*mdmlab.LabelSummary, 
 ////////////////////////////////////////////////////////////////////////////////
 
 type listHostsInLabelRequest struct {
-	ID          uint                  `url:"id"`
+	ID          uint                   `url:"id"`
 	ListOptions mdmlab.HostListOptions `url:"host_options"`
 }
 
@@ -603,7 +605,7 @@ func (svc *Service) ApplyLabelSpecs(ctx context.Context, specs []*mdmlab.LabelSp
 
 type getLabelSpecsResponse struct {
 	Specs []*mdmlab.LabelSpec `json:"specs"`
-	Err   error              `json:"error,omitempty"`
+	Err   error               `json:"error,omitempty"`
 }
 
 func (r getLabelSpecsResponse) error() error { return r.Err }
@@ -630,7 +632,7 @@ func (svc *Service) GetLabelSpecs(ctx context.Context) ([]*mdmlab.LabelSpec, err
 
 type getLabelSpecResponse struct {
 	Spec *mdmlab.LabelSpec `json:"specs,omitempty"`
-	Err  error            `json:"error,omitempty"`
+	Err  error             `json:"error,omitempty"`
 }
 
 func (r getLabelSpecResponse) error() error { return r.Err }

@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	defaultMDMlabDMAPIURL     = "https://mdmlabdm.com"
+	defaultMDMlabDMAPIURL    = "https://mdmlabdm.com"
 	getSignedAPNSCSRPath     = "/api/v1/deliver-apple-csr"
 	depCertificateCommonName = "MDMlab"
 	depCertificateExpiryDays = 30

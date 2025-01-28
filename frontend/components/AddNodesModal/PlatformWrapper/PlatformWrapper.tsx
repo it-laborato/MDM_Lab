@@ -219,8 +219,8 @@ const PlatformWrapper = ({
 
   const renderInstallerString = (packageType: string) => {
     return packageType === "advanced"
-      ? `mdmlabctl package --type=YOUR_TYPE --mdmlab-url=${config?.server_settings.server_url} --enroll-secret=${enrollSecret} --mdmlab-certificate=PATH_TO_YOUR_CERTIFICATE/mdmlab.pem`
-      : `mdmlabctl package --type=${packageType} ${
+      ? `./build/mdmlabctl package --type=YOUR_TYPE --mdmlab-url=${config?.server_settings.server_url} --enroll-secret=${enrollSecret} --mdmlab-certificate=PATH_TO_YOUR_CERTIFICATE/mdmlab.pem`
+      : `./build/mdmlabctl package --type=${packageType} ${
           config && !config.server_settings.scripts_disabled
             ? "--enable-scripts "
             : ""

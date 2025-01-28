@@ -215,8 +215,8 @@ const generatePlatformTypeString = (platforms: string | undefined): string => {
   const ALL_PLATFORMS = [
     { text: "All", value: "all" },
     { text: "Windows", value: "windows" },
-    { text: "Linux", value: "linux" },
-    { text: "macOS", value: "darwin" },
+    // { text: "Linux", value: "linux" },
+    // { text: "macOS", value: "darwin" },
   ];
 
   if (platforms) {

@@ -98,6 +98,29 @@ define HELP_TEXT
 
 endef
 
+prepare:
+	./build/mdmlab prepare db --dev
+run:
+	./build/mdmlab serve --dev --dev_license --server_private_key=DVa/QbMoGgcc24RygI4LuukIvaVert0raKl9yWnV+Ls= \
+	--mdm_windows_wstep_identity_cert= ./mdmlab-mdm-win-wstep.crt\
+	--mdm_windows_wstep_identity_key= ./mdmlab-mdm-win-wstep.key
+
+osquery:
+ifndef ENROLL_SECRET
+	$(error ENROLL_SECRET is not set. Example: 'make osquery ENROLL_SECRET=my_secret_key')
+endif
+	go run ./orbit/cmd/orbit \
+		--dev-mode \
+		--disable-updates \
+		--root-dir /tmp/orbit \
+		--mdmlab-url https://localhost:8080 \
+		--insecure \
+		--enroll-secret=$(ENROLL_SECRET) \
+		-- --verbose
+
+sim:
+	go run ./cmd/osquery-perf/agent.go --enroll_secret JP0TSbZgUUjHHzqUNpJcMsM13TJcWC5b --host_count 500 --os_templates windows_11
+
 help:
 	$(info $(HELP_TEXT))
 

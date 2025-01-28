@@ -194,7 +194,7 @@ the way that the MDMlab server works.
 				opts = append(opts, mysql.Replica(&config.MysqlReadReplica))
 			}
 			// NOTE this will disable OTEL/APM interceptor
-			if dev && os.Getenv("FLEET_DEV_ENABLE_SQL_INTERCEPTOR") != "" {
+			if dev && os.Getenv("MDM_LAB_DEV_ENABLE_SQL_INTERCEPTOR") != "" {
 				opts = append(opts, mysql.WithInterceptor(&devSQLInterceptor{
 					logger: kitlog.With(logger, "component", "sql-interceptor"),
 				}))
