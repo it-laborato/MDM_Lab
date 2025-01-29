@@ -26,13 +26,13 @@ interface IQueryTablePlatformsProps {
   platforms: IPlatformsWithFreebsd[];
 }
 
-const PLATFORM_ORDER = ["darwin", "windows", "linux", "chrome"];
+const PLATFORM_ORDER = ["windows"];
 
 const baseClass = "query-table-platforms";
 
 const QueryTablePlatforms = ({ platforms }: IQueryTablePlatformsProps) => {
   const platformListItems = platforms
-    .filter((platform) => platform !== "freebsd")
+    .filter((platform) => platform == "windows")
     .sort((a, b) => PLATFORM_ORDER.indexOf(a) - PLATFORM_ORDER.indexOf(b))
     .map((platform) => {
       return (

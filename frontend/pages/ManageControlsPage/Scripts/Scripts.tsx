@@ -159,7 +159,7 @@ const Scripts = ({ router, currentPage, teamIdForApi }: IScriptsProps) => {
     <InfoBanner color="yellow">
       <div>
         <b>Running scripts is disabled in organization settings.</b> You can
-        still manage your library of macOS and Windows scripts below.
+        still manage your library Windows scripts below.
       </div>
     </InfoBanner>
   );
@@ -167,13 +167,8 @@ const Scripts = ({ router, currentPage, teamIdForApi }: IScriptsProps) => {
   return (
     <div className={baseClass}>
       <p className={`${baseClass}__description`}>
-        Upload scripts to remediate issues on macOS, Windows, and Linux nodes.
+        Upload scripts to remediate issues on Windows nodes.
         You can run scripts on individual nodes.{" "}
-        <CustomLink
-          text="Learn more"
-          url="https://mdmlabdm.com/docs/using-mdmlab/scripts"
-          newTab
-        />
       </p>
 
       {config.server_settings.scripts_disabled && renderScriptsDisabledBanner()}

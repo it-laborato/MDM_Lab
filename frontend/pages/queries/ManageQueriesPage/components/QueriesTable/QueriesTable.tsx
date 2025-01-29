@@ -16,7 +16,6 @@ import { CustomOptionType } from "components/forms/fields/DropdownWrapper/Dropdo
 import Button from "components/buttons/Button";
 import TableContainer from "components/TableContainer";
 import TableCount from "components/TableContainer/TableCount";
-import CustomLink from "components/CustomLink";
 import EmptyTable from "components/EmptyTable";
 
 import generateColumnConfigs from "./QueriesTableConfig";
@@ -165,13 +164,8 @@ const QueriesTable = ({
     } else if (!isOnlyObserver || isObserverPlus || isAnyTeamObserverPlus) {
       emptyParams.additionalInfo = (
         <>
-          Create a new query, or{" "}
-          <CustomLink
-            url="https://mdmlabdm.com/docs/using-mdmlab/standard-query-library"
-            text="import Mdmlab's standard query library"
-            newTab
-          />
-        </>
+          Create a new query{" "}
+          </>
       );
       emptyParams.primaryButton = (
         <Button

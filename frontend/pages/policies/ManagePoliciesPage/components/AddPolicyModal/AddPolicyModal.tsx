@@ -32,21 +32,9 @@ const PLATFORM_FILTER_OPTIONS = [
     label: "All platforms",
     value: "all",
   },
-  {
-    label: "macOS",
-    value: "darwin",
-  },
-  {
+   {
     label: "Windows",
     value: "windows",
-  },
-  {
-    label: "Linux",
-    value: "linux",
-  },
-  {
-    label: "ChromeOS",
-    value: "chrome",
   },
 ];
 

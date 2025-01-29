@@ -25,10 +25,10 @@ const controlsSubNav: IControlsSubNavItem[] = [
     name: "OS settings",
     pathname: PATHS.CONTROLS_OS_SETTINGS,
   },
-  {
-    name: "Setup experience",
-    pathname: PATHS.CONTROLS_SETUP_EXPERIENCE,
-  },
+  // {
+  //   name: "Setup experience",
+  //   pathname: PATHS.CONTROLS_SETUP_EXPERIENCE,
+  // },
   {
     name: "Scripts",
     pathname: PATHS.CONTROLS_SCRIPTS,

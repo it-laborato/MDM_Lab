@@ -94,13 +94,7 @@ const QuerySidePanel = ({
       <QueryTablePlatforms platforms={platforms} />
       <QueryTableColumns columns={columns} />
       {examples && <QueryTableExample example={examples} />}
-      {notes && <QueryTableNotes notes={notes} />}
-      <CustomLink
-        url={`https://www.mdmlabdm.com/tables/${name}`}
-        text="Source"
-        newTab
-      />
-    </>
+     </>
   );
 };
 

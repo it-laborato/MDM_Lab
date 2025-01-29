@@ -124,24 +124,7 @@ const DiskEncryption = ({
     setIsLoadingTeam(false);
   }
 
-  const getTipContent = (platform: "windows" | "macOS" | "linux") => {
-    if (platform === "linux") {
-      return (
-        <>
-          For Ubuntu and Fedora Linux.
-          <br />
-          Currently, full disk encryption must be turned on{" "}
-          <b>
-            during OS
-            <br />
-            setup
-          </b>
-          . If disk encryption is off, the end user must re-install
-          <br />
-          their operating system.
-        </>
-      );
-    }
+  const getTipContent = (platform: "windows" ) => {
     const [AppleOrWindows, DEMethod] =
       platform === "windows"
         ? ["Windows", "BitLocker"]
@@ -161,13 +144,9 @@ const DiskEncryption = ({
   const subTitle = (
     <>
       Disk encryption is available on{" "}
-      <TooltipWrapper tipContent={getTipContent("macOS")}>macOS</TooltipWrapper>
-      ,{" "}
       <TooltipWrapper tipContent={getTipContent("windows")}>
         Windows
-      </TooltipWrapper>
-      , and{" "}
-      <TooltipWrapper tipContent={getTipContent("linux")}>Linux</TooltipWrapper>{" "}
+      </TooltipWrapper>{" "}
       nodes.
     </>
   );
@@ -206,12 +185,7 @@ const DiskEncryption = ({
               <p>
                 If turned on, nodes&apos; disk encryption keys will be stored in
                 Mdmlab{" "}
-                <CustomLink
-                  text="Learn more"
-                  url={`${LEARN_MORE_ABOUT_BASE_LINK}/mdm-disk-encryption`}
-                  newTab
-                />
-              </p>
+               </p>
               <Button
                 className={`${baseClass}__save-button`}
                 onClick={onUpdateDiskEncryption}
