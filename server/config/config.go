@@ -989,7 +989,7 @@ func (man Manager) addConfigs() {
 		man.addConfigString(prefix+".sql_mode", "", "MySQL sql_mode"+usageSuffix)
 	}
 	// MySQL
-	addMysqlConfig("mysql", "localhost:3306", ".")
+	addMysqlConfig("mysql", "localhost:3312", ".")
 	addMysqlConfig("mysql_read_replica", "", " for the read replica.")
 
 	// Redis

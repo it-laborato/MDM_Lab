@@ -6,7 +6,9 @@ services:
 
 
   mysql:
-    image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
+
+    image: mysql:8.0.36
+    platform: linux/x86_64
     volumes:
       - mysql-persistent-volume:/tmp
     command: [
@@ -22,10 +24,9 @@ services:
       MYSQL_DATABASE: mdmlab 
       MYSQL_USER: mdmlab
       MYSQL_PASSWORD: insecure
-      # This is required by Percona XtraDB server.
       CLUSTER_NAME: mdmlab
     ports:
-      - "3306:3306"
+      - "3312:3306"
 
   mysql_test:
     image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
