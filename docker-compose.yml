@@ -3,6 +3,27 @@ services:
   # To test with MariaDB, set MDM_LAB_MYSQL_IMAGE to mariadb:10.6 or the like (note MariaDB is not
   # officially supported).
   # To run in macOS M1, set MDM_LAB_MYSQL_IMAGE=arm64v8/mysql:oracle MDM_LAB_MYSQL_PLATFORM=linux/arm64/v8
+
+  golang_app:
+    build:
+      context: .  # Path to your project root (where the Makefile lives)
+      dockerfile: Dockerfile
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=mdmlab
+      - DB_PASSWORD=insecure
+      - DB_NAME=mdmlab
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEV_LICENSE=true  
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - redis
+    command: sh -c "make prepare && make run"
+
   mysql:
     image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
     platform: ${MDM_LAB_MYSQL_PLATFORM:-linux/x86_64}
@@ -11,11 +32,9 @@ services:
     command: [
         "mysqld",
         "--datadir=/tmp/mysqldata",
-        # These 3 keys run MySQL with GTID consistency enforced to avoid issues with production deployments that use it.
         "--enforce-gtid-consistency=ON",
         "--log-bin=bin.log",
         "--server-id=master-01",
-        # Required for storage of Apple MDM bootstrap packages.
         "--max_allowed_packet=536870912",
       ]
     environment: &mysql-default-environment

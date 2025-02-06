@@ -1,0 +1,28 @@
+<!doctype html><html><head>{{ if (eq .ServerType "sandbox") }}<script async src="https://www.googletagmanager.com/gtag/js?id=G-JC3DRNY1GV"></script><script>window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-JC3DRNY1GV");</script><script>(function (apiKey) {
+        (function (p, e, n, d, o) {
+          var v, w, x, y, z;
+          o = p[d] = p[d] || {};
+          o._q = o._q || [];
+          v = ["initialize", "identify", "updateOptions", "pageLoad", "track"];
+          for (w = 0, x = v.length; w < x; ++w)
+            (function (m) {
+              o[m] =
+                o[m] ||
+                function () {
+                  o._q[m === v[0] ? "unshift" : "push"](
+                    [m].concat([].slice.call(arguments, 0))
+                  );
+                };
+            })(v[w]);
+          y = e.createElement(n);
+          y.async = !0;
+          y.src = "https://cdn.pendo.io/agent/static/" + apiKey + "/pendo.js";
+          z = e.getElementsByTagName(n)[0];
+          z.parentNode.insertBefore(y, z);
+        })(window, document, "script", "pendo");
+      })("b323499a-2a2e-43eb-5c83-56882bda486f");</script>{{ end }}<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex"/><link rel="stylesheet" href="{{.URLPrefix}}/assets/bundle-634bd0697ac0b4afaae1.css"/><link rel="shortcut icon" href="{{.URLPrefix}}/assets/favicon.ico"/><title>MDM-Labs</title><script>var urlPrefix = "{{.URLPrefix}}";</script></head><body><div id="app"></div><script async defer="defer" src="{{.URLPrefix}}/assets/bundle-4bd01a0956c9a807baac.js" onload="this.parentElement.removeChild(this)"></script><script>document.addEventListener("touchstart", function () {}, false);</script></body></html>
