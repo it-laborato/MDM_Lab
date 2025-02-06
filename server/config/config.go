@@ -1022,7 +1022,7 @@ func (man Manager) addConfigs() {
 	man.addConfigDuration("redis.read_timeout", 10*time.Second, "Redis maximum amount of time to wait for a read (receive) on a connection")
 
 	// Server
-	man.addConfigString("server.address", "0.0.0.0:8080",
+	man.addConfigString("server.address", "0.0.0.0:8084",
 		"MDMlab server address (host:port)")
 	man.addConfigString("server.cert", "./tools/osquery/mdmlab.crt",
 		"MDMlab TLS certificate path")
