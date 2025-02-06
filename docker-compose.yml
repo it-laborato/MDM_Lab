@@ -4,29 +4,9 @@ services:
   # officially supported).
   # To run in macOS M1, set MDM_LAB_MYSQL_IMAGE=arm64v8/mysql:oracle MDM_LAB_MYSQL_PLATFORM=linux/arm64/v8
 
-  golang_app:
-    build:
-      context: .  # Path to your project root (where the Makefile lives)
-      dockerfile: Dockerfile
-    environment:
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_USER=mdmlab
-      - DB_PASSWORD=insecure
-      - DB_NAME=mdmlab
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - DEV_LICENSE=true  
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mysql
-      - redis
-    command: sh -c "make prepare && make run"
 
   mysql:
     image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
-    platform: ${MDM_LAB_MYSQL_PLATFORM:-linux/x86_64}
     volumes:
       - mysql-persistent-volume:/tmp
     command: [
@@ -49,7 +29,6 @@ services:
 
   mysql_test:
     image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
-    platform: ${MDM_LAB_MYSQL_PLATFORM:-linux/x86_64}
     # innodb-file-per-table=OFF gives ~20% speedup for test runs.
     command: [
         "mysqld",
@@ -75,7 +54,6 @@ services:
 
   mysql_replica_test:
     image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
-    platform: ${MDM_LAB_MYSQL_PLATFORM:-linux/x86_64}
     # innodb-file-per-table=OFF gives ~20% speedup for test runs.
     command: [
         "mysqld",
