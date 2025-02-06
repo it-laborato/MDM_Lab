@@ -1,13 +1,9 @@
 ---
 services:
-  # To test with MariaDB, set MDM_LAB_MYSQL_IMAGE to mariadb:10.6 or the like (note MariaDB is not
-  # officially supported).
-  # To run in macOS M1, set MDM_LAB_MYSQL_IMAGE=arm64v8/mysql:oracle MDM_LAB_MYSQL_PLATFORM=linux/arm64/v8
-
 
   mysql:
-    image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}
-    platform: ${MDM_LAB_MYSQL_PLATFORM:-linux/x86_64}
+    image: mysql:8.0.36
+    platform: linux/x86_64
     volumes:
       - mysql-persistent-volume:/tmp
     command: [
@@ -23,10 +19,9 @@ services:
       MYSQL_DATABASE: mdmlab 
       MYSQL_USER: mdmlab
       MYSQL_PASSWORD: insecure
-      # This is required by Percona XtraDB server.
       CLUSTER_NAME: mdmlab
     ports:
-      - "3306:3306"
+      - "3312:3306"
 
   mysql_test:
     image: ${MDM_LAB_MYSQL_IMAGE:-mysql:8.0.36}

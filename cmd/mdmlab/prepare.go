@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mixer/clock"
-	"github.com/spf13/cobra"
 	"github.com/it-laborato/MDM_Lab/server/config"
 	"github.com/it-laborato/MDM_Lab/server/datastore/mysql"
 	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/mixer/clock"
+	"github.com/spf13/cobra"
 )
 
 func createPrepareCmd(configManager config.Manager) *cobra.Command {
