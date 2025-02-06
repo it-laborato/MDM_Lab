@@ -102,8 +102,6 @@ prepare:
 	./build/mdmlab prepare db --dev
 run:
 	./build/mdmlab serve --dev --dev_license --server_private_key=DVa/QbMoGgcc24RygI4LuukIvaVert0raKl9yWnV+Ls= \
-	--mdm_windows_wstep_identity_cert= ./mdmlab-mdm-win-wstep.crt\
-	--mdm_windows_wstep_identity_key= ./mdmlab-mdm-win-wstep.key
 
 osquery:
 ifndef ENROLL_SECRET
@@ -243,7 +241,7 @@ generate-ci:
 	NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=development yarn run webpack
 	make generate-go
 
-generate-js: clean-assets .prefix
+generate-js: .prefix
 	NODE_ENV=production yarn run webpack --progress
 
 generate-go: .prefix

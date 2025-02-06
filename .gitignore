@@ -4,20 +4,20 @@
 # output directories
 /build
 vendor
-node_modules
+# node_modules
 dist
 
 # generated artifacts
-assets/bundle*.*
-assets/*@*.svg
-assets/*@*.png
-assets/*@*.gif
-assets/*@*.eot
-assets/*@*.woff
-assets/*@*.woff2
-assets/*@*.ttf
-frontend/templates/react.tmpl
-bindata.go
+# assets/bundle*.*
+# assets/*@*.svg
+# assets/*@*.png
+# assets/*@*.gif
+# assets/*@*.eot
+# assets/*@*.woff
+# assets/*@*.woff2
+# assets/*@*.ttf
+# frontend/templates/react.tmpl
+# bindata.go
 server/bindata/generated.go
 *.cover
 *.test
