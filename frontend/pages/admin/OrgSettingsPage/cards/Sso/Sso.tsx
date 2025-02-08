@@ -245,17 +245,7 @@ const Sso = ({
               name="enableJitProvisioning"
               value={enableJitProvisioning}
               parseTarget
-              helpText={
-                <>
-                  <CustomLink
-                    url={`${LEARN_MORE_ABOUT_BASE_LINK}/just-in-time-provisioning`}
-                    text="Learn more"
-                    newTab
-                  />{" "}
-                  about just-in-time (JIT) user provisioning.
-                </>
-              }
-            >
+             >
               Create user and sync permissions on login
             </Checkbox>
           )}

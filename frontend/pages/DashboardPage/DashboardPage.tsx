@@ -612,11 +612,11 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     ),
   });
 
-  const LearnMdmlabCard = useInfoCard({
-    title: "Learn how to use Mdmlab",
-    showTitle: true,
-    children: <LearnMdmlab />,
-  });
+  // const LearnMdmlabCard = useInfoCard({
+  //   title: "Learn how to use Mdmlab",
+  //   showTitle: true,
+  //   children: <LearnMdmlab />,
+  // });
 
   const ActivityFeedCard = useInfoCard({
     title: "Activity",
@@ -742,7 +742,6 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
           nodeSummaryData?.totals_hosts_count < 2 && (
             <>
               {WelcomeNodeCard}
-              {LearnMdmlabCard}
             </>
           )}
         {showSoftwareCard && SoftwareCard}

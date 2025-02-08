@@ -84,13 +84,7 @@ const Agents = ({
             Agent options configure Mdmlab&apos;s agent (mdmlabd). When you update
             agent options, they will be applied the next time a node checks in
             to Mdmlab.{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/docs/configuration/agent-configuration"
-              text="Learn more about agent options"
-              newTab
-              multiline
-            />
-          </p>
+                      </p>
           {isPremiumTier ? (
             <InfoBanner>
               These options are not applied to nodes on a team. To update agent

@@ -61,12 +61,7 @@ const Statistics = ({
             submit usage statistics data.
             <br />
             <br />
-            <CustomLink
-              url="https://mdmlabdm.com/docs/using-mdmlab/usage-statistics#usage-statistics"
-              text="Learn more about usage statistics"
-              newTab
-            />
-          </p>
+                     </p>
           <Checkbox
             onChange={onInputChange}
             name="enableUsageStatistics"

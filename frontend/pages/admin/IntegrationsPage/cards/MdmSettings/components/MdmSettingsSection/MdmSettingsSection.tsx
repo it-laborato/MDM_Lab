@@ -48,12 +48,6 @@ const MdmSettingsSection = ({
 
     return (
       <div className={`${baseClass}__content`}>
-        <AppleMdmCard
-          appleAPNSInfo={appleAPNSInfo}
-          errorData={appleAPNSError}
-          turnOnAppleMdm={navigateToAppleMdm}
-          viewDetails={navigateToAppleMdm}
-        />
         <WindowsMdmCard
           turnOnWindowsMdm={navigateToWindowsMdm}
           editWindowsMdm={navigateToWindowsMdm}

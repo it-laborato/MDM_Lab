@@ -19,13 +19,7 @@ const EmptyTeamsTable = ({
       additionalInfo={
         <>
           {" "}
-          Want to learn more?&nbsp;
-          <CustomLink
-            url="https://mdmlabdm.com/docs/using-mdmlab/teams"
-            text="Read about teams"
-            newTab
-          />
-        </>
+          </>
       }
       primaryButton={
         <Button

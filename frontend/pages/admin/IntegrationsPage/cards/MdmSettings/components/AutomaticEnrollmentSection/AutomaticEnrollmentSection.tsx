@@ -37,12 +37,7 @@ const AutomaticEnrollmentSection = ({
         <PremiumFeatureMessage alignment="left" />
       ) : (
         <div className={`${baseClass}__content`}>
-          <AppleAutomaticEnrollmentCard
-            viewDetails={navigateToAppleAutomaticEnrollment}
-            isAppleMdmOn={!!config?.mdm.enabled_and_configured}
-            configured={!!config?.mdm.apple_bm_enabled_and_configured}
-          />
-          <WindowsAutomaticEnrollmentCard
+           <WindowsAutomaticEnrollmentCard
             viewDetails={navigateToWindowsAutomaticEnrollment}
           />
         </div>

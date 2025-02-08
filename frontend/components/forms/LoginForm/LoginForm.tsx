@@ -187,14 +187,7 @@ const LoginForm = ({
           </Button>
           {ssoEnabled && renderSingleSignOnButton()}
         </div>
-        <div className={`${baseClass}__forgot-wrap`}>
-          <Link
-            className={`${baseClass}__forgot-link`}
-            to={paths.FORGOT_PASSWORD}
-          >
-            Forgot password?
-          </Link>
-        </div>
+      
       </div>
     </form>
   );
