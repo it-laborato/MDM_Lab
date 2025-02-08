@@ -298,7 +298,7 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	go s.ListenAndServe()
+	go s.ListenAndServeTLS("cert.pem", "key.pem")
 
 	ue.GET("/api/_version_/mdmlab/config/certificate", getCertificateEndpoint, nil)
 	ue.GET("/api/_version_/mdmlab/config", getAppConfigEndpoint, nil)
