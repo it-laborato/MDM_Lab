@@ -13,7 +13,7 @@ import (
 
 const (
 	directoryReference = "ORBITROOT"
-	imageName          = "mdmlabdm/wix:latest"
+	imageName          = "fleetdm/wix:latest"
 	dockerPlatform     = "linux/amd64"
 	WineCmd            = "wine64"
 )

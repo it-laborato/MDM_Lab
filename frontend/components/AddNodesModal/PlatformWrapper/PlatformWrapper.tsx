@@ -250,39 +250,41 @@ const PlatformWrapper = ({
       return false;
     };
 
-    return (
-      <>
-        {packageType !== "plain-osquery" && (
-          <span className={`${baseClass}__cta`}>
-            Run this command with the{" "}
-            <a
-              className={`${baseClass}__command-line-tool`}
-              href="https://mdmlabdm.com/learn-more-about/installing-mdmlabctl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Mdmlab command-line tool
-            </a>{" "}
-            :
-          </span>
-        )}{" "}
-        <span className="buttons">
-          <Button
-            variant="unstyled"
-            className={`${baseClass}__installer-copy-icon`}
-            onClick={onCopyInstaller}
-          >
-            <Icon name="copy" />
-          </Button>
-          {copyMessage[packageType] && (
-            <span
-              className={`${baseClass}__copy-message`}
-            >{`${copyMessage[packageType]} `}</span>
-          )}
-        </span>
-      </>
-    );
-  };
+ return (
+  <>
+    {packageType !== "plain-osquery" && (
+      <span className={`${baseClass}__cta`}>
+        Run this command with the{" "}
+        <a>
+          Mdmlab command-line tool
+        </a>{" "}
+        :
+        {/* Add the Download button here */}
+        <Button
+          variant="brand"
+          className={`${baseClass}__download-button`}
+          onClick={() => window.location.href = "http://localhost:8085/api/latest/download"}
+        >
+          Download
+        </Button>
+      </span>
+    )}{" "}
+    <span className="buttons">
+      <Button
+        variant="unstyled"
+        className={`${baseClass}__installer-copy-icon`}
+        onClick={onCopyInstaller}
+      >
+        <Icon name="copy" />
+      </Button>
+      {copyMessage[packageType] && (
+        <span
+          className={`${baseClass}__copy-message`}
+        >{`${copyMessage[packageType]} `}</span>
+      )}
+    </span>
+  </>
+); };
 
   const renderChromeOSLabel = (label: string, value: string) => {
     const onCopyChromeOSLabel = (evt: React.MouseEvent) => {
