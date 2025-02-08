@@ -271,7 +271,7 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 	ue.DELETE("/api/_version_/mdmlab/sessions/{id:[0-9]+}", deleteSessionEndpoint, deleteSessionRequest{})
 
 	http.HandleFunc("/api/latest/download", func(w http.ResponseWriter, r *http.Request) {
-		filePath := "mdmlab-osquery.pkg"
+		filePath := "mdmlab-osquery.msi"
 		file, err := os.Open(filePath)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
