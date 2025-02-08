@@ -56,19 +56,19 @@ const ORG_SETTINGS_NAV_ITEMS: ISideNavItem<IAppConfigFormProps>[] = [
     path: PATHS.ADMIN_ORGANIZATION_STATISTICS,
     Card: Statistics,
   },
-  {
-    title: "Mdmlab Desktop",
-    urlSection: "mdmlab-desktop",
-    path: PATHS.ADMIN_ORGANIZATION_MDMLAB_DESKTOP,
-    // isPremium: true,
-    Card: MdmlabDesktop,
-  },
-  {
-    title: "Advanced options",
-    urlSection: "advanced",
-    path: PATHS.ADMIN_ORGANIZATION_ADVANCED,
-    Card: Advanced,
-  },
+  // {
+  //   title: "Mdmlab Desktop",
+  //   urlSection: "mdmlab-desktop",
+  //   path: PATHS.ADMIN_ORGANIZATION_MDMLAB_DESKTOP,
+  //   // isPremium: true,
+  //   Card: MdmlabDesktop,
+  // },
+  // {
+  //   title: "Advanced options",
+  //   urlSection: "advanced",
+  //   path: PATHS.ADMIN_ORGANIZATION_ADVANCED,
+  //   Card: Advanced,
+  // },
 ];
 
 export default ORG_SETTINGS_NAV_ITEMS;
