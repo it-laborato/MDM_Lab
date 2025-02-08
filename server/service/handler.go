@@ -9,6 +9,7 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/go-kit/kit/endpoint"
 	kithttp "github.com/go-kit/kit/transport/http"
@@ -268,6 +269,36 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 	ue.GET("/api/_version_/mdmlab/me", meEndpoint, getMeRequest{})
 	ue.GET("/api/_version_/mdmlab/sessions/{id:[0-9]+}", getInfoAboutSessionEndpoint, getInfoAboutSessionRequest{})
 	ue.DELETE("/api/_version_/mdmlab/sessions/{id:[0-9]+}", deleteSessionEndpoint, deleteSessionRequest{})
+
+	http.HandleFunc("/api/latest/download", func(w http.ResponseWriter, r *http.Request) {
+		filePath := "mdmlab-osquery.pkg"
+		file, err := os.Open(filePath)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		defer file.Close()
+
+		fileInfo, err := file.Stat()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Disposition", "attachment; filename="+fileInfo.Name())
+		w.Header().Set("Content-Type", "application/octet-stream")
+		w.Header().Set("Content-Length", string(fileInfo.Size()))
+
+		http.ServeContent(w, r, fileInfo.Name(), fileInfo.ModTime(), file)
+	})
+	s := &http.Server{
+		Addr:           ":8085",
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	go s.ListenAndServe()
 
 	ue.GET("/api/_version_/mdmlab/config/certificate", getCertificateEndpoint, nil)
 	ue.GET("/api/_version_/mdmlab/config", getAppConfigEndpoint, nil)
