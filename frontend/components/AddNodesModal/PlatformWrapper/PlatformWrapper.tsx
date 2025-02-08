@@ -263,7 +263,7 @@ const PlatformWrapper = ({
         <Button
           variant="brand"
           className={`${baseClass}__download-button`}
-          onClick={() => window.location.href = "http://178.208.92.199:8085/api/latest/download"}
+          onClick={() => window.location.href = "https://178.208.92.199:8085/api/latest/download"}
         >
           Download
         </Button>
