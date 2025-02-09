@@ -136,13 +136,13 @@ func buildNFPM(opt Options, pkger nfpm.Packager) (string, error) {
 		}
 	}
 
-	if opt.FleetCertificate != "" {
+	if opt.MdmlabCertificate != "" {
 		if err := writeMDMlabServerCertificate(opt, orbitRoot); err != nil {
 			return "", fmt.Errorf("write mdmlab server certificate: %w", err)
 		}
 	}
 
-	if opt.FleetTLSClientCertificate != "" {
+	if opt.MdmlabTLSClientCertificate != "" {
 		if err := writeMDMlabClientCertificate(opt, orbitRoot); err != nil {
 			return "", fmt.Errorf("write mdmlab client certificate: %w", err)
 		}
