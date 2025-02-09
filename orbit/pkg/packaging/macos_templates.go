@@ -24,11 +24,11 @@ var macosPackageInfoTemplate = template.Must(template.New("").Option("missingkey
 var macosDistributionTemplate = template.Must(template.New("").Option("missingkey=error").Parse(
 	`<?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
-	<titleMDMlab osquery</title>
+	<title>MDMlab osquery</title>
 	<choices-outline>
 	    <line choice="choiceBase"/>
     </choices-outline>
-    <choice id="choiceBase" title=MDMlab osquery" enabled="false" selected="true" description="Standard installation for Fleet osquery.">
+    <choice id="choiceBase" title="MDMlab osquery" enabled="false" selected="true" description="Standard installation for MDMlab osquery.">
         <pkg-ref id="{{.Identifier}}.base.pkg"/>
     </choice>
     {{/* base.pkg specified here is the foldername that contains the package contents */}}
@@ -54,11 +54,11 @@ ln -sf /opt/orbit /var/lib/orbit
 {{- end }}
 
 {{ if .StartService -}}
-DAEMON_LABEL="com.fleetdm.orbit"
+DAEMON_LABEL="com.mdmlabdm.orbit"
 DAEMON_PLIST="/Library/LaunchDaemons/${DAEMON_LABEL}.plist"
 
 # Stop the previous desktop agent
-pkill fleet-desktop || true
+pkill mdmlab-desktop || true
 # Remove any pre-existing version of the config
 launchctl bootout "system/${DAEMON_LABEL}"
 
@@ -110,7 +110,7 @@ var macosLaunchdTemplate = template.Must(template.New("").Option("missingkey=err
 		{{- end }}
 		{{- if .MDMlabCertificate }}
 		<key>ORBIT_FLEET_CERTIFICATE</key>
-		<string>/opt/orbit/fleet.pem</string>
+		<string>/opt/orbit/mdmlab.pem</string>
 		{{- end }}
 		{{- if .EnrollSecret }}
 		<key>ORBIT_ENROLL_SECRET_PATH</key>
@@ -170,7 +170,7 @@ var macosLaunchdTemplate = template.Must(template.New("").Option("missingkey=err
 	<key>KeepAlive</key>
 	<true/>
 	<key>Label</key>
-	<string>com.fleetdm.orbit</string>
+	<string>com.mdmlabdm.orbit</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/opt/orbit/bin/orbit/orbit</string>
