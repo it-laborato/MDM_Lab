@@ -122,13 +122,13 @@ func BuildPkg(opt Options) (string, error) {
 		}
 	}
 
-	if opt.MDMlabCertificate != "" {
+	if opt.FleetCertificate != "" {
 		if err := writeMDMlabServerCertificate(opt, orbitRoot); err != nil {
 			return "", fmt.Errorf("write mdmlab server certificate: %w", err)
 		}
 	}
 
-	if opt.MDMlabTLSClientCertificate != "" {
+	if opt.FleetTLSClientCertificate != "" {
 		if err := writeMDMlabClientCertificate(opt, orbitRoot); err != nil {
 			return "", fmt.Errorf("write mdmlab client certificate: %w", err)
 		}
@@ -287,7 +287,7 @@ func writeDistribution(opt Options, rootPath string) error {
 func writeMDMlabServerCertificate(opt Options, orbitRoot string) error {
 	dstPath := filepath.Join(orbitRoot, "mdmlab.pem")
 
-	if err := file.Copy(opt.MDMlabCertificate, dstPath, 0o644); err != nil {
+	if err := file.Copy(opt.FleetCertificate, dstPath, 0o644); err != nil {
 		return fmt.Errorf("write mdmlab server certificate: %w", err)
 	}
 
@@ -306,11 +306,11 @@ func writeUpdateServerCertificate(opt Options, orbitRoot string) error {
 
 func writeMDMlabClientCertificate(opt Options, orbitRoot string) error {
 	dstPath := filepath.Join(orbitRoot, constant.MDMlabTLSClientCertificateFileName)
-	if err := file.Copy(opt.MDMlabTLSClientCertificate, dstPath, constant.DefaultFileMode); err != nil {
+	if err := file.Copy(opt.FleetTLSClientCertificate, dstPath, constant.DefaultFileMode); err != nil {
 		return fmt.Errorf("write mdmlab certificate file: %w", err)
 	}
 	dstPath = filepath.Join(orbitRoot, constant.MDMlabTLSClientKeyFileName)
-	if err := file.Copy(opt.MDMlabTLSClientKey, dstPath, constant.DefaultFileMode); err != nil {
+	if err := file.Copy(opt.FleetTLSClientKey, dstPath, constant.DefaultFileMode); err != nil {
 		return fmt.Errorf("write mdmlab key file: %w", err)
 	}
 	return nil

@@ -13,10 +13,10 @@ import (
 	"github.com/goreleaser/nfpm/v2"
 	"github.com/goreleaser/nfpm/v2/files"
 	"github.com/goreleaser/nfpm/v2/rpm"
-	"github.com/rs/zerolog/log"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
 	"github.com/it-laborato/MDM_Lab/pkg/secure"
+	"github.com/rs/zerolog/log"
 )
 
 func buildNFPM(opt Options, pkger nfpm.Packager) (string, error) {
@@ -136,13 +136,13 @@ func buildNFPM(opt Options, pkger nfpm.Packager) (string, error) {
 		}
 	}
 
-	if opt.MDMlabCertificate != "" {
+	if opt.FleetCertificate != "" {
 		if err := writeMDMlabServerCertificate(opt, orbitRoot); err != nil {
 			return "", fmt.Errorf("write mdmlab server certificate: %w", err)
 		}
 	}
 
-	if opt.MDMlabTLSClientCertificate != "" {
+	if opt.FleetTLSClientCertificate != "" {
 		if err := writeMDMlabClientCertificate(opt, orbitRoot); err != nil {
 			return "", fmt.Errorf("write mdmlab client certificate: %w", err)
 		}
