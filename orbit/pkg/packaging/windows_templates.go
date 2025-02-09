@@ -30,15 +30,15 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
   <Product
     Id="*"
-    Name="Fleet osquery"
+    Name="MDMLab osquery"
     Language="1033"
     Version="{{.Version}}"
-    Manufacturer="Fleet Device Management (fleetdm.com)"
+    Manufacturer="MDMLAB Device Management"
     UpgradeCode="B681CB20-107E-428A-9B14-2D3C1AFED244" >
 
     <Package
-      Keywords='Fleet osquery'
-      Description="Fleet osquery"
+      Keywords='MDMLAB osquery'
+      Description="MDMLAB osquery"
       InstallerVersion="500"
       Compressed="yes"
       InstallScope="perMachine"
@@ -102,12 +102,12 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
                   ##############################################################################################
                   -->
                 <ServiceInstall
-                  Name="Fleet osquery"
+                  Name="MDMLAB osquery"
                   Account="LocalSystem"
                   ErrorControl="ignore"
                   Start="auto"
                   Type="ownProcess"
-                  Description="This service runs Fleet's osquery runtime and autoupdater (Orbit)."
+                  Description="This service runs mdmlab's osquery runtime and autoupdater (Orbit)."
                   Arguments='--root-dir "[ORBITROOT]." --log-file "[System64Folder]config\systemprofile\AppData\Local\FleetDM\Orbit\Logs\orbit-osquery.log" --mdmlab-url "[FLEET_URL]"{{ if .FleetCertificate }} --mdmlab-certificate "[ORBITROOT]fleet.pem"{{ end }}{{ if .EnrollSecret }} --enroll-secret-path "[ORBITROOT]secret.txt"{{ end }}{{if .Insecure }} --insecure{{ end }}{{ if .Debug }} --debug{{ end }}{{ if .UpdateURL }} --update-url "{{ .UpdateURL }}"{{ end }}{{ if .UpdateTLSServerCertificate }} --update-tls-certificate "[ORBITROOT]update.pem"{{ end }}{{ if .DisableUpdates }} --disable-updates{{ end }} --mdmlab-desktop="[FLEET_DESKTOP]" --desktop-channel {{ .DesktopChannel }}{{ if .FleetDesktopAlternativeBrowserHost }} --mdmlab-desktop-alternative-browser-host {{ .FleetDesktopAlternativeBrowserHost }}{{ end }} --orbit-channel "{{ .OrbitChannel }}" --osqueryd-channel "{{ .OsquerydChannel }}" --enable-scripts="[ENABLE_SCRIPTS]" {{ if and (ne .HostIdentifier "") (ne .HostIdentifier "uuid") }}--host-identifier={{ .HostIdentifier }}{{ end }}{{ $endUserEmailArg }}{{ if .OsqueryDB }} --osquery-db="{{ .OsqueryDB }}"{{ end }}'
                 >
                   <util:ServiceConfig
@@ -200,7 +200,7 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
       <Custom Action="CA_RemoveRebootPending" Before='InstallFiles'>NOT Installed</Custom> <!-- It removes reboot pending Orbit files -->
     </InstallExecuteSequence>
 
-    <Feature Id="Orbit" Title="Fleet osquery" Level="1" Display="hidden">
+    <Feature Id="Orbit" Title="MdmLab osquery" Level="1" Display="hidden">
       <ComponentGroupRef Id="OrbitFiles" />
       <ComponentRef Id="C_ORBITBIN" />
       <ComponentRef Id="C_ORBITROOT" />
@@ -566,7 +566,7 @@ function Force-Remove-Orbit {
     Stop-Orbit
 
     #Remove Service
-    $service = Get-WmiObject -Class Win32_Service -Filter "Name='Fleet osquery'"
+    $service = Get-WmiObject -Class Win32_Service -Filter "Name='MDMLAB osquery'"
     if ($service) {
       $service.delete() | Out-Null
     }
@@ -579,7 +579,7 @@ function Force-Remove-Orbit {
     Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" -Recurse  -ErrorAction "SilentlyContinue" |  Where-Object {($_.ValueCount -gt 0)} | ForEach-Object {
 
       # Filter for osquery entries
-      $properties = Get-ItemProperty -LiteralPath $_.PSPath  -ErrorAction "SilentlyContinue" |  Where-Object {($_.DisplayName -eq "Fleet osquery")}
+      $properties = Get-ItemProperty -LiteralPath $_.PSPath  -ErrorAction "SilentlyContinue" |  Where-Object {($_.DisplayName -eq "MDMLAB osquery")}
       if ($properties) {
 
         #Remove Registry Entries
@@ -661,7 +661,7 @@ function Graceful-Product-Uninstall($productName) {
       return $false
     }
 
-    if ($productName -eq "Fleet osquery") {
+    if ($productName -eq "MDMLAB osquery") {
       Stop-Orbit
     } elseif ($productName -eq "osquery") {
       Stop-Osquery
@@ -760,7 +760,7 @@ function Main {
     } elseif ($uninstallOrbit) {
       Write-Host "About to uninstall Orbit." -foregroundcolor Yellow
 
-      #if (Graceful-Product-Uninstall("Fleet osquery")) {
+      #if (Graceful-Product-Uninstall("MDMLAB osquery")) {
       if ($false) {
         Force-Remove-Orbit #best effort action to ensure cleanup after graceful uninstall
         Write-Host "Orbit was gracefully uninstalled." -foregroundcolor Cyan
