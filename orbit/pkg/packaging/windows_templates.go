@@ -33,12 +33,12 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
     Name="Fleet osquery"
     Language="1033"
     Version="{{.Version}}"
-    Manufacturer="MDMlab Device Management"
+    Manufacturer="Fleet Device Management (fleetdm.com)"
     UpgradeCode="B681CB20-107E-428A-9B14-2D3C1AFED244" >
 
     <Package
-      Keywords='MDMlab osquery'
-      Description="MDMlab osquery"
+      Keywords='Fleet osquery'
+      Description="Fleet osquery"
       InstallerVersion="500"
       Compressed="yes"
       InstallScope="perMachine"
@@ -48,16 +48,16 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
     <Property Id="REINSTALLMODE" Value="amus" />
 
     <Property Id="APPLICATIONFOLDER">
-      <RegistrySearch Key="SOFTWARE\MDMlabDM\Orbit" Root="HKLM" Type="raw" Id="APPLICATIONFOLDER_REGSEARCH" Name="Path" />
+      <RegistrySearch Key="SOFTWARE\FleetDM\Orbit" Root="HKLM" Type="raw" Id="APPLICATIONFOLDER_REGSEARCH" Name="Path" />
     </Property>
 
     <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
     <Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />
 
-    <Property Id="MDMLAB_URL" Value="{{ if .MDMlabURL }}{{ .MDMlabURL }}{{ end }}"/>
-    <Property Id="MDMLAB_SECRET" Value="dummy"/>
+    <Property Id="FLEET_URL" Value="{{ if .MDMlabURL }}{{ .MDMlabURL }}{{ end }}"/>
+    <Property Id="FLEET_SECRET" Value="dummy"/>
     <Property Id="ENABLE_SCRIPTS" Value="{{ if .EnableScripts }}True{{ else }}False{{ end }}"/>
-	<Property Id="MDMLAB_DESKTOP" Value="{{ if .Desktop }}True{{ else }}False{{ end }}"/>
+	<Property Id="FLEET_DESKTOP" Value="{{ if .Desktop }}True{{ else }}False{{ end }}"/>
 	{{ $endUserEmailArg := "" }}
     {{ if .EnableEndUserEmailProperty }}
 		<Property Id="END_USER_EMAIL" Value="{{ if .EndUserEmail }}{{ .EndUserEmail }}{{ else }}dummy{{end}}"/>
@@ -102,13 +102,13 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
                   ##############################################################################################
                   -->
                 <ServiceInstall
-                  Name="MDMlab osquery"
+                  Name="Fleet osquery"
                   Account="LocalSystem"
                   ErrorControl="ignore"
                   Start="auto"
                   Type="ownProcess"
-                  Description="This service runs MDMlab's osquery runtime and autoupdater (Orbit)."
-                  Arguments='--root-dir "[ORBITROOT]." --log-file "[System64Folder]config\systemprofile\AppData\Local\MDMlabDM\Orbit\Logs\orbit-osquery.log" --mdmlab-url "[MDMLAB_URL]"{{ if .MDMlabCertificate }} --mdmlab-certificate "[ORBITROOT]mdmlab.pem"{{ end }}{{ if .EnrollSecret }} --enroll-secret-path "[ORBITROOT]secret.txt"{{ end }}{{if .Insecure }} --insecure{{ end }}{{ if .Debug }} --debug{{ end }}{{ if .UpdateURL }} --update-url "{{ .UpdateURL }}"{{ end }}{{ if .UpdateTLSServerCertificate }} --update-tls-certificate "[ORBITROOT]update.pem"{{ end }}{{ if .DisableUpdates }} --disable-updates{{ end }} --mdmlab-desktop="[MDMLAB_DESKTOP]" --desktop-channel {{ .DesktopChannel }}{{ if .MDMlabDesktopAlternativeBrowserHost }} --mdmlab-desktop-alternative-browser-host {{ .MDMlabDesktopAlternativeBrowserHost }}{{ end }} --orbit-channel "{{ .OrbitChannel }}" --osqueryd-channel "{{ .OsquerydChannel }}" --enable-scripts="[ENABLE_SCRIPTS]" {{ if and (ne .HostIdentifier "") (ne .HostIdentifier "uuid") }}--host-identifier={{ .HostIdentifier }}{{ end }}{{ $endUserEmailArg }}{{ if .OsqueryDB }} --osquery-db="{{ .OsqueryDB }}"{{ end }}'
+                  Description="This service runs Fleet's osquery runtime and autoupdater (Orbit)."
+                  Arguments='--root-dir "[ORBITROOT]." --log-file "[System64Folder]config\systemprofile\AppData\Local\FleetDM\Orbit\Logs\orbit-osquery.log" --mdmlab-url "[FLEET_URL]"{{ if .MDMlabCertificate }} --mdmlab-certificate "[ORBITROOT]mdmlab.pem"{{ end }}{{ if .EnrollSecret }} --enroll-secret-path "[ORBITROOT]secret.txt"{{ end }}{{if .Insecure }} --insecure{{ end }}{{ if .Debug }} --debug{{ end }}{{ if .UpdateURL }} --update-url "{{ .UpdateURL }}"{{ end }}{{ if .UpdateTLSServerCertificate }} --update-tls-certificate "[ORBITROOT]update.pem"{{ end }}{{ if .DisableUpdates }} --disable-updates{{ end }} --mdmlab-desktop="[FLEET_DESKTOP]" --desktop-channel {{ .DesktopChannel }}{{ if .MDMlabDesktopAlternativeBrowserHost }} --mdmlab-desktop-alternative-browser-host {{ .DesktopAlternativeBrowserHost }}{{ end }} --orbit-channel "{{ .OrbitChannel }}" --osqueryd-channel "{{ .OsquerydChannel }}" --enable-scripts="[ENABLE_SCRIPTS]" {{ if and (ne .HostIdentifier "") (ne .HostIdentifier "uuid") }}--host-identifier={{ .HostIdentifier }}{{ end }}{{ $endUserEmailArg }}{{ if .OsqueryDB }} --osquery-db="{{ .OsqueryDB }}"{{ end }}'
                 >
                   <util:ServiceConfig
                     FirstFailureActionType="restart"
@@ -120,7 +120,7 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
                 </ServiceInstall>
                 <ServiceControl
                   Id="StartOrbitService"
-                  Name="MDMlab osquery"
+                  Name="Fleet osquery"
                   Start="install"
                   Stop="both"
                   Remove="uninstall"
@@ -159,7 +159,7 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
    <SetProperty Id="CA_UpdateSecret"
                  Before ="CA_UpdateSecret"
                  Sequence="execute"
-                 Value='&quot;[POWERSHELLEXE]&quot; -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -File "[ORBITROOT]installer_utils.ps1" -updateSecret "[MDMLAB_SECRET]"' />
+                 Value='&quot;[POWERSHELLEXE]&quot; -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -File "[ORBITROOT]installer_utils.ps1" -updateSecret "[FLEET_SECRET]"' />
 
     <CustomAction Id="CA_UpdateSecret"
                   BinaryKey="WixCA"
@@ -200,7 +200,7 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
       <Custom Action="CA_RemoveRebootPending" Before='InstallFiles'>NOT Installed</Custom> <!-- It removes reboot pending Orbit files -->
     </InstallExecuteSequence>
 
-    <Feature Id="Orbit" Title="MDMlab osquery" Level="1" Display="hidden">
+    <Feature Id="Orbit" Title="Fleet osquery" Level="1" Display="hidden">
       <ComponentGroupRef Id="OrbitFiles" />
       <ComponentRef Id="C_ORBITBIN" />
       <ComponentRef Id="C_ORBITROOT" />
@@ -215,7 +215,7 @@ var windowsOsqueryEventLogTemplate = template.Must(template.New("").Option("miss
 <instrumentationManifest xsi:schemaLocation="http://schemas.microsoft.com/win/2004/08/events eventman.xsd" xmlns="http://schemas.microsoft.com/win/2004/08/events" xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:trace="http://schemas.microsoft.com/win/2004/08/events/trace">
 	<instrumentation>
 		<events>
-			<provider name="MDMlabDM" guid="{F7740E18-3259-434F-9759-976319968900}" symbol="OsqueryWindowsEventLogProvider" resourceFileName="%systemdrive%\Program Files\Orbit\bin\osqueryd\windows\{{ .OsquerydChannel }}\osqueryd.exe" messageFileName="%systemdrive%\Program Files\Orbit\bin\osqueryd\windows\{{ .OsquerydChannel }}\osqueryd.exe">
+			<provider name="FleetDM" guid="{F7740E18-3259-434F-9759-976319968900}" symbol="OsqueryWindowsEventLogProvider" resourceFileName="%systemdrive%\Program Files\Orbit\bin\osqueryd\windows\{{ .OsquerydChannel }}\osqueryd.exe" messageFileName="%systemdrive%\Program Files\Orbit\bin\osqueryd\windows\{{ .OsquerydChannel }}\osqueryd.exe">
 				<events>
 					<event symbol="DebugMessage" value="1" version="0" channel="osquery" level="win:Warning" task="LogMessage" opcode="MessageOpcode" template="_template_message" keywords="DebugWindowsEventLogMessage " message="$(string.osquery.event.1.message)"></event>
 					<event symbol="InfoMessage" value="2" version="0" channel="osquery" level="win:Informational" task="LogMessage" opcode="MessageOpcode" template="_template_message" keywords="InfoWindowsEventLogMessage " message="$(string.osquery.event.2.message)"></event>
@@ -532,7 +532,7 @@ function Stop-Osquery {
 function Stop-Orbit {
 
   # Stop Service
-  Stop-Service -Name "MDMlab osquery" -ErrorAction "Continue"
+  Stop-Service -Name "Fleet osquery" -ErrorAction "Continue"
   Start-Sleep -Milliseconds 1000
 
   # Ensure that no process left running
@@ -566,7 +566,7 @@ function Force-Remove-Orbit {
     Stop-Orbit
 
     #Remove Service
-    $service = Get-WmiObject -Class Win32_Service -Filter "Name='MDMlab osquery'"
+    $service = Get-WmiObject -Class Win32_Service -Filter "Name='Fleet osquery'"
     if ($service) {
       $service.delete() | Out-Null
     }
@@ -579,7 +579,7 @@ function Force-Remove-Orbit {
     Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" -Recurse  -ErrorAction "SilentlyContinue" |  Where-Object {($_.ValueCount -gt 0)} | ForEach-Object {
 
       # Filter for osquery entries
-      $properties = Get-ItemProperty -LiteralPath $_.PSPath  -ErrorAction "SilentlyContinue" |  Where-Object {($_.DisplayName -eq "MDMlab osquery")}
+      $properties = Get-ItemProperty -LiteralPath $_.PSPath  -ErrorAction "SilentlyContinue" |  Where-Object {($_.DisplayName -eq "Fleet osquery")}
       if ($properties) {
 
         #Remove Registry Entries
@@ -661,7 +661,7 @@ function Graceful-Product-Uninstall($productName) {
       return $false
     }
 
-    if ($productName -eq "MDMlab osquery") {
+    if ($productName -eq "Fleet osquery") {
       Stop-Orbit
     } elseif ($productName -eq "osquery") {
       Stop-Osquery
@@ -760,7 +760,7 @@ function Main {
     } elseif ($uninstallOrbit) {
       Write-Host "About to uninstall Orbit." -foregroundcolor Yellow
 
-      #if (Graceful-Product-Uninstall("MDMlab osquery")) {
+      #if (Graceful-Product-Uninstall("Fleet osquery")) {
       if ($false) {
         Force-Remove-Orbit #best effort action to ensure cleanup after graceful uninstall
         Write-Host "Orbit was gracefully uninstalled." -foregroundcolor Cyan
