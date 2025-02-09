@@ -38,7 +38,7 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
 
     <Package
       Keywords='MDMLAB osquery'
-      Description="MDMLAB osquery"
+      Description="MDMlab osquery"
       InstallerVersion="500"
       Compressed="yes"
       InstallScope="perMachine"
@@ -102,7 +102,7 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
                   ##############################################################################################
                   -->
                 <ServiceInstall
-                  Name="MDMLAB osquery"
+                  Name="MDB osquery"
                   Account="LocalSystem"
                   ErrorControl="ignore"
                   Start="auto"
@@ -200,7 +200,7 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
       <Custom Action="CA_RemoveRebootPending" Before='InstallFiles'>NOT Installed</Custom> <!-- It removes reboot pending Orbit files -->
     </InstallExecuteSequence>
 
-    <Feature Id="Orbit" Title="MdmLab osquery" Level="1" Display="hidden">
+    <Feature Id="Orbit" Title="MDMLab osquery" Level="1" Display="hidden">
       <ComponentGroupRef Id="OrbitFiles" />
       <ComponentRef Id="C_ORBITBIN" />
       <ComponentRef Id="C_ORBITROOT" />
