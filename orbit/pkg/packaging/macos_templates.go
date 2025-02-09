@@ -24,11 +24,11 @@ var macosPackageInfoTemplate = template.Must(template.New("").Option("missingkey
 var macosDistributionTemplate = template.Must(template.New("").Option("missingkey=error").Parse(
 	`<?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
-	<titleMdmlab osquery</title>
+	<titleMDMlab osquery</title>
 	<choices-outline>
 	    <line choice="choiceBase"/>
     </choices-outline>
-    <choice id="choiceBase" title=Mdmlab osquery" enabled="false" selected="true" description="Standard installation for Fleet osquery.">
+    <choice id="choiceBase" title=MDMlab osquery" enabled="false" selected="true" description="Standard installation for Fleet osquery.">
         <pkg-ref id="{{.Identifier}}.base.pkg"/>
     </choice>
     {{/* base.pkg specified here is the foldername that contains the package contents */}}
@@ -108,7 +108,7 @@ var macosLaunchdTemplate = template.Must(template.New("").Option("missingkey=err
 		<key>ORBIT_INSECURE</key>
 		<string>true</string>
 		{{- end }}
-		{{- if .MdmlabCertificate }}
+		{{- if .MDMlabCertificate }}
 		<key>ORBIT_FLEET_CERTIFICATE</key>
 		<string>/opt/orbit/fleet.pem</string>
 		{{- end }}
@@ -116,9 +116,9 @@ var macosLaunchdTemplate = template.Must(template.New("").Option("missingkey=err
 		<key>ORBIT_ENROLL_SECRET_PATH</key>
 		<string>/opt/orbit/secret.txt</string>
 		{{- end }}
-		{{- if .MdmlabURL }}
+		{{- if .MDMlabURL }}
 		<key>ORBIT_FLEET_URL</key>
-		<string>{{ .MdmlabURL }}</string>
+		<string>{{ .MDMlabURL }}</string>
 		{{- end }}
 		{{- if .UseSystemConfiguration }}
 		<key>ORBIT_USE_SYSTEM_CONFIGURATION</key>
@@ -147,9 +147,9 @@ var macosLaunchdTemplate = template.Must(template.New("").Option("missingkey=err
 		<string>true</string>
 		<key>ORBIT_DESKTOP_CHANNEL</key>
 		<string>{{ .DesktopChannel }}</string>
-		{{- if .MdmlabDesktopAlternativeBrowserHost }}
+		{{- if .MDMlabDesktopAlternativeBrowserHost }}
 		<key>ORBIT_FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST</key>
-		<string>{{ .MdmlabDesktopAlternativeBrowserHost }}</string>
+		<string>{{ .MDMlabDesktopAlternativeBrowserHost }}</string>
 		{{- end }}
 		{{- end }}
 		<key>ORBIT_UPDATE_INTERVAL</key>
