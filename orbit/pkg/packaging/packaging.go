@@ -22,14 +22,14 @@ import (
 
 // Options are the configurable options provided for the package.
 type Options struct {
-	// MDMlabURL is the URL to the MDMlab server.
-	MDMlabURL string
-	// EnrollSecret is the enroll secret used to authenticate to the MDMlab
+	// FleetURL is the URL to the Fleet server.
+	FleetURL string
+	// EnrollSecret is the enroll secret used to authenticate to the Fleet
 	// server.
 	EnrollSecret string
 	// Version is the version number for this package.
 	Version string
-	// Identifier is the identifier (eg. com.mdmlabdm.orbit) for the package product.
+	// Identifier is the identifier (eg. com.fleetdm.orbit) for the package product.
 	Identifier string
 	// StartService is a boolean indicating whether to start a system-specific
 	// background service.
@@ -40,32 +40,32 @@ type Options struct {
 	SignIdentity string
 	// Notarize sets whether macOS packages should be Notarized.
 	Notarize bool
-	// MDMlabCertificate is a file path to a MDMlab server certificate to include in the package.
-	MDMlabCertificate string
-	// MDMlabTLSClientCertificate is a file path to a client certificate to use when
-	// connecting to the MDMlab server.
+	// FleetCertificate is a file path to a Fleet server certificate to include in the package.
+	FleetCertificate string
+	// FleetTLSClientCertificate is a file path to a client certificate to use when
+	// connecting to the Fleet server.
 	//
-	// If set, then MDMlabTLSClientKey must be set too.
-	MDMlabTLSClientCertificate string
-	// MDMlabTLSClientKey is a file path to a client private key to use when
-	// connecting to the MDMlab server.
+	// If set, then FleetTLSClientKey must be set too.
+	FleetTLSClientCertificate string
+	// FleetTLSClientKey is a file path to a client private key to use when
+	// connecting to the Fleet server.
 	//
-	// If set, then MDMlabTLSClientCertificate must be set too.
-	MDMlabTLSClientKey string
-	// MDMlabDesktopAlternativeBrowserHost is an alternative host:port to use for MDMlab Desktop in the browser.
+	// If set, then FleetTLSClientCertificate must be set too.
+	FleetTLSClientKey string
+	// FleetDesktopAlternativeBrowserHost is an alternative host:port to use for Fleet Desktop in the browser.
 	//
-	// This may be required when using TLS client authentication for connecting to MDMlab via a proxy.
+	// This may be required when using TLS client authentication for connecting to Fleet via a proxy.
 	// Otherwise users would need to configure client certificates on their browsers.
 	//
-	// If not set, then MDMlabURL is used instead.
-	MDMlabDesktopAlternativeBrowserHost string
+	// If not set, then FleetURL is used instead.
+	FleetDesktopAlternativeBrowserHost string
 	// DisableUpdates disables auto updates on the generated package.
 	DisableUpdates bool
 	// OrbitChannel is the update channel to use for Orbit.
 	OrbitChannel string
 	// OsquerydChannel is the update channel to use for Osquery (osqueryd).
 	OsquerydChannel string
-	// DesktopChannel is the update channel to use for the MDMlab Desktop application.
+	// DesktopChannel is the update channel to use for the Fleet Desktop application.
 	DesktopChannel string
 	// UpdateURL is the base URL of the update server (TUF repository).
 	UpdateURL string
@@ -87,7 +87,7 @@ type Options struct {
 	OsqueryFlagfile string
 	// Debug determines whether to enable debug logging for the agent.
 	Debug bool
-	// Desktop determines whether to package the MDMlab Desktop application.
+	// Desktop determines whether to package the Fleet Desktop application.
 	Desktop bool
 	// OrbitUpdateInterval is the interval that Orbit will use to check for updates.
 	OrbitUpdateInterval time.Duration
@@ -106,14 +106,14 @@ type Options struct {
 	AppStoreConnectAPIKeyIssuer string
 	// AppStoreConnectAPIKeyContent is the content of the App Store API Key
 	AppStoreConnectAPIKeyContent string
-	// UseSystemConfiguration tells mdmlabd to try to read MDMlabURL and
+	// UseSystemConfiguration tells fleetd to try to read FleetURL and
 	// EnrollSecret from a system configuration that's present on the host.
 	// Currently only macOS profiles are supported.
 	UseSystemConfiguration bool
 	// EnableScripts enables script execution on the agent.
 	EnableScripts bool
 	// LocalWixDir uses a Windows machine's local WiX installation instead of a containerized
-	// emulation to build an MSI mdmlabd installer
+	// emulation to build an MSI fleetd installer
 	LocalWixDir string
 	// HostIdentifier is the host identifier to use in osquery.
 	HostIdentifier string
@@ -239,7 +239,7 @@ func InitializeUpdates(updateOpt update.Options) (*UpdatesData, error) {
 	// Copy the new metadata file to the old location (pre-migration) to
 	// support orbit downgrades to 1.37.0 or lower.
 	//
-	// Once https://tuf.mdmlabctl.com is brought down (which means downgrades to 1.37.0 or
+	// Once https://tuf.fleetctl.com is brought down (which means downgrades to 1.37.0 or
 	// lower won't be possible), we can remove this copy.
 	oldMetadataPath := filepath.Join(updateOpt.RootDirectory, update.OldMetadataFileName)
 	newMetadataPath := filepath.Join(updateOpt.RootDirectory, update.MetadataFileName)

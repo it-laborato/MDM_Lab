@@ -111,13 +111,14 @@ func BuildMSI(opt Options) (string, error) {
 		return "", fmt.Errorf("write certs.pem: %w", err)
 	}
 
-	if opt.MDMlabCertificate != "" {
+	if opt.FleetCertificate != "" {
+
 		if err := writeMDMlabServerCertificate(opt, orbitRoot); err != nil {
 			return "", fmt.Errorf("write mdmlab server certificate: %w", err)
 		}
 	}
 
-	if opt.MDMlabTLSClientCertificate != "" {
+	if opt.FleetTLSClientCertificate != "" {
 		if err := writeMDMlabClientCertificate(opt, orbitRoot); err != nil {
 			return "", fmt.Errorf("write mdmlab client certificate: %w", err)
 		}
