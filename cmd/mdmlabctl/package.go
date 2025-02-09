@@ -53,27 +53,27 @@ func packageCommand() *cli.Command {
 			&cli.StringFlag{
 				Name:        "mdmlab-url",
 				Usage:       "URL (host:port) of MDMlab server",
-				Destination: &opt.FleetURL,
+				Destination: &opt.MdmlabURL,
 			},
 			&cli.StringFlag{
 				Name:        "mdmlab-certificate",
 				Usage:       "Path to the MDMlab server certificate chain",
-				Destination: &opt.FleetCertificate,
+				Destination: &opt.MdmlabCertificate,
 			},
 			&cli.StringFlag{
 				Name:        "mdmlab-tls-client-certificate",
 				Usage:       "Path to a TLS client certificate to use when connecting to the MDMlab server. This functionality is licensed under the MDMlab EE License. Usage requires a current MDMlab EE subscription.",
-				Destination: &opt.FleetTLSClientCertificate,
+				Destination: &opt.MdmlabTLSClientCertificate,
 			},
 			&cli.StringFlag{
 				Name:        "mdmlab-tls-client-key",
 				Usage:       "Path to a TLS client private key to use when connecting to the MDMlab server. This functionality is licensed under the MDMlab EE License. Usage requires a current MDMlab EE subscription.",
-				Destination: &opt.FleetTLSClientKey,
+				Destination: &opt.MdmlabTLSClientKey,
 			},
 			&cli.StringFlag{
 				Name:        "mdmlab-desktop-alternative-browser-host",
 				Usage:       "Alternative host:port to use for MDMlab Desktop in the browser (this may be required when using TLS client authentication in the MDMlab server)",
-				Destination: &opt.FleetDesktopAlternativeBrowserHost,
+				Destination: &opt.MdmlabDesktopAlternativeBrowserHost,
 			},
 			&cli.StringFlag{
 				Name:        "identifier",
@@ -251,13 +251,13 @@ func packageCommand() *cli.Command {
 			},
 		},
 		Action: func(c *cli.Context) error {
-			if opt.FleetURL != "" || opt.EnrollSecret != "" {
-				if opt.FleetURL == "" || opt.EnrollSecret == "" {
+			if opt.MdmlabURL != "" || opt.EnrollSecret != "" {
+				if opt.MdmlabURL == "" || opt.EnrollSecret == "" {
 					return errors.New("--enroll-secret and --mdmlab-url must be provided together")
 				}
 			}
 
-			if opt.Insecure && opt.FleetCertificate != "" {
+			if opt.Insecure && opt.MdmlabCertificate != "" {
 				return errors.New("--insecure and --mdmlab-certificate may not be provided together")
 			}
 
@@ -270,11 +270,11 @@ func packageCommand() *cli.Command {
 			}
 
 			// Perform checks on the provided mdmlab client certificate and key.
-			if (opt.FleetTLSClientCertificate != "") != (opt.FleetTLSClientKey != "") {
+			if (opt.MdmlabTLSClientCertificate != "") != (opt.MdmlabTLSClientKey != "") {
 				return errors.New("must specify both mdmlab-tls-client-certificate and mdmlab-tls-client-key")
 			}
-			if opt.FleetTLSClientKey != "" {
-				if _, err := tls.LoadX509KeyPair(opt.FleetTLSClientCertificate, opt.FleetTLSClientKey); err != nil {
+			if opt.MdmlabTLSClientKey != "" {
+				if _, err := tls.LoadX509KeyPair(opt.MdmlabTLSClientCertificate, opt.MdmlabTLSClientKey); err != nil {
 					return fmt.Errorf("error loading mdmlab client certificate and key: %w", err)
 				}
 			}
@@ -320,10 +320,10 @@ func packageCommand() *cli.Command {
 				}
 			}
 
-			if opt.FleetCertificate != "" {
-				err := checkPEMCertificate(opt.FleetCertificate)
+			if opt.MdmlabCertificate != "" {
+				err := checkPEMCertificate(opt.MdmlabCertificate)
 				if err != nil {
-					return fmt.Errorf("failed to read mdmlab server certificate %q: %w", opt.FleetCertificate, err)
+					return fmt.Errorf("failed to read mdmlab server certificate %q: %w", opt.MdmlabCertificate, err)
 				}
 			}
 

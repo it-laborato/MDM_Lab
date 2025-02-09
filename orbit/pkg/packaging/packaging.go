@@ -22,9 +22,9 @@ import (
 
 // Options are the configurable options provided for the package.
 type Options struct {
-	// FleetURL is the URL to the Fleet server.
-	FleetURL string
-	// EnrollSecret is the enroll secret used to authenticate to the Fleet
+	// MdmlabURL is the URL to the Fleet server.
+	MdmlabURL string
+	// EnrollSecret is the enroll secret used to authenticate to the Mdmlab
 	// server.
 	EnrollSecret string
 	// Version is the version number for this package.
@@ -40,32 +40,32 @@ type Options struct {
 	SignIdentity string
 	// Notarize sets whether macOS packages should be Notarized.
 	Notarize bool
-	// FleetCertificate is a file path to a Fleet server certificate to include in the package.
-	FleetCertificate string
-	// FleetTLSClientCertificate is a file path to a client certificate to use when
-	// connecting to the Fleet server.
+	// MdmlabCertificate is a file path to a Fleet server certificate to include in the package.
+	MdmlabCertificate string
+	// MdmlabTLSClientCertificate is a file path to a client certificate to use when
+	// connecting to the Mdmlab server.
 	//
-	// If set, then FleetTLSClientKey must be set too.
-	FleetTLSClientCertificate string
-	// FleetTLSClientKey is a file path to a client private key to use when
-	// connecting to the Fleet server.
+	// If set, then MdmlabTLSClientKey must be set too.
+	MdmlabTLSClientCertificate string
+	// MdmlabTLSClientKey is a file path to a client private key to use when
+	// connecting to the Mdmlab server.
 	//
-	// If set, then FleetTLSClientCertificate must be set too.
-	FleetTLSClientKey string
-	// FleetDesktopAlternativeBrowserHost is an alternative host:port to use for Fleet Desktop in the browser.
+	// If set, then MdmlabTLSClientCertificate must be set too.
+	MdmlabTLSClientKey string
+	// MdmlabDesktopAlternativeBrowserHost is an alternative host:port to use for Fleet Desktop in the browser.
 	//
-	// This may be required when using TLS client authentication for connecting to Fleet via a proxy.
+	// This may be required when using TLS client authentication for connecting to Mdmlab via a proxy.
 	// Otherwise users would need to configure client certificates on their browsers.
 	//
-	// If not set, then FleetURL is used instead.
-	FleetDesktopAlternativeBrowserHost string
+	// If not set, then MdmlabURL is used instead.
+	MdmlabDesktopAlternativeBrowserHost string
 	// DisableUpdates disables auto updates on the generated package.
 	DisableUpdates bool
 	// OrbitChannel is the update channel to use for Orbit.
 	OrbitChannel string
 	// OsquerydChannel is the update channel to use for Osquery (osqueryd).
 	OsquerydChannel string
-	// DesktopChannel is the update channel to use for the Fleet Desktop application.
+	// DesktopChannel is the update channel to use for the Mdmlab Desktop application.
 	DesktopChannel string
 	// UpdateURL is the base URL of the update server (TUF repository).
 	UpdateURL string
@@ -87,7 +87,7 @@ type Options struct {
 	OsqueryFlagfile string
 	// Debug determines whether to enable debug logging for the agent.
 	Debug bool
-	// Desktop determines whether to package the Fleet Desktop application.
+	// Desktop determines whether to package the Mdmlab Desktop application.
 	Desktop bool
 	// OrbitUpdateInterval is the interval that Orbit will use to check for updates.
 	OrbitUpdateInterval time.Duration
@@ -106,7 +106,7 @@ type Options struct {
 	AppStoreConnectAPIKeyIssuer string
 	// AppStoreConnectAPIKeyContent is the content of the App Store API Key
 	AppStoreConnectAPIKeyContent string
-	// UseSystemConfiguration tells fleetd to try to read FleetURL and
+	// UseSystemConfiguration tells fleetd to try to read MdmlabURL and
 	// EnrollSecret from a system configuration that's present on the host.
 	// Currently only macOS profiles are supported.
 	UseSystemConfiguration bool
