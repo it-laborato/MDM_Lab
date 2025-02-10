@@ -108,7 +108,7 @@ func createVersionInfo(vParts []string, iconPath string, manifestPath string) (*
 		vIntParts = append(vIntParts, v)
 	}
 	version := strings.Join(vParts, ".")
-	copyright := fmt.Sprintf("%d MDMlab Device Management Inc.", time.Now().Year())
+	copyright := fmt.Sprintf("%d Fleet Device Management Inc.", time.Now().Year())
 
 	// Taken from https://github.com/josephspurrier/goversioninfo/blob/master/testdata/resource/versioninfo.json
 	langID, err := strconv.ParseUint("0409", 16, 16)
@@ -142,8 +142,8 @@ func createVersionInfo(vParts []string, iconPath string, manifestPath string) (*
 			FileSubType:   "00",
 		},
 		StringFileInfo: goversioninfo.StringFileInfo{
-			Comments:         "MDMlab osquery",
-			CompanyName:      "MDMlab Device Management (mdmlabdm.com)",
+			Comments:         "Fleet osquery",
+			CompanyName:      "Fleet Device Management (fleetdm.com)",
 			FileDescription:  "Orbit osquery runtime and autoupdater",
 			FileVersion:      version,
 			InternalName:     "",
@@ -151,7 +151,7 @@ func createVersionInfo(vParts []string, iconPath string, manifestPath string) (*
 			LegalTrademarks:  "",
 			OriginalFilename: "",
 			PrivateBuild:     "",
-			ProductName:      "MDMlab osquery",
+			ProductName:      "Fleet osquery",
 			ProductVersion:   version,
 			SpecialBuild:     "",
 		},

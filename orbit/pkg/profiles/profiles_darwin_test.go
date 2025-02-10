@@ -9,24 +9,24 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/stretchr/testify/require"
 )
 
-func TestGetMDMlabdConfig(t *testing.T) {
+func TestGetFleetdConfig(t *testing.T) {
 	testErr := errors.New("test error")
 	cases := []struct {
 		cmdOut  *string
 		cmdErr  error
-		wantOut *mdmlab.MDMAppleMDMlabdConfig
+		wantOut *fleet.MDMAppleFleetdConfig
 		wantErr error
 	}{
 		{nil, testErr, nil, testErr},
 		{ptr.String("invalid-xml"), nil, nil, io.EOF},
-		{&emptyOutput, nil, &mdmlab.MDMAppleMDMlabdConfig{}, nil},
-		{&withMDMlabdConfig, nil, &mdmlab.MDMAppleMDMlabdConfig{EnrollSecret: "ENROLL_SECRET", MDMlabURL: "https://test.example.com"}, nil},
+		{&emptyOutput, nil, &fleet.MDMAppleFleetdConfig{}, nil},
+		{&withFleetdConfig, nil, &fleet.MDMAppleFleetdConfig{EnrollSecret: "ENROLL_SECRET", FleetURL: "https://test.example.com"}, nil},
 	}
 
 	origExecProfileCmd := execProfileCmd
@@ -42,7 +42,7 @@ func TestGetMDMlabdConfig(t *testing.T) {
 			return &buf, nil
 		}
 
-		out, err := GetMDMlabdConfig()
+		out, err := GetFleetdConfig()
 		require.ErrorIs(t, err, c.wantErr)
 		require.Equal(t, c.wantOut, out)
 	}
@@ -55,7 +55,7 @@ var (
 <dict/>
 </plist>`
 
-	withMDMlabdConfig = `
+	withFleetdConfig = `
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -68,7 +68,7 @@ var (
 			<key>ProfileDisplayName</key>
 			<string>test name</string>
 			<key>ProfileIdentifier</key>
-			<string>com.mdmlabdm.mdmlabd.config</string>
+			<string>com.fleetdm.fleetd.config</string>
 			<key>ProfileInstallDate</key>
 			<string>2023-02-27 18:55:07 +0000</string>
 			<key>ProfileItems</key>
@@ -78,7 +78,7 @@ var (
 					<dict>
 						<key>EnrollSecret</key>
 						<string>ENROLL_SECRET</string>
-						<key>MDMlabURL</key>
+						<key>FleetURL</key>
 						<string>https://test.example.com</string>
 					</dict>
 					<key>PayloadDescription</key>
@@ -86,9 +86,9 @@ var (
 					<key>PayloadDisplayName</key>
 					<string>test name</string>
 					<key>PayloadIdentifier</key>
-					<string>com.mdmlabdm.mdmlabd.config</string>
+					<string>com.fleetdm.fleetd.config</string>
 					<key>PayloadType</key>
-					<string>com.mdmlabdm.mdmlabd</string>
+					<string>com.fleetdm.fleetd</string>
 					<key>PayloadUUID</key>
 					<string>0C6AFB45-01B6-4E19-944A-123CD16381C7</string>
 					<key>PayloadVersion</key>
@@ -108,7 +108,7 @@ var (
 </dict>
 </plist>`
 
-	withMDMlabdConfigAndEnrollment = `
+	withFleetdConfigAndEnrollment = `
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -121,7 +121,7 @@ var (
 			<key>ProfileDisplayName</key>
 			<string>test name</string>
 			<key>ProfileIdentifier</key>
-			<string>com.mdmlabdm.mdmlabd.config</string>
+			<string>com.fleetdm.fleetd.config</string>
 			<key>ProfileInstallDate</key>
 			<string>2023-02-27 18:55:07 +0000</string>
 			<key>ProfileItems</key>
@@ -131,7 +131,7 @@ var (
 					<dict>
 						<key>EnrollSecret</key>
 						<string>ENROLL_SECRET</string>
-						<key>MDMlabURL</key>
+						<key>FleetURL</key>
 						<string>https://test.example.com</string>
 					</dict>
 					<key>PayloadDescription</key>
@@ -139,9 +139,9 @@ var (
 					<key>PayloadDisplayName</key>
 					<string>test name</string>
 					<key>PayloadIdentifier</key>
-					<string>com.mdmlabdm.mdmlabd.config</string>
+					<string>com.fleetdm.fleetd.config</string>
 					<key>PayloadType</key>
-					<string>com.mdmlabdm.mdmlabd</string>
+					<string>com.fleetdm.fleetd</string>
 					<key>PayloadUUID</key>
 					<string>0C6AFB45-01B6-4E19-944A-123CD16381C7</string>
 					<key>PayloadVersion</key>
@@ -161,7 +161,7 @@ var (
 			<key>ProfileDisplayName</key>
 			<string>f1337 enrollment</string>
 			<key>ProfileIdentifier</key>
-			<string>com.mdmlabdm.mdmlab.mdm.apple</string>
+			<string>com.fleetdm.fleet.mdm.apple</string>
 			<key>ProfileInstallDate</key>
 			<string>2023-02-27 18:55:07 +0000</string>
 			<key>ProfileItems</key>
@@ -170,7 +170,7 @@ var (
 						<key>PayloadContent</key>
 						<dict/>
 						<key>PayloadIdentifier</key>
-						<string>com.mdmlabdm.mdmlab.mdm.apple.scep</string>
+						<string>com.fleetdm.fleet.mdm.apple.scep</string>
 						<key>PayloadType</key>
 						<string>com.apple.security.scep</string>
 						<key>PayloadUUID</key>
@@ -196,7 +196,7 @@ var (
 						<string>https://test.example.com</string>
 					</dict>
 					<key>PayloadIdentifier</key>
-					<string>com.mdmlabdm.mdmlab.mdm.apple.mdm</string>
+					<string>com.fleetdm.fleet.mdm.apple.mdm</string>
 					<key>PayloadType</key>
 					<string>com.apple.mdm</string>
 					<key>PayloadUUID</key>
@@ -229,11 +229,11 @@ func TestCustomInstallerWorkflow(t *testing.T) {
 		wantEmail string
 		wantErr   error
 	}{
-		{"happy path", withMDMlabdConfigAndEnrollment, "user@example.com", nil},
+		{"happy path", withFleetdConfigAndEnrollment, "user@example.com", nil},
 		{"empty profiles", emptyOutput, "", ErrNotFound},
-		{"no enrollment payload", withMDMlabdConfig, "", ErrNotFound},
-		{"wrong payload identifier", strings.Replace(withMDMlabdConfigAndEnrollment, mobileconfig.MDMlabEnrollmentPayloadIdentifier, "wrong-identifier", 1), "", ErrNotFound},
-		{"no end user email key", strings.Replace(withMDMlabdConfigAndEnrollment, "EndUserEmail", "WrongKey", 1), "", ErrNotFound},
+		{"no enrollment payload", withFleetdConfig, "", ErrNotFound},
+		{"wrong payload identifier", strings.Replace(withFleetdConfigAndEnrollment, mobileconfig.FleetEnrollmentPayloadIdentifier, "wrong-identifier", 1), "", ErrNotFound},
+		{"no end user email key", strings.Replace(withFleetdConfigAndEnrollment, "EndUserEmail", "WrongKey", 1), "", ErrNotFound},
 	} {
 		t.Run(c.name, func(t *testing.T) {
 			execProfileCmd = func() (*bytes.Buffer, error) {
@@ -328,7 +328,7 @@ MDM server: https://valid.com/mdm/apple/mdm
 }
 
 func TestCheckAssignedEnrollmentProfile(t *testing.T) {
-	mdmlabURL := "https://valid.com"
+	fleetURL := "https://valid.com"
 	cases := []struct {
 		name    string
 		cmdOut  *string
@@ -422,7 +422,7 @@ func TestCheckAssignedEnrollmentProfile(t *testing.T) {
 				return []byte(*c.cmdOut), nil
 			}
 
-			err := CheckAssignedEnrollmentProfile(mdmlabURL)
+			err := CheckAssignedEnrollmentProfile(fleetURL)
 			if c.wantErr != nil {
 				require.ErrorContains(t, err, c.wantErr.Error())
 			} else {
@@ -438,28 +438,28 @@ func TestGetProfilePayloadContent(t *testing.T) {
 
 	execProfileCmd = func() (*bytes.Buffer, error) {
 		var buf bytes.Buffer
-		buf.WriteString(withMDMlabdConfigAndEnrollment)
+		buf.WriteString(withFleetdConfigAndEnrollment)
 		return &buf, nil
 	}
 
 	// mismatched int type is not acceptable
-	_, err := getProfilePayloadContent[int]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	_, err := getProfilePayloadContent[int]("com.fleetdm.fleet.mdm.apple.mdm")
 	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type int")
 
 	// mismatched string type is not acceptable
-	_, err = getProfilePayloadContent[string]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	_, err = getProfilePayloadContent[string]("com.fleetdm.fleet.mdm.apple.mdm")
 	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type string")
 
 	// mismatched bool type is not acceptable
-	_, err = getProfilePayloadContent[bool]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	_, err = getProfilePayloadContent[bool]("com.fleetdm.fleet.mdm.apple.mdm")
 	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type bool")
 
 	// mismatched slice type is not acceptable
-	_, err = getProfilePayloadContent[[]string]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	_, err = getProfilePayloadContent[[]string]("com.fleetdm.fleet.mdm.apple.mdm")
 	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type []string")
 
 	// mismatched []byte type is not acceptable
-	_, err = getProfilePayloadContent[[]byte]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	_, err = getProfilePayloadContent[[]byte]("com.fleetdm.fleet.mdm.apple.mdm")
 	require.ErrorContains(t, err, "plist: cannot unmarshal dict into Go value of type []uint8")
 
 	// mismatched struct type is acceptable, but result is empty
@@ -467,26 +467,26 @@ func TestGetProfilePayloadContent(t *testing.T) {
 		foo string
 		bar int
 	}
-	ws, err := getProfilePayloadContent[wrongStruct]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	ws, err := getProfilePayloadContent[wrongStruct]("com.fleetdm.fleet.mdm.apple.mdm")
 	require.NoError(t, err)
 	require.NotNil(t, ws)
 	require.Empty(t, ws.bar)
 	require.Empty(t, ws.foo)
 
 	// struct type is acceptable and returns the expected value type corresponds to the payload identifier
-	c, err := getProfilePayloadContent[mdmlab.MDMAppleMDMlabdConfig]("com.mdmlabdm.mdmlabd.config")
+	c, err := getProfilePayloadContent[fleet.MDMAppleFleetdConfig]("com.fleetdm.fleetd.config")
 	require.NoError(t, err)
 	require.NotNil(t, c)
-	require.Equal(t, *c, mdmlab.MDMAppleMDMlabdConfig{EnrollSecret: "ENROLL_SECRET", MDMlabURL: "https://test.example.com"})
+	require.Equal(t, *c, fleet.MDMAppleFleetdConfig{EnrollSecret: "ENROLL_SECRET", FleetURL: "https://test.example.com"})
 
 	// struct type is acceptable and returns the expected value type corresponds to the payload identifier
-	e, err := getProfilePayloadContent[mdmlab.MDMCustomEnrollmentProfileItem]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	e, err := getProfilePayloadContent[fleet.MDMCustomEnrollmentProfileItem]("com.fleetdm.fleet.mdm.apple.mdm")
 	require.NoError(t, err)
 	require.NotNil(t, e)
-	require.Equal(t, *e, mdmlab.MDMCustomEnrollmentProfileItem{EndUserEmail: "user@example.com"})
+	require.Equal(t, *e, fleet.MDMCustomEnrollmentProfileItem{EndUserEmail: "user@example.com"})
 
 	// map type is acceptable
-	m, err := getProfilePayloadContent[map[string]any]("com.mdmlabdm.mdmlab.mdm.apple.mdm")
+	m, err := getProfilePayloadContent[map[string]any]("com.fleetdm.fleet.mdm.apple.mdm")
 	require.NoError(t, err)
 	require.NotNil(t, m)
 	gotMap := *m
@@ -495,18 +495,18 @@ func TestGetProfilePayloadContent(t *testing.T) {
 	require.Equal(t, "user@example.com", v)
 	_, ok = gotMap["EnrollSecret"]
 	require.False(t, ok)
-	_, ok = gotMap["MDMlabURL"]
+	_, ok = gotMap["FleetURL"]
 	require.False(t, ok)
 
 	// map type is acceptable
-	m2, err := getProfilePayloadContent[map[string]any]("com.mdmlabdm.mdmlabd.config")
+	m2, err := getProfilePayloadContent[map[string]any]("com.fleetdm.fleetd.config")
 	require.NoError(t, err)
 	require.NotNil(t, m)
 	gotMap = *m2
 	v, ok = gotMap["EnrollSecret"]
 	require.True(t, ok)
 	require.Equal(t, "ENROLL_SECRET", v)
-	v, ok = gotMap["MDMlabURL"]
+	v, ok = gotMap["FleetURL"]
 	require.True(t, ok)
 	require.Equal(t, "https://test.example.com", v)
 	_, ok = gotMap["EndUserEmail"]

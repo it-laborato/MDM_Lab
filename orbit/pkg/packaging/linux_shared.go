@@ -10,12 +10,12 @@ import (
 	"text/template"
 
 	"github.com/Masterminds/semver"
-	"github.com/goreleaser/nfpm/v2"
-	"github.com/goreleaser/nfpm/v2/files"
-	"github.com/goreleaser/nfpm/v2/rpm"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
 	"github.com/it-laborato/MDM_Lab/pkg/secure"
+	"github.com/goreleaser/nfpm/v2"
+	"github.com/goreleaser/nfpm/v2/files"
+	"github.com/goreleaser/nfpm/v2/rpm"
 	"github.com/rs/zerolog/log"
 )
 
@@ -136,15 +136,15 @@ func buildNFPM(opt Options, pkger nfpm.Packager) (string, error) {
 		}
 	}
 
-	if opt.MDMlabCertificate != "" {
-		if err := writeMDMlabServerCertificate(opt, orbitRoot); err != nil {
-			return "", fmt.Errorf("write mdmlab server certificate: %w", err)
+	if opt.FleetCertificate != "" {
+		if err := writeFleetServerCertificate(opt, orbitRoot); err != nil {
+			return "", fmt.Errorf("write fleet server certificate: %w", err)
 		}
 	}
 
-	if opt.MDMlabTLSClientCertificate != "" {
-		if err := writeMDMlabClientCertificate(opt, orbitRoot); err != nil {
-			return "", fmt.Errorf("write mdmlab client certificate: %w", err)
+	if opt.FleetTLSClientCertificate != "" {
+		if err := writeFleetClientCertificate(opt, orbitRoot); err != nil {
+			return "", fmt.Errorf("write fleet client certificate: %w", err)
 		}
 	}
 
@@ -223,14 +223,14 @@ func buildNFPM(opt Options, pkger nfpm.Packager) (string, error) {
 
 	// Build package
 	info := &nfpm.Info{
-		Name:        "mdmlab-osquery",
+		Name:        "fleet-osquery",
 		Version:     opt.Version,
-		Description: "MDMlab osquery -- runtime and autoupdater",
+		Description: "Fleet osquery -- runtime and autoupdater",
 		Arch:        opt.Architecture,
-		Maintainer:  "MDMlab Device Management",
-		Vendor:      "MDMlab Device Management",
-		License:     "https://github.com/mdmlabdm/mdmlab/blob/main/LICENSE",
-		Homepage:    "https://mdmlabdm.com",
+		Maintainer:  "Fleet Device Management",
+		Vendor:      "Fleet Device Management",
+		License:     "https://github.com/fleetdm/fleet/blob/main/LICENSE",
+		Homepage:    "https://fleetdm.com",
 		Overridables: nfpm.Overridables{
 			Contents: contents,
 			Scripts: nfpm.Scripts{
@@ -315,14 +315,14 @@ ORBIT_UPDATE_INTERVAL={{ .OrbitUpdateInterval }}
 {{ if .Desktop }}
 ORBIT_FLEET_DESKTOP=true
 ORBIT_DESKTOP_CHANNEL={{ .DesktopChannel }}
-{{ if .MDMlabDesktopAlternativeBrowserHost }}
-ORBIT_FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST={{ .MDMlabDesktopAlternativeBrowserHost }}
+{{ if .FleetDesktopAlternativeBrowserHost }}
+ORBIT_FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST={{ .FleetDesktopAlternativeBrowserHost }}
 {{ end }}
 {{ end }}
 {{ if .Insecure }}ORBIT_INSECURE=true{{ end }}
 {{ if .DisableUpdates }}ORBIT_DISABLE_UPDATES=true{{ end }}
-{{ if .MDMlabURL }}ORBIT_FLEET_URL={{.MDMlabURL}}{{ end }}
-{{ if .MDMlabCertificate }}ORBIT_FLEET_CERTIFICATE=/opt/orbit/mdmlab.pem{{ end }}
+{{ if .FleetURL }}ORBIT_FLEET_URL={{.FleetURL}}{{ end }}
+{{ if .FleetCertificate }}ORBIT_FLEET_CERTIFICATE=/opt/orbit/fleet.pem{{ end }}
 {{ if .UpdateTLSServerCertificate }}ORBIT_UPDATE_TLS_CERTIFICATE=/opt/orbit/update.pem{{ end }}
 {{ if .EnrollSecret }}ORBIT_ENROLL_SECRET={{.EnrollSecret}}{{ end }}
 {{ if .Debug }}ORBIT_DEBUG=true{{ end }}
@@ -387,14 +387,14 @@ func writePreRemove(opt Options, path string) error {
 	// or has been manually disabled already. Otherwise,
 	// uninstallation fails.
 	//
-	// "pkill mdmlab-desktop" is required because the application
+	// "pkill fleet-desktop" is required because the application
 	// runs as user (separate from sudo command that launched it),
 	// so on some systems it's not killed properly.
 	if err := os.WriteFile(path, []byte(`#!/bin/sh
 
 systemctl stop orbit.service || true
 systemctl disable orbit.service || true
-pkill mdmlab-desktop || true
+pkill fleet-desktop || true
 `), constant.DefaultFileMode); err != nil {
 		return fmt.Errorf("write file: %w", err)
 	}

@@ -16,7 +16,7 @@ import (
 	"unsafe"
 )
 
-const service = "com.mdmlabdm.mdmlabd.enroll.secret"
+const service = "com.fleetdm.fleetd.enroll.secret"
 
 var serviceStringRef = stringToCFString(service)
 var mu sync.Mutex

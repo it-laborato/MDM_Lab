@@ -5,17 +5,17 @@ import (
 	"path"
 )
 
-// MDMlabFlags is the set of flags to pass to osquery when connecting to MDMlab.
-func MDMlabFlags(mdmlabURL *url.URL) []string {
-	hostname, prefix := mdmlabURL.Host, mdmlabURL.Path
+// FleetFlags is the set of flags to pass to osquery when connecting to Fleet.
+func FleetFlags(fleetURL *url.URL) []string {
+	hostname, prefix := fleetURL.Host, fleetURL.Path
 	return []string{
 		"--tls_hostname=" + hostname,
 		"--enroll_tls_endpoint=" + path.Join(prefix, "/api/v1/osquery/enroll"),
 		"--config_plugin=tls",
 		"--config_tls_endpoint=" + path.Join(prefix, "/api/v1/osquery/config"),
 		// Osquery defaults config_refresh to 0 which is probably not ideal for
-		// a client connected to MDMlab. Users can always override this in the
-		// config they serve via MDMlab.
+		// a client connected to Fleet. Users can always override this in the
+		// config they serve via Fleet.
 		"--config_refresh=60",
 		"--disable_distributed=false",
 		"--distributed_plugin=tls",

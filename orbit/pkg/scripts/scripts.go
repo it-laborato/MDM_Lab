@@ -1,5 +1,5 @@
 // Package scripts implements support to execute scripts on the host when
-// requested by the MDMlab server.
+// requested by the Fleet server.
 package scripts
 
 import (
@@ -18,7 +18,7 @@ import (
 )
 
 // Client defines the methods required for the API requests to the server. The
-// mdmlab.OrbitClient type satisfies this interface.
+// fleet.OrbitClient type satisfies this interface.
 type Client interface {
 	GetHostScript(execID string) (*mdmlab.HostScriptResult, error)
 	SaveHostScriptResult(result *mdmlab.HostScriptResultPayload) error
@@ -83,7 +83,7 @@ func (r *Runner) runOne(script *mdmlab.HostScriptResult) (finalErr error) {
 
 	if script.ExitCode != nil {
 		// already a result stored for this execution, skip, it shouldn't be sent
-		// again by MDMlab.
+		// again by Fleet.
 		return nil
 	}
 
@@ -159,14 +159,14 @@ func (r *Runner) createRunDir(execID string) (string, error) {
 	}
 	// MkdirTemp will only allow read/write by current user (root), which is what
 	// we want.
-	return os.MkdirTemp(tempDir, "mdmlab-"+execID+"-*")
+	return os.MkdirTemp(tempDir, "fleet-"+execID+"-*")
 }
 
 func (r *Runner) runOneDisabled(execID string) error {
 	err := r.Client.SaveHostScriptResult(&mdmlab.HostScriptResultPayload{
 		ExecutionID: execID,
 		Output:      "Scripts are disabled",
-		ExitCode:    -2, // mdmlabctl knows that -2 means script was disabled on host
+		ExitCode:    -2, // fleetctl knows that -2 means script was disabled on host
 	})
 	if err != nil {
 		return fmt.Errorf("save script result: %w", err)

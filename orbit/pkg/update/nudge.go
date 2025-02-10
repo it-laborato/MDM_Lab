@@ -23,7 +23,7 @@ const (
 )
 
 // NudgeConfigReceiver is a kind of middleware that wraps an OrbitConfigFetcher and a Runner.
-// It checks the config supplied by the wrapped OrbitConfigFetcher to detects whether the MDMlab
+// It checks the config supplied by the wrapped OrbitConfigFetcher to detects whether the Fleet
 // server has supplied a Nudge config. If so, it sets Nudge as a target on the wrapped Runner.
 type NudgeConfigReceiver struct {
 	opt NudgeConfigFetcherOptions
@@ -55,7 +55,7 @@ func ApplyNudgeConfigReceiverMiddleware(opt NudgeConfigFetcherOptions) mdmlab.Or
 }
 
 // GetConfig calls the wrapped Fetcher's GetConfig method, and detects if the
-// MDMlab server has supplied a Nudge config.
+// Fleet server has supplied a Nudge config.
 //
 // If a Nudge config is supplied, it:
 //

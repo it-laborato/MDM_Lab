@@ -10,7 +10,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/bitlocker"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/profiles"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/scripts"
-	mdmlabscripts "github.com/it-laborato/MDM_Lab/pkg/scripts"
+	fleetscripts "github.com/it-laborato/MDM_Lab/pkg/scripts"
 	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/rs/zerolog/log"
 )
@@ -22,7 +22,7 @@ type checkEnrollmentFunc func() (bool, string, error)
 type checkAssignedEnrollmentProfileFunc func(url string) error
 
 // renewEnrollmentProfileConfigReceiver is a kind of middleware that wraps an
-// OrbitConfigFetcher and detects if the mdmlab server sent a notification to
+// OrbitConfigFetcher and detects if the fleet server sent a notification to
 // renew the enrollment profile. If so, it runs the command (as root) to
 // bootstrap the renewal of the profile on the device (the user still needs to
 // execute some manual steps to accept the new profile).
@@ -38,7 +38,7 @@ type renewEnrollmentProfileConfigReceiver struct {
 	// runRenewEnrollmentProfile.
 	runCmdFn runCmdFunc
 
-	// for tests, to be able to mock the function that checks for MDMlab
+	// for tests, to be able to mock the function that checks for Fleet
 	// enrollment
 	checkEnrollmentFn checkEnrollmentFunc
 
@@ -49,11 +49,11 @@ type renewEnrollmentProfileConfigReceiver struct {
 	cmdMu   sync.Mutex
 	lastRun time.Time
 
-	mdmlabURL string
+	fleetURL string
 }
 
-func ApplyRenewEnrollmentProfileConfigFetcherMiddleware(fetcher OrbitConfigFetcher, frequency time.Duration, mdmlabURL string) mdmlab.OrbitConfigReceiver {
-	return &renewEnrollmentProfileConfigReceiver{Frequency: frequency, mdmlabURL: mdmlabURL}
+func ApplyRenewEnrollmentProfileConfigFetcherMiddleware(fetcher OrbitConfigFetcher, frequency time.Duration, fleetURL string) mdmlab.OrbitConfigReceiver {
+	return &renewEnrollmentProfileConfigReceiver{Frequency: frequency, fleetURL: fleetURL}
 }
 
 func (h *renewEnrollmentProfileConfigReceiver) Run(config *mdmlab.OrbitConfig) error {
@@ -62,10 +62,10 @@ func (h *renewEnrollmentProfileConfigReceiver) Run(config *mdmlab.OrbitConfig) e
 			defer h.cmdMu.Unlock()
 
 			// Note that the macOS notification popup will be shown periodically
-			// until the MDMlab server gets notified that the device is now properly
+			// until the Fleet server gets notified that the device is now properly
 			// enrolled (after the user's manual steps, and osquery reporting the
 			// updated mdm enrollment).
-			// See https://github.com/mdmlabdm/mdmlab/pull/9409#discussion_r1084382455
+			// See https://github.com/fleetdm/fleet/pull/9409#discussion_r1084382455
 			if time.Since(h.lastRun) >= h.Frequency {
 				// we perform this check locally on the client too to avoid showing the
 				// dialog if the client is enrolled to an MDM server.
@@ -85,13 +85,13 @@ func (h *renewEnrollmentProfileConfigReceiver) Run(config *mdmlab.OrbitConfig) e
 				}
 
 				// we perform this check locally on the client too to avoid showing the
-				// dialog if the MDMlab enrollment profile has not been assigned to the device in
+				// dialog if the Fleet enrollment profile has not been assigned to the device in
 				// Apple Business Manager.
 				assignedFn := h.checkAssignedEnrollmentProfileFn
 				if assignedFn == nil {
 					assignedFn = profiles.CheckAssignedEnrollmentProfile
 				}
-				if err := assignedFn(h.mdmlabURL); err != nil {
+				if err := assignedFn(h.fleetURL); err != nil {
 					log.Error().Err(err).Msg("checking assigned enrollment profile")
 					log.Info().Msg("a request to renew the enrollment profile was processed but not executed because there was an error checking the assigned enrollment profile.")
 					// TODO: Design a better way to backoff `profiles show` so that the device doesn't get rate
@@ -165,11 +165,11 @@ func ApplyWindowsMDMEnrollmentFetcherMiddleware(
 
 var errIsWindowsServer = errors.New("device is a Windows Server")
 
-// Run checks if the mdmlab server set the "needs windows {un}enrollment" flag
+// Run checks if the fleet server set the "needs windows {un}enrollment" flag
 // to true, and executes the command to {un}enroll into Windows MDM (or not, if
 // the device is a Windows Server). It also unenrolls the device if the flag
 // "needs MDM migration" is set to true, so that the device can then be
-// enrolled in MDMlab MDM.
+// enrolled in Fleet MDM.
 func (w *windowsMDMEnrollmentConfigReceiver) Run(cfg *mdmlab.OrbitConfig) error {
 	switch {
 	case cfg.Notifications.NeedsProgrammaticWindowsMDMEnrollment:
@@ -275,7 +275,7 @@ func (w *windowsMDMEnrollmentConfigReceiver) attemptUnenrollment(actionLabel str
 type runScriptsConfigReceiver struct {
 	// ScriptsExecutionEnabled indicates if this agent allows scripts execution.
 	// If it doesn't, scripts are not executed, but a response is returned to the
-	// MDMlab server so it knows the agent processed the request. Note that this
+	// Fleet server so it knows the agent processed the request. Note that this
 	// should be set to the value of the --scripts-enabled command-line flag. An
 	// additional, dynamic check is done automatically by the
 	// runScriptsConfigReceiver if this field is false to get the value from the
@@ -291,8 +291,8 @@ type runScriptsConfigReceiver struct {
 	// on macos and only if ScriptsExecutionEnabled is false.
 	dynamicScriptsEnabled              atomic.Bool
 	dynamicScriptsEnabledCheckInterval time.Duration
-	// for tests, if set will use this instead of profiles.GetMDMlabdConfig.
-	testGetMDMlabdConfig func() (*mdmlab.MDMAppleMDMlabdConfig, error)
+	// for tests, if set will use this instead of profiles.GetFleetdConfig.
+	testGetFleetdConfig func() (*mdmlab.MDMAppleMDMlabdConfig, error)
 
 	// for tests, to be able to mock command execution. If nil, will use
 	// (scripts.Runner{...}).Run. To help with testing, the function receives as
@@ -320,23 +320,23 @@ func ApplyRunScriptsConfigFetcherMiddleware(
 }
 
 func (h *runScriptsConfigReceiver) runDynamicScriptsEnabledCheck() {
-	getMDMlabdConfig := h.testGetMDMlabdConfig
-	if getMDMlabdConfig == nil {
-		getMDMlabdConfig = profiles.GetMDMlabdConfig
+	getFleetdConfig := h.testGetFleetdConfig
+	if getFleetdConfig == nil {
+		getFleetdConfig = profiles.GetFleetdConfig
 	}
 
 	// only run on macos and only if scripts are disabled by default for the
-	// agent (but always run if a test get mdmlabd config function is set).
-	if (runtime.GOOS == "darwin" && !h.ScriptsExecutionEnabled) || (h.testGetMDMlabdConfig != nil) {
+	// agent (but always run if a test get fleetd config function is set).
+	if (runtime.GOOS == "darwin" && !h.ScriptsExecutionEnabled) || (h.testGetFleetdConfig != nil) {
 		go func() {
 			runCheck := func() {
-				cfg, err := getMDMlabdConfig()
+				cfg, err := getFleetdConfig()
 				if err != nil {
 					if err != profiles.ErrNotImplemented {
 						// note that an unenrolled host will not return an error, it will
 						// return the zero-value struct, so this logging should not be too
 						// noisy unless something goes wrong.
-						log.Info().Err(err).Msg("get mdmlabd configuration failed")
+						log.Info().Err(err).Msg("get fleetd configuration failed")
 					}
 					return
 				}
@@ -354,11 +354,11 @@ func (h *runScriptsConfigReceiver) runDynamicScriptsEnabledCheck() {
 	}
 }
 
-// GetConfig calls the wrapped Fetcher's GetConfig method, and if the mdmlab
+// GetConfig calls the wrapped Fetcher's GetConfig method, and if the fleet
 // server sent a list of scripts to execute, starts a goroutine to execute
 // them.
 func (h *runScriptsConfigReceiver) Run(cfg *mdmlab.OrbitConfig) error {
-	timeout := mdmlabscripts.MaxHostExecutionTime
+	timeout := fleetscripts.MaxHostExecutionTime
 	if cfg.ScriptExeTimeout > 0 {
 		timeout = time.Duration(cfg.ScriptExeTimeout) * time.Second
 	}
@@ -467,7 +467,7 @@ func ApplyWindowsMDMBitlockerFetcherMiddleware(
 	}
 }
 
-// GetConfig calls the wrapped Fetcher's GetConfig method, and if the mdmlab
+// GetConfig calls the wrapped Fetcher's GetConfig method, and if the fleet
 // server set the "EnforceBitLockerEncryption" flag to true, executes the command
 // to attempt BitlockerEncryption (or not, if the device is a Windows Server).
 func (w *windowsMDMBitlockerConfigReceiver) Run(cfg *mdmlab.OrbitConfig) error {
@@ -518,8 +518,8 @@ func (w *windowsMDMBitlockerConfigReceiver) attemptBitlockerEncryption(notifs md
 		if err := w.decryptVolume(targetVolume); err != nil {
 			log.Error().Err(err).Msg("decryption failed")
 
-			if serverErr := w.updateMDMlabServer("", err); serverErr != nil {
-				log.Error().Err(serverErr).Msg("failed to send decryption failure to MDMlab Server")
+			if serverErr := w.updateFleetServer("", err); serverErr != nil {
+				log.Error().Err(serverErr).Msg("failed to send decryption failure to Fleet Server")
 				return
 			}
 		}
@@ -542,8 +542,8 @@ func (w *windowsMDMBitlockerConfigReceiver) attemptBitlockerEncryption(notifs md
 		return
 	}
 
-	if serverErr := w.updateMDMlabServer(recoveryKey, encryptionErr); serverErr != nil {
-		log.Error().Err(serverErr).Msg("failed to send encryption result to MDMlab Server")
+	if serverErr := w.updateFleetServer(recoveryKey, encryptionErr); serverErr != nil {
+		log.Error().Err(serverErr).Msg("failed to send encryption result to Fleet Server")
 		return
 	}
 
@@ -633,15 +633,15 @@ func (w *windowsMDMBitlockerConfigReceiver) isMisreportedDecryptionError(err *bi
 		status.ConversionStatus == bitlocker.ConversionStatusFullyDecrypted
 }
 
-func (w *windowsMDMBitlockerConfigReceiver) updateMDMlabServer(key string, err error) error {
+func (w *windowsMDMBitlockerConfigReceiver) updateFleetServer(key string, err error) error {
 	// Getting Bitlocker encryption operation error message if any
-	// This is going to be sent to MDMlab Server
+	// This is going to be sent to Fleet Server
 	bitlockerError := ""
 	if err != nil {
 		bitlockerError = err.Error()
 	}
 
-	// Update MDMlab Server with encryption result
+	// Update Fleet Server with encryption result
 	payload := mdmlab.OrbitHostDiskEncryptionKeyPayload{
 		EncryptionKey: []byte(key),
 		ClientError:   bitlockerError,

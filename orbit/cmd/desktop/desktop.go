@@ -21,9 +21,9 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/useraction"
 	"github.com/it-laborato/MDM_Lab/pkg/certificate"
-	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/pkg/fleethttp"
 	"github.com/it-laborato/MDM_Lab/pkg/open"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/oklog/run"
 	"github.com/rs/zerolog"
@@ -57,21 +57,21 @@ func setupRunners() {
 	}
 
 	if err := runnerGroup.Run(); err != nil {
-		log.Error().Err(err).Msg("MDMlab Desktop runners terminated")
+		log.Error().Err(err).Msg("Fleet Desktop runners terminated")
 		return
 	}
 }
 
 func main() {
 	// FIXME: we need to do a better job of graceful shutdown, releasing resources, stopping
-	// tickers, etc. (https://github.com/mdmlabdm/mdmlab/issues/21256)
+	// tickers, etc. (https://github.com/fleetdm/fleet/issues/21256)
 	// This context will be used as a general context to handle graceful shutdown in the future.
 	offlineWatcherCtx, cancelOfflineWatcherCtx := context.WithCancel(context.Background())
 
-	// Orbits uses --version to get the mdmlab-desktop version. Logs do not need to be set up when running this.
+	// Orbits uses --version to get the fleet-desktop version. Logs do not need to be set up when running this.
 	if len(os.Args) > 1 && os.Args[1] == "--version" {
 		// Must work with update.GetVersion
-		fmt.Println("mdmlab-desktop", version)
+		fmt.Println("fleet-desktop", version)
 		return
 	}
 
@@ -80,29 +80,29 @@ func main() {
 
 	// Our TUF provided targets must support launching with "--help".
 	if len(os.Args) > 1 && os.Args[1] == "--help" {
-		fmt.Println("MDMlab Desktop application executable")
+		fmt.Println("Fleet Desktop application executable")
 		return
 	}
-	log.Info().Msgf("mdmlab-desktop version=%s", version)
+	log.Info().Msgf("fleet-desktop version=%s", version)
 
 	identifierPath := os.Getenv("FLEET_DESKTOP_DEVICE_IDENTIFIER_PATH")
 	if identifierPath == "" {
 		log.Fatal().Msg("missing URL environment FLEET_DESKTOP_DEVICE_IDENTIFIER_PATH")
 	}
 
-	mdmlabURL := os.Getenv("FLEET_DESKTOP_FLEET_URL")
-	if mdmlabURL == "" {
+	fleetURL := os.Getenv("FLEET_DESKTOP_FLEET_URL")
+	if fleetURL == "" {
 		log.Fatal().Msg("missing URL environment FLEET_DESKTOP_FLEET_URL")
 	}
 
-	mdmlabTLSClientCertificate := os.Getenv("FLEET_DESKTOP_FLEET_TLS_CLIENT_CERTIFICATE")
-	mdmlabTLSClientKey := os.Getenv("FLEET_DESKTOP_FLEET_TLS_CLIENT_KEY")
-	mdmlabClientCrt, err := certificate.LoadClientCertificate(mdmlabTLSClientCertificate, mdmlabTLSClientKey)
+	fleetTLSClientCertificate := os.Getenv("FLEET_DESKTOP_FLEET_TLS_CLIENT_CERTIFICATE")
+	fleetTLSClientKey := os.Getenv("FLEET_DESKTOP_FLEET_TLS_CLIENT_KEY")
+	fleetClientCrt, err := certificate.LoadClientCertificate(fleetTLSClientCertificate, fleetTLSClientKey)
 	if err != nil {
-		log.Fatal().Err(err).Msg("load mdmlab tls client certificate")
+		log.Fatal().Err(err).Msg("load fleet tls client certificate")
 	}
-	mdmlabAlternativeBrowserHost := os.Getenv("FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST")
-	if mdmlabClientCrt != nil {
+	fleetAlternativeBrowserHost := os.Getenv("FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST")
+	if fleetClientCrt != nil {
 		log.Info().Msg("Using TLS client certificate and key to authenticate to the server.")
 	}
 	tufUpdateRoot := os.Getenv("FLEET_DESKTOP_TUF_UPDATE_ROOT")
@@ -127,18 +127,18 @@ func main() {
 	onReady := func() {
 		log.Info().Msg("ready")
 
-		systray.SetTooltip("MDMlab Desktop")
+		systray.SetTooltip("Fleet Desktop")
 
 		// Default to dark theme icon because this seems to be a better fit on Linux (Ubuntu at
 		// least). On macOS this is used as a template icon anyway.
 		systray.SetTemplateIcon(iconDark, iconDark)
 
 		// Add a disabled menu item with the current version
-		versionItem := systray.AddMenuItem(fmt.Sprintf("MDMlab Desktop v%s", version), "")
+		versionItem := systray.AddMenuItem(fmt.Sprintf("Fleet Desktop v%s", version), "")
 		versionItem.Disable()
 		systray.AddSeparator()
 
-		migrateMDMItem := systray.AddMenuItem("Migrate to MDMlab", "")
+		migrateMDMItem := systray.AddMenuItem("Migrate to Fleet", "")
 		migrateMDMItem.Disable()
 		// this item is only shown if certain conditions are met below.
 		migrateMDMItem.Hide()
@@ -151,7 +151,7 @@ func main() {
 		selfServiceItem.Hide()
 		systray.AddSeparator()
 
-		transparencyItem := systray.AddMenuItem("About MDMlab", "")
+		transparencyItem := systray.AddMenuItem("About Fleet", "")
 		transparencyItem.Disable()
 
 		tokenReader := token.Reader{Path: identifierPath}
@@ -166,11 +166,11 @@ func main() {
 		rootCA := os.Getenv("FLEET_DESKTOP_FLEET_ROOT_CA")
 
 		client, err := service.NewDeviceClient(
-			mdmlabURL,
+			fleetURL,
 			insecureSkipVerify,
 			rootCA,
-			mdmlabClientCrt,
-			mdmlabAlternativeBrowserHost,
+			fleetClientCrt,
+			fleetAlternativeBrowserHost,
 		)
 		if err != nil {
 			log.Fatal().Err(err).Msg("unable to initialize request client")
@@ -199,26 +199,26 @@ func main() {
 		}
 
 		reportError := func(err error, info map[string]any) {
-			if !client.GetServerCapabilities().Has(mdmlab.CapabilityErrorReporting) {
+			if !client.GetServerCapabilities().Has(fleet.CapabilityErrorReporting) {
 				log.Info().Msg("skipped reporting error to the server as it doesn't have the capability enabled")
 				return
 			}
 
-			mdmlabdErr := mdmlab.MDMlabdError{
-				ErrorSource:         "mdmlab-desktop",
+			fleetdErr := fleet.FleetdError{
+				ErrorSource:         "fleet-desktop",
 				ErrorSourceVersion:  version,
 				ErrorTimestamp:      time.Now(),
 				ErrorMessage:        err.Error(),
 				ErrorAdditionalInfo: info,
 			}
 
-			if err := client.ReportError(tokenReader.GetCached(), mdmlabdErr); err != nil {
-				log.Error().Err(err).EmbedObject(mdmlabdErr).Msg("reporting error to MDMlab server")
+			if err := client.ReportError(tokenReader.GetCached(), fleetdErr); err != nil {
+				log.Error().Err(err).EmbedObject(fleetdErr).Msg("reporting error to Fleet server")
 			}
 		}
 
 		if runtime.GOOS == "darwin" {
-			m, s, o, err := mdmMigrationSetup(offlineWatcherCtx, tufUpdateRoot, mdmlabURL, client, &tokenReader)
+			m, s, o, err := mdmMigrationSetup(offlineWatcherCtx, tufUpdateRoot, fleetURL, client, &tokenReader)
 			if err != nil {
 				go reportError(err, nil)
 				log.Error().Err(err).Msg("setting up MDM migration resources")
@@ -237,7 +237,7 @@ func main() {
 		}
 
 		// checkToken performs API test calls to enable the "My device" item as
-		// soon as the device auth token is registered by MDMlab.
+		// soon as the device auth token is registered by Fleet.
 		checkToken := func() <-chan interface{} {
 			done := make(chan interface{})
 
@@ -353,14 +353,14 @@ func main() {
 					}
 
 					// we perform this check locally on the client too to avoid showing the
-					// dialog if the client has already migrated but the MDMlab server
+					// dialog if the client has already migrated but the Fleet server
 					// doesn't know about this state yet.
-					enrolledIntoMDMlab, err := mdmlabhttp.HostnamesMatch(enrollURL, mdmlabURL)
+					enrolledIntoFleet, err := fleethttp.HostnamesMatch(enrollURL, fleetURL)
 					if err != nil {
 						log.Error().Err(err).Msg("comparing MDM server URLs")
 						continue
 					}
-					if !enrolledIntoMDMlab {
+					if !enrolledIntoFleet {
 						// isUnmanaged captures two important bits of information:
 						//
 						// - The notification coming from the server, which is based on information that's
@@ -369,7 +369,7 @@ func main() {
 						// - The current enrollment status of the device.
 						isUnmanaged := sum.Notifications.RenewEnrollmentProfile && !enrolled
 						forceModeEnabled := sum.Notifications.NeedsMDMMigration &&
-							sum.Config.MDM.MacOSMigration.Mode == mdmlab.MacOSMigrationModeForced
+							sum.Config.MDM.MacOSMigration.Mode == fleet.MacOSMigrationModeForced
 
 						// update org info in case it changed
 						mdmMigrator.SetProps(useraction.MDMMigratorProps{
@@ -445,7 +445,7 @@ func main() {
 	}
 
 	// FIXME: it doesn't look like this is actually triggering, at least when desktop gets
-	// killed (https://github.com/mdmlabdm/mdmlab/issues/21256)
+	// killed (https://github.com/fleetdm/fleet/issues/21256)
 	onExit := func() {
 		log.Info().Msg("exiting")
 		if mdmMigrator != nil {
@@ -480,8 +480,8 @@ func main() {
 	systray.Run(onReady, onExit)
 }
 
-func refreshMenuItems(sum mdmlab.DesktopSummary, selfServiceItem *systray.MenuItem, myDeviceItem *systray.MenuItem) {
-	// Check for null for backward compatibility with an old MDMlab server
+func refreshMenuItems(sum fleet.DesktopSummary, selfServiceItem *systray.MenuItem, myDeviceItem *systray.MenuItem) {
+	// Check for null for backward compatibility with an old Fleet server
 	if sum.SelfService != nil && !*sum.SelfService {
 		selfServiceItem.Disable()
 		selfServiceItem.Hide()
@@ -554,7 +554,7 @@ func setupLogs() {
 		return
 	}
 
-	dir = filepath.Join(dir, "MDMlab")
+	dir = filepath.Join(dir, "Fleet")
 
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		stderrOut := zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339Nano, NoColor: true}
@@ -564,7 +564,7 @@ func setupLogs() {
 	}
 
 	logFile := &lumberjack.Logger{
-		Filename:   filepath.Join(dir, "mdmlab-desktop.log"),
+		Filename:   filepath.Join(dir, "fleet-desktop.log"),
 		MaxSize:    25, // megabytes
 		MaxBackups: 3,
 		MaxAge:     28, // days
@@ -587,7 +587,7 @@ func setupStderr() {
 		return
 	}
 
-	stderrFile, err := os.OpenFile(filepath.Join(dir, "MDMlab", "mdmlab-desktop.err"), os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o666)
+	stderrFile, err := os.OpenFile(filepath.Join(dir, "Fleet", "fleet-desktop.err"), os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o666)
 	if err != nil {
 		log.Error().Err(err).Msg("create file to redirect stderr")
 		return
@@ -647,7 +647,7 @@ func logDir() (string, error) {
 	return dir, nil
 }
 
-func mdmMigrationSetup(ctx context.Context, tufUpdateRoot, mdmlabURL string, client *service.DeviceClient, tokenReader *token.Reader) (useraction.MDMMigrator, chan struct{}, useraction.MDMOfflineWatcher, error) {
+func mdmMigrationSetup(ctx context.Context, tufUpdateRoot, fleetURL string, client *service.DeviceClient, tokenReader *token.Reader) (useraction.MDMMigrator, chan struct{}, useraction.MDMOfflineWatcher, error) {
 	dir, err := migration.Dir()
 	if err != nil {
 		return nil, nil, nil, err
@@ -671,7 +671,7 @@ func mdmMigrationSetup(ctx context.Context, tufUpdateRoot, mdmlabURL string, cli
 			tokenReader: tokenReader,
 		},
 		mrw,
-		mdmlabURL,
+		fleetURL,
 		swiftDialogCh,
 	)
 

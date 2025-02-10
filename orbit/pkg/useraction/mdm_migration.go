@@ -7,7 +7,7 @@ import (
 )
 
 // MDMMigrator represents the minimum set of methods a migration must implement
-// in order to be used by MDMlab Desktop.
+// in order to be used by Fleet Desktop.
 type MDMMigrator interface {
 	// CanRun indicates if the migrator is able to run, for example, for macOS it
 	// checks if the swiftDialog executable is present.
@@ -24,7 +24,7 @@ type MDMMigrator interface {
 	// Exit tries to stop any processes started by the migrator.
 	Exit()
 	// MigrationInProgress checks if the MDM migration is still in progress (i.e. the host is not
-	// yet fully enrolled in MDMlab MDM). It returns the type of migration that is in progress, if any.
+	// yet fully enrolled in Fleet MDM). It returns the type of migration that is in progress, if any.
 	MigrationInProgress() (string, error)
 	// MarkMigrationCompleted marks the migration as completed. This is currently done by removing
 	// the migration file.

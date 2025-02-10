@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestGetMDMlabdConfig(t *testing.T) {
-	config, err := GetMDMlabdConfig()
+func TestGetFleetdConfig(t *testing.T) {
+	config, err := GetFleetdConfig()
 	require.ErrorIs(t, ErrNotImplemented, err)
 	require.Nil(t, config)
 }

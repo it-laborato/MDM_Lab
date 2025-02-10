@@ -74,8 +74,8 @@ func TestLocalTargetPaths(t *testing.T) {
 	}{
 		{
 			DesktopWindowsTarget,
-			"root/bin/target/windows/stable/mdmlab-desktop.exe",
-			"root/bin/target/windows/stable/mdmlab-desktop.exe",
+			"root/bin/target/windows/stable/fleet-desktop.exe",
+			"root/bin/target/windows/stable/fleet-desktop.exe",
 			"",
 		},
 		{
@@ -87,14 +87,14 @@ func TestLocalTargetPaths(t *testing.T) {
 		{
 			DesktopLinuxTarget,
 			"root/bin/target/linux/stable/desktop.tar.gz",
-			"root/bin/target/linux/stable/mdmlab-desktop/mdmlab-desktop",
-			"root/bin/target/linux/stable/mdmlab-desktop",
+			"root/bin/target/linux/stable/fleet-desktop/fleet-desktop",
+			"root/bin/target/linux/stable/fleet-desktop",
 		},
 		{
 			DesktopLinuxArm64Target,
 			"root/bin/target/linux-arm64/stable/desktop.tar.gz",
-			"root/bin/target/linux-arm64/stable/mdmlab-desktop/mdmlab-desktop",
-			"root/bin/target/linux-arm64/stable/mdmlab-desktop",
+			"root/bin/target/linux-arm64/stable/fleet-desktop/fleet-desktop",
+			"root/bin/target/linux-arm64/stable/fleet-desktop",
 		},
 		{
 			SwiftDialogMacOSTarget,

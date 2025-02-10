@@ -92,7 +92,7 @@ func BuildMSI(opt Options) (string, error) {
 	if !strings.HasPrefix(orbitVersion, "v") {
 		orbitVersion = "v" + orbitVersion
 	}
-	// v1.28.0 introduced configurable END_USER_EMAIL property for MSI package: https://github.com/mdmlabdm/mdmlab/issues/19219
+	// v1.28.0 introduced configurable END_USER_EMAIL property for MSI package: https://github.com/fleetdm/fleet/issues/19219
 	if semver.Compare(orbitVersion, "v1.28.0") >= 0 {
 		opt.EnableEndUserEmailProperty = true
 	}
@@ -111,16 +111,15 @@ func BuildMSI(opt Options) (string, error) {
 		return "", fmt.Errorf("write certs.pem: %w", err)
 	}
 
-	if opt.MDMlabCertificate != "" {
-
-		if err := writeMDMlabServerCertificate(opt, orbitRoot); err != nil {
-			return "", fmt.Errorf("write mdmlab server certificate: %w", err)
+	if opt.FleetCertificate != "" {
+		if err := writeFleetServerCertificate(opt, orbitRoot); err != nil {
+			return "", fmt.Errorf("write fleet server certificate: %w", err)
 		}
 	}
 
-	if opt.MDMlabTLSClientCertificate != "" {
-		if err := writeMDMlabClientCertificate(opt, orbitRoot); err != nil {
-			return "", fmt.Errorf("write mdmlab client certificate: %w", err)
+	if opt.FleetTLSClientCertificate != "" {
+		if err := writeFleetClientCertificate(opt, orbitRoot); err != nil {
+			return "", fmt.Errorf("write fleet client certificate: %w", err)
 		}
 	}
 
@@ -170,10 +169,10 @@ func BuildMSI(opt Options) (string, error) {
 	wineChecked := false
 
 	// Download wix for macOS running on arm64, unless a local-wix-dir is provided.
-	// We are using native MSI build on macOS arm64, instead of Docker, because the current mdmlabdm/wix Docker image is unreliable on macOS arm64.
+	// We are using native MSI build on macOS arm64, instead of Docker, because the current fleetdm/wix Docker image is unreliable on macOS arm64.
 	// We are looking into creating a new Docker image for macOS arm64.
 	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm64" && absWixDir == "" {
-		fmt.Println("Detected macOS arm64. mdmlabctl must use locally installed wine and wix to build the MSI package.")
+		fmt.Println("Detected macOS arm64. fleetctl must use locally installed wine and wix to build the MSI package.")
 
 		// Ensure wine is installed before downloading wix
 		if err = checkWine(false); err != nil {
@@ -215,7 +214,7 @@ func BuildMSI(opt Options) (string, error) {
 		return "", fmt.Errorf("build package: %w", err)
 	}
 
-	filename := "mdmlab-osquery.msi"
+	filename := "fleet-osquery.msi"
 	if opt.NativeTooling {
 		filename = filepath.Join("build", filename)
 	}
@@ -233,7 +232,7 @@ func checkWine(wineChecked bool) error {
 		cmd := exec.Command(wix.WineCmd, "--version")
 		if err := cmd.Run(); err != nil {
 			return fmt.Errorf(
-				"%s failed. Is Wine installed? Creating a mdmlabd agent for Windows (.msi) requires Wine. To install Wine see the script here: https://mdmlabdm.com/install-wine %w",
+				"%s failed. Is Wine installed? Creating a fleetd agent for Windows (.msi) requires Wine. To install Wine see the script here: https://fleetdm.com/install-wine %w",
 				wix.WineCmd, err,
 			)
 		}
@@ -333,7 +332,7 @@ func createVersionInfo(vParts []string, manifestPath string) (*goversioninfo.Ver
 		vIntParts = append(vIntParts, v)
 	}
 	version := strings.Join(vParts, ".")
-	copyright := fmt.Sprintf("%d MDMlab Device Management Inc.", time.Now().Year())
+	copyright := fmt.Sprintf("%d Fleet Device Management Inc.", time.Now().Year())
 
 	// Taken from https://github.com/josephspurrier/goversioninfo/blob/master/testdata/resource/versioninfo.json
 	langID, err := strconv.ParseUint("0409", 16, 16)
@@ -367,16 +366,16 @@ func createVersionInfo(vParts []string, manifestPath string) (*goversioninfo.Ver
 			FileSubType:   "00",
 		},
 		StringFileInfo: goversioninfo.StringFileInfo{
-			Comments:         "MDMlab osquery",
-			CompanyName:      "MDMlab Device Management (mdmlabdm.com)",
-			FileDescription:  "MDMlab osquery installer",
+			Comments:         "Fleet osquery",
+			CompanyName:      "Fleet Device Management (fleetdm.com)",
+			FileDescription:  "Fleet osquery installer",
 			FileVersion:      version,
 			InternalName:     "",
 			LegalCopyright:   copyright,
 			LegalTrademarks:  "",
 			OriginalFilename: "",
 			PrivateBuild:     "",
-			ProductName:      "MDMlab osquery",
+			ProductName:      "Fleet osquery",
 			ProductVersion:   version,
 			SpecialBuild:     "",
 		},

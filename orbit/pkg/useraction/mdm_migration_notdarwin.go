@@ -10,7 +10,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/server/service"
 )
 
-func NewMDMMigrator(path string, frequency time.Duration, handler MDMMigratorHandler, mrw *migration.ReadWriter, mdmlabURL string, showCh chan struct{}) MDMMigrator {
+func NewMDMMigrator(path string, frequency time.Duration, handler MDMMigratorHandler, mrw *migration.ReadWriter, fleetURL string, showCh chan struct{}) MDMMigrator {
 	return &NoopMDMMigrator{}
 }
 

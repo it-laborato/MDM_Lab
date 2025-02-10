@@ -18,7 +18,7 @@ import (
 
 // In the past we implemented some logic to detect the Windows theme but it was buggy,
 // so as a temporary fix we are using the same colored icon for both themes.
-// Such theme detection logic was removed in this PR: https://github.com/mdmlabdm/mdmlab/pull/16402.
+// Such theme detection logic was removed in this PR: https://github.com/fleetdm/fleet/pull/16402.
 
 //go:embed windows_app.ico
 var iconLight []byte

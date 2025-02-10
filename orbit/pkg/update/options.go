@@ -71,7 +71,7 @@ var (
 		Platform:             "macos",
 		Channel:              "stable",
 		TargetFile:           "desktop.app.tar.gz",
-		ExtractedExecSubPath: []string{"MDMlab Desktop.app", "Contents", "MacOS", constant.DesktopAppExecName},
+		ExtractedExecSubPath: []string{"Fleet Desktop.app", "Contents", "MacOS", constant.DesktopAppExecName},
 	}
 
 	DesktopWindowsTarget = TargetInfo{
@@ -84,7 +84,7 @@ var (
 		Platform:             "linux",
 		Channel:              "stable",
 		TargetFile:           "desktop.tar.gz",
-		ExtractedExecSubPath: []string{"mdmlab-desktop", constant.DesktopAppExecName},
+		ExtractedExecSubPath: []string{"fleet-desktop", constant.DesktopAppExecName},
 		CustomCheckExec: func(execPath string) error {
 			cmd := exec.Command(execPath, "--help")
 			cmd.Env = append(cmd.Env, fmt.Sprintf("LD_LIBRARY_PATH=%s:%s", filepath.Dir(execPath), os.ExpandEnv("$LD_LIBRARY_PATH")))
@@ -99,7 +99,7 @@ var (
 		Platform:             "linux-arm64",
 		Channel:              "stable",
 		TargetFile:           "desktop.tar.gz",
-		ExtractedExecSubPath: []string{"mdmlab-desktop", constant.DesktopAppExecName},
+		ExtractedExecSubPath: []string{"fleet-desktop", constant.DesktopAppExecName},
 		CustomCheckExec: func(execPath string) error {
 			cmd := exec.Command(execPath, "--help")
 			if out, err := cmd.CombinedOutput(); err != nil {

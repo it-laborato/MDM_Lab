@@ -12,7 +12,7 @@ import (
 
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/bitlocker"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/scripts"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/require"
@@ -41,7 +41,7 @@ func TestRenewEnrollmentProfile(t *testing.T) {
 		t.Run(c.desc, func(t *testing.T) {
 			logBuf.Reset()
 
-			testConfig := &mdmlab.OrbitConfig{Notifications: mdmlab.OrbitConfigNotifications{RenewEnrollmentProfile: c.renewFlag}}
+			testConfig := &fleet.OrbitConfig{Notifications: fleet.OrbitConfigNotifications{RenewEnrollmentProfile: c.renewFlag}}
 
 			var cmdGotCalled bool
 			var depAssignedCheckGotCalled bool
@@ -77,7 +77,7 @@ func TestRenewEnrollmentProfilePrevented(t *testing.T) {
 	log.Logger = log.Output(&logBuf)
 	t.Cleanup(func() { log.Logger = oldLog })
 
-	testConfig := &mdmlab.OrbitConfig{Notifications: mdmlab.OrbitConfigNotifications{RenewEnrollmentProfile: true}}
+	testConfig := &fleet.OrbitConfig{Notifications: fleet.OrbitConfigNotifications{RenewEnrollmentProfile: true}}
 
 	var cmdCallCount int
 	isEnrolled := false
@@ -225,7 +225,7 @@ func TestWindowsMDMEnrollment(t *testing.T) {
 				isUnenroll = c.unenrollFlag != nil
 			)
 
-			testConfig := &mdmlab.OrbitConfig{Notifications: mdmlab.OrbitConfigNotifications{
+			testConfig := &fleet.OrbitConfig{Notifications: fleet.OrbitConfigNotifications{
 				NeedsProgrammaticWindowsMDMEnrollment:   enroll,
 				NeedsProgrammaticWindowsMDMUnenrollment: unenroll,
 				NeedsMDMMigration:                       migrate,
@@ -268,7 +268,7 @@ func TestWindowsMDMEnrollmentPrevented(t *testing.T) {
 	log.Logger = log.Output(&logBuf)
 	t.Cleanup(func() { log.Logger = oldLog })
 
-	cfgs := []mdmlab.OrbitConfigNotifications{
+	cfgs := []fleet.OrbitConfigNotifications{
 		{
 			NeedsProgrammaticWindowsMDMEnrollment: true,
 			WindowsMDMDiscoveryEndpoint:           "http://example.com",
@@ -279,7 +279,7 @@ func TestWindowsMDMEnrollmentPrevented(t *testing.T) {
 	}
 	for _, cfg := range cfgs {
 		t.Run(fmt.Sprintf("%+v", cfg), func(t *testing.T) {
-			testConfig := &mdmlab.OrbitConfig{Notifications: cfg}
+			testConfig := &fleet.OrbitConfig{Notifications: cfg}
 
 			var (
 				apiCallCount int
@@ -394,7 +394,7 @@ func TestRunScripts(t *testing.T) {
 	t.Run("no pending scripts", func(t *testing.T) {
 		t.Cleanup(func() { callsCount.Store(0); logBuf.Reset() })
 
-		testConfig := &mdmlab.OrbitConfig{Notifications: mdmlab.OrbitConfigNotifications{
+		testConfig := &fleet.OrbitConfig{Notifications: fleet.OrbitConfigNotifications{
 			PendingScriptExecutionIDs: nil,
 		}}
 
@@ -413,7 +413,7 @@ func TestRunScripts(t *testing.T) {
 	t.Run("pending scripts succeed", func(t *testing.T) {
 		t.Cleanup(func() { callsCount.Store(0); logBuf.Reset() })
 
-		testConfig := &mdmlab.OrbitConfig{Notifications: mdmlab.OrbitConfigNotifications{
+		testConfig := &fleet.OrbitConfig{Notifications: fleet.OrbitConfigNotifications{
 			PendingScriptExecutionIDs: []string{"a", "b", "c"},
 		}}
 
@@ -432,7 +432,7 @@ func TestRunScripts(t *testing.T) {
 	t.Run("pending scripts failed", func(t *testing.T) {
 		t.Cleanup(func() { callsCount.Store(0); logBuf.Reset(); runFailure = nil })
 
-		testConfig := &mdmlab.OrbitConfig{Notifications: mdmlab.OrbitConfigNotifications{
+		testConfig := &fleet.OrbitConfig{Notifications: fleet.OrbitConfigNotifications{
 			PendingScriptExecutionIDs: []string{"a", "b", "c"},
 		}}
 
@@ -454,7 +454,7 @@ func TestRunScripts(t *testing.T) {
 	t.Run("concurrent run prevented", func(t *testing.T) {
 		t.Cleanup(func() { callsCount.Store(0); logBuf.Reset(); blockRun = nil })
 
-		testConfig := &mdmlab.OrbitConfig{Notifications: mdmlab.OrbitConfigNotifications{
+		testConfig := &fleet.OrbitConfig{Notifications: fleet.OrbitConfigNotifications{
 			PendingScriptExecutionIDs: []string{"a", "b", "c"},
 		}}
 
@@ -482,7 +482,7 @@ func TestRunScripts(t *testing.T) {
 	t.Run("dynamic enabling of scripts", func(t *testing.T) {
 		t.Cleanup(logBuf.Reset)
 
-		testConfig := &mdmlab.OrbitConfig{Notifications: mdmlab.OrbitConfigNotifications{
+		testConfig := &fleet.OrbitConfig{Notifications: fleet.OrbitConfigNotifications{
 			PendingScriptExecutionIDs: []string{"a"},
 		}}
 
@@ -499,8 +499,8 @@ func TestRunScripts(t *testing.T) {
 				scriptsEnabledCalls = append(scriptsEnabledCalls, r.ScriptExecutionEnabled)
 				return nil
 			},
-			testGetMDMlabdConfig: func() (*mdmlab.MDMAppleMDMlabdConfig, error) {
-				return &mdmlab.MDMAppleMDMlabdConfig{
+			testGetFleetdConfig: func() (*fleet.MDMAppleFleetdConfig, error) {
+				return &fleet.MDMAppleFleetdConfig{
 					EnableScripts: dynamicEnabled.Load(),
 				}, nil
 			},
@@ -549,11 +549,11 @@ func TestRunScripts(t *testing.T) {
 }
 
 type mockDiskEncryptionKeySetter struct {
-	SetOrUpdateDiskEncryptionKeyImpl    func(diskEncryptionStatus mdmlab.OrbitHostDiskEncryptionKeyPayload) error
+	SetOrUpdateDiskEncryptionKeyImpl    func(diskEncryptionStatus fleet.OrbitHostDiskEncryptionKeyPayload) error
 	SetOrUpdateDiskEncryptionKeyInvoked bool
 }
 
-func (m *mockDiskEncryptionKeySetter) SetOrUpdateDiskEncryptionKey(diskEncryptionStatus mdmlab.OrbitHostDiskEncryptionKeyPayload) error {
+func (m *mockDiskEncryptionKeySetter) SetOrUpdateDiskEncryptionKey(diskEncryptionStatus fleet.OrbitHostDiskEncryptionKeyPayload) error {
 	m.SetOrUpdateDiskEncryptionKeyInvoked = true
 	return m.SetOrUpdateDiskEncryptionKeyImpl(diskEncryptionStatus)
 }
@@ -574,14 +574,14 @@ func TestBitlockerOperations(t *testing.T) {
 		decryptFnCalled        = false
 	)
 
-	testConfig := &mdmlab.OrbitConfig{
-		Notifications: mdmlab.OrbitConfigNotifications{
+	testConfig := &fleet.OrbitConfig{
+		Notifications: fleet.OrbitConfigNotifications{
 			EnforceBitLockerEncryption: shouldEncrypt,
 		},
 	}
 
 	clientMock := &mockDiskEncryptionKeySetter{}
-	clientMock.SetOrUpdateDiskEncryptionKeyImpl = func(diskEncryptionStatus mdmlab.OrbitHostDiskEncryptionKeyPayload) error {
+	clientMock.SetOrUpdateDiskEncryptionKeyImpl = func(diskEncryptionStatus fleet.OrbitHostDiskEncryptionKeyPayload) error {
 		if shouldFailServerUpdate {
 			return errors.New("server error")
 		}
@@ -739,7 +739,7 @@ func TestBitlockerOperations(t *testing.T) {
 		require.False(t, decryptFnCalled, "decryption function should not be called")
 	})
 
-	t.Run("successful mdmlab server update", func(t *testing.T) {
+	t.Run("successful fleet server update", func(t *testing.T) {
 		setupTest()
 		shouldFailEncryption = false
 		mockStatus := &bitlocker.EncryptionStatus{ConversionStatus: bitlocker.ConversionStatusFullyDecrypted}
@@ -754,7 +754,7 @@ func TestBitlockerOperations(t *testing.T) {
 		require.False(t, decryptFnCalled, "decryption function should not be called")
 	})
 
-	t.Run("failed mdmlab server update", func(t *testing.T) {
+	t.Run("failed fleet server update", func(t *testing.T) {
 		setupTest()
 		shouldFailEncryption = false
 		shouldFailServerUpdate = true
@@ -765,7 +765,7 @@ func TestBitlockerOperations(t *testing.T) {
 
 		err := enrollReceiver.Run(testConfig)
 		require.NoError(t, err)
-		require.Contains(t, logBuf.String(), "failed to send encryption result to MDMlab Server")
+		require.Contains(t, logBuf.String(), "failed to send encryption result to Fleet Server")
 		require.True(t, clientMock.SetOrUpdateDiskEncryptionKeyInvoked)
 		require.True(t, encryptFnCalled, "encryption function should have been called")
 		require.False(t, decryptFnCalled, "decryption function should not be called")

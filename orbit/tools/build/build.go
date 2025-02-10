@@ -55,7 +55,7 @@ func main() {
 	const (
 		amdBinaryPath    = "orbit-darwin-amd64"
 		armBinaryPath    = "orbit-darwin-arm64"
-		bundleIdentifier = "com.mdmlabdm.orbit"
+		bundleIdentifier = "com.fleetdm.orbit"
 	)
 	if err := buildOrbit(amdBinaryPath, "amd64", version, commit, date); err != nil {
 		panic(err)

@@ -10,9 +10,9 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/groob/plist"
 	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
-	"github.com/micromdm/plist"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 )
 
 type profileItem[T any] struct {
@@ -29,10 +29,10 @@ type profilesOutput[T any] struct {
 	ComputerLevel []profilePayload[T] `plist:"_computerlevel"`
 }
 
-// GetMDMlabdConfig searches and parses a device level configuration profile
-// with MDMlab's payload identifier.
-func GetMDMlabdConfig() (*mdmlab.MDMAppleMDMlabdConfig, error) {
-	pc, err := getProfilePayloadContent[mdmlab.MDMAppleMDMlabdConfig](mobileconfig.MDMlabdConfigPayloadIdentifier)
+// GetFleetdConfig searches and parses a device level configuration profile
+// with Fleet's payload identifier.
+func GetFleetdConfig() (*mdmlab.MDMAppleMDMlabdConfig, error) {
+	pc, err := getProfilePayloadContent[mdmlab.MDMAppleMDMlabdConfig](mobileconfig.MDMlabCARootConfigPayloadIdentifier)
 	if err != nil {
 		if err == ErrNotFound {
 			return &mdmlab.MDMAppleMDMlabdConfig{}, nil
@@ -45,7 +45,7 @@ func GetMDMlabdConfig() (*mdmlab.MDMAppleMDMlabdConfig, error) {
 }
 
 func GetCustomEnrollmentProfileEndUserEmail() (string, error) {
-	pc, err := getProfilePayloadContent[mdmlab.MDMCustomEnrollmentProfileItem](mobileconfig.MDMlabEnrollmentPayloadIdentifier)
+	pc, err := getProfilePayloadContent[mdmlab.MDMCustomEnrollmentProfileItem](mobileconfig.MDMlabCARootConfigPayloadIdentifier)
 	if err != nil {
 		return "", err
 	}
@@ -219,7 +219,7 @@ func CheckAssignedEnrollmentProfile(expectedURL string) error {
 	for _, line := range lines {
 		// Note the output may contain both ConfigurationURL and ConfigurationWebURL but we check only
 		// the latter for backwards compatibility.
-		// See https://github.com/mdmlabdm/mdmlab/blob/963b2438537de14e7e16f1f18857ed8a66d51bfc/server/mdm/apple/apple_mdm.go#L195
+		// See https://github.com/fleetdm/fleet/blob/963b2438537de14e7e16f1f18857ed8a66d51bfc/server/mdm/apple/apple_mdm.go#L195
 		v, ok := parseEnrollmentProfileValue(line, "ConfigurationWebURL")
 		if ok {
 			assignedURL = v

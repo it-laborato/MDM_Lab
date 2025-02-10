@@ -1,4 +1,4 @@
-package mdmlabd_logs
+package fleetd_logs
 
 import (
 	"bytes"
@@ -30,7 +30,7 @@ func TablePlugin() *table.Plugin {
 		table.TextColumn("error"),
 	}
 
-	return table.NewPlugin("mdmlabd_logs", columns, generate)
+	return table.NewPlugin("fleetd_logs", columns, generate)
 }
 
 func generate(ctx context.Context, queryContext table.QueryContext) ([]map[string]string, error) {
@@ -66,7 +66,7 @@ type logger struct {
 func (l *logger) Write(event []byte) (int, error) {
 	msgs, err := processLogEntry(event)
 	if err != nil {
-		return 0, fmt.Errorf("mdmlab_logs.Write: %w", err)
+		return 0, fmt.Errorf("fleet_logs.Write: %w", err)
 	}
 
 	l.writeMutex.Lock()
@@ -84,7 +84,7 @@ func (l *logger) Write(event []byte) (int, error) {
 func (l *logger) WriteLevel(level zerolog.Level, event []byte) (int, error) {
 	msgs, err := processLogEntry(event)
 	if err != nil {
-		return 0, fmt.Errorf("mdmlab_logs.WriteLevel: %w", err)
+		return 0, fmt.Errorf("fleet_logs.WriteLevel: %w", err)
 	}
 
 	for idx := range msgs {
