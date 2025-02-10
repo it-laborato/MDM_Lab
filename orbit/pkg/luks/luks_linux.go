@@ -19,7 +19,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/kdialog"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/lvm"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/zenity"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/rs/zerolog/log"
 	"github.com/siderolabs/go-blockdevice/v2/encryption"
 	luksdevice "github.com/siderolabs/go-blockdevice/v2/encryption/luks"
@@ -32,7 +32,7 @@ const (
 	infoTitle            = "Disk encryption"
 	infoFailedText       = "Failed to escrow key. Please try again later."
 	infoSuccessText      = "Success!  Now, return to your browser window and follow the instructions to verify disk encryption."
-	timeoutMessage       = "Please visit MDMlab Desktop > My device and click Create key"
+	timeoutMessage       = "Please visit Fleet Desktop > My device and click Create key"
 	maxKeySlots          = 8
 	userKeySlot          = 0 // Key slot 0 is assumed to be the location of the user's passphrase
 )
@@ -47,7 +47,7 @@ func isInstalled(toolName string) bool {
 	return path != ""
 }
 
-func (lr *LuksRunner) Run(oc *mdmlab.OrbitConfig) error {
+func (lr *LuksRunner) Run(oc *fleet.OrbitConfig) error {
 	ctx := context.Background()
 
 	if !oc.Notifications.RunDiskEncryptionEscrow {

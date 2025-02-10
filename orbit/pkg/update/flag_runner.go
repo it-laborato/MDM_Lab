@@ -16,11 +16,11 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-// FlagRunner is a specialized runner to periodically check and update flags from MDMlab
+// FlagRunner is a specialized runner to periodically check and update flags from Fleet
 // It is designed with Execute and Interrupt functions to be compatible with oklog/run
 //
 // It uses an OrbitConfigFetcher (which may be the OrbitClient with additional middleware), along
-// with FlagUpdateOptions to connect to MDMlab
+// with FlagUpdateOptions to connect to Fleet
 type FlagRunner struct {
 	triggerOrbitRestart func(reason string)
 	opt                 FlagUpdateOptions
@@ -41,8 +41,8 @@ func NewFlagReceiver(triggerOrbitRestart func(reason string), opt FlagUpdateOpti
 	}
 }
 
-// DoFlagsUpdate checks for update of flags from MDMlab
-// It gets the flags from the MDMlab server, and compares them to locally stored flagfile (if it exists)
+// DoFlagsUpdate checks for update of flags from Fleet
+// It gets the flags from the Fleet server, and compares them to locally stored flagfile (if it exists)
 // If the flag comparison from disk and server are not equal, it writes the flags to disk, and returns true
 func (r *FlagRunner) Run(config *mdmlab.OrbitConfig) error {
 	flagFileExists := true
@@ -62,18 +62,18 @@ func (r *FlagRunner) Run(config *mdmlab.OrbitConfig) error {
 		return nil
 	}
 
-	osqueryFlagMapFromMDMlab, err := getFlagsFromJSON(config.Flags)
+	osqueryFlagMapFromFleet, err := getFlagsFromJSON(config.Flags)
 	if err != nil {
 		return fmt.Errorf("error parsing flags: %w", err)
 	}
 
 	// compare both flags, if they are equal, nothing to do
-	if flagFileExists && reflect.DeepEqual(osqueryFlagMapFromFile, osqueryFlagMapFromMDMlab) {
+	if flagFileExists && reflect.DeepEqual(osqueryFlagMapFromFile, osqueryFlagMapFromFleet) {
 		return nil
 	}
 
-	// flags are not equal, write the mdmlab flags to disk
-	err = writeFlagFile(r.opt.RootDir, osqueryFlagMapFromMDMlab)
+	// flags are not equal, write the fleet flags to disk
+	err = writeFlagFile(r.opt.RootDir, osqueryFlagMapFromFleet)
 	if err != nil {
 		return fmt.Errorf("error writing flags to disk: %w", err)
 	}
@@ -82,11 +82,11 @@ func (r *FlagRunner) Run(config *mdmlab.OrbitConfig) error {
 	return nil
 }
 
-// ExtensionRunner is a specialized runner to periodically check and update flags from MDMlab
+// ExtensionRunner is a specialized runner to periodically check and update flags from Fleet
 // It is designed with Execute and Interrupt functions to be compatible with oklog/run
 //
 // It uses an an OrbitConfigFetcher (which may be the OrbitClient with additional middleware), along
-// with ExtensionUpdateOptions and updateRunner to connect to MDMlab.
+// with ExtensionUpdateOptions and updateRunner to connect to Fleet.
 type ExtensionRunner struct {
 	opt                 ExtensionUpdateOptions
 	updateRunner        *Runner
@@ -109,14 +109,14 @@ func NewExtensionConfigUpdateRunner(opt ExtensionUpdateOptions, updateRunner *Ru
 	}
 }
 
-// DoExtensionConfigUpdate calls the /config API endpoint to grab extensions from MDMlab
+// DoExtensionConfigUpdate calls the /config API endpoint to grab extensions from Fleet
 // It parses the extensions, computes the local hash, and writes the binary path to extension.load file
 //
 // It will only trigger a orbit restart when extensions were previously configured and now are cleared.
 func (r *ExtensionRunner) Run(config *mdmlab.OrbitConfig) error {
 	extensionAutoLoadFile := filepath.Join(r.opt.RootDir, "extensions.load")
 	if len(config.Extensions) == 0 {
-		// Extensions from MDMlab is empty
+		// Extensions from Fleet is empty
 		// this can be either because of:
 		// 1. the default state, where no extensions are configured to begin with, or
 		// 2. extensions were previously configured, but now are deleted and reverted to empty state
@@ -149,7 +149,7 @@ func (r *ExtensionRunner) Run(config *mdmlab.OrbitConfig) error {
 	var extensions mdmlab.Extensions
 	err := json.Unmarshal(config.Extensions, &extensions)
 	if err != nil {
-		return fmt.Errorf("error unmarshing json extensions config from mdmlab: %w", err)
+		return fmt.Errorf("error unmarshing json extensions config from fleet: %w", err)
 	}
 
 	// Filter out extensions not targeted to this OS.

@@ -1,5 +1,5 @@
 // Package insecure provides an insecure (if it were not obvious yet) TLS proxy
-// that can be used for testing osquery enrollment with a MDMlab (or other TLS)
+// that can be used for testing osquery enrollment with a Fleet (or other TLS)
 // server in non-production environments.
 //
 // Functions in this package are NOT SUITABLE FOR PRODUCTION ENVIRONMENTS!
@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/pkg/fleethttp"
 )
 
 const (
@@ -152,7 +152,7 @@ func newProxyHandler(targetURL string) (*httputil.ReverseProxy, error) {
 		},
 	}
 	// Adapted from http.DefaultTransport
-	reverseProxy.Transport = mdmlabhttp.NewTransport(mdmlabhttp.WithTLSConfig(
+	reverseProxy.Transport = fleethttp.NewTransport(fleethttp.WithTLSConfig(
 		&tls.Config{InsecureSkipVerify: true},
 	))
 

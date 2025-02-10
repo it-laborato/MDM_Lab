@@ -18,7 +18,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/augeas"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/build"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
@@ -34,7 +33,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/profiles"
 	setupexperience "github.com/it-laborato/MDM_Lab/orbit/pkg/setup_experience"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/table"
-	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/mdmlabd_logs"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/fleetd_logs"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/orbit_info"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/token"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
@@ -44,8 +43,9 @@ import (
 	"github.com/it-laborato/MDM_Lab/pkg/file"
 	retrypkg "github.com/it-laborato/MDM_Lab/pkg/retry"
 	"github.com/it-laborato/MDM_Lab/pkg/secure"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/it-laborato/MDM_Lab/server/service"
+	"github.com/google/uuid"
 	"github.com/oklog/run"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -63,6 +63,8 @@ const (
 	logErrorLaunchServicesMsg    logError = "LaunchServices kLSServerCommunicationErr (-10822)"
 	logErrorMissingExecSubstr    logError = "The application cannot be opened because its executable is missing."
 	logErrorMissingExecMsg       logError = "bad desktop executable"
+	logErrorMissingDomainSubstr  logError = "Domain=OSLaunchdErrorDomain Code=112"
+	logErrorMissingDomainMsg     logError = "missing specified domain"
 )
 
 func main() {
@@ -86,18 +88,18 @@ func main() {
 			EnvVars: []string{"ORBIT_INSECURE"},
 		},
 		&cli.StringFlag{
-			Name:    "mdmlab-url",
-			Usage:   "URL (host:port) of MDMlab server",
+			Name:    "fleet-url",
+			Usage:   "URL (host:port) of Fleet server",
 			EnvVars: []string{"ORBIT_FLEET_URL"},
 		},
 		&cli.StringFlag{
-			Name:    "mdmlab-certificate",
-			Usage:   "Path to the MDMlab server certificate chain",
+			Name:    "fleet-certificate",
+			Usage:   "Path to the Fleet server certificate chain",
 			EnvVars: []string{"ORBIT_FLEET_CERTIFICATE"},
 		},
 		&cli.StringFlag{
-			Name:    "mdmlab-desktop-alternative-browser-host",
-			Usage:   "Alternative host:port to use for MDMlab Desktop in the browser (this may be required when using TLS client authentication in the MDMlab server)",
+			Name:    "fleet-desktop-alternative-browser-host",
+			Usage:   "Alternative host:port to use for Fleet Desktop in the browser (this may be required when using TLS client authentication in the Fleet server)",
 			EnvVars: []string{"ORBIT_FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST"},
 		},
 		&cli.StringFlag{
@@ -113,7 +115,7 @@ func main() {
 		},
 		&cli.StringFlag{
 			Name:    "enroll-secret",
-			Usage:   "Enroll secret for authenticating to MDMlab server",
+			Usage:   "Enroll secret for authenticating to Fleet server",
 			EnvVars: []string{"ORBIT_ENROLL_SECRET"},
 		},
 		&cli.StringFlag{
@@ -135,13 +137,13 @@ func main() {
 		},
 		&cli.StringFlag{
 			Name:    "desktop-channel",
-			Usage:   "Update channel of MDMlab Desktop to use",
+			Usage:   "Update channel of Fleet Desktop to use",
 			Value:   "stable",
 			EnvVars: []string{"ORBIT_DESKTOP_CHANNEL"},
 		},
 		&cli.DurationFlag{
 			Name:    "update-interval",
-			Usage:   "How often to check for updates. Note: mdmlabd checks for updates at startup. The next update check adds some randomization and may take up to 10 minutes longer",
+			Usage:   "How often to check for updates. Note: fleetd checks for updates at startup. The next update check adds some randomization and may take up to 10 minutes longer",
 			Value:   15 * time.Minute,
 			EnvVars: []string{"ORBIT_UPDATE_INTERVAL"},
 		},
@@ -170,8 +172,8 @@ func main() {
 			EnvVars: []string{"ORBIT_LOG_FILE"},
 		},
 		&cli.BoolFlag{
-			Name:    "mdmlab-desktop",
-			Usage:   "Launch MDMlab Desktop application (flag currently only used on darwin)",
+			Name:    "fleet-desktop",
+			Usage:   "Launch Fleet Desktop application (flag currently only used on darwin)",
 			EnvVars: []string{"ORBIT_FLEET_DESKTOP"},
 		},
 		// Note: this flag doesn't have any effect anymore. I'm keeping
@@ -179,7 +181,7 @@ func main() {
 		// using it because softwareupdated was causing problems and I
 		// don't want to break their setups.
 		//
-		// For more context please check out: https://github.com/mdmlabdm/mdmlab/issues/11777
+		// For more context please check out: https://github.com/fleetdm/fleet/issues/11777
 		&cli.BoolFlag{
 			Name:    "disable-kickstart-softwareupdated",
 			Usage:   "(Deprecated) Disable periodic execution of 'launchctl kickstart -k softwareupdated' on macOS",
@@ -188,7 +190,7 @@ func main() {
 		},
 		&cli.BoolFlag{
 			Name:    "use-system-configuration",
-			Usage:   "Try to read --mdmlab-url and --enroll-secret using configuration in the host (currently only macOS profiles are supported)",
+			Usage:   "Try to read --fleet-url and --enroll-secret using configuration in the host (currently only macOS profiles are supported)",
 			EnvVars: []string{"ORBIT_USE_SYSTEM_CONFIGURATION"},
 			Hidden:  true,
 		},
@@ -199,14 +201,14 @@ func main() {
 		},
 		&cli.StringFlag{
 			Name:    "host-identifier",
-			Usage:   "Sets the host identifier that orbit and osquery will use when enrolling to MDMlab. Options: 'uuid' and 'instance' (requires MDMlab >= v4.42.0)",
+			Usage:   "Sets the host identifier that orbit and osquery will use when enrolling to Fleet. Options: 'uuid' and 'instance' (requires Fleet >= v4.42.0)",
 			EnvVars: []string{"ORBIT_HOST_IDENTIFIER"},
 			Value:   "uuid",
 		},
 		&cli.StringFlag{
 			Name:    "end-user-email",
 			Hidden:  true, // experimental feature, we don't want to show it for now
-			Usage:   "Sets the email address of the user associated with the host when enrolling to MDMlab. (requires MDMlab >= v4.43.0)",
+			Usage:   "Sets the email address of the user associated with the host when enrolling to Fleet. (requires Fleet >= v4.43.0)",
 			EnvVars: []string{"ORBIT_END_USER_EMAIL"},
 		},
 		&cli.BoolFlag{
@@ -264,19 +266,19 @@ func main() {
 				// #3100). Thus, we log to the logFile only.
 				log.Logger = log.Output(zerolog.MultiLevelWriter(
 					zerolog.ConsoleWriter{Out: logFile, TimeFormat: time.RFC3339Nano, NoColor: true},
-					&mdmlabd_logs.Logger,
+					&fleetd_logs.Logger,
 				))
 			} else {
 				log.Logger = log.Output(zerolog.MultiLevelWriter(
 					zerolog.ConsoleWriter{Out: logFile, TimeFormat: time.RFC3339Nano, NoColor: true},
 					zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339Nano, NoColor: true},
-					&mdmlabd_logs.Logger,
+					&fleetd_logs.Logger,
 				))
 			}
 		} else {
 			log.Logger = log.Output(zerolog.MultiLevelWriter(
 				zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339Nano, NoColor: true},
-				&mdmlabd_logs.Logger,
+				&fleetd_logs.Logger,
 			))
 		}
 
@@ -286,14 +288,14 @@ func main() {
 			zerolog.SetGlobalLevel(zerolog.DebugLevel)
 		}
 
-		// Override flags with values retrieved from MDMlab.
+		// Override flags with values retrieved from Fleet.
 		fallbackServerOverridesCfg := setServerOverrides(c)
 		if !fallbackServerOverridesCfg.empty() {
 			log.Debug().Msgf("fallback settings: %+v", fallbackServerOverridesCfg)
 		}
 
-		if c.Bool("insecure") && c.String("mdmlab-certificate") != "" {
-			return errors.New("insecure and mdmlab-certificate may not be specified together")
+		if c.Bool("insecure") && c.String("fleet-certificate") != "" {
+			return errors.New("insecure and fleet-certificate may not be specified together")
 		}
 
 		if c.Bool("insecure") && c.String("update-tls-certificate") != "" {
@@ -393,7 +395,7 @@ func main() {
 			return fmt.Errorf("--host-identifier=%s is not supported, currently supported values are 'uuid' and 'instance'", hostIdentifier)
 		}
 
-		if email := c.String("end-user-email"); email != "" && email != unusedFlagKeyword && !mdmlab.IsLooseEmail(email) {
+		if email := c.String("end-user-email"); email != "" && email != unusedFlagKeyword && !fleet.IsLooseEmail(email) {
 			return fmt.Errorf("the provided end-user email address %q is not a valid email address", email)
 		}
 
@@ -404,9 +406,9 @@ func main() {
 		// if neither are set, this might be an agent deployed via MDM, try to read
 		// both configs from a configuration profile
 		if runtime.GOOS == "darwin" && c.Bool("use-system-configuration") {
-			log.Info().Msg("trying to read mdmlab-url and enroll-secret from a configuration profile")
+			log.Info().Msg("trying to read fleet-url and enroll-secret from a configuration profile")
 			for {
-				config, err := profiles.GetMDMlabdConfig()
+				config, err := profiles.GetFleetdConfig()
 				switch {
 				// handle these errors separately as debug messages to not raise false
 				// alarms when users look into the orbit logs, it's perfectly normal to
@@ -414,40 +416,40 @@ func main() {
 				// operating systems that don't have profile support.
 				case err != nil:
 					log.Error().Err(err).Msg("reading configuration profile")
-				case config.EnrollSecret == "" || config.MDMlabURL == "":
-					log.Debug().Msg("enroll secret or mdmlab url are empty in configuration profile, not setting either")
+				case config.EnrollSecret == "" || config.FleetURL == "":
+					log.Debug().Msg("enroll secret or fleet url are empty in configuration profile, not setting either")
 				default:
-					log.Info().Msg("setting enroll-secret and mdmlab-url configs from configuration profile")
+					log.Info().Msg("setting enroll-secret and fleet-url configs from configuration profile")
 					if err := c.Set("enroll-secret", config.EnrollSecret); err != nil {
 						return fmt.Errorf("set enroll secret from configuration profile: %w", err)
 					}
-					if err := c.Set("mdmlab-url", config.MDMlabURL); err != nil {
-						return fmt.Errorf("set mdmlab URL from configuration profile: %w", err)
+					if err := c.Set("fleet-url", config.FleetURL); err != nil {
+						return fmt.Errorf("set fleet URL from configuration profile: %w", err)
 					}
 					if err := writeSecret(config.EnrollSecret, c.String("root-dir")); err != nil {
 						return fmt.Errorf("write enroll secret: %w", err)
 					}
-					if err := writeMDMlabURL(config.MDMlabURL, c.String("root-dir")); err != nil {
-						return fmt.Errorf("write mdmlab URL: %w", err)
+					if err := writeFleetURL(config.FleetURL, c.String("root-dir")); err != nil {
+						return fmt.Errorf("write fleet URL: %w", err)
 					}
 				}
 
-				if c.String("mdmlab-url") != "" && c.String("enroll-secret") != "" {
+				if c.String("fleet-url") != "" && c.String("enroll-secret") != "" {
 					log.Info().Msg("found configuration values in system profile")
 					break
 				}
 
 				// If we didn't find the configuration values, try to read them from the stored files.
-				// First, get MDMlab URL
-				b, err := os.ReadFile(path.Join(c.String("root-dir"), constant.MDMlabURLFileName))
+				// First, get Fleet URL
+				b, err := os.ReadFile(path.Join(c.String("root-dir"), constant.FleetURLFileName))
 				if err != nil {
 					if !errors.Is(err, os.ErrNotExist) {
-						return fmt.Errorf("read mdmlab URL file: %w", err)
+						return fmt.Errorf("read fleet URL file: %w", err)
 					}
 				} else {
-					mdmlabURL := strings.TrimSpace(string(b))
-					if err = c.Set("mdmlab-url", mdmlabURL); err != nil {
-						return fmt.Errorf("set mdmlab URL from file: %w", err)
+					fleetURL := strings.TrimSpace(string(b))
+					if err = c.Set("fleet-url", fleetURL); err != nil {
+						return fmt.Errorf("set fleet URL from file: %w", err)
 					}
 				}
 				// Now, get enroll secret
@@ -455,13 +457,13 @@ func main() {
 					return err
 				}
 				// Since the normal enroll secret flow supports keychain, we can use it here as well.
-				// The story to remove the enroll secret from macOS MDM profile is: https://github.com/mdmlabdm/mdmlab/issues/16118
+				// The story to remove the enroll secret from macOS MDM profile is: https://github.com/fleetdm/fleet/issues/16118
 				if err := tryReadEnrollSecretFromKeystore(); err != nil {
 					// Log the error but don't return it, as we want to keep trying to read the configuration
 					// from the system profile.
 					log.Error().Err(err).Msg("failed to read enroll secret from keystore")
 				}
-				if c.String("mdmlab-url") != "" && c.String("enroll-secret") != "" {
+				if c.String("fleet-url") != "" && c.String("enroll-secret") != "" {
 					log.Info().Msg("found configuration values in local files")
 					break
 				}
@@ -497,7 +499,7 @@ func main() {
 
 		opt := update.DefaultOptions
 
-		if c.Bool("mdmlab-desktop") {
+		if c.Bool("fleet-desktop") {
 			switch runtime.GOOS {
 			case "darwin":
 				opt.Targets[constant.DesktopTUFTargetName] = update.DesktopMacOSTarget
@@ -527,8 +529,8 @@ func main() {
 			//
 			// This only gets executed on orbit 1.38.0+
 			// when it is configured to connect to the old TUF server
-			// (mdmlabd instances packaged before the migration,
-			// built by mdmlabctl previous to v4.63.0).
+			// (fleetd instances packaged before the migration,
+			// built by fleetctl previous to v4.63.0).
 			//
 
 			if ok := update.HasAccessToNewTUFServer(opt); ok {
@@ -568,7 +570,7 @@ func main() {
 
 		// sofwareupdated is a macOS daemon that automatically updates Apple software.
 		if c.Bool("disable-kickstart-softwareupdated") && runtime.GOOS == "darwin" {
-			log.Warn().Msg("mdmlabd no longer automatically kickstarts softwareupdated. The --disable-kickstart-softwareupdated flag, which was previously used to disable this behavior, has been deprecated and will be removed in a future version")
+			log.Warn().Msg("fleetd no longer automatically kickstarts softwareupdated. The --disable-kickstart-softwareupdated flag, which was previously used to disable this behavior, has been deprecated and will be removed in a future version")
 		}
 
 		updateClientCrtPath := filepath.Join(c.String("root-dir"), constant.UpdateTLSClientCertificateFileName)
@@ -602,7 +604,7 @@ func main() {
 
 			targets := []string{constant.OrbitTUFTargetName, constant.OsqueryTUFTargetName}
 
-			if c.Bool("mdmlab-desktop") {
+			if c.Bool("fleet-desktop") {
 				targets = append(targets, constant.DesktopTUFTargetName)
 			}
 			if c.Bool("dev-mode") {
@@ -654,7 +656,7 @@ func main() {
 			// how/when we want to retry to download the packages.
 			err = retrypkg.Do(func() error {
 				var err error
-				osquerydPath, desktopPath, err = getMDMlabdComponentPaths(c, updater, fallbackServerOverridesCfg)
+				osquerydPath, desktopPath, err = getFleetdComponentPaths(c, updater, fallbackServerOverridesCfg)
 				if err != nil {
 					return err
 				}
@@ -677,7 +679,7 @@ func main() {
 			if err != nil {
 				log.Fatal().Err(err).Msgf("locate %s", constant.OsqueryTUFTargetName)
 			}
-			if c.Bool("mdmlab-desktop") {
+			if c.Bool("fleet-desktop") {
 				if runtime.GOOS == "darwin" {
 					desktopPath, err = updater.DirLocalPath(constant.DesktopTUFTargetName)
 					if err != nil {
@@ -732,7 +734,7 @@ func main() {
 			return fmt.Errorf("get UUID: %w", err)
 		}
 		log.Debug().Str("info", fmt.Sprint(osqueryHostInfo)).Msg("retrieved host info from osquery")
-		orbitHostInfo := mdmlab.OrbitHostInfo{
+		orbitHostInfo := fleet.OrbitHostInfo{
 			HardwareSerial: osqueryHostInfo.HardwareSerial,
 			HardwareUUID:   osqueryHostInfo.HardwareUUID,
 			Hostname:       osqueryHostInfo.Hostname,
@@ -744,7 +746,7 @@ func main() {
 		if runtime.GOOS == "darwin" {
 			// Get the hardware UUID. We use a temporary osquery DB location in order to guarantee that
 			// we're getting true UUID, not a cached UUID. See
-			// https://github.com/mdmlabdm/mdmlab/issues/17934 and
+			// https://github.com/fleetdm/fleet/issues/17934 and
 			// https://github.com/osquery/osquery/issues/7509 for more details.
 
 			tmpDBPath := filepath.Join(os.TempDir(), strings.Join([]string{uuid.NewString(), "tmp-db"}, "-"))
@@ -759,7 +761,7 @@ func main() {
 
 			if oi.HardwareUUID != orbitHostInfo.HardwareUUID {
 				// Then we have moved to a new physical machine, so we should restart!
-				// Removing the osquery DB should trigger a re-enrollment when mdmlabd is restarted.
+				// Removing the osquery DB should trigger a re-enrollment when fleetd is restarted.
 				if err := os.RemoveAll(osqueryDB); err != nil {
 					return fmt.Errorf("removing old osquery.db: %w", err)
 				}
@@ -769,7 +771,7 @@ func main() {
 					return fmt.Errorf("removing old orbit node key file: %w", err)
 				}
 				if err := os.RemoveAll(filepath.Join(c.String("root-dir"), constant.DesktopTokenFileName)); err != nil {
-					return fmt.Errorf("removing old MDMlab Desktop identifier file: %w", err)
+					return fmt.Errorf("removing old Fleet Desktop identifier file: %w", err)
 				}
 
 				return errors.New("found a new hardware uuid, restarting")
@@ -799,9 +801,9 @@ func main() {
 			options = append(options, osquery.WithStderr(logFile))
 		}
 
-		mdmlabURL := c.String("mdmlab-url")
-		if !strings.HasPrefix(mdmlabURL, "http") {
-			mdmlabURL = "https://" + mdmlabURL
+		fleetURL := c.String("fleet-url")
+		if !strings.HasPrefix(fleetURL, "http") {
+			fleetURL = "https://" + fleetURL
 		}
 
 		enrollSecret := c.String("enroll-secret")
@@ -814,8 +816,8 @@ func main() {
 		}
 
 		var certPath string
-		if mdmlabURL != "https://" && c.Bool("insecure") {
-			proxy, err := insecure.NewTLSProxy(mdmlabURL)
+		if fleetURL != "https://" && c.Bool("insecure") {
+			proxy, err := insecure.NewTLSProxy(fleetURL)
 			if err != nil {
 				return fmt.Errorf("create TLS proxy: %w", err)
 			}
@@ -824,7 +826,7 @@ func main() {
 				execute: func() error {
 					log.Info().
 						Str("addr", fmt.Sprintf("localhost:%d", proxy.Port)).
-						Str("target", c.String("mdmlab-url")).
+						Str("target", c.String("fleet-url")).
 						Msg("using insecure TLS proxy")
 					err := proxy.InsecureServeTLS()
 					return err
@@ -842,7 +844,7 @@ func main() {
 				return fmt.Errorf("there was a problem creating the proxy directory: %w", err)
 			}
 
-			certPath = filepath.Join(proxyDirectory, "mdmlab.crt")
+			certPath = filepath.Join(proxyDirectory, "fleet.crt")
 
 			// Write cert that proxy uses
 			err = os.WriteFile(certPath, []byte(insecure.ServerCert), os.FileMode(0o644))
@@ -862,36 +864,36 @@ func main() {
 			if err != nil {
 				return fmt.Errorf("load certificate: %w", err)
 			}
-			if err := certificate.ValidateConnection(pool, mdmlabURL); err != nil {
-				log.Info().Err(err).Msg("Failed to connect to MDMlab server. Osquery connection may fail.")
+			if err := certificate.ValidateConnection(pool, fleetURL); err != nil {
+				log.Info().Err(err).Msg("Failed to connect to Fleet server. Osquery connection may fail.")
 			}
 
 			options = append(options,
-				osquery.WithFlags(osquery.MDMlabFlags(parsedURL)),
+				osquery.WithFlags(osquery.FleetFlags(parsedURL)),
 				osquery.WithFlags([]string{"--tls_server_certs", certPath}),
 			)
-		} else if mdmlabURL != "https://" {
+		} else if fleetURL != "https://" {
 			if enrollSecret == "" {
-				return errors.New("enroll secret must be specified to connect to MDMlab server")
+				return errors.New("enroll secret must be specified to connect to Fleet server")
 			}
 
-			parsedURL, err := url.Parse(mdmlabURL)
+			parsedURL, err := url.Parse(fleetURL)
 			if err != nil {
 				return fmt.Errorf("parse URL: %w", err)
 			}
 
 			options = append(options,
-				osquery.WithFlags(osquery.MDMlabFlags(parsedURL)),
+				osquery.WithFlags(osquery.FleetFlags(parsedURL)),
 			)
 
-			if certPath = c.String("mdmlab-certificate"); certPath != "" {
+			if certPath = c.String("fleet-certificate"); certPath != "" {
 				// Check and log if there are any errors with TLS connection.
 				pool, err := certificate.LoadPEM(certPath)
 				if err != nil {
 					return fmt.Errorf("load certificate: %w", err)
 				}
-				if err := certificate.ValidateConnection(pool, mdmlabURL); err != nil {
-					log.Info().Err(err).Msg("Failed to connect to MDMlab server. Osquery connection may fail.")
+				if err := certificate.ValidateConnection(pool, fleetURL); err != nil {
+					log.Info().Err(err).Msg("Failed to connect to Fleet server. Osquery connection may fail.")
 				}
 
 				options = append(options,
@@ -912,30 +914,30 @@ func main() {
 
 		}
 
-		mdmlabClientCertPath := filepath.Join(c.String("root-dir"), constant.MDMlabTLSClientCertificateFileName)
-		mdmlabClientKeyPath := filepath.Join(c.String("root-dir"), constant.MDMlabTLSClientKeyFileName)
-		mdmlabClientCrt, err := certificate.LoadClientCertificateFromFiles(mdmlabClientCertPath, mdmlabClientKeyPath)
+		fleetClientCertPath := filepath.Join(c.String("root-dir"), constant.FleetTLSClientCertificateFileName)
+		fleetClientKeyPath := filepath.Join(c.String("root-dir"), constant.FleetTLSClientKeyFileName)
+		fleetClientCrt, err := certificate.LoadClientCertificateFromFiles(fleetClientCertPath, fleetClientKeyPath)
 		if err != nil {
-			return fmt.Errorf("error loading mdmlab client certificate: %w", err)
+			return fmt.Errorf("error loading fleet client certificate: %w", err)
 		}
 
-		var mdmlabClientCertificate *tls.Certificate
-		if mdmlabClientCrt != nil {
-			log.Info().Msg("Found TLS client certificate and key. Using them to authenticate to MDMlab.")
-			mdmlabClientCertificate = &mdmlabClientCrt.Crt
+		var fleetClientCertificate *tls.Certificate
+		if fleetClientCrt != nil {
+			log.Info().Msg("Found TLS client certificate and key. Using them to authenticate to Fleet.")
+			fleetClientCertificate = &fleetClientCrt.Crt
 			options = append(options, osquery.WithFlags([]string{
-				"--tls_client_cert", mdmlabClientCertPath,
-				"--tls_client_key", mdmlabClientKeyPath,
+				"--tls_client_cert", fleetClientCertPath,
+				"--tls_client_key", fleetClientKeyPath,
 			}))
 		}
 
 		orbitClient, err := service.NewOrbitClient(
 			c.String("root-dir"),
-			mdmlabURL,
-			c.String("mdmlab-certificate"),
+			fleetURL,
+			c.String("fleet-certificate"),
 			c.Bool("insecure"),
 			enrollSecret,
-			mdmlabClientCertificate,
+			fleetClientCertificate,
 			orbitHostInfo,
 			&service.OnGetConfigErrFuncs{
 				DebugErrFunc: func(err error) {
@@ -966,7 +968,7 @@ func main() {
 		switch runtime.GOOS {
 		case "darwin":
 			orbitClient.RegisterConfigReceiver(update.ApplyRenewEnrollmentProfileConfigFetcherMiddleware(
-				orbitClient, renewEnrollmentProfileCommandFrequency, mdmlabURL))
+				orbitClient, renewEnrollmentProfileCommandFrequency, fleetURL))
 			const nudgeLaunchInterval = 30 * time.Minute
 			orbitClient.RegisterConfigReceiver(update.ApplyNudgeConfigReceiverMiddleware(update.NudgeConfigFetcherOptions{
 				UpdateRunner: updateRunner, RootDir: c.String("root-dir"), Interval: nudgeLaunchInterval,
@@ -994,7 +996,7 @@ func main() {
 					OsquerydPath: osquerydPath,
 					DesktopPath:  desktopPath,
 				},
-				c.Bool("mdmlab-desktop"),
+				c.Bool("fleet-desktop"),
 				orbitClient.TriggerOrbitRestart,
 			)
 
@@ -1002,14 +1004,14 @@ func main() {
 		}
 
 		// only setup extensions autoupdate if we have enabled updates
-		// for extensions autoupdate, we can only proceed after orbit is enrolled in mdmlab
+		// for extensions autoupdate, we can only proceed after orbit is enrolled in fleet
 		// and all relevant things for it (like certs, enroll secrets, tls proxy, etc) is configured
 		if !c.Bool("disable-updates") || c.Bool("dev-mode") {
 			extRunner := update.NewExtensionConfigUpdateRunner(update.ExtensionUpdateOptions{
 				RootDir: c.String("root-dir"),
 			}, updateRunner, orbitClient.TriggerOrbitRestart)
 
-			// call UpdateAction on the updateRunner after we have fetched extensions from MDMlab
+			// call UpdateAction on the updateRunner after we have fetched extensions from Fleet
 			_, err := updateRunner.UpdateAction()
 			if err != nil {
 				// OK, initial call may fail, ok to continue
@@ -1038,7 +1040,7 @@ func main() {
 			orbitClient.RegisterConfigReceiver(extRunner)
 		}
 
-		// Run a early check of mdmlabd configuration to check if orbit needs to
+		// Run a early check of fleetd configuration to check if orbit needs to
 		// restart before proceeding to start the sub-systems.
 		//
 		// E.g. the administrator has updated the following agent options for this device:
@@ -1059,7 +1061,7 @@ func main() {
 
 		var trw *token.ReadWriter
 		var deviceClient *service.DeviceClient
-		if c.Bool("mdmlab-desktop") {
+		if c.Bool("fleet-desktop") {
 			trw = token.NewReadWriter(filepath.Join(c.String("root-dir"), constant.DesktopTokenFileName))
 			if err := trw.LoadOrGenerate(); err != nil {
 				return fmt.Errorf("initializing token read writer: %w", err)
@@ -1079,11 +1081,11 @@ func main() {
 			// invalid token, because its goal is to detect invalid tokens when
 			// making requests with this client.
 			deviceClient, err = service.NewDeviceClient(
-				mdmlabURL,
+				fleetURL,
 				c.Bool("insecure"),
-				c.String("mdmlab-certificate"),
-				mdmlabClientCertificate,
-				c.String("mdmlab-desktop-alternative-browser-host"),
+				c.String("fleet-certificate"),
+				fleetClientCertificate,
+				c.String("fleet-desktop-alternative-browser-host"),
 			)
 			if err != nil {
 				return fmt.Errorf("initializing client: %w", err)
@@ -1208,11 +1210,11 @@ func main() {
 		// rootDir string, addr string, rootCA string, insecureSkipVerify bool, enrollSecret, uuid string
 		checkerClient, err := service.NewOrbitClient(
 			c.String("root-dir"),
-			mdmlabURL,
-			c.String("mdmlab-certificate"),
+			fleetURL,
+			c.String("fleet-certificate"),
 			c.Bool("insecure"),
 			enrollSecret,
-			mdmlabClientCertificate,
+			fleetClientCertificate,
 			orbitHostInfo,
 			&service.OnGetConfigErrFuncs{
 				DebugErrFunc: func(err error) {
@@ -1232,14 +1234,14 @@ func main() {
 		addSubsystem(&g, "capabilities checker", capabilitiesChecker)
 
 		var desktopVersion string
-		if c.Bool("mdmlab-desktop") {
+		if c.Bool("fleet-desktop") {
 			runPath := desktopPath
 			if runtime.GOOS == "darwin" {
 				runPath = filepath.Join(desktopPath, "Contents", "MacOS", constant.DesktopAppExecName)
 			}
 			desktopVersion, err = update.GetVersion(runPath)
 			if err == nil && desktopVersion != "" {
-				log.Info().Msgf("Found mdmlab-desktop version: %s", desktopVersion)
+				log.Info().Msgf("Found fleet-desktop version: %s", desktopVersion)
 			} else {
 				desktopVersion = "unknown"
 			}
@@ -1261,34 +1263,34 @@ func main() {
 			)),
 		)
 
-		if c.Bool("mdmlab-desktop") {
+		if c.Bool("fleet-desktop") {
 			var (
 				rawClientCrt []byte
 				rawClientKey []byte
 			)
-			if mdmlabClientCrt != nil {
-				rawClientCrt = mdmlabClientCrt.RawCrt
-				rawClientKey = mdmlabClientCrt.RawKey
+			if fleetClientCrt != nil {
+				rawClientCrt = fleetClientCrt.RawCrt
+				rawClientKey = fleetClientCrt.RawKey
 			}
 			desktopRunner := newDesktopRunner(
 				desktopPath,
-				mdmlabURL,
-				c.String("mdmlab-certificate"),
+				fleetURL,
+				c.String("fleet-certificate"),
 				c.Bool("insecure"),
 				trw,
 				rawClientCrt,
 				rawClientKey,
-				c.String("mdmlab-desktop-alternative-browser-host"),
+				c.String("fleet-desktop-alternative-browser-host"),
 				opt.RootDirectory,
 			)
 			go func() {
 				for {
 					msg := <-desktopRunner.errorNotifyCh
-					log.Error().Err(errors.New(msg)).Msg("mdmlab-desktop runner error")
-					// Vital errors are always sent to MDMlab, regardless of the error reporting setting FLEET_ENABLE_POST_CLIENT_DEBUG_ERRORS.
-					mdmlabdErr := mdmlab.MDMlabdError{
+					log.Error().Err(errors.New(msg)).Msg("fleet-desktop runner error")
+					// Vital errors are always sent to Fleet, regardless of the error reporting setting FLEET_ENABLE_POST_CLIENT_DEBUG_ERRORS.
+					fleetdErr := fleet.FleetdError{
 						Vital:              true,
-						ErrorSource:        "mdmlab-desktop",
+						ErrorSource:        "fleet-desktop",
 						ErrorSourceVersion: desktopVersion,
 						ErrorTimestamp:     time.Now(),
 						ErrorMessage:       msg,
@@ -1299,8 +1301,8 @@ func main() {
 							"os_version":      osqueryHostInfo.OSVersion,
 						},
 					}
-					if err = deviceClient.ReportError(trw.GetCached(), mdmlabdErr); err != nil {
-						log.Error().Err(err).Msg(fmt.Sprintf("failed to send error report to MDMlab: %s", msg))
+					if err = deviceClient.ReportError(trw.GetCached(), fleetdErr); err != nil {
+						log.Error().Err(err).Msg(fmt.Sprintf("failed to send error report to Fleet: %s", msg))
 					}
 				}
 			}()
@@ -1311,13 +1313,13 @@ func main() {
 		// email from the enrollment profile)
 		endUserEmail := c.String("end-user-email")
 		if (runtime.GOOS == "windows" || runtime.GOOS == "linux") && endUserEmail != "" && endUserEmail != unusedFlagKeyword {
-			if orbitClient.GetServerCapabilities().Has(mdmlab.CapabilityEndUserEmail) {
-				log.Debug().Msg("sending end-user email to MDMlab")
+			if orbitClient.GetServerCapabilities().Has(fleet.CapabilityEndUserEmail) {
+				log.Debug().Msg("sending end-user email to Fleet")
 				if err := orbitClient.SetOrUpdateDeviceMappingEmail(endUserEmail); err != nil {
-					log.Error().Err(err).Msg("error sending end-user email to MDMlab")
+					log.Error().Err(err).Msg("error sending end-user email to Fleet")
 				}
 			} else {
-				log.Info().Msg("an end-user email is provided, but the MDMlab server doesn't have the capability to set it.")
+				log.Info().Msg("an end-user email is provided, but the Fleet server doesn't have the capability to set it.")
 			}
 		}
 
@@ -1348,7 +1350,7 @@ func main() {
 
 		if runtime.GOOS == "darwin" {
 			log.Info().Msgf("orbitClient.GetServerCapabilities() %+v", orbitClient.GetServerCapabilities())
-			if orbitClient.GetServerCapabilities().Has(mdmlab.CapabilityEscrowBuddy) {
+			if orbitClient.GetServerCapabilities().Has(fleet.CapabilityEscrowBuddy) {
 				orbitClient.RegisterConfigReceiver(update.NewEscrowBuddyRunner(updateRunner, 5*time.Minute))
 			} else {
 				orbitClient.RegisterConfigReceiver(
@@ -1399,7 +1401,7 @@ func deleteSecretPathIfExists(enrollSecretPath string) {
 	}
 }
 
-// setServerOverrides overrides specific variables in c with values fetched from MDMlab.
+// setServerOverrides overrides specific variables in c with values fetched from Fleet.
 func setServerOverrides(c *cli.Context) fallbackServerOverridesConfig {
 	overrideCfg, err := loadServerOverrides(c.String("root-dir"))
 	if err != nil {
@@ -1425,10 +1427,10 @@ func setServerOverrides(c *cli.Context) fallbackServerOverridesConfig {
 	return overrideCfg.fallbackServerOverridesConfig
 }
 
-// getMDMlabdComponentPaths returns the paths of the mdmlabd components.
+// getFleetdComponentPaths returns the paths of the fleetd components.
 // If the path to the component cannot be fetched using the updater (e.g. channel doesn't exist yet)
 // then it will use the fallbackCfg's paths (if set).
-func getMDMlabdComponentPaths(
+func getFleetdComponentPaths(
 	c *cli.Context,
 	updater *update.Updater,
 	fallbackCfg fallbackServerOverridesConfig,
@@ -1462,8 +1464,8 @@ func getMDMlabdComponentPaths(
 			log.Info().Err(err).Msgf("get local %s target failed, fallback to using %s", constant.OsqueryTUFTargetName, fallbackCfg.OsquerydPath)
 			osquerydPath = fallbackCfg.OsquerydPath
 		}
-		// Attempt to get local path of MDMlab Desktop.
-		if c.Bool("mdmlab-desktop") {
+		// Attempt to get local path of Fleet Desktop.
+		if c.Bool("fleet-desktop") {
 			if runtime.GOOS == "darwin" {
 				desktopPath, err = updater.DirLocalPath(constant.DesktopTUFTargetName)
 			} else {
@@ -1497,9 +1499,9 @@ func getMDMlabdComponentPaths(
 		osquerydPath = osquerydLocalTarget.ExecPath
 	}
 
-	// MDMlab Desktop
-	if c.Bool("mdmlab-desktop") {
-		mdmlabDesktopLocalTarget, err := updater.Get(constant.DesktopTUFTargetName)
+	// Fleet Desktop
+	if c.Bool("fleet-desktop") {
+		fleetDesktopLocalTarget, err := updater.Get(constant.DesktopTUFTargetName)
 		if err != nil {
 			if fallbackCfg.DesktopPath == "" {
 				log.Info().Err(err).Msgf("get %s target failed", constant.DesktopTUFTargetName)
@@ -1509,9 +1511,9 @@ func getMDMlabdComponentPaths(
 			desktopPath = fallbackCfg.DesktopPath
 		} else {
 			if runtime.GOOS == "darwin" {
-				desktopPath = mdmlabDesktopLocalTarget.DirPath
+				desktopPath = fleetDesktopLocalTarget.DirPath
 			} else {
-				desktopPath = mdmlabDesktopLocalTarget.ExecPath
+				desktopPath = fleetDesktopLocalTarget.ExecPath
 			}
 		}
 	}
@@ -1524,28 +1526,28 @@ func registerExtensionRunner(g *run.Group, extSockPath string, opts ...table.Opt
 	addSubsystem(g, "osqueryd extension runner", ext)
 }
 
-// desktopRunner runs the MDMlab Desktop application.
+// desktopRunner runs the Fleet Desktop application.
 type desktopRunner struct {
 	// desktopPath is the path to the desktop executable.
 	desktopPath string
 	updateRoot  string
-	// mdmlabURL is the URL of the MDMlab server.
-	mdmlabURL string
-	// trw is the MDMlab Desktop token reader and writer (implements token rotation).
+	// fleetURL is the URL of the Fleet server.
+	fleetURL string
+	// trw is the Fleet Desktop token reader and writer (implements token rotation).
 	trw *token.ReadWriter
-	// mdmlabRootCA is the path to a certificate to use for server TLS verification.
-	mdmlabRootCA string
+	// fleetRootCA is the path to a certificate to use for server TLS verification.
+	fleetRootCA string
 	// insecure disables all TLS verification.
 	insecure bool
-	// mdmlabClientCrt is the raw TLS client certificate (in PEM format)
-	// to use for authenticating to the MDMlab server.
-	mdmlabClientCrt []byte
-	// mdmlabClientKey is the raw TLS client private key (in PEM format)
-	// to use for authenticating to the MDMlab server.
-	mdmlabClientKey []byte
-	// mdmlabAlternativeBrowserHost is an alternative host:port to use for
-	// the browser URLs in MDMlab Desktop.
-	mdmlabAlternativeBrowserHost string
+	// fleetClientCrt is the raw TLS client certificate (in PEM format)
+	// to use for authenticating to the Fleet server.
+	fleetClientCrt []byte
+	// fleetClientKey is the raw TLS client private key (in PEM format)
+	// to use for authenticating to the Fleet server.
+	fleetClientKey []byte
+	// fleetAlternativeBrowserHost is an alternative host:port to use for
+	// the browser URLs in Fleet Desktop.
+	fleetAlternativeBrowserHost string
 	// interruptCh is closed when interrupt is triggered.
 	interruptCh chan struct{} //
 	// executeDoneCh is closed when execute returns.
@@ -1557,42 +1559,42 @@ type desktopRunner struct {
 }
 
 func newDesktopRunner(
-	desktopPath, mdmlabURL, mdmlabRootCA string,
+	desktopPath, fleetURL, fleetRootCA string,
 	insecure bool,
 	trw *token.ReadWriter,
-	mdmlabClientCrt []byte, mdmlabClientKey []byte,
-	mdmlabAlternativeBrowserHost string,
+	fleetClientCrt []byte, fleetClientKey []byte,
+	fleetAlternativeBrowserHost string,
 	updateRoot string,
 ) *desktopRunner {
 	return &desktopRunner{
-		desktopPath:                  desktopPath,
-		updateRoot:                   updateRoot,
-		mdmlabURL:                    mdmlabURL,
-		trw:                          trw,
-		mdmlabRootCA:                 mdmlabRootCA,
-		insecure:                     insecure,
-		mdmlabClientCrt:              mdmlabClientCrt,
-		mdmlabClientKey:              mdmlabClientKey,
-		mdmlabAlternativeBrowserHost: mdmlabAlternativeBrowserHost,
-		interruptCh:                  make(chan struct{}),
-		executeDoneCh:                make(chan struct{}),
-		errorNotifyCh:                make(chan string),
+		desktopPath:                 desktopPath,
+		updateRoot:                  updateRoot,
+		fleetURL:                    fleetURL,
+		trw:                         trw,
+		fleetRootCA:                 fleetRootCA,
+		insecure:                    insecure,
+		fleetClientCrt:              fleetClientCrt,
+		fleetClientKey:              fleetClientKey,
+		fleetAlternativeBrowserHost: fleetAlternativeBrowserHost,
+		interruptCh:                 make(chan struct{}),
+		executeDoneCh:               make(chan struct{}),
+		errorNotifyCh:               make(chan string),
 	}
 }
 
-// execute makes sure the mdmlab-desktop application is running.
+// execute makes sure the fleet-desktop application is running.
 //
 // We have to support the scenario where the user closes its sessions (log out).
 // To support this, we add retries to execuser.Run. Basically retry execuser.Run until it succeeds,
 // which will happen when the user logs in.
-// Once mdmlab-desktop is started, the process is monitored (user processes get killed when the user
+// Once fleet-desktop is started, the process is monitored (user processes get killed when the user
 // closes all its sessions).
 //
 // NOTE(lucas): This logic could be improved to detect if there's a valid session or not first.
 func (d *desktopRunner) Execute() error {
 	defer close(d.executeDoneCh)
 
-	log.Info().Msg("killing any pre-existing mdmlab-desktop instances")
+	log.Info().Msg("killing any pre-existing fleet-desktop instances")
 
 	if err := platform.SignalProcessBeforeTerminate(constant.DesktopAppExecName); err != nil &&
 		!errors.Is(err, platform.ErrProcessNotFound) &&
@@ -1601,13 +1603,13 @@ func (d *desktopRunner) Execute() error {
 	}
 
 	log.Info().Str("path", d.desktopPath).Msg("opening")
-	url, err := url.Parse(d.mdmlabURL)
+	url, err := url.Parse(d.fleetURL)
 	if err != nil {
-		return fmt.Errorf("invalid mdmlab-url: %w", err)
+		return fmt.Errorf("invalid fleet-url: %w", err)
 	}
-	deviceURL, err := url.Parse(d.mdmlabURL)
+	deviceURL, err := url.Parse(d.fleetURL)
 	if err != nil {
-		return fmt.Errorf("invalid mdmlab-url: %w", err)
+		return fmt.Errorf("invalid fleet-url: %w", err)
 	}
 	deviceURL.Path = path.Join(url.Path, "device", d.trw.GetCached())
 	opts := []execuser.Option{
@@ -1618,24 +1620,24 @@ func (d *desktopRunner) Execute() error {
 		// we should remove it once we think is safe
 		execuser.WithEnv("FLEET_DESKTOP_DEVICE_URL", deviceURL.String()),
 
-		execuser.WithEnv("FLEET_DESKTOP_FLEET_TLS_CLIENT_CERTIFICATE", string(d.mdmlabClientCrt)),
-		execuser.WithEnv("FLEET_DESKTOP_FLEET_TLS_CLIENT_KEY", string(d.mdmlabClientKey)),
+		execuser.WithEnv("FLEET_DESKTOP_FLEET_TLS_CLIENT_CERTIFICATE", string(d.fleetClientCrt)),
+		execuser.WithEnv("FLEET_DESKTOP_FLEET_TLS_CLIENT_KEY", string(d.fleetClientKey)),
 
-		execuser.WithEnv("FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST", d.mdmlabAlternativeBrowserHost),
+		execuser.WithEnv("FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST", d.fleetAlternativeBrowserHost),
 		execuser.WithEnv("FLEET_DESKTOP_TUF_UPDATE_ROOT", d.updateRoot),
 	}
-	if d.mdmlabRootCA != "" {
-		opts = append(opts, execuser.WithEnv("FLEET_DESKTOP_FLEET_ROOT_CA", d.mdmlabRootCA))
+	if d.fleetRootCA != "" {
+		opts = append(opts, execuser.WithEnv("FLEET_DESKTOP_FLEET_ROOT_CA", d.fleetRootCA))
 	}
 	if d.insecure {
 		opts = append(opts, execuser.WithEnv("FLEET_DESKTOP_INSECURE", "1"))
 	}
 
 	for {
-		// First retry logic to start mdmlab-desktop.
+		// First retry logic to start fleet-desktop.
 		if done := retry(30*time.Second, false, d.interruptCh, func() bool {
-			// On MacOS, if we attempt to run MDMlab Desktop while the user is not logged in through
-			// the GUI, MacOS returns an error. See https://github.com/mdmlabdm/mdmlab/issues/14698
+			// On MacOS, if we attempt to run Fleet Desktop while the user is not logged in through
+			// the GUI, MacOS returns an error. See https://github.com/fleetdm/fleet/issues/14698
 			// for more details.
 			loggedInGui, err := user.IsUserLoggedInViaGui()
 			if err != nil {
@@ -1661,7 +1663,7 @@ func (d *desktopRunner) Execute() error {
 			return nil
 		}
 
-		// Second retry logic to monitor mdmlab-desktop.
+		// Second retry logic to monitor fleet-desktop.
 		// Call with waitFirst=true to give some time for the process to start.
 		if done := retry(30*time.Second, true, d.interruptCh, func() bool {
 			switch _, err := platform.GetProcessByName(constant.DesktopAppExecName); {
@@ -1717,14 +1719,17 @@ func (d *desktopRunner) processLog(log string) {
 	var msg string
 	switch {
 	case strings.Contains(log, string(logErrorLaunchServicesSubstr)):
-		// https://github.com/mdmlabdm/mdmlab/issues/19172
+		// https://github.com/fleetdm/fleet/issues/19172
 		msg = string(logErrorLaunchServicesMsg)
 	case strings.Contains(log, string(logErrorMissingExecSubstr)):
 		// For manual testing.
-		// To get this message, delete MDMlab Desktop.app directory, make an empty MDMlab Desktop.app directory,
-		// and kill the mdmlab-desktop process. Orbit will try to re-start MDMlab Desktop and log this message.
+		// To get this message, delete Fleet Desktop.app directory, make an empty Fleet Desktop.app directory,
+		// and kill the fleet-desktop process. Orbit will try to re-start Fleet Desktop and log this message.
 		msg = string(logErrorMissingExecMsg)
+	case strings.Contains(log, string(logErrorMissingDomainSubstr)):
+		msg = string(logErrorMissingDomainMsg)
 	}
+
 	if msg == "" {
 		return
 	}
@@ -1907,19 +1912,19 @@ func (f *capabilitiesChecker) Execute() error {
 			}
 			newCapabilities := f.client.GetServerCapabilities()
 
-			if oldCapabilities.Has(mdmlab.CapabilityOrbitEndpoints) !=
-				newCapabilities.Has(mdmlab.CapabilityOrbitEndpoints) {
-				log.Info().Msgf("%s capability changed, restarting", mdmlab.CapabilityOrbitEndpoints)
+			if oldCapabilities.Has(fleet.CapabilityOrbitEndpoints) !=
+				newCapabilities.Has(fleet.CapabilityOrbitEndpoints) {
+				log.Info().Msgf("%s capability changed, restarting", fleet.CapabilityOrbitEndpoints)
 				return nil
 			}
-			if oldCapabilities.Has(mdmlab.CapabilityTokenRotation) !=
-				newCapabilities.Has(mdmlab.CapabilityTokenRotation) {
-				log.Info().Msgf("%s capability changed, restarting", mdmlab.CapabilityTokenRotation)
+			if oldCapabilities.Has(fleet.CapabilityTokenRotation) !=
+				newCapabilities.Has(fleet.CapabilityTokenRotation) {
+				log.Info().Msgf("%s capability changed, restarting", fleet.CapabilityTokenRotation)
 				return nil
 			}
-			if oldCapabilities.Has(mdmlab.CapabilityEndUserEmail) !=
-				newCapabilities.Has(mdmlab.CapabilityEndUserEmail) {
-				log.Info().Msgf("%s capability changed, restarting", mdmlab.CapabilityEndUserEmail)
+			if oldCapabilities.Has(fleet.CapabilityEndUserEmail) !=
+				newCapabilities.Has(fleet.CapabilityEndUserEmail) {
+				log.Info().Msgf("%s capability changed, restarting", fleet.CapabilityEndUserEmail)
 				return nil
 			}
 		case <-f.interruptCh:
@@ -1958,13 +1963,13 @@ func writeOrbitFile(contents string, orbitRoot string, fileName string) error {
 	return nil
 }
 
-// writeMDMlabURL writes the MDMlab URL to the designated file. This is needed in case the
-// MDMlab URL originally came from a config profile, which was subsequently removed.
-func writeMDMlabURL(contents string, orbitRoot string) error {
-	return writeOrbitFile(contents, orbitRoot, constant.MDMlabURLFileName)
+// writeFleetURL writes the Fleet URL to the designated file. This is needed in case the
+// Fleet URL originally came from a config profile, which was subsequently removed.
+func writeFleetURL(contents string, orbitRoot string) error {
+	return writeOrbitFile(contents, orbitRoot, constant.FleetURLFileName)
 }
 
-// serverOverridesRunner is a oklog.Group runner that polls for configuration overrides from MDMlab.
+// serverOverridesRunner is a oklog.Group runner that polls for configuration overrides from Fleet.
 type serverOverridesRunner struct {
 	rootDir             string
 	fallbackCfg         fallbackServerOverridesConfig
@@ -1973,7 +1978,7 @@ type serverOverridesRunner struct {
 	triggerOrbitRestart func(reason string)
 }
 
-// newServerOverridesReveiver creates a runner for updating server overrides configuration with values fetched from MDMlab.
+// newServerOverridesReveiver creates a runner for updating server overrides configuration with values fetched from Fleet.
 func newServerOverridesReceiver(
 	rootDir string,
 	fallbackCfg fallbackServerOverridesConfig,
@@ -1989,7 +1994,7 @@ func newServerOverridesReceiver(
 	}
 }
 
-func (r *serverOverridesRunner) Run(orbitCfg *mdmlab.OrbitConfig) error {
+func (r *serverOverridesRunner) Run(orbitCfg *fleet.OrbitConfig) error {
 	overrideCfg, err := loadServerOverrides(r.rootDir)
 	if err != nil {
 		return err
@@ -2013,15 +2018,15 @@ func (r *serverOverridesRunner) Run(orbitCfg *mdmlab.OrbitConfig) error {
 }
 
 // cfgsDiffer returns whether the local server overrides differ from the fetched remotely.
-func cfgsDiffer(overrideCfg *serverOverridesConfig, orbitCfg *mdmlab.OrbitConfig, desktopEnabled bool) bool {
-	localUpdateChannelsCfg := &mdmlab.OrbitUpdateChannels{
+func cfgsDiffer(overrideCfg *serverOverridesConfig, orbitCfg *fleet.OrbitConfig, desktopEnabled bool) bool {
+	localUpdateChannelsCfg := &fleet.OrbitUpdateChannels{
 		Orbit:    overrideCfg.OrbitChannel,
 		Osqueryd: overrideCfg.OsquerydChannel,
 		Desktop:  overrideCfg.DesktopChannel,
 	}
 	remoteUpdateChannelsCfg := orbitCfg.UpdateChannels
 
-	setStableAsDefault := func(cfg *mdmlab.OrbitUpdateChannels) {
+	setStableAsDefault := func(cfg *fleet.OrbitUpdateChannels) {
 		if cfg.Orbit == "" {
 			cfg.Orbit = "stable"
 		}
@@ -2053,7 +2058,7 @@ type serverOverridesConfig struct {
 	OrbitChannel string `json:"orbit-channel"`
 	// OsquerydChannel defines the override for the osqueryd's channel.
 	OsquerydChannel string `json:"osqueryd-channel"`
-	// DesktopChannel defines the override for the MDMlab Desktop's channel.
+	// DesktopChannel defines the override for the Fleet Desktop's channel.
 	DesktopChannel string `json:"desktop-channel"`
 
 	fallbackServerOverridesConfig
@@ -2062,14 +2067,14 @@ type serverOverridesConfig struct {
 // fallbackServerOverridesConfig contains fallback configuration in case the server
 // settings are invalid (e.g. invalid update channels that don't exist).
 // Whenever the user sets an invalid channel, then the fallback paths are used to get
-// mdmlabd up and running with the last known good configuration.
+// fleetd up and running with the last known good configuration.
 //
 // NOTE: We don't need orbit's path because the `orbit` component is a special case that uses
 // a symlink to define the last known valid version.
 type fallbackServerOverridesConfig struct {
 	// OsquerydPath contains the path of the osqueryd executable last known to be valid.
 	OsquerydPath string `json:"fallback-osqueryd-path"`
-	// DesktopPath contains the path of the MDMlab Desktop executable last known to be valid.
+	// DesktopPath contains the path of the Fleet Desktop executable last known to be valid.
 	DesktopPath string `json:"fallback-desktop-path"`
 }
 
@@ -2077,8 +2082,8 @@ func (f fallbackServerOverridesConfig) empty() bool {
 	return f.OsquerydPath == "" && f.DesktopPath == ""
 }
 
-// updateServerOverrides updates the server override local file with the configuration fetched from MDMlab.
-func (r *serverOverridesRunner) updateServerOverrides(remoteCfg *mdmlab.OrbitConfig) error {
+// updateServerOverrides updates the server override local file with the configuration fetched from Fleet.
+func (r *serverOverridesRunner) updateServerOverrides(remoteCfg *fleet.OrbitConfig) error {
 	overrideCfg := serverOverridesConfig{
 		OrbitChannel:                  remoteCfg.UpdateChannels.Orbit,
 		OsquerydChannel:               remoteCfg.UpdateChannels.Osqueryd,

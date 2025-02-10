@@ -1,7 +1,7 @@
 .PHONY: build clean clean-assets e2e-reset-db e2e-serve e2e-setup changelog db-reset db-backup db-restore check-go-cloner update-go-cloner help
 
 export GO111MODULE=on
-#  find . -name "*.go" -exec sed -i '' 's|||g' {} + 
+#  find . -name "*.go" -exec sed -i '' 's|github.com/fleetdm/fleet/v4/|github.com/it-laborato/MDM_Lab/|g' {} + 
 PATH := $(shell npm bin):$(PATH)
 VERSION = $(shell git describe --tags --always --dirty)
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)

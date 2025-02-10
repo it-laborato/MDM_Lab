@@ -11,7 +11,7 @@ import (
 )
 
 // Using a var instead of const so that it can be overridden in tests.
-var service = "com.mdmlabdm.mdmlabd.enroll.secret"
+var service = "com.fleetdm.fleetd.enroll.secret"
 var mu sync.Mutex
 
 func Supported() bool {

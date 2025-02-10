@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )
@@ -22,7 +22,7 @@ type escrowBuddyTestSuite struct {
 
 func (s *escrowBuddyTestSuite) TestUpdatesDisabled() {
 	t := s.T()
-	cfg := &mdmlab.OrbitConfig{}
+	cfg := &fleet.OrbitConfig{}
 	cfg.Notifications.RotateDiskEncryptionKey = true
 	r := NewEscrowBuddyRunner(nil, time.Second)
 	err := r.Run(cfg)
@@ -38,7 +38,7 @@ func (s *escrowBuddyTestSuite) TestEscrowBuddyRotatesKey() {
 	runner := &Runner{updater: updater, localHashes: make(map[string][]byte)}
 	escrowBuddyPath := "escrowBuddy/macos/stable/escrowBuddy.pkg"
 
-	cfg := &mdmlab.OrbitConfig{}
+	cfg := &fleet.OrbitConfig{}
 	r := &EscrowBuddyRunner{updateRunner: runner, interval: time.Millisecond}
 	// mock the command to run the defaults cli
 	cmdCalls := []map[string]any{}

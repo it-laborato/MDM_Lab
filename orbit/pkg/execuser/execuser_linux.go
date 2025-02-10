@@ -26,8 +26,8 @@ func run(path string, opts eopts) (lastLogs string, err error) {
 	args = append(args,
 		// Append the packaged libayatana-appindicator3 libraries path to LD_LIBRARY_PATH.
 		//
-		// MDMlab Desktop doesn't use libayatana-appindicator3 since 1.18.3, but we need to
-		// keep this to support older versions of MDMlab Desktop.
+		// Fleet Desktop doesn't use libayatana-appindicator3 since 1.18.3, but we need to
+		// keep this to support older versions of Fleet Desktop.
 		fmt.Sprintf("LD_LIBRARY_PATH=%s:%s", filepath.Dir(path), os.ExpandEnv("$LD_LIBRARY_PATH")),
 		path,
 	)

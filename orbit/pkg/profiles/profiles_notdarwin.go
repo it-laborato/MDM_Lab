@@ -2,9 +2,9 @@
 
 package profiles
 
-import "github.com/it-laborato/MDM_Lab/server/mdmlab"
+import "github.com/it-laborato/MDM_Lab/server/fleet"
 
-func GetMDMlabdConfig() (*mdmlab.MDMAppleMDMlabdConfig, error) {
+func GetFleetdConfig() (*fleet.MDMAppleFleetdConfig, error) {
 	return nil, ErrNotImplemented
 }
 

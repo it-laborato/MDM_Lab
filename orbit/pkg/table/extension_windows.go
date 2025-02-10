@@ -17,7 +17,7 @@ import (
 
 func PlatformTables(_ PluginOpts) ([]osquery.OsqueryPlugin, error) {
 	plugins := []osquery.OsqueryPlugin{
-		// MDMlab tables
+		// Fleet tables
 		table.NewPlugin("cis_audit", cisaudit.Columns(), cisaudit.Generate),
 
 		windowsupdatetable.TablePlugin(windowsupdatetable.UpdatesTable, log.Logger), // table name is "windows_updates"

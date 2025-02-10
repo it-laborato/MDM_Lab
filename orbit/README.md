@@ -13,7 +13,7 @@ Orbit is the recommended agent for Fleet. But Orbit can be used with or without 
 To build orbit we use [goreleaser](https://goreleaser.com/).
 
 For reference, here are the build configuration files:
-- [Goreleaser github workflow](../.github/workflows/goreleaser-orbit.yml)
+- [Goreleaser github workflow](../.github/workflows/goreleaser-orbit.yaml)
 - Goreleaser configuration file for each platform:
     - [goreleaser-linux.yml](./goreleaser-linux.yml)
     - [goreleaser-linux-arm64.yml](./goreleaser-linux-arm64.yml)
@@ -70,13 +70,13 @@ To report a bug or request a feature, [click here](https://github.com/fleetdm/fl
 To execute orbit from source directly, run the following command:
 
 ```sh
-go run ./orbit/cmd/orbit \
+go run github.com/fleetdm/fleet/v4/orbit/cmd/orbit \
     --dev-mode \
     --disable-updates \
     --root-dir /tmp/orbit \
-    --mdmlab-url https://localhost:8080 \
+    --fleet-url https://localhost:8080 \
     --insecure \
-    --enroll-secret riFaEoeLDuolUqHYWJdBVRoVBIKkMdNd \
+    --enroll-secret Pz3zC0NMDdZfb3FtqiLgwoexItojrYh/ \
     -- --verbose
 ```
 

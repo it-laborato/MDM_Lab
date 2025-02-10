@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
+	"github.com/it-laborato/MDM_Lab/pkg/fleethttp"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -44,12 +44,12 @@ func TestCreateVersionInfo(t *testing.T) {
 		require.Equal(t, result.FixedFileInfo.FileType, "01")
 		require.Equal(t, result.FixedFileInfo.FileSubType, "00")
 
-		require.Equal(t, result.StringFileInfo.Comments, "MDMlab osquery")
-		require.Equal(t, result.StringFileInfo.CompanyName, "MDMlab Device Management (mdmlabdm.com)")
-		require.Equal(t, result.StringFileInfo.FileDescription, "MDMlab osquery installer")
+		require.Equal(t, result.StringFileInfo.Comments, "Fleet osquery")
+		require.Equal(t, result.StringFileInfo.CompanyName, "Fleet Device Management (fleetdm.com)")
+		require.Equal(t, result.StringFileInfo.FileDescription, "Fleet osquery installer")
 		require.Equal(t, result.StringFileInfo.FileVersion, "1.2.3.0")
-		require.Equal(t, result.StringFileInfo.LegalCopyright, fmt.Sprintf("%d MDMlab Device Management Inc.", time.Now().Year()))
-		require.Equal(t, result.StringFileInfo.ProductName, "MDMlab osquery")
+		require.Equal(t, result.StringFileInfo.LegalCopyright, fmt.Sprintf("%d Fleet Device Management Inc.", time.Now().Year()))
+		require.Equal(t, result.StringFileInfo.ProductName, "Fleet osquery")
 		require.Equal(t, result.StringFileInfo.ProductVersion, "1.2.3.0")
 		require.Equal(t, result.ManifestPath, manifestPath)
 	})
@@ -103,7 +103,7 @@ func TestSanitizeVersion(t *testing.T) {
 func TestDownloadAndExtractZip(t *testing.T) {
 	t.Parallel()
 	path := t.TempDir()
-	client := mdmlabhttp.NewClient()
+	client := fleethttp.NewClient()
 	err := downloadAndExtractZip(client, wixDownload, path)
 	require.NoError(t, err)
 	assert.FileExists(t, filepath.Join(path, "heat.exe"))

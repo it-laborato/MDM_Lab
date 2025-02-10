@@ -40,7 +40,7 @@ type RunnerOptions struct {
 	// at start up (the go-tuf libary allows loading the targets).
 	SignaturesExpiredAtStartup bool
 
-	// CheckAccessToNewTUF, if set to true, will perform a check of access to the new MDMlab TUF
+	// CheckAccessToNewTUF, if set to true, will perform a check of access to the new Fleet TUF
 	// server on every update interval (once the access is confirmed it will store the confirmation
 	// of access to disk and will exit to restart).
 	CheckAccessToNewTUF bool
@@ -129,8 +129,8 @@ func NewRunner(updater *Updater, opt RunnerOptions) (*Runner, error) {
 	if _, err := updater.Lookup(constant.OrbitTUFTargetName); errors.Is(err, client.ErrNoLocalSnapshot) {
 		// Return early and skip optimization, this will cause an unnecessary auto-update of orbit
 		// but allows orbit to start up if there's no local metadata AND if the TUF server is down
-		// (which may be the case during the migration from https://tuf.mdmlabctl.com to
-		// https://updates.mdmlabdm.com).
+		// (which may be the case during the migration from https://tuf.fleetctl.com to
+		// https://updates.fleetdm.com).
 		return runner, nil
 	}
 
@@ -350,7 +350,7 @@ func (r *Runner) updateTarget(target string) error {
 		return nil
 	}
 	// Compare old/new orbit versions
-	_, _ = compareVersion(path, build.Version, "mdmlabd")
+	_, _ = compareVersion(path, build.Version, "fleetd")
 
 	// Symlink Orbit binary
 	linkPath := filepath.Join(r.updater.opt.RootDirectory, "bin", "orbit", filepath.Base(path))

@@ -13,7 +13,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 	"github.com/it-laborato/MDM_Lab/pkg/optjson"
 	"github.com/it-laborato/MDM_Lab/pkg/retry"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )
@@ -32,8 +32,8 @@ type nudgeTestSuite struct {
 func (s *nudgeTestSuite) TestUpdatesDisabled() {
 	t := s.T()
 	var err error
-	cfg := &mdmlab.OrbitConfig{}
-	cfg.NudgeConfig, err = mdmlab.NewNudgeConfig(mdmlab.AppleOSUpdateSettings{MinimumVersion: optjson.SetString("11"), Deadline: optjson.SetString("2022-01-04")})
+	cfg := &fleet.OrbitConfig{}
+	cfg.NudgeConfig, err = fleet.NewNudgeConfig(fleet.AppleOSUpdateSettings{MinimumVersion: optjson.SetString("11"), Deadline: optjson.SetString("2022-01-04")})
 	require.NoError(t, err)
 	runNudgeFn := func(execPath, configPath string) error {
 		return nil
@@ -60,7 +60,7 @@ func (s *nudgeTestSuite) TestNudgeConfigFetcherAddNudge() {
 	}
 	runner := &Runner{updater: updater, localHashes: make(map[string][]byte)}
 	interval := time.Second
-	cfg := &mdmlab.OrbitConfig{}
+	cfg := &fleet.OrbitConfig{}
 	nudgePath := "nudge/macos/stable/nudge.app.tar.gz"
 
 	// set up mock runNudgeFn to capture exec command
@@ -96,7 +96,7 @@ func (s *nudgeTestSuite) TestNudgeConfigFetcherAddNudge() {
 	require.Len(t, targets, 0)
 
 	// set the config
-	cfg.NudgeConfig, err = mdmlab.NewNudgeConfig(mdmlab.AppleOSUpdateSettings{MinimumVersion: optjson.SetString("11"), Deadline: optjson.SetString("2022-01-04")})
+	cfg.NudgeConfig, err = fleet.NewNudgeConfig(fleet.AppleOSUpdateSettings{MinimumVersion: optjson.SetString("11"), Deadline: optjson.SetString("2022-01-04")})
 	require.NoError(t, err)
 
 	// there's an error when the remote repo doesn't have the target yet
@@ -146,7 +146,7 @@ func (s *nudgeTestSuite) TestNudgeConfigFetcherAddNudge() {
 	require.NoError(t, err)
 	configBytes, err := os.ReadFile(configPath)
 	require.NoError(t, err)
-	var savedConfig mdmlab.NudgeConfig
+	var savedConfig fleet.NudgeConfig
 	err = json.Unmarshal(configBytes, &savedConfig)
 	require.NoError(t, err)
 	require.Equal(t, cfg.NudgeConfig, &savedConfig)
@@ -157,7 +157,7 @@ func (s *nudgeTestSuite) TestNudgeConfigFetcherAddNudge() {
 	require.NoError(t, err)
 	configBytes, err = os.ReadFile(configPath)
 	require.NoError(t, err)
-	savedConfig = mdmlab.NudgeConfig{}
+	savedConfig = fleet.NudgeConfig{}
 	err = json.Unmarshal(configBytes, &savedConfig)
 	require.NoError(t, err)
 	require.Equal(t, cfg.NudgeConfig, &savedConfig)
@@ -173,7 +173,7 @@ func (s *nudgeTestSuite) TestNudgeConfigFetcherAddNudge() {
 
 	configBytes, err = os.ReadFile(configPath)
 	require.NoError(t, err)
-	savedConfig = mdmlab.NudgeConfig{}
+	savedConfig = fleet.NudgeConfig{}
 	err = json.Unmarshal(configBytes, &savedConfig)
 	require.NoError(t, err)
 	require.Equal(t, cfg.NudgeConfig, &savedConfig)

@@ -122,15 +122,15 @@ func BuildPkg(opt Options) (string, error) {
 		}
 	}
 
-	if opt.MDMlabCertificate != "" {
-		if err := writeMDMlabServerCertificate(opt, orbitRoot); err != nil {
-			return "", fmt.Errorf("write mdmlab server certificate: %w", err)
+	if opt.FleetCertificate != "" {
+		if err := writeFleetServerCertificate(opt, orbitRoot); err != nil {
+			return "", fmt.Errorf("write fleet server certificate: %w", err)
 		}
 	}
 
-	if opt.MDMlabTLSClientCertificate != "" {
-		if err := writeMDMlabClientCertificate(opt, orbitRoot); err != nil {
-			return "", fmt.Errorf("write mdmlab client certificate: %w", err)
+	if opt.FleetTLSClientCertificate != "" {
+		if err := writeFleetClientCertificate(opt, orbitRoot); err != nil {
+			return "", fmt.Errorf("write fleet client certificate: %w", err)
 		}
 	}
 
@@ -180,7 +180,7 @@ func BuildPkg(opt Options) (string, error) {
 	if opt.Notarize {
 		switch {
 		case isDarwin:
-			if err := NotarizeStaple(generatedPath, "com.mdmlabdm.orbit"); err != nil {
+			if err := NotarizeStaple(generatedPath, "com.fleetdm.orbit"); err != nil {
 				return "", err
 			}
 		case isLinuxNative:
@@ -196,7 +196,7 @@ func BuildPkg(opt Options) (string, error) {
 		}
 	}
 
-	filename := "mdmlab-osquery.pkg"
+	filename := "fleet-osquery.pkg"
 	if opt.NativeTooling {
 		filename = filepath.Join("build", filename)
 	}
@@ -248,7 +248,7 @@ func writeScripts(opt Options, rootPath string) error {
 
 func writeLaunchd(opt Options, rootPath string) error {
 	// launchd is the service mechanism on macOS
-	path := filepath.Join(rootPath, "Library", "LaunchDaemons", "com.mdmlabdm.orbit.plist")
+	path := filepath.Join(rootPath, "Library", "LaunchDaemons", "com.fleetdm.orbit.plist")
 	if err := secure.MkdirAll(filepath.Dir(path), constant.DefaultDirMode); err != nil {
 		return fmt.Errorf("mkdir: %w", err)
 	}
@@ -284,11 +284,11 @@ func writeDistribution(opt Options, rootPath string) error {
 	return nil
 }
 
-func writeMDMlabServerCertificate(opt Options, orbitRoot string) error {
-	dstPath := filepath.Join(orbitRoot, "mdmlab.pem")
+func writeFleetServerCertificate(opt Options, orbitRoot string) error {
+	dstPath := filepath.Join(orbitRoot, "fleet.pem")
 
-	if err := file.Copy(opt.MDMlabCertificate, dstPath, 0o644); err != nil {
-		return fmt.Errorf("write mdmlab server certificate: %w", err)
+	if err := file.Copy(opt.FleetCertificate, dstPath, 0o644); err != nil {
+		return fmt.Errorf("write fleet server certificate: %w", err)
 	}
 
 	return nil
@@ -304,14 +304,14 @@ func writeUpdateServerCertificate(opt Options, orbitRoot string) error {
 	return nil
 }
 
-func writeMDMlabClientCertificate(opt Options, orbitRoot string) error {
-	dstPath := filepath.Join(orbitRoot, constant.MDMlabTLSClientCertificateFileName)
-	if err := file.Copy(opt.MDMlabTLSClientCertificate, dstPath, constant.DefaultFileMode); err != nil {
-		return fmt.Errorf("write mdmlab certificate file: %w", err)
+func writeFleetClientCertificate(opt Options, orbitRoot string) error {
+	dstPath := filepath.Join(orbitRoot, constant.FleetTLSClientCertificateFileName)
+	if err := file.Copy(opt.FleetTLSClientCertificate, dstPath, constant.DefaultFileMode); err != nil {
+		return fmt.Errorf("write fleet certificate file: %w", err)
 	}
-	dstPath = filepath.Join(orbitRoot, constant.MDMlabTLSClientKeyFileName)
-	if err := file.Copy(opt.MDMlabTLSClientKey, dstPath, constant.DefaultFileMode); err != nil {
-		return fmt.Errorf("write mdmlab key file: %w", err)
+	dstPath = filepath.Join(orbitRoot, constant.FleetTLSClientKeyFileName)
+	if err := file.Copy(opt.FleetTLSClientKey, dstPath, constant.DefaultFileMode); err != nil {
+		return fmt.Errorf("write fleet key file: %w", err)
 	}
 	return nil
 }
@@ -387,7 +387,7 @@ func xarBom(opt Options, rootPath string) error {
 		// Same as linux native, but modified for running in Docker. This should
 		// be either Windows, or Linux without the --native-tooling flag.
 		cmdMkbom = exec.Command(
-			"docker", "run", "--rm", "-v", rootPath+":/root", "mdmlabdm/bomutils",
+			"docker", "run", "--rm", "-v", rootPath+":/root", "fleetdm/bomutils",
 			"mkbom", "-u", "0", "-g", "80",
 			// Use / instead of filepath.Join because these will always be paths within the Docker
 			// container (so Linux file paths) -- if we use filepath.Join we'll get invalid paths on
@@ -426,7 +426,7 @@ func xarBom(opt Options, rootPath string) error {
 		cmdXar.Dir = filepath.Join(rootPath, "flat")
 	default:
 		cmdXar = exec.Command(
-			"docker", "run", "--rm", "-v", rootPath+":/root", "-w", "/root/flat", "mdmlabdm/bomutils",
+			"docker", "run", "--rm", "-v", rootPath+":/root", "-w", "/root/flat", "fleetdm/bomutils",
 			"xar",
 		)
 		cmdXar.Args = append(cmdXar.Args, append([]string{"--compression", "none", "-cf", "/root/orbit.pkg"}, files...)...)

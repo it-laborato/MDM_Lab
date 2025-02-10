@@ -421,7 +421,7 @@ func versionCheckForfixSymlinkNotPresentQuirk(orbitPath string) error {
 }
 
 // fixSymlinkNotPresent fixes the issue where the symlink to the orbit service binary is not present
-// this is a workaround for the issue described here https://github.com/mdmlabdm/mdmlab/issues/10300
+// this is a workaround for the issue described here https://github.com/fleetdm/fleet/issues/10300
 func fixSymlinkNotPresent() error {
 	// getting current working directory
 	execPath, err := getExecutablePath()

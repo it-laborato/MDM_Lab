@@ -19,8 +19,8 @@ func TestNewRunner(t *testing.T) {
 	// TODO(lucas): Do not use our TUF remote repository
 	// but instead create local repository and serve with a httptest server.
 	// For that, we need to move and export some functionality currently in
-	// "ee/mdmlabctl/updates.go" (as it doesn't make sense to have such functionality
-	// there and import such eemdmlabctl package here).
+	// "ee/fleetctl/updates.go" (as it doesn't make sense to have such functionality
+	// there and import such eefleetctl package here).
 	nettest.Run(t)
 
 	rootDir := t.TempDir()
@@ -87,7 +87,7 @@ func TestGetVersion(t *testing.T) {
 			version: "4.5.6",
 		},
 		"42.0.0": {
-			cmd:     "#!/bin/bash\n/bin/echo mdmlab-desktop 42.0.0",
+			cmd:     "#!/bin/bash\n/bin/echo fleet-desktop 42.0.0",
 			version: "42.0.0",
 		},
 		"5.10.2-26-gc396d07b4-dirty": {

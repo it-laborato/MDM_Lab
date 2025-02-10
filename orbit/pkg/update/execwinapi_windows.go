@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/sys/windows"
 	"golang.org/x/sys/windows/registry"
@@ -73,7 +73,7 @@ func readInstallationType() (string, error) {
 }
 
 // TODO(mna): refactor to a Windows-specific package to constrain usage of
-// unsafe to that package, once https://github.com/mdmlabdm/mdmlab/pull/12387
+// unsafe to that package, once https://github.com/fleetdm/fleet/pull/12387
 // lands.
 
 // Perform the host MDM enrollment process using MS-MDE protocol:
@@ -136,7 +136,7 @@ func unenrollHostFromMDM() error {
 	}
 
 	// must explicitly pass 0 here, see for details:
-	// https://github.com/mdmlabdm/mdmlab/issues/12342#issuecomment-1608190367
+	// https://github.com/fleetdm/fleet/issues/12342#issuecomment-1608190367
 	code, _, err := procUnregisterDeviceWithManagement.Call(0)
 	log.Debug().Msgf("UnregisterDeviceWithManagement returned code: %#x ; message: %v", code, err)
 	if code != uintptr(windows.ERROR_SUCCESS) {
@@ -169,8 +169,8 @@ func improveWindowsAPIError(apiFunc, discoURL string, code uintptr, err error) e
 }
 
 func generateWindowsMDMAccessTokenPayload(args WindowsMDMEnrollmentArgs) ([]byte, error) {
-	var pld mdmlab.WindowsMDMAccessTokenPayload
-	pld.Type = mdmlab.WindowsMDMProgrammaticEnrollmentType // always programmatic for now
+	var pld fleet.WindowsMDMAccessTokenPayload
+	pld.Type = fleet.WindowsMDMProgrammaticEnrollmentType // always programmatic for now
 	pld.Payload.OrbitNodeKey = args.OrbitNodeKey
 	return json.Marshal(pld)
 }

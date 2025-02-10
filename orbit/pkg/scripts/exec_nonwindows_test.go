@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/stretchr/testify/require"
 )
 
@@ -53,7 +53,7 @@ func TestExecCmdNonWindows(t *testing.T) {
 		{
 			name:     "unsupported shebang",
 			contents: "#!/bin/python",
-			error:    mdmlab.ErrUnsupportedInterpreter,
+			error:    fleet.ErrUnsupportedInterpreter,
 			exitCode: -1,
 		},
 	}

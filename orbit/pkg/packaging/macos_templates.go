@@ -24,11 +24,11 @@ var macosPackageInfoTemplate = template.Must(template.New("").Option("missingkey
 var macosDistributionTemplate = template.Must(template.New("").Option("missingkey=error").Parse(
 	`<?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
-	<title>MDMlab osquery</title>
+	<title>Fleet osquery</title>
 	<choices-outline>
 	    <line choice="choiceBase"/>
     </choices-outline>
-    <choice id="choiceBase" title="MDMlab osquery" enabled="false" selected="true" description="Standard installation for MDMlab osquery.">
+    <choice id="choiceBase" title="Fleet osquery" enabled="false" selected="true" description="Standard installation for Fleet osquery.">
         <pkg-ref id="{{.Identifier}}.base.pkg"/>
     </choice>
     {{/* base.pkg specified here is the foldername that contains the package contents */}}
@@ -54,11 +54,11 @@ ln -sf /opt/orbit /var/lib/orbit
 {{- end }}
 
 {{ if .StartService -}}
-DAEMON_LABEL="com.mdmlabdm.orbit"
+DAEMON_LABEL="com.fleetdm.orbit"
 DAEMON_PLIST="/Library/LaunchDaemons/${DAEMON_LABEL}.plist"
 
 # Stop the previous desktop agent
-pkill mdmlab-desktop || true
+pkill fleet-desktop || true
 # Remove any pre-existing version of the config
 launchctl bootout "system/${DAEMON_LABEL}"
 
@@ -108,17 +108,17 @@ var macosLaunchdTemplate = template.Must(template.New("").Option("missingkey=err
 		<key>ORBIT_INSECURE</key>
 		<string>true</string>
 		{{- end }}
-		{{- if .MDMlabCertificate }}
+		{{- if .FleetCertificate }}
 		<key>ORBIT_FLEET_CERTIFICATE</key>
-		<string>/opt/orbit/mdmlab.pem</string>
+		<string>/opt/orbit/fleet.pem</string>
 		{{- end }}
 		{{- if .EnrollSecret }}
 		<key>ORBIT_ENROLL_SECRET_PATH</key>
 		<string>/opt/orbit/secret.txt</string>
 		{{- end }}
-		{{- if .MDMlabURL }}
+		{{- if .FleetURL }}
 		<key>ORBIT_FLEET_URL</key>
-		<string>{{ .MDMlabURL }}</string>
+		<string>{{ .FleetURL }}</string>
 		{{- end }}
 		{{- if .UseSystemConfiguration }}
 		<key>ORBIT_USE_SYSTEM_CONFIGURATION</key>
@@ -147,9 +147,9 @@ var macosLaunchdTemplate = template.Must(template.New("").Option("missingkey=err
 		<string>true</string>
 		<key>ORBIT_DESKTOP_CHANNEL</key>
 		<string>{{ .DesktopChannel }}</string>
-		{{- if .MDMlabDesktopAlternativeBrowserHost }}
+		{{- if .FleetDesktopAlternativeBrowserHost }}
 		<key>ORBIT_FLEET_DESKTOP_ALTERNATIVE_BROWSER_HOST</key>
-		<string>{{ .MDMlabDesktopAlternativeBrowserHost }}</string>
+		<string>{{ .FleetDesktopAlternativeBrowserHost }}</string>
 		{{- end }}
 		{{- end }}
 		<key>ORBIT_UPDATE_INTERVAL</key>
@@ -170,7 +170,7 @@ var macosLaunchdTemplate = template.Must(template.New("").Option("missingkey=err
 	<key>KeepAlive</key>
 	<true/>
 	<key>Label</key>
-	<string>com.mdmlabdm.orbit</string>
+	<string>com.fleetdm.orbit</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/opt/orbit/bin/orbit/orbit</string>

@@ -11,7 +11,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/cryptoinfotable"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/dataflattentable"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/firefox_preferences"
-	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/mdmlabd_logs"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/fleetd_logs"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/table/sntp_request"
 	"github.com/macadmins/osquery-extension/tables/chromeuserprofiles"
 	"github.com/macadmins/osquery-extension/tables/fileline"
@@ -84,7 +84,7 @@ func (r *Runner) Execute() error {
 	ticker := time.NewTicker(200 * time.Millisecond)
 	for {
 		srv, err := osquery.NewExtensionManagerServer(
-			"com.mdmlabdm.orbit.osquery_extension.v1",
+			"com.fleetdm.orbit.osquery_extension.v1",
 			r.socket,
 			// This timeout is only used for registering the extension tables
 			// and for the heartbeat ping requests in r.srv.Run().
@@ -143,7 +143,7 @@ func OrbitDefaultTables() []osquery.OsqueryPlugin {
 
 		// Orbit extensions.
 		table.NewPlugin("sntp_request", sntp_request.Columns(), sntp_request.GenerateFunc),
-		mdmlabd_logs.TablePlugin(),
+		fleetd_logs.TablePlugin(),
 
 		// Note: the logger passed here and to all other tables is the global logger from zerolog.
 		// This logger has already been configured with some required settings in

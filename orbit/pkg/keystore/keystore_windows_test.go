@@ -25,7 +25,7 @@ func TestSecret(t *testing.T) {
 
 	// Use a different service name for testing
 	origService := service
-	service = "com.mdmlabdm.mdmlabd.enroll.secret.test"
+	service = "com.fleetdm.fleetd.enroll.secret.test"
 
 	deleteSecret := func() {
 		mu.Lock()

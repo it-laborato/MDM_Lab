@@ -37,7 +37,7 @@ func main() {
 	var server *osquery.ExtensionManagerServer
 	backOff := backoff.WithMaxRetries(backoff.NewConstantBackOff(time.Millisecond*200), 25) // retry once per 200ms for 25 times == 5 seconds
 	op := func() error {
-		s, err := osquery.NewExtensionManagerServer("com.mdmlabdm.mdmlabd_tables.osquery_extension.v1", *socket, serverTimeout, serverPingInterval)
+		s, err := osquery.NewExtensionManagerServer("com.fleetdm.fleetd_tables.osquery_extension.v1", *socket, serverTimeout, serverPingInterval)
 		if err != nil {
 			return fmt.Errorf("error creating extension: %w", err)
 		}

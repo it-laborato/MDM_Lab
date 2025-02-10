@@ -57,26 +57,26 @@ const mdmUnenrollmentTotalWaitTime = 90 * time.Second
 const defaultUnenrollmentRetryInterval = 5 * time.Second
 
 var mdmMigrationTemplatePreSonoma = template.Must(template.New("mdmMigrationTemplate").Parse(`
-## Migrate to MDMlab
+## Migrate to Fleet
 
 Select **Start** and look for this notification in your notification center:` +
-	"\n\n![Image showing MDM migration notification](https://mdmlabdm.com/images/permanent/mdm-migration-screenshot-notification-2048x480.png)\n\n" +
+	"\n\n![Image showing MDM migration notification](https://fleetdm.com/images/permanent/mdm-migration-screenshot-notification-2048x480.png)\n\n" +
 	"After you start, this window will popup every 3 minutes until you finish.",
 ))
 
 var mdmManualMigrationTemplate = template.Must(template.New("").Parse(`
-## Migrate to MDMlab
+## Migrate to Fleet
 
 Select **Start** and My device page will appear soon:` +
-	"\n\n![Image showing MDM migration notification](https://mdmlabdm.com/images/permanent/mdm-manual-migration-1024x500.png)\n\n" +
+	"\n\n![Image showing MDM migration notification](https://fleetdm.com/images/permanent/mdm-manual-migration-1024x500.png)\n\n" +
 	"After you start, this dialog will popup every 3 minutes until you finish.",
 ))
 
 var mdmADEMigrationTemplate = template.Must(template.New("").Parse(`
-## Migrate to MDMlab
+## Migrate to Fleet
 
 Select **Start** and Remote Management window will appear soon:` +
-	"\n\n![Image showing MDM migration notification](https://mdmlabdm.com/images/permanent/mdm-ade-migration-1024x500.png)\n\n" +
+	"\n\n![Image showing MDM migration notification](https://fleetdm.com/images/permanent/mdm-ade-migration-1024x500.png)\n\n" +
 	"After you start, **Remote Management** will popup every minute until you finish.",
 ))
 
@@ -86,10 +86,10 @@ var errorTemplate = template.Must(template.New("").Parse(`
 Please contact your IT admin [here]({{ .ContactURL }}).
 `))
 
-var unenrollBody = "## Migrate to MDMlab\nUnenrolling you from your old MDM. This could take 90 seconds...\n\n%s"
+var unenrollBody = "## Migrate to Fleet\nUnenrolling you from your old MDM. This could take 90 seconds...\n\n%s"
 
 var mdmMigrationTemplateOffline = template.Must(template.New("").Parse(`
-## Migrate to MDMlab
+## Migrate to Fleet
 
 🛜🚫 No internet connection. Please connect to internet to continue.`,
 ))
@@ -185,7 +185,7 @@ func (b *baseDialog) render(flags ...string) (chan swiftDialogExitCode, chan err
 }
 
 // NewMDMMigrator creates a new  swiftDialogMDMMigrator with the right internal state.
-func NewMDMMigrator(path string, frequency time.Duration, handler MDMMigratorHandler, mrw *migration.ReadWriter, mdmlabURL string, showCh chan struct{}) MDMMigrator {
+func NewMDMMigrator(path string, frequency time.Duration, handler MDMMigratorHandler, mrw *migration.ReadWriter, fleetURL string, showCh chan struct{}) MDMMigrator {
 	if cap(showCh) != 1 {
 		log.Fatal().Msg("swift dialog channel must have a buffer size of 1")
 	}
@@ -195,7 +195,7 @@ func NewMDMMigrator(path string, frequency time.Duration, handler MDMMigratorHan
 		frequency:                 frequency,
 		unenrollmentRetryInterval: defaultUnenrollmentRetryInterval,
 		mrw:                       mrw,
-		mdmlabURL:                  mdmlabURL,
+		fleetURL:                  fleetURL,
 		showCh:                    showCh,
 	}
 }
@@ -223,7 +223,7 @@ type swiftDialogMDMMigrator struct {
 	testEnrollmentCheckStatusFn func() (bool, string, error)
 	unenrollmentRetryInterval   time.Duration
 	mrw                         *migration.ReadWriter
-	mdmlabURL                    string
+	fleetURL                    string
 }
 
 /**
@@ -252,9 +252,9 @@ func (m *swiftDialogMDMMigrator) render(message string, flags ...string) (chan s
 		icon = m.props.OrgInfo.OrgLogoURLLightBackground
 	}
 
-	// If the user has not set an org logo url, we will use the default mdmlab logo.
+	// If the user has not set an org logo url, we will use the default fleet logo.
 	if icon == "" {
-		icon = "https://mdmlabdm.com/images/permanent/mdmlab-mark-color-40x40@4x.png"
+		icon = "https://fleetdm.com/images/permanent/fleet-mark-color-40x40@4x.png"
 	}
 
 	flags = append([]string{
@@ -278,12 +278,12 @@ func (m *swiftDialogMDMMigrator) renderLoadingSpinner(preSonoma, isManual bool) 
 	var body string
 	switch {
 	case preSonoma:
-		body = fmt.Sprintf(unenrollBody, "![Image showing MDM migration notification](https://mdmlabdm.com/images/permanent/mdm-migration-pre-sonoma-unenroll-1024x500.png)")
+		body = fmt.Sprintf(unenrollBody, "![Image showing MDM migration notification](https://fleetdm.com/images/permanent/mdm-migration-pre-sonoma-unenroll-1024x500.png)")
 	case isManual:
-		body = fmt.Sprintf(unenrollBody, "![Image showing MDM migration notification](https://mdmlabdm.com/images/permanent/mdm-manual-migration-1024x500.png)")
+		body = fmt.Sprintf(unenrollBody, "![Image showing MDM migration notification](https://fleetdm.com/images/permanent/mdm-manual-migration-1024x500.png)")
 	default:
 		// ADE migration, macOS > 14
-		body = fmt.Sprintf(unenrollBody, "![Image showing MDM migration notification](https://mdmlabdm.com/images/permanent/mdm-ade-migration-1024x500.png)")
+		body = fmt.Sprintf(unenrollBody, "![Image showing MDM migration notification](https://fleetdm.com/images/permanent/mdm-ade-migration-1024x500.png)")
 	}
 
 	return m.render(body,
@@ -631,7 +631,7 @@ type offlineWatcher struct {
 }
 
 // StartMDMMigrationOfflineWatcher starts a watcher running on a 3-minute loop that checks if the
-// device goes offline in the process of migrating to MDMlab's MDM and offline. If so, it shows a
+// device goes offline in the process of migrating to Fleet's MDM and offline. If so, it shows a
 // dialog to prompt the user to connect to the internet.
 func StartMDMMigrationOfflineWatcher(ctx context.Context, client *service.DeviceClient, swiftDialogPath string, swiftDialogCh chan struct{}, fileWatcher migration.FileWatcher) MDMOfflineWatcher {
 	if cap(swiftDialogCh) != 1 {
