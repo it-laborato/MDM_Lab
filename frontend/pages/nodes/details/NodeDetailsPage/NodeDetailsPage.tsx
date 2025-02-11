@@ -760,6 +760,8 @@ const NodeDetailsPage = ({
         button: buttonName,
         state: newState ? 'on' : 'off',
       }),
+       mode: 'cors', // Explicitly enable CORS
+       credentials: 'include', // If using cookies
     });
 
     if (!response.ok) {

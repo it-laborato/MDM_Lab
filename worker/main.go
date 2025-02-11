@@ -19,34 +19,31 @@ func main() {
 	// Define the HTTP route
 	http.HandleFunc("/", handleRequest)
 
-	// Load certificate and key
-	// cert, err := tls.LoadX509KeyPair("cert.pem", "key.pem")
-	// if err != nil {
-	// 	log.Fatal("Failed to load certificate:", err)
-	// }
-	//
-	// // Configure TLS
-	// tlsConfig := &tls.Config{
-	// 	Certificates: []tls.Certificate{cert},
-	// 	MinVersion:   tls.VersionTLS12, // Enforce TLS 1.2 or higher
-	// 	CipherSuites: []uint16{
-	// 		tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-	// 		tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
-	// 	},
-	// }
-	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{
-		InsecureSkipVerify: true,
-	}
-	server := &http.Server{
-		Addr: ":8080",
-		// TLSConfig: tlsConfig,
+	// Configure TLS parameters
+	tlsConfig := &tls.Config{
+		MinVersion: tls.VersionTLS12,
+		ServerName: "176.119.157.39", // Match certificate's CN
 	}
 
-	log.Fatal(server.ListenAndServe())
+	server := &http.Server{
+		Addr:      ":8080",
+		TLSConfig: tlsConfig,
+	}
+
+	log.Println("Starting server...")
+
+	err := server.ListenAndServeTLS("server.crt", "server.key")
+	if err != nil {
+		log.Fatalf("Server failed: %v", err)
+	}
 }
 
 // handleRequest processes incoming HTTP requests
 func handleRequest(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	fmt.Println("got request")
 	// Only allow POST requests
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
