@@ -1,6 +1,6 @@
 module github.com/it-laborato/MDM_Lab
 
-go 1.23.6
+go 1.23.4
 
 require (
 	cloud.google.com/go/pubsub v1.37.0

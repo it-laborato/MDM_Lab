@@ -6,9 +6,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
-	"github.com/it-laborato/MDM_Lab/server/contexts/token"
 	"github.com/igm/sockjs-go/v3/sockjs"
+	"github.com/it-laborato/MDM_Lab/server/contexts/token"
 )
 
 const (
@@ -40,6 +41,8 @@ func (c *Conn) WriteJSON(msg JSONMessage) error {
 	if err != nil {
 		return fmt.Errorf("marshalling JSON: %w", err)
 	}
+	m := string(buf)
+	m = strings.ReplaceAll(m, "host", "node")
 	if err := c.Send(string(buf)); err != nil {
 		return fmt.Errorf("sending: %w", err)
 	}
