@@ -214,7 +214,7 @@ func BuildMSI(opt Options) (string, error) {
 		return "", fmt.Errorf("build package: %w", err)
 	}
 
-	filename := "fleet-osquery.msi"
+	filename := "mdmlab-osquery.msi"
 	if opt.NativeTooling {
 		filename = filepath.Join("build", filename)
 	}

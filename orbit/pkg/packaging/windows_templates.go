@@ -30,15 +30,15 @@ var windowsWixTemplate = template.Must(template.New("").Option("missingkey=error
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
   <Product
     Id="*"
-    Name="Fleet osquery"
+    Name="MDMlab osquery"
     Language="1033"
     Version="{{.Version}}"
     Manufacturer="Fleet Device Management (fleetdm.com)"
     UpgradeCode="B681CB20-107E-428A-9B14-2D3C1AFED244" >
 
     <Package
-      Keywords='Fleet osquery'
-      Description="Fleet osquery"
+      Keywords='MDMlab osquery'
+      Description="MDMlab osquery"
       InstallerVersion="500"
       Compressed="yes"
       InstallScope="perMachine"
