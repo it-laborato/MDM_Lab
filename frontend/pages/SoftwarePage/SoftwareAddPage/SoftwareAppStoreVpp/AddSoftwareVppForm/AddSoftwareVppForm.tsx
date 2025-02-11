@@ -29,11 +29,6 @@ const EnableVppCard = () => {
         <p className={`${baseClass}__enable-vpp-description`}>
           To add App Store apps, first enable VPP.
         </p>
-        <CustomLink
-          url={PATHS.ADMIN_INTEGRATIONS_VPP}
-          text="Enable VPP"
-          className={`${baseClass}__enable-vpp-link`}
-        />
       </div>
     </Card>
   );

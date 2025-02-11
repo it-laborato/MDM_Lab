@@ -16,7 +16,6 @@ import { PlatformValueOptions } from "utilities/constants";
 import Spinner from "components/Spinner";
 import TableDataError from "components/DataError";
 import LastUpdatedText from "components/LastUpdatedText";
-import CustomLink from "components/CustomLink";
 import { AxiosError } from "axios";
 
 import OSTable from "./OSTable";
@@ -76,12 +75,7 @@ const OperatingSystems = ({
         <p>
           Chromebooks automatically receive updates from Google until their
           auto-update expiration date.{" "}
-          <CustomLink
-            url="https://mdmlabdm.com/learn-more-about/chromeos-updates"
-            text="See supported devices"
-            newTab
-            multiline
-          />
+          
         </p>
       );
     }
@@ -94,12 +88,7 @@ const OperatingSystems = ({
         <p>
           {OS_VENDOR_BY_PLATFORM[selectedPlatform]} releases updates and fixes
           for supported operating systems.{" "}
-          <CustomLink
-            url={OS_END_OF_LIFE_LINK_BY_PLATFORM[selectedPlatform]}
-            text="See supported operating systems"
-            newTab
-            multiline
-          />
+         
         </p>
       );
     return null;

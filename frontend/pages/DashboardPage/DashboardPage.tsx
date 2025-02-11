@@ -52,7 +52,6 @@ import { ITableQueryData } from "components/TableContainer/TableContainer";
 
 import TeamsDropdown from "components/TeamsDropdown";
 import Spinner from "components/Spinner";
-import CustomLink from "components/CustomLink";
 import { SingleValue } from "react-select-5";
 import DropdownWrapper from "components/forms/fields/DropdownWrapper";
 import { CustomOptionType } from "components/forms/fields/DropdownWrapper/DropdownWrapper";
@@ -679,11 +678,7 @@ const DashboardPage = ({ router, location }: IDashboardProps): JSX.Element => {
     description: (
       <p>
         Munki is a tool for managing software on macOS devices.{" "}
-        <CustomLink
-          url="https://www.munki.org/munki/"
-          text="Learn about Munki"
-          newTab
-        />
+        
       </p>
     ),
     children: (

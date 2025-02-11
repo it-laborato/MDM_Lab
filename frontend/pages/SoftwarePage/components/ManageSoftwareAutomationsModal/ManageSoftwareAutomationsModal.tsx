@@ -27,7 +27,6 @@ import Slider from "components/forms/fields/Slider";
 import Radio from "components/forms/fields/Radio";
 // @ts-ignore
 import InputField from "components/forms/fields/InputField";
-import CustomLink from "components/CustomLink";
 import validUrl from "components/forms/validators/valid_url";
 
 import { IWebhookSoftwareVulnerabilities } from "interfaces/webhook";
@@ -483,12 +482,7 @@ const ManageAutomationsModal = ({
           <p>
             Vulnerability automations currently run for software
             vulnerabilities. Interested in automations for OS vulnerabilities?{" "}
-            <CustomLink
-              url={SUPPORT_LINK}
-              text="Let us know"
-              newTab
-              disableKeyboardNavigation={!softwareAutomationsEnabled}
-            />
+           
           </p>
         </div>
         <div className="modal-cta-wrap">

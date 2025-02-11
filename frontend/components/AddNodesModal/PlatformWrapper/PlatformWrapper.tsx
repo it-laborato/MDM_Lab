@@ -16,7 +16,6 @@ import Checkbox from "components/forms/fields/Checkbox";
 import TooltipWrapper from "components/TooltipWrapper";
 import TabsWrapper from "components/TabsWrapper";
 import InfoBanner from "components/InfoBanner/InfoBanner";
-import CustomLink from "components/CustomLink/CustomLink";
 
 import { isValidPemCertificate } from "../../../pages/nodes/ManageNodesPage/helpers";
 import IosIpadosPanel from "./IosIpadosPanel";
@@ -364,13 +363,8 @@ const PlatformWrapper = ({
               information below.
             </p>
             <InfoBanner className={`${baseClass}__chromeos--instructions`}>
-              For a step-by-step guide, see the documentation page for{" "}
-              <CustomLink
-                url="https://mdmlabdm.com/docs/using-mdmlab/adding-nodes#enroll-chromebooks"
-                text="adding nodes"
-                newTab
-                multiline
-              />
+            
+             
             </InfoBanner>
           </div>
           <InputField

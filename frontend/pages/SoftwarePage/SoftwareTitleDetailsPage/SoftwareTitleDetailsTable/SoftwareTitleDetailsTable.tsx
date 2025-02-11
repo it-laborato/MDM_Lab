@@ -12,7 +12,6 @@ import { buildQueryStringFromParams } from "utilities/url";
 import TableContainer from "components/TableContainer";
 import TableCount from "components/TableContainer/TableCount";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 import LastUpdatedText from "components/LastUpdatedText";
 
 import generateSoftwareTitleDetailsTableConfig from "./SoftwareTitleDetailsTableConfig";
@@ -50,12 +49,7 @@ const NoVersionsDetected = (isAvailableForInstall = false): JSX.Element => {
           "Install this software on a node to see versions."
         ) : (
           <>
-            Expecting to see versions?{" "}
-            <CustomLink
-              url={GITHUB_NEW_ISSUE_LINK}
-              text="File an issue on GitHub"
-              newTab
-            />
+            
           </>
         )
       }

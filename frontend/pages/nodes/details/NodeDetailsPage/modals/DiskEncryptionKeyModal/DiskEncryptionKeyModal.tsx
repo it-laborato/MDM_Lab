@@ -8,7 +8,6 @@ import Modal from "components/Modal";
 import Button from "components/buttons/Button";
 import InputFieldHiddenContent from "components/forms/fields/InputFieldHiddenContent";
 import DataError from "components/DataError";
-import CustomLink from "components/CustomLink";
 import { LEARN_MORE_ABOUT_BASE_LINK } from "utilities/constants";
 import { NodePlatform } from "interfaces/platform";
 
@@ -56,11 +55,7 @@ const DiskEncryptionKeyModal = ({
           <InputFieldHiddenContent value={encryptionKey ?? ""} />
           <p>
             {recoveryText}{" "}
-            <CustomLink
-              newTab
-              url={`${LEARN_MORE_ABOUT_BASE_LINK}/mdm-disk-encryption`}
-              text="Learn more"
-            />
+           
           </p>
           <div className="modal-cta-wrap">
             <Button onClick={onCancel}>Done</Button>

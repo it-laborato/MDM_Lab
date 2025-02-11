@@ -3,7 +3,6 @@ import classNames from "classnames";
 
 import { IPolicySoftwareToInstall } from "interfaces/policy";
 import Checkbox from "components/forms/fields/Checkbox";
-import CustomLink from "components/CustomLink";
 import TooltipWrapper from "components/TooltipWrapper";
 import { buildQueryStringFromParams } from "utilities/url";
 import paths from "router/paths";
@@ -55,8 +54,7 @@ export const PlatformSelector = ({
 
     return (
       <span className={`${baseClass}__install-software`}>
-        <CustomLink text={softwareName} url={softwareLink} /> will only install
-        on{" "}
+       
         <TooltipWrapper
           tipContent={
             <>

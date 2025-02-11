@@ -13,7 +13,6 @@ import Button from "components/buttons/Button";
 import Modal from "components/Modal";
 // @ts-ignore
 import Dropdown from "components/forms/fields/Dropdown";
-import CustomLink from "components/CustomLink";
 import { API_ALL_TEAMS_ID, APP_CONTEXT_ALL_TEAMS_ID } from "interfaces/team";
 
 export interface IAddPolicyModalProps {
@@ -141,11 +140,7 @@ const AddPolicyModal = ({
     return (
       <>
         There are no results that match your filters.{" "}
-        <CustomLink
-          text="Everyone can contribute"
-          url={CONTRIBUTE_TO_POLICIES_DOCS_URL}
-          newTab
-        />
+       
       </>
     );
   };

@@ -1,7 +1,6 @@
 import React from "react";
 
 import InfoBanner from "components/InfoBanner";
-import CustomLink from "components/CustomLink";
 
 const baseClass = "apple-bm-renewal-message";
 
@@ -14,15 +13,7 @@ const AppleBMRenewalMessage = ({ expired }: IAppleBMRenewalMessageProps) => {
     <InfoBanner
       className={baseClass}
       color="yellow"
-      cta={
-        <CustomLink
-          url="/settings/integrations/mdm/abm"
-          text="Renew ABM"
-          className={`${baseClass}`}
-          color="core-mdmlab-black"
-          iconColor="core-mdmlab-black"
-        />
-      }
+     
     >
       {expired ? (
         <>

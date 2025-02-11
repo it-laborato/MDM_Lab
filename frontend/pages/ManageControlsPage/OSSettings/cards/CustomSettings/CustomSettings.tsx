@@ -10,7 +10,6 @@ import { IMdmProfile } from "interfaces/mdm";
 
 import mdmAPI, { IMdmProfilesResponse } from "services/entities/mdm";
 
-import CustomLink from "components/CustomLink";
 import SectionHeader from "components/SectionHeader";
 import Spinner from "components/Spinner";
 import DataError from "components/DataError";
@@ -187,11 +186,7 @@ const CustomSettings = ({
       <SectionHeader title="Custom settings" />
       <p className={`${baseClass}__description`}>
         Create and upload configuration profiles to apply custom settings.{" "}
-        <CustomLink
-          newTab
-          text="Learn how"
-          url="https://mdmlabdm.com/learn-more-about/custom-os-settings"
-        />
+       
       </p>
       {!mdmEnabled ? (
         <TurnOnMdmMessage

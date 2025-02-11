@@ -11,7 +11,6 @@ import TableContainer from "components/TableContainer";
 import Spinner from "components/Spinner";
 import TableDataError from "components/DataError";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 
 import munkiVersionsTableHeaders from "./MunkiVersionsTableConfig";
 import generateMunkiIssuesTableHeaders from "./MunkiIssuesTableConfig";
@@ -107,13 +106,9 @@ const Munki = ({
                       header="Unable to detect Munki versions"
                       info={
                         <>
-                          To see Munki versions, deploy&nbsp;
-                          <CustomLink
-                            url="https://mdmlabdm.com/learn-more-about/mdmlabd"
-                            text="Mdmlab's agent (mdmlabd)"
-                            newTab
-                          />
-                          .
+                           see Munki versions, deploy&nbsp;
+                          
+                          
                         </>
                       }
                     />

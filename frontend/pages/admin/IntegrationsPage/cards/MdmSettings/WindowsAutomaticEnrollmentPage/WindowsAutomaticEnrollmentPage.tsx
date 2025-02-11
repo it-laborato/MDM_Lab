@@ -7,7 +7,6 @@ import { AppContext } from "context/app";
 import InputField from "components/forms/fields/InputField";
 import BackLink from "components/BackLink";
 import MainContent from "components/MainContent";
-import CustomLink from "components/CustomLink/CustomLink";
 import InfoBanner from "components/InfoBanner";
 import Icon from "components/Icon";
 
@@ -37,11 +36,7 @@ const WindowsAutomaticEnrollmentPage = () => {
           The end user will see Microsoft&apos;s default initial setup. You can
           further simplify the initial device setup with Autopilot, which is
           similar to Apple&apos;s Automated Device Enrollment (DEP).{" "}
-          <CustomLink
-            newTab
-            text="Learn more"
-            url="https://mdmlabdm.com/learn-more-about/setup-windows-mdm"
-          />
+          
         </p>
         {/* Ideally we'd use the native browser list styles and css to display
         the list numbers but this does not allow us to style the list items as we'd
@@ -49,11 +44,7 @@ const WindowsAutomaticEnrollmentPage = () => {
         <ol className={`${baseClass}__setup-list`}>
           <li>
             <span>1.</span>
-            <CustomLink
-              newTab
-              text="Sign in to Azure portal"
-              url="https://mdmlabdm.com/sign-in-to/microsoft-automatic-enrollment-tool"
-            />
+            
           </li>
           <li>
             <span>2.</span>

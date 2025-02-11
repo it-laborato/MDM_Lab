@@ -4,8 +4,6 @@ import { isAxiosError } from "axios";
 import { getErrorReason } from "interfaces/errors";
 import { LEARN_MORE_ABOUT_BASE_LINK } from "utilities/constants";
 
-import CustomLink from "components/CustomLink";
-
 import { generateSecretErrMsg } from "pages/SoftwarePage/helpers";
 
 const DEFAULT_ERROR_MESSAGE = "Couldn't add. Please try again.";
@@ -25,11 +23,7 @@ export const getErrorMessage = (err: unknown) => {
     return (
       <>
         Couldn&apos;t add. Unable to extract necessary metadata.{" "}
-        <CustomLink
-          url={`${LEARN_MORE_ABOUT_BASE_LINK}/package-metadata-extraction`}
-          text="Learn more"
-          newTab
-        />
+       
       </>
     );
   }

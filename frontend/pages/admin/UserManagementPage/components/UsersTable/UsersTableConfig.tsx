@@ -4,7 +4,6 @@ import ReactTooltip from "react-tooltip";
 import HeaderCell from "components/TableContainer/DataTable/HeaderCell/HeaderCell";
 import StatusIndicator from "components/StatusIndicator";
 import TextCell from "components/TableContainer/DataTable/TextCell/TextCell";
-import CustomLink from "components/CustomLink";
 import TooltipWrapper from "components/TooltipWrapper";
 import { IInvite } from "interfaces/invite";
 import { IUser, UserRole } from "interfaces/user";
@@ -106,12 +105,7 @@ const generateTableHeaders = (
                     <>
                       This user was created using mdmlabctl and
                       <br /> only has API access.{" "}
-                      <CustomLink
-                        text="Learn more"
-                        newTab
-                        url="https://mdmlabdm.com/docs/using-mdmlab/mdmlabctl-cli#using-mdmlabctl-with-an-api-only-user"
-                        iconColor="core-mdmlab-white"
-                      />
+                     
                     </>
                   </ReactTooltip>
                 </>

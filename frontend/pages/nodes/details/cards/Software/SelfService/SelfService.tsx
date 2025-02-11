@@ -12,7 +12,6 @@ import { DEFAULT_USE_QUERY_OPTIONS } from "utilities/constants";
 import { pluralize } from "utilities/strings/stringUtils";
 
 import Card from "components/Card";
-import CustomLink from "components/CustomLink";
 import DataError from "components/DataError";
 import EmptyTable from "components/EmptyTable";
 import Spinner from "components/Spinner";
@@ -98,8 +97,8 @@ const SoftwareSelfService = ({
         Install organization-approved apps provided by your IT department.{" "}
         {contactUrl && (
           <span>
-            If you need help,{" "}
-            <CustomLink url={contactUrl} text="reach out to IT" newTab />
+           
+           
           </span>
         )}
       </div>

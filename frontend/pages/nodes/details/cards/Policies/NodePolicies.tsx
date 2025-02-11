@@ -9,7 +9,6 @@ import { createNodesByPolicyPath } from "utilities/helpers";
 import TableContainer from "components/TableContainer";
 import EmptyTable from "components/EmptyTable";
 import Card from "components/Card";
-import CustomLink from "components/CustomLink";
 
 import {
   generatePolicyTableHeaders,
@@ -82,7 +81,7 @@ const Policies = ({
             <>
               Interested in detecting device health issues on{" "}
               {nodePlatform === "ios" ? "iPhones" : "iPads"}?{" "}
-              <CustomLink url={SUPPORT_LINK} text="Let us know" newTab />
+            
             </>
           }
         />

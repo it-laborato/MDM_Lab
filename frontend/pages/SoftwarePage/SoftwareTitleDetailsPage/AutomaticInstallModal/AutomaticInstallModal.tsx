@@ -4,7 +4,6 @@ import { ISoftwareInstallPolicy } from "interfaces/software";
 
 import Modal from "components/Modal";
 import Button from "components/buttons/Button";
-import CustomLink from "components/CustomLink";
 import { Link } from "react-router";
 
 const baseClass = "automatic-install-modal";
@@ -52,20 +51,12 @@ const AutomaticInstallModal = ({
     policies.length > 1 ? (
       <>
         Software will be installed when nodes fail any of these policies.{" "}
-        <CustomLink
-          newTab
-          text="Learn more"
-          url="https://mdmlabdm.com/learn-more-about/policy-automation-install-software"
-        />
+       
       </>
     ) : (
       <>
         Software will be installed when nodes fail this policy.{" "}
-        <CustomLink
-          newTab
-          text="Learn more"
-          url="https://mdmlabdm.com/learn-more-about/policy-automation-install-software"
-        />
+        
       </>
     );
 

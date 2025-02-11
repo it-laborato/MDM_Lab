@@ -4,7 +4,6 @@ import strUtils from "utilities/strings";
 
 import Modal from "components/Modal";
 import Button from "components/buttons/Button";
-import CustomLink from "components/CustomLink";
 import { LEARN_MORE_ABOUT_BASE_LINK } from "utilities/constants";
 
 const baseClass = "delete-node-modal";
@@ -68,15 +67,9 @@ const DeleteNodeModal = ({
         </p>
         <ul>
           <li>
-            macOS, Windows, or Linux nodes will re-appear unless Mdmlab&apos;s
+            Windows nodes will re-appear unless Mdmlab&apos;s
             agent is uninstalled.{" "}
-            <CustomLink
-              text="Uninstall Mdmlab's agent"
-              url={`${LEARN_MORE_ABOUT_BASE_LINK}/uninstall-mdmlabd`}
-              newTab
-            />
           </li>
-          <li>iOS and iPadOS nodes will re-appear unless MDM is turned off.</li>
         </ul>
         <div className="modal-cta-wrap">
           <Button

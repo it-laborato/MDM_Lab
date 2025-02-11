@@ -2,7 +2,6 @@ import React from "react";
 import ReactTooltip from "react-tooltip";
 import TextCell from "components/TableContainer/DataTable/TextCell/TextCell";
 import ActionsDropdown from "components/ActionsDropdown";
-import CustomLink from "components/CustomLink";
 import { IUser, UserRole } from "interfaces/user";
 import { ITeam } from "interfaces/team";
 import { IDropdownOption } from "interfaces/dropdownOption";
@@ -100,12 +99,7 @@ const generateColumnConfigs = (
                     <>
                       This user was created using mdmlabctl and
                       <br /> only has API access.{" "}
-                      <CustomLink
-                        text="Learn more"
-                        newTab
-                        url="https://mdmlabdm.com/docs/using-mdmlab/mdmlabctl-cli#using-mdmlabctl-with-an-api-only-user"
-                        iconColor="core-mdmlab-white"
-                      />
+                      
                     </>
                   </ReactTooltip>
                 </>

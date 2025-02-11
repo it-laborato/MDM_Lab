@@ -10,7 +10,6 @@ import validateYaml from "components/forms/validators/validate_yaml";
 import InfoBanner from "components/InfoBanner/InfoBanner";
 // @ts-ignore
 import YamlAce from "components/YamlAce";
-import CustomLink from "components/CustomLink";
 import SectionHeader from "components/SectionHeader";
 
 import { IAppConfigFormProps } from "../constants";
@@ -94,11 +93,7 @@ const Agents = ({
           ) : (
             <InfoBanner>
               Want some nodes to have different options?&nbsp;
-              <CustomLink
-                url="https://mdmlabdm.com/docs/using-mdmlab/teams"
-                text="Learn more about teams"
-                newTab
-              />
+             
             </InfoBanner>
           )}
           <YamlAce

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Modal from "components/Modal";
 import Button from "components/buttons/Button";
 import InfoBanner from "components/InfoBanner/InfoBanner";
-import CustomLink from "components/CustomLink/CustomLink";
 import Checkbox from "components/forms/fields/Checkbox/Checkbox";
 import QueryFrequencyIndicator from "components/QueryFrequencyIndicator/QueryFrequencyIndicator";
 import LogDestinationIndicator from "components/LogDestinationIndicator/LogDestinationIndicator";
@@ -161,19 +160,10 @@ const ManageQueryAutomationsModal = ({
           </div>
           <div className={`${baseClass}__configure form-field__help-text`}>
             Users with the admin role can&nbsp;
-            <CustomLink
-              url="https://mdmlabdm.com/docs/using-mdmlab/log-destinations"
-              text="configure a different log destination"
-              newTab
-            />
           </div>
         </div>
         <InfoBanner className={`${baseClass}__supported-platforms`}>
-          <p>Automations currently run on macOS, Windows, and Linux nodes.</p>
-          <p>
-            Interested in query automations for your Chromebooks? &nbsp;
-            <CustomLink url={CONTACT_MDMLAB_LINK} text="Let us know" newTab />
-          </p>
+          <p>Automations currently run on Windows nodes.</p>
         </InfoBanner>
         <Button
           type="button"

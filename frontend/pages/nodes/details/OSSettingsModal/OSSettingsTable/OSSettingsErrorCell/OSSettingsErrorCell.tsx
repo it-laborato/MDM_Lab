@@ -9,7 +9,7 @@ import { NotificationContext } from "context/notification";
 import TooltipTruncatedTextCell from "components/TableContainer/DataTable/TooltipTruncatedTextCell";
 import Button from "components/buttons/Button";
 import Icon from "components/Icon";
-import CustomLink from "components/CustomLink";
+
 
 import { INodeMdmProfileWithAddedStatus } from "../OSSettingsTableConfig";
 
@@ -100,12 +100,7 @@ const generateErrorTooltip = (
         <br />
         $mdmlab_VAR_HOST_END_USER_EMAIL_IDP.
         <br />
-        <CustomLink
-          text="Learn more"
-          url="https://mdmlabdm.com/learn-more-about/idp-email"
-          newTab
-          iconColor="core-mdmlab-white"
-        />
+        
       </>
     );
   }

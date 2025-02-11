@@ -18,7 +18,6 @@ import Checkbox from "components/forms/fields/Checkbox";
 import TooltipTruncatedText from "components/TooltipTruncatedText";
 import DataError from "components/DataError";
 import Spinner from "components/Spinner";
-import CustomLink from "components/CustomLink";
 import Button from "components/buttons/Button";
 import Modal from "components/Modal";
 import TooltipWrapper from "components/TooltipWrapper";
@@ -218,11 +217,7 @@ const PolicyRunScriptModal = ({
             policy. The script will not run on nodes with scripts disabled, or
             on nodes with too many pending scripts. Node counts will reset when
             new scripts are selected.{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/learn-more-about/policy-automation-run-script"
-              text="Learn more"
-              newTab
-            />
+            
           </span>
         </div>
         <div className="modal-cta-wrap">

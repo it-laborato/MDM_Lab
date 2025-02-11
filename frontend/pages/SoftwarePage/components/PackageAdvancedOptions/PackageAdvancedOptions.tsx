@@ -10,7 +10,6 @@ import {
   PackageType,
 } from "interfaces/package_type";
 
-import CustomLink from "components/CustomLink";
 import RevealButton from "components/buttons/RevealButton";
 
 import { IPackageFormData } from "../PackageForm/PackageForm";
@@ -34,11 +33,7 @@ const getInstallHelpText = (pkgType: PackageType) => (
   <>
     Use the $INSTALLER_PATH variable to point to the installer.{" "}
     {getSupportedScriptTypeText(pkgType)}{" "}
-    <CustomLink
-      url={`${LEARN_MORE_ABOUT_BASE_LINK}/install-scripts`}
-      text="Learn more about install scripts"
-      newTab
-    />
+    
   </>
 );
 
@@ -56,11 +51,7 @@ const getUninstallHelpText = (pkgType: PackageType) => {
       $PACKAGE_ID will be populated with the {PKG_TYPE_TO_ID_TEXT[pkgType]} from
       the .{pkgType} file after the software is added.{" "}
       {getSupportedScriptTypeText(pkgType)}{" "}
-      <CustomLink
-        url={`${LEARN_MORE_ABOUT_BASE_LINK}/uninstall-scripts`}
-        text="Learn more about uninstall scripts"
-        newTab
-      />
+     
     </>
   );
 };

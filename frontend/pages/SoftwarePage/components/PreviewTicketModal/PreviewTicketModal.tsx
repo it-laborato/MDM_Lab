@@ -4,7 +4,6 @@ import { AppContext } from "context/app";
 import { IIntegrationType } from "interfaces/integration";
 import Modal from "components/Modal";
 import Button from "components/buttons/Button";
-import CustomLink from "components/CustomLink";
 
 import JiraPreview from "../../../../../assets/images/jira-vuln-software-preview-400x517@2x.png";
 import ZendeskPreview from "../../../../../assets/images/zendesk-vuln-software-preview-400x455@2x.png";
@@ -49,11 +48,7 @@ const PreviewTicketModal = ({
       <>
         <p className="automations-learn-more">
           Want to learn more about how automations in Mdmlab work?{" "}
-          <CustomLink
-            url="https://mdmlabdm.com/docs/using-mdmlab/automations"
-            text="Check out the Mdmlab documentation"
-            newTab
-          />
+         
         </p>
         <div className={`${baseClass}__example`}>{screenshot}</div>
         <div className="modal-cta-wrap">

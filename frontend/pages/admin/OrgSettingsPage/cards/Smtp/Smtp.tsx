@@ -13,7 +13,6 @@ import InputField from "components/forms/fields/InputField";
 // @ts-ignore
 import validEmail from "components/forms/validators/valid_email";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 import SectionHeader from "components/SectionHeader";
 
 import {
@@ -223,12 +222,8 @@ const Smtp = ({
     const header = "Email already configured";
     const info = (
       <>
-        To configure SMTP,{" "}
-        <CustomLink
-          url={isPremiumTier ? CONTACT_MDMLAB_LINK : "https://mdmlabdm.com/slack"}
-          text="get help"
-          newTab
-        />
+       
+      
       </>
     );
     return <EmptyTable header={header} info={info} />;

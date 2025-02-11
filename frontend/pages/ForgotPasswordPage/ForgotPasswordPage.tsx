@@ -10,7 +10,6 @@ import ForgotPasswordForm from "components/forms/ForgotPasswordForm";
 import StackedWhiteBoxes from "components/StackedWhiteBoxes";
 import AuthenticationFormWrapper from "components/AuthenticationFormWrapper";
 import Spinner from "components/Spinner";
-import CustomLink from "components/CustomLink";
 
 interface IForgotPasswordPage {
   router: InjectedRouter;
@@ -57,12 +56,8 @@ const ForgotPasswordPage = ({ router }: IForgotPasswordPage) => {
             did not receive an email please contact your Mdmlab administrator.
             <br />
             <br />
-            You can find more information on resetting passwords at the{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/docs/using-mdmlab/mdmlabctl-cli?utm_medium=mdmlabui&utm_campaign=get-api-token#using-mdmlabctl-with-an-api-only-user"
-              text="Password reset FAQ"
-              newTab
-            />
+           
+            
           </p>
         </div>
       );

@@ -2,7 +2,6 @@ import React from "react";
 
 import Button from "components/buttons/Button";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 import PATHS from "router/paths";
 
 interface IEmptyUsersTableProps {
@@ -14,12 +13,7 @@ interface IEmptyUsersTableProps {
   toggleCreateMemberModal: () => void;
 }
 
-const infoLink = (
-  <>
-    <CustomLink url={PATHS.ADMIN_USERS} text="Global users" /> can still access
-    this team.
-  </>
-);
+
 
 const CreateUserButton = ({
   className,
@@ -76,7 +70,7 @@ const EmptyMembersTable = ({
     <EmptyTable
       graphicName="empty-users"
       header="No users on this team"
-      info={infoLink}
+      
       primaryButton={
         <CreateUserButton
           className={className}

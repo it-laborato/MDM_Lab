@@ -5,7 +5,6 @@ import { IApiError } from "interfaces/errors";
 import { NotificationContext } from "context/notification";
 import mdmAPI from "services/entities/mdm";
 
-import CustomLink from "components/CustomLink";
 import FileUploader from "components/FileUploader";
 
 import { UPLOAD_ERROR_MESSAGES, getErrorMessage } from "./helpers";
@@ -60,11 +59,7 @@ const BootstrapPackageUploader = ({
         Upload a bootstrap package to install a configuration management tool
         (ex. Munki, Chef, or Puppet) on nodes that automatically enroll to
         Mdmlab.{" "}
-        <CustomLink
-          url="https://mdmlabdm.com/docs/using-mdmlab/mdm-macos-setup-experience#bootstrap-package"
-          text="Learn more"
-          newTab
-        />
+        
       </p>
       <FileUploader
         message="Package (.pkg)"

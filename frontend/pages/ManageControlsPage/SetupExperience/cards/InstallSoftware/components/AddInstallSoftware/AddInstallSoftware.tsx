@@ -5,7 +5,6 @@ import PATHS from "router/paths";
 import { LEARN_MORE_ABOUT_BASE_LINK } from "utilities/constants";
 
 import Button from "components/buttons/Button";
-import CustomLink from "components/CustomLink";
 import { ISoftwareTitle } from "interfaces/software";
 import LinkWithContext from "components/LinkWithContext";
 import TooltipWrapper from "components/TooltipWrapper";
@@ -86,11 +85,7 @@ const AddInstallSoftware = ({
         <p className={`${baseClass}__description`}>
           Install software on nodes that automatically enroll to Mdmlab.
         </p>
-        <CustomLink
-          newTab
-          url={`${LEARN_MORE_ABOUT_BASE_LINK}/setup-assistant`}
-          text="Learn how"
-        />
+       
       </div>
       <span className={`${baseClass}__added-text`}>{addedText}</span>
       <div>

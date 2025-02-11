@@ -4,7 +4,7 @@ import InfoBanner from "components/InfoBanner";
 import Button from "components/buttons/Button";
 import { MacDiskEncryptionActionRequired } from "interfaces/node";
 import { INodeBannersBaseProps } from "pages/nodes/details/NodeDetailsPage/components/NodeDetailsBanners/NodeDetailsBanners";
-import CustomLink from "components/CustomLink";
+
 import { isDiskEncryptionSupportedLinuxPlatform } from "interfaces/platform";
 
 const baseClass = "device-user-banners";
@@ -85,14 +85,7 @@ const DeviceUserBanners = ({
         // banner 1
         return (
           <InfoBanner
-            cta={
-              <CustomLink
-                url="https://mdmlabdm.com/learn-more-about/encrypt-linux-device"
-                text="Guide"
-                color="core-mdmlab-black"
-                iconColor="core-mdmlab-black"
-              />
-            }
+            
             color="yellow"
           >
             Disk encryption: Follow the instructions in the guide to encrypt

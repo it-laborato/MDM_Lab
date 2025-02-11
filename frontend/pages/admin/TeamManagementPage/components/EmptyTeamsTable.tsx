@@ -2,7 +2,6 @@ import React from "react";
 
 import Button from "components/buttons/Button";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 
 const EmptyTeamsTable = ({
   className,

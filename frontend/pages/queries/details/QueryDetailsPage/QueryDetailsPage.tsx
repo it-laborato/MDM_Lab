@@ -33,7 +33,6 @@ import TooltipWrapper from "components/TooltipWrapper/TooltipWrapper";
 import QueryAutomationsStatusIndicator from "pages/queries/ManageQueriesPage/components/QueryAutomationsStatusIndicator/QueryAutomationsStatusIndicator";
 import DataError from "components/DataError/DataError";
 import LogDestinationIndicator from "components/LogDestinationIndicator/LogDestinationIndicator";
-import CustomLink from "components/CustomLink";
 import InfoBanner from "components/InfoBanner";
 import ShowQueryModal from "components/modals/ShowQueryModal";
 import QueryReport from "../components/QueryReport/QueryReport";
@@ -367,7 +366,6 @@ const QueryDetailsPage = ({
   const renderClippedBanner = () => (
     <InfoBanner
       color="yellow"
-      cta={<CustomLink url={SUPPORT_LINK} text="Get help" newTab />}
     >
       <div>
         <b>Report clipped.</b> A sample of this query&apos;s results is included

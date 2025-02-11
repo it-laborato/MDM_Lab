@@ -1,7 +1,6 @@
 import React from "react";
 
 import InfoBanner from "components/InfoBanner";
-import CustomLink from "components/CustomLink";
 
 const baseClass = "apple-pn-cert-renewal-message";
 
@@ -14,16 +13,7 @@ const ApplePNCertRenewalMessage = ({ expired }: IApplePNCertRenewalMessage) => {
     <InfoBanner
       className={baseClass}
       color="yellow"
-      cta={
-        <CustomLink
-          url="https://mdmlabdm.com/learn-more-about/renew-apns"
-          text="Renew APNs"
-          className={`${baseClass}__new-tab`}
-          newTab
-          color="core-mdmlab-black"
-          iconColor="core-mdmlab-black"
-        />
-      }
+     
     >
       {expired ? (
         <>

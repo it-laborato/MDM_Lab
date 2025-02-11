@@ -1,7 +1,6 @@
 import classnames from "classnames";
 import React from "react";
 
-import CustomLink from "components/CustomLink";
 
 interface ISandboxMessageProps {
   variant?: "demo" | "sales";
@@ -21,29 +20,13 @@ const SandboxMessage = ({
   className,
 }: ISandboxMessageProps): JSX.Element => {
   const classes = classnames(baseClass, className);
-  const variants = {
-    demo: (
-      <CustomLink
-        url={`https://calendly.com/mdmlabdm/demo?utm_source=${utmSource}`}
-        text="Schedule a demo"
-        newTab
-      />
-    ),
-    sales: (
-      <CustomLink
-        url={`https://mdmlabdm.com/upgrade`}
-        text="Contact sales"
-        newTab
-      />
-    ),
-  };
+ 
+
 
   return (
     <div className={classes}>
       <h2 className={`${baseClass}__message`}>{message}</h2>
-      <p className={`${baseClass}__link-message`}>
-        Want to learn more? {variants[variant]}
-      </p>
+      
     </div>
   );
 };

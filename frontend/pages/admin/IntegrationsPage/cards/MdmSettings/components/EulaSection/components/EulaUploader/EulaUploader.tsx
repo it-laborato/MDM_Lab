@@ -6,7 +6,6 @@ import mdmAPI from "services/entities/mdm";
 import { NotificationContext } from "context/notification";
 
 import FileUploader from "components/FileUploader/FileUploader";
-import CustomLink from "components/CustomLink";
 
 import { UPLOAD_ERROR_MESSAGES, getErrorMessage } from "./helpers";
 
@@ -55,11 +54,7 @@ const EulaUploader = ({ onUpload }: IEulaUploaderProps) => {
       <p>
         Require end users to agree to a EULA when they first setup their new
         macOS nodes.{" "}
-        <CustomLink
-          url="https://mdmlabdm.com/learn-more-about/end-user-license-agreement"
-          text="Learn more"
-          newTab
-        />
+       
       </p>
       <FileUploader
         graphicName="file-pdf"

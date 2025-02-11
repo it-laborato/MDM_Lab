@@ -1,5 +1,4 @@
 import React from "react";
-import CustomLink from "components/CustomLink";
 import EmptyTable from "components/EmptyTable";
 import { IEmptyTableProps } from "interfaces/empty_table";
 import { IVulnerabilitiesEmptyStateReason } from "services/entities/vulnerabilities";
@@ -12,13 +11,6 @@ export interface IEmptyVulnerabilitiesTableProps {
   emptyStateReason?: IVulnerabilitiesEmptyStateReason;
 }
 
-const LearnMoreLink = () => (
-  <CustomLink
-    url="https://mdmlabdm.com/learn-more-about/vulnerability-processing"
-    text="Learn more"
-    newTab
-  />
-);
 
 const emptyStateDetails: Record<
   IVulnerabilitiesEmptyStateReason,
@@ -44,13 +36,13 @@ const emptyStateDetails: Record<
     graphicName: "empty-search-question",
     header: "This is not a known CVE",
     info: "None of Mdmlab's vulnerability sources are aware of this CVE.",
-    additionalInfo: <LearnMoreLink />,
+    
   },
   "known-vuln": {
     graphicName: "empty-search-check",
     header:
       "This is a known vulnerability (CVE), but it wasn't detected on any nodes",
-    additionalInfo: <LearnMoreLink />,
+   
   },
 };
 
@@ -68,13 +60,7 @@ const EmptyVulnerabilitiesTable: React.FC<IEmptyVulnerabilitiesTableProps> = ({
         header="Software inventory disabled"
         info={
           <>
-            Users with the admin role can{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/docs/using-mdmlab/vulnerability-processing#configuration"
-              text="turn on software inventory"
-              newTab
-            />
-            .
+            Users with the admin role can{" "}.
           </>
         }
       />

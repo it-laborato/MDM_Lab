@@ -7,7 +7,7 @@ import { syntaxHighlight } from "utilities/helpers";
 import validURL from "components/forms/validators/valid_url";
 import Button from "components/buttons/Button";
 import RevealButton from "components/buttons/RevealButton";
-import CustomLink from "components/CustomLink";
+
 import Slider from "components/forms/fields/Slider";
 // @ts-ignore
 import InputField from "components/forms/fields/InputField";
@@ -225,12 +225,7 @@ const CalendarEventsModal = ({
         <span className="form-field__help-text">
           A calendar event will be created for end users if one of their nodes
           fail any of these policies.{" "}
-          <CustomLink
-            url="https://www.mdmlabdm.com/learn-more-about/calendar-events"
-            text="Learn more"
-            newTab
-            disableKeyboardNavigation={!formData.enabled}
-          />
+         
         </span>
       </div>
     );
@@ -250,11 +245,7 @@ const CalendarEventsModal = ({
           This can be configured in <b>Settings</b> &gt; <b>Integrations</b>{" "}
           &gt; <b>Calendars.</b>
         </div>
-        <CustomLink
-          url="https://www.mdmlabdm.com/learn-more-about/calendar-events"
-          text="Learn more"
-          newTab
-        />
+      
         <div className="modal-cta-wrap">
           <Button onClick={onExit} variant="brand">
             Done

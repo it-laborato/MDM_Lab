@@ -6,7 +6,6 @@ import mdmAbmAPI from "services/entities/mdm_apple_bm";
 import Modal from "components/Modal";
 import Button from "components/buttons/Button";
 import FileUploader from "components/FileUploader";
-import CustomLink from "components/CustomLink";
 import DownloadABMKey from "pages/admin/components/DownloadFileButtons/DownloadABMKey";
 import { getErrorMessage } from "./helpers";
 
@@ -68,17 +67,7 @@ const AddAbmModal = ({ onCancel, onAdded }: IAddAbmModalProps) => {
           <li>
             <span>2.</span>
             <span>
-              <span>
-                Sign in to{" "}
-                <CustomLink
-                  newTab
-                  text="Apple Business Manager"
-                  url="https://business.apple.com"
-                />
-                <br />
-                If your organization doesn&apos;t have an account, select{" "}
-                <b>Enroll now</b>.
-              </span>
+           
             </span>
           </li>
           <li>

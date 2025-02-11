@@ -5,7 +5,6 @@ import { IApiError } from "interfaces/errors";
 import { NotificationContext } from "context/notification";
 import mdmAPI from "services/entities/mdm";
 
-import CustomLink from "components/CustomLink";
 import FileUploader from "components/FileUploader";
 
 import { getErrorMessage } from "./helpers";
@@ -46,14 +45,7 @@ const SetupAssistantProfileUploader = ({
         errComponent = (
           <>
             {errMessage}.{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/learn-more-about/dep-profile"
-              text="Learn more"
-              className={`${baseClass}__new-tab`}
-              newTab
-              color="core-mdmlab-black"
-              iconColor="core-mdmlab-white"
-            />
+           
           </>
         );
       }

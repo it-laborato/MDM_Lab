@@ -10,7 +10,6 @@ import Button from "components/buttons/Button/Button";
 // @ts-ignore
 import StackedWhiteBoxes from "components/StackedWhiteBoxes";
 import AuthenticationFormWrapper from "components/AuthenticationFormWrapper";
-import CustomLink from "components/CustomLink/CustomLink";
 
 const baseClass = "no-access-page";
 
@@ -49,10 +48,7 @@ const NoAccessPage = ({ router, orgContactUrl }: INoAccessPageProps) => {
         <>
           <p>
             To get access,{" "}
-            <CustomLink
-              url={orgContactUrl || CONTACT_MDMLAB_LINK}
-              text="contact your administrator"
-            />
+           
             .
           </p>
           <Button

@@ -4,7 +4,6 @@ import { IQueryStats } from "interfaces/query_stats";
 import { SUPPORT_LINK } from "utilities/constants";
 import TableContainer from "components/TableContainer";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 import Card from "components/Card";
 import PATHS from "router/paths";
 import { InjectedRouter } from "react-router";
@@ -48,11 +47,7 @@ const NodeQueries = ({
           info={
             <>
               <span>Interested in collecting data from your Chromebooks? </span>
-              <CustomLink
-                url="https://www.mdmlabdm.com/contact"
-                text="Let us know"
-                newTab
-              />
+              
             </>
           }
         />
@@ -67,7 +62,6 @@ const NodeQueries = ({
             <>
               Interested in querying{" "}
               {nodePlatform === "ios" ? "iPhones" : "iPads"}?{" "}
-              <CustomLink url={SUPPORT_LINK} text="Let us know" newTab />
             </>
           }
         />

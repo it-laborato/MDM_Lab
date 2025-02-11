@@ -5,7 +5,6 @@ import TableContainer from "components/TableContainer";
 import { ITableQueryData } from "components/TableContainer/TableContainer";
 import TableCount from "components/TableContainer/TableCount";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 import Card from "components/Card";
 
 import generateUsersTableHeaders from "./UsersTable/UsersTableConfig";
@@ -46,12 +45,7 @@ const Users = ({
           header="User collection has been disabled"
           info={
             <>
-              Check out the Mdmlab documentation for{" "}
-              <CustomLink
-                url="https://mdmlabdm.com/learn-more-about/enable-user-collection"
-                text="steps to enable this feature"
-                newTab
-              />
+              Check out the Mdmlab documentation 
             </>
           }
         />

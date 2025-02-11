@@ -2,7 +2,6 @@ import React from "react";
 
 import Button from "components/buttons/Button";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 
 const EmptyIntegrationsTable = ({
   className,
@@ -19,11 +18,7 @@ const EmptyIntegrationsTable = ({
       additionalInfo={
         <>
           Want to learn more?&nbsp;
-          <CustomLink
-            url="https://mdmlabdm.com/docs/using-mdmlab/automations"
-            text="Read about automations"
-            newTab
-          />
+         
         </>
       }
       primaryButton={

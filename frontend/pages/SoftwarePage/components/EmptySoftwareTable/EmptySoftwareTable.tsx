@@ -1,5 +1,4 @@
 import React from "react";
-import CustomLink from "components/CustomLink";
 import EmptyTable from "components/EmptyTable";
 import { IEmptyTableProps } from "interfaces/empty_table";
 import {
@@ -58,13 +57,7 @@ const EmptySoftwareTable = ({
         header: "Software inventory disabled",
         info: (
           <>
-            Users with the admin role can{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/docs/using-mdmlab/vulnerability-processing#configuration"
-              text="turn on software inventory"
-              newTab
-            />
-            .
+            Users with the admin role can{" "}.
           </>
         ),
       };

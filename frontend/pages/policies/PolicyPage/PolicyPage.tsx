@@ -31,7 +31,6 @@ import SelectTargets from "components/LiveQuery/SelectTargets";
 import MainContent from "components/MainContent";
 import SidePanelContent from "components/SidePanelContent";
 import Spinner from "components/Spinner/Spinner";
-import CustomLink from "components/CustomLink";
 import RunQuery from "pages/policies/PolicyPage/screens/RunQuery";
 import { DEFAULT_POLICY } from "pages/policies/constants";
 
@@ -275,11 +274,7 @@ const PolicyPage = ({
           <p>
             Mdmlab is unable to run a live query. Refresh the page or log in
             again. If this keeps happening please{" "}
-            <CustomLink
-              url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
-              text="file an issue"
-              newTab
-            />
+           
           </p>
         </div>
       </div>

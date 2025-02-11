@@ -1,4 +1,4 @@
-import CustomLink from "components/CustomLink";
+
 import Icon from "components/Icon";
 import { uniqueId } from "lodash";
 import React from "react";
@@ -44,13 +44,7 @@ const PremiumFeatureIconWithTooltip = ({
         }}
       >
         {`This is a Mdmlab Premium feature. `}
-        <CustomLink
-          url="https://mdmlabdm.com/upgrade"
-          text="Learn more"
-          newTab
-          multiline={false}
-          iconColor="core-mdmlab-white"
-        />
+       
       </ReactTooltip>
     </span>
   );

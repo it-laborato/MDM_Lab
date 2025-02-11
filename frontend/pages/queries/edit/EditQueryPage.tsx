@@ -25,7 +25,6 @@ import { getErrorReason } from "interfaces/errors";
 import QuerySidePanel from "components/side_panels/QuerySidePanel";
 import MainContent from "components/MainContent";
 import SidePanelContent from "components/SidePanelContent";
-import CustomLink from "components/CustomLink";
 import BackLink from "components/BackLink";
 import InfoBanner from "components/InfoBanner";
 
@@ -354,12 +353,6 @@ const EditQueryPage = ({
     return (
       <InfoBanner color="yellow">
         Mdmlab is unable to run a live query. Refresh the page or log in again.
-        If this keeps happening please{" "}
-        <CustomLink
-          url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
-          text="file an issue"
-          newTab
-        />
       </InfoBanner>
     );
   };

@@ -23,7 +23,6 @@ import ShowQueryModal from "components/modals/ShowQueryModal";
 import QueryResultsHeading from "components/queries/queryResults/QueryResultsHeading";
 import AwaitingResults from "components/queries/queryResults/AwaitingResults";
 import InfoBanner from "components/InfoBanner";
-import CustomLink from "components/CustomLink";
 
 import generateColumnConfigsFromRows from "./QueryResultsTableConfig";
 
@@ -274,7 +273,6 @@ const QueryResults = ({
       {isQueryClipped && (
         <InfoBanner
           color="yellow"
-          cta={<CustomLink url={SUPPORT_LINK} text="Get help" newTab />}
         >
           <div>
             <b>Results clipped.</b> A sample of this query&apos;s results and

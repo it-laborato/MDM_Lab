@@ -1,7 +1,6 @@
 import React from "react";
 import classnames from "classnames";
 
-import CustomLink from "components/CustomLink";
 import Icon from "components/Icon";
 import Graphic from "components/Graphic";
 
@@ -44,11 +43,7 @@ const DataError = ({
               {!excludeIssueLink && (
                 <div className={`${baseClass}__data`}>
                   If this keeps happening please&nbsp;
-                  <CustomLink
-                    url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
-                    text="file an issue"
-                    newTab
-                  />
+                 
                 </div>
               )}
             </>
@@ -74,11 +69,7 @@ const DataError = ({
                 {!excludeIssueLink && (
                   <span className="info__data">
                     If this keeps happening, please&nbsp;
-                    <CustomLink
-                      url="https://github.com/mdmlabdm/mdmlab/issues/new/choose"
-                      text="file an issue"
-                      newTab
-                    />
+                  
                   </span>
                 )}
               </>

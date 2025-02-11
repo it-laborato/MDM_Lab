@@ -6,7 +6,6 @@ import InputField from "components/forms/fields/InputField";
 import validUrl from "components/forms/validators/valid_url";
 import SectionHeader from "components/SectionHeader";
 
-import CustomLink from "components/CustomLink";
 import {
   DEFAULT_TRANSPARENCY_URL,
   IAppConfigFormProps,
@@ -73,14 +72,7 @@ const MdmlabDesktop = ({
         <form onSubmit={onFormSubmit} autoComplete="off">
           <p className={`${baseClass}__section-description`}>
             When an end user clicks “About Mdmlab” in the Mdmlab Desktop menu, by
-            default they are taken to{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/transparency"
-              text="https://mdmlabdm.com/transparency"
-              newTab
-              multiline
-            />{" "}
-            . You can override the URL to take them to a resource of your
+            default they are taken to{" "}. You can override the URL to take them to a resource of your
             choice.
           </p>
           <InputField

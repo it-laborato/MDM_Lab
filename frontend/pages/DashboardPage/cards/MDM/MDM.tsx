@@ -9,7 +9,6 @@ import TableContainer from "components/TableContainer";
 import Spinner from "components/Spinner";
 import TableDataError from "components/DataError";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 
 import {
   generateSolutionsTableHeaders,
@@ -52,11 +51,7 @@ const EmptyMdmStatus = (): JSX.Element => (
     info={
       <>
         To see MDM versions, deploy&nbsp;
-        <CustomLink
-          url="https://mdmlabdm.com/learn-more-about/mdmlabd"
-          newTab
-          text="Mdmlab's agent (mdmlabd)"
-        />
+       
       </>
     }
   />

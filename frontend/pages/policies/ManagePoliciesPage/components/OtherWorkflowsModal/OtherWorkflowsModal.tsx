@@ -25,7 +25,6 @@ import InputField from "components/forms/fields/InputField";
 import Radio from "components/forms/fields/Radio";
 import validUrl from "components/forms/validators/valid_url";
 import RevealButton from "components/buttons/RevealButton";
-import CustomLink from "components/CustomLink";
 import TooltipTruncatedText from "components/TooltipTruncatedText";
 import ExampleTicket from "../ExampleTicket";
 import ExamplePayload from "../ExamplePayload";
@@ -450,12 +449,7 @@ const OtherWorkflowsModal = ({
           </div>
           <p className={`${baseClass}__help-text`}>
             The workflow will be triggered when nodes fail these policies.{" "}
-            <CustomLink
-              url="https://www.mdmlabdm.com/learn-more-about/policy-automations"
-              text="Learn more"
-              newTab
-              disableKeyboardNavigation={!isPolicyAutomationsEnabled}
-            />
+            
           </p>
         </div>
         <div className="modal-cta-wrap">

@@ -27,7 +27,6 @@ import InputField from "components/forms/fields/InputField";
 import Checkbox from "components/forms/fields/Checkbox";
 import Radio from "components/forms/fields/Radio";
 import InfoBanner from "components/InfoBanner/InfoBanner";
-import CustomLink from "components/CustomLink";
 import TooltipWrapper from "components/TooltipWrapper";
 import SelectedTeamsForm from "../SelectedTeamsForm/SelectedTeamsForm";
 import SelectRoleForm from "../SelectRoleForm/SelectRoleForm";
@@ -335,11 +334,6 @@ const UserForm = ({
               Global users can manage or observe all users, entities, and
               settings in Mdmlab.
             </p>
-            <CustomLink
-              url="https://mdmlabdm.com/docs/using-mdmlab/permissions#user-permissions"
-              text="Learn more about user permissions"
-              newTab
-            />
           </InfoBanner>
         )}
         <DropdownWrapper
@@ -392,11 +386,6 @@ const UserForm = ({
                   Users can manage or observe team-specific users, entities, and
                   settings in Mdmlab.
                 </p>
-                <CustomLink
-                  url="https://mdmlabdm.com/docs/using-mdmlab/permissions#team-member-permissions"
-                  text="Learn more about user permissions"
-                  newTab
-                />
               </InfoBanner>
               <SelectedTeamsForm
                 availableTeams={availableTeams}

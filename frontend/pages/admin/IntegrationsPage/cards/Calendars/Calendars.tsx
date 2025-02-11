@@ -13,7 +13,6 @@ import paths from "router/paths";
 import InputField from "components/forms/fields/InputField";
 import Button from "components/buttons/Button";
 import SectionHeader from "components/SectionHeader";
-import CustomLink from "components/CustomLink";
 import Spinner from "components/Spinner";
 import DataError from "components/DataError";
 import PremiumFeatureMessage from "components/PremiumFeatureMessage/PremiumFeatureMessage";
@@ -219,11 +218,7 @@ const Calendars = (): JSX.Element => {
         <div className={`${baseClass}__section-instructions`}>
           <p>
             1. Go to the <b>Service Accounts</b> page in Google Cloud Platform.{" "}
-            <CustomLink
-              text="View page"
-              url={CREATING_SERVICE_ACCOUNT}
-              newTab
-            />
+            
           </p>
           <p>
             2. Create a new project for your service account.
@@ -323,11 +318,7 @@ const Calendars = (): JSX.Element => {
                       helpText={
                         <>
                           You can find your primary domain in Google Workspace{" "}
-                          <CustomLink
-                            url={GOOGLE_WORKSPACE_DOMAINS}
-                            text="here"
-                            newTab
-                          />
+                         
                         </>
                       }
                       error={formErrors.domain}
@@ -356,11 +347,7 @@ const Calendars = (): JSX.Element => {
                   Manage Domain Wide Delegation
                 </b>
                 .{" "}
-                <CustomLink
-                  url={DOMAIN_WIDE_DELEGATION}
-                  text="View page"
-                  newTab
-                />
+                
               </li>
               <li>
                 Under <b>API clients</b>, click <b>Add new</b>.
@@ -394,11 +381,7 @@ const Calendars = (): JSX.Element => {
               <li>
                 In the Google Cloud console API library, go to the Google
                 Calendar API.{" "}
-                <CustomLink
-                  url={ENABLING_CALENDAR_API}
-                  text="View page"
-                  newTab
-                />
+               
               </li>
               <li>
                 Make sure the &quot;Mdmlab calendar events&quot; project is
@@ -411,10 +394,7 @@ const Calendars = (): JSX.Element => {
           </p>
           <p>
             Now head over to{" "}
-            <CustomLink
-              url={paths.MANAGE_POLICIES}
-              text="Policies &gt; Manage automations"
-            />{" "}
+           
             to finish setup.
           </p>
         </div>

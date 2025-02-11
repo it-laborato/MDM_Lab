@@ -11,7 +11,6 @@ import Button from "components/buttons/Button";
 import RevealButton from "components/buttons/RevealButton";
 
 import { syntaxHighlight } from "utilities/helpers";
-import CustomLink from "components/CustomLink";
 
 const baseClass = "activity-feed-automations-modal";
 
@@ -119,11 +118,7 @@ const ActivityFeedAutomationsModal = ({
           To see the data included in each activity, check out the documentation
           for{" "}
           {
-            <CustomLink
-              url="https://mdmlabdm.com/learn-more-about/audit-logs"
-              text="audit logs"
-              newTab
-            />
+            
           }
         </div>
       </>

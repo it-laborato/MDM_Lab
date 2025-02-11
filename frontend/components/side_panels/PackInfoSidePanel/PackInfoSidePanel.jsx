@@ -1,6 +1,5 @@
 import React from "react";
 
-import CustomLink from "components/CustomLink";
 
 import DifferentialIcon from "../../../../assets/images/icon-plus-minus-black-16x16@2x.png";
 import SnapshotIcon from "../../../../assets/images/icon-snapshot-black-16x14@2x.png";
@@ -56,11 +55,7 @@ const PackInfoSidePanel = () => {
       </ul>
       <p>
         Learn more about log aggregation in the{" "}
-        <CustomLink
-          url="https://osquery.readthedocs.io/en/stable/deployment/log-aggregation/"
-          text="documentation"
-          newTab
-        />
+       
       </p>
     </div>
   );

@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "components/Modal";
 import Button from "components/buttons/Button";
 import { ITeam } from "interfaces/team";
-import CustomLink from "components/CustomLink";
 
 interface IDeleteSecretModal {
   selectedTeam: number;
@@ -43,11 +42,7 @@ const DeleteSecretModal = ({
         <div className={`${baseClass}__description`}>
           <p>Nodes can no longer enroll using this secret.</p>
           <p>
-            <CustomLink
-              url="https://mdmlabdm.com/learn-more-about/rotating-enroll-secrets"
-              text="Learn about rotating enroll secrets"
-              newTab
-            />
+           
           </p>
         </div>
         <div className="modal-cta-wrap">

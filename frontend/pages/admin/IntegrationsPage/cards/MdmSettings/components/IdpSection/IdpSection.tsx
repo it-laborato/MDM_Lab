@@ -4,7 +4,6 @@ import configAPI from "services/entities/config";
 
 // @ts-ignore
 import InputField from "components/forms/fields/InputField";
-import CustomLink from "components/CustomLink/CustomLink";
 import Button from "components/buttons/Button/Button";
 import SectionHeader from "components/SectionHeader";
 import { NotificationContext } from "context/notification";
@@ -101,11 +100,7 @@ const IdpSection = () => {
         <p>
           Connect Mdmlab to your identity provider to require end users to
           authenticate when they first setup their new macOS nodes.{" "}
-          <CustomLink
-            url="https://mdmlabdm.com/learn-more-about/end-user-authentication"
-            text="Learn more"
-            newTab
-          />
+          
         </p>
         <InputField
           label="Identity provider name"

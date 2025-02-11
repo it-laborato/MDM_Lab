@@ -17,7 +17,6 @@ import osqueryOptionsAPI from "services/entities/osquery_options";
 import validateYaml from "components/forms/validators/validate_yaml";
 import Button from "components/buttons/Button";
 import Spinner from "components/Spinner";
-import CustomLink from "components/CustomLink";
 // @ts-ignore
 import YamlAce from "components/YamlAce";
 import { ITeamSubnavProps } from "interfaces/team_subnav";
@@ -146,12 +145,6 @@ const AgentOptionsPage = ({
         agent options, they will be applied the next time a node checks in to
         Mdmlab.
         <br />
-        <CustomLink
-          url="https://mdmlabdm.com/learn-more-about/agent-options"
-          text="Learn more about agent options"
-          newTab
-          multiline
-        />
       </p>
       {isFetchingTeamOptions ? (
         <Spinner />

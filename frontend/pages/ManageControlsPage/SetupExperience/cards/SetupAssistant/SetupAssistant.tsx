@@ -13,7 +13,6 @@ import { DEFAULT_USE_QUERY_OPTIONS } from "utilities/constants";
 
 import SectionHeader from "components/SectionHeader";
 import Spinner from "components/Spinner";
-import CustomLink from "components/CustomLink";
 
 import SetupAssistantPreview from "./components/SetupAssistantPreview";
 import SetupAssistantProfileUploader from "./components/SetupAssistantProfileUploader";
@@ -100,11 +99,7 @@ const SetupAssistant = ({ currentTeamId }: ISetupAssistantProps) => {
             <p className={`${baseClass}__section-description`}>
               Add an automatic enrollment profile to customize the macOS Setup
               Assistant.{" "}
-              <CustomLink
-                url="https://mdmlabdm.com/learn-more-about/setup-assistant"
-                text="Learn how"
-                newTab
-              />
+              
             </p>
             {enrollmentProfileNotFound || !enrollmentProfileData ? (
               <SetupAssistantProfileUploader

@@ -6,7 +6,6 @@ import mdmAppleApi from "services/entities/mdm_apple";
 import { getErrorReason } from "interfaces/errors";
 
 import Button from "components/buttons/Button";
-import CustomLink from "components/CustomLink";
 import { FileUploader } from "components/FileUploader/FileUploader";
 import Modal from "components/Modal";
 import DownloadCSR from "../../../../../../../components/DownloadFileButtons/DownloadCSR";
@@ -86,12 +85,8 @@ const RenewCertModal = ({
           </li>
           <li>
             <p>
-              2. Sign in to{" "}
-              <CustomLink
-                url="https://identity.apple.com/pushcert/"
-                text="Apple Push Certificates Portal"
-                newTab
-              />
+             
+             
             </p>
           </li>
           <li>

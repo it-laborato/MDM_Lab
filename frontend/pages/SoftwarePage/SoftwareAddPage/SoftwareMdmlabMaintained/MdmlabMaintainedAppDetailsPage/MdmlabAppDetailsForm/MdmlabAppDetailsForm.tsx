@@ -10,7 +10,6 @@ import Button from "components/buttons/Button";
 import Radio from "components/forms/fields/Radio";
 import TargetLabelSelector from "components/TargetLabelSelector";
 import InfoBanner from "components/InfoBanner";
-import CustomLink from "components/CustomLink";
 import { LEARN_MORE_ABOUT_BASE_LINK } from "utilities/constants";
 
 import AdvancedOptionsFields from "pages/SoftwarePage/components/AdvancedOptionsFields";
@@ -126,13 +125,7 @@ export const InstallTypeSection = ({
       {installType === "automatic" && isCustomPackage && (
         <InfoBanner
           color="yellow"
-          cta={
-            <CustomLink
-              url={`${LEARN_MORE_ABOUT_BASE_LINK}/query-templates-for-automatic-software-install`}
-              text="Learn more"
-              newTab
-            />
-          }
+          
         >
           Installing software over existing installations might cause issues.
           Mdmlab&apos;s policy may not detect these existing installations.

@@ -22,7 +22,6 @@ import DataError from "components/DataError";
 import Spinner from "components/Spinner";
 import Checkbox from "components/forms/fields/Checkbox";
 import TooltipTruncatedText from "components/TooltipTruncatedText";
-import CustomLink from "components/CustomLink";
 import Button from "components/buttons/Button";
 import {
   INSTALLABLE_SOURCE_PLATFORM_CONVERSION,
@@ -317,11 +316,7 @@ const InstallSoftwareModal = ({
             If compatible with the node, the selected software will be installed
             when nodes fail the policy. Node counts will reset when new software
             is selected.{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/learn-more-about/policy-automation-install-software"
-              text="Learn more"
-              newTab
-            />
+            
           </span>
         </div>
         <div className="modal-cta-wrap">

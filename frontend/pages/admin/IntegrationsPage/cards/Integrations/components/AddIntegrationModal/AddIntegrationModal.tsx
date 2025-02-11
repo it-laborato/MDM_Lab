@@ -4,7 +4,7 @@ import Modal from "components/Modal";
 import { SingleValue } from "react-select-5";
 import DropdownWrapper from "components/forms/fields/DropdownWrapper";
 import { CustomOptionType } from "components/forms/fields/DropdownWrapper/DropdownWrapper";
-import CustomLink from "components/CustomLink";
+
 import { IIntegration, IZendeskJiraIntegrations } from "interfaces/integration";
 import IntegrationForm from "../IntegrationForm";
 
@@ -63,11 +63,7 @@ const AddIntegrationModal = ({
               className={`${baseClass}__destination-dropdown`}
               wrapperClassname={`${baseClass}__form-field ${baseClass}__form-field--platform`}
             />
-            <CustomLink
-              url="https://github.com/mdmlabdm/mdmlab/issues/new?assignees=&labels=idea&template=feature-request.md&title="
-              text="Suggest a new destination"
-              newTab
-            />
+            
           </>
         )}
         <IntegrationForm

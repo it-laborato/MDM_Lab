@@ -1,6 +1,5 @@
 import React from "react";
 
-import CustomLink from "components/CustomLink";
 
 import { OSUpdatesSupportedPlatform } from "../../OSUpdates";
 
@@ -28,11 +27,7 @@ const OSRequirementDescription = ({
             after 5pm (end user&apos;s local time). After the deadline, restarts
             are forced regardless of active hours.
           </p>
-          <CustomLink
-            text="Learn more about Windows updates in Mdmlab"
-            url="https://mdmlabdm.com/learn-more-about/os-updates"
-            newTab
-          />
+          
         </>
       );
     default:

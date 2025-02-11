@@ -1,7 +1,6 @@
 import React from "react";
 
 import InfoBanner from "components/InfoBanner";
-import CustomLink from "components/CustomLink";
 
 const baseClass = "license-expiry-banner";
 
@@ -10,15 +9,7 @@ const LicenseExpirationBanner = (): JSX.Element => {
     <InfoBanner
       className={baseClass}
       color="yellow"
-      cta={
-        <CustomLink
-          url="https://mdmlabdm.com/learn-more-about/downgrading"
-          text="Downgrade or renew"
-          newTab
-          iconColor="core-mdmlab-black"
-          color="core-mdmlab-black"
-        />
-      }
+      
     >
       Your Mdmlab Premium license is about to expire.
     </InfoBanner>

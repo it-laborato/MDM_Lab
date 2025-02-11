@@ -4,7 +4,6 @@ import { NotificationContext } from "context/notification";
 import { getErrorReason } from "interfaces/errors";
 import mdmAppleApi from "services/entities/mdm_apple";
 
-import CustomLink from "components/CustomLink";
 import FileUploader from "components/FileUploader";
 import ClickableUrls from "components/ClickableUrls";
 import DownloadCSR from "../../../../../../components/DownloadFileButtons/DownloadCSR";
@@ -83,11 +82,7 @@ const ApplePushCertSetup = ({
             <span>2. </span>
             <span>
               Sign in to{" "}
-              <CustomLink
-                url="https://identity.apple.com/pushcert/"
-                text="Apple Push Certificates Portal"
-                newTab
-              />
+             
               <br />
               If you don&apos;t have an Apple ID, select <b>Create yours now</b>
               .

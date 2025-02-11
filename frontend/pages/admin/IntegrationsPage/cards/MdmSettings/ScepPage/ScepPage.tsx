@@ -12,7 +12,6 @@ import { AppContext } from "context/app";
 import MainContent from "components/MainContent/MainContent";
 import Button from "components/buttons/Button";
 import BackLink from "components/BackLink/BackLink";
-import CustomLink from "components/CustomLink";
 import Card from "components/Card";
 import validateUrl from "components/forms/validators/valid_url";
 // @ts-ignore
@@ -114,12 +113,7 @@ export const ScepCertificateContent = ({
         <ol className={`${baseClass}__steps`}>
           <li>
             <div>
-              Connect to your Network Device Enrollment Service (
-              <CustomLink
-                url="https://www.mdmlabdm.com/learn-more-about/ndes"
-                text="NDES"
-              />
-              ) admin account:
+              Connect to your Network Device Enrollment Service admin account:
             </div>
             <Card>
               <form onSubmit={onFormSubmit} autoComplete="off">
@@ -206,17 +200,8 @@ export const ScepCertificateContent = ({
           </li>
           <li>
             <span>
-              Now head over to{" "}
-              <CustomLink
-                url={PATHS.CONTROLS_CUSTOM_SETTINGS}
-                text="Controls > OS Settings > Custom settings"
-              />{" "}
-              to configure how SCEP certificates are delivered to your nodes.{" "}
-              <CustomLink
-                url="https://mdmlabdm.com/learn-more-about/setup-ndes"
-                text="Learn more"
-                newTab
-              />
+             
+             
             </span>
           </li>
         </ol>

@@ -11,7 +11,6 @@ import {
 } from "interfaces/platform";
 
 import InfoBanner from "components/InfoBanner";
-import CustomLink from "components/CustomLink";
 import { LEARN_MORE_ABOUT_BASE_LINK } from "utilities/constants";
 
 const baseClass = "node-details-banners";
@@ -120,15 +119,7 @@ const NodeDetailsBanners = ({
         <div className={baseClass}>
           <InfoBanner
             color="yellow"
-            cta={
-              <CustomLink
-                url={`${LEARN_MORE_ABOUT_BASE_LINK}/mdm-disk-encryption`}
-                text="Guide"
-                color="core-mdmlab-black"
-                iconColor="core-mdmlab-black"
-                newTab
-              />
-            }
+            
           >
             Disk encryption: Disk encryption is off. Currently, to turn on{" "}
             <b>full</b> disk encryption, the end user has to re-install their

@@ -11,7 +11,6 @@ import { ApplePlatform } from "interfaces/platform";
 import InputField from "components/forms/fields/InputField";
 import Button from "components/buttons/Button";
 import validatePresence from "components/forms/validators/validate_presence";
-import CustomLink from "components/CustomLink";
 
 const baseClass = "apple-os-target-form";
 
@@ -201,11 +200,7 @@ const AppleOSTargetForm = ({
         helpText={
           <>
             Use only versions available from Apple.{" "}
-            <CustomLink
-              text="Learn more"
-              newTab
-              url="https://mdmlabdm.com/learn-more-about/available-os-update-versions"
-            />
+           
           </>
         }
         value={minOsVersion}

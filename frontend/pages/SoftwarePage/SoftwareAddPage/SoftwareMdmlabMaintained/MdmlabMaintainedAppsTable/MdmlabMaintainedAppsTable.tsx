@@ -12,7 +12,6 @@ import TableCount from "components/TableContainer/TableCount";
 import LastUpdatedText from "components/LastUpdatedText";
 import { ITableQueryData } from "components/TableContainer/TableContainer";
 import EmptyTable from "components/EmptyTable";
-import CustomLink from "components/CustomLink";
 
 import { generateTableConfig } from "./MdmlabMaintainedAppsTableConfig";
 
@@ -25,11 +24,7 @@ const EmptyMdmlabAppsTable = () => (
     info={
       <>
         Can&apos;t find app?{" "}
-        <CustomLink
-          newTab
-          url="https://mdmlabdm.com/feature-request"
-          text="File an issue on GitHub"
-        />
+       
       </>
     }
   />

@@ -22,7 +22,6 @@ import UserSettingsForm from "components/forms/UserSettingsForm";
 import InfoBanner from "components/InfoBanner";
 import MainContent from "components/MainContent";
 import SidePanelContent from "components/SidePanelContent";
-import CustomLink from "components/CustomLink";
 
 import SecretField from "./APITokenModal/TokenSecretField/SecretField";
 import AccountSidePanel from "./AccountSidePanel";
@@ -181,11 +180,7 @@ const AccountPage = ({ router }: IAccountPageProps): JSX.Element | null => {
             <p>
               <strong>This token expires.</strong> If you want an API key for a
               permanent integration, create an&nbsp;
-              <CustomLink
-                url="https://mdmlabdm.com/docs/using-mdmlab/mdmlabctl-cli?utm_medium=mdmlabui&utm_campaign=get-api-token#using-mdmlabctl-with-an-api-only-user"
-                text="API-only user"
-                newTab
-              />
+             
               &nbsp;instead.
             </p>
           </InfoBanner>
@@ -195,11 +190,7 @@ const AccountPage = ({ router }: IAccountPageProps): JSX.Element | null => {
           <p className="token-message">
             This token is intended for SSO users to authenticate in the mdmlabctl
             CLI. It expires based on the{" "}
-            <CustomLink
-              url="https://mdmlabdm.com/docs/deploying/configuration?utm_medium=mdmlabui&utm_campaign=get-api-token#session-duration"
-              text="session duration configuration"
-              newTab
-            />
+           
           </p>
           <div className="modal-cta-wrap">
             <Button onClick={onToggleApiTokenModal} type="button">

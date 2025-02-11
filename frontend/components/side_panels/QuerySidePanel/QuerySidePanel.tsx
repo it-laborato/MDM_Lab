@@ -6,7 +6,6 @@ import { osqueryTableNames } from "utilities/osquery_tables";
 // @ts-ignore
 import Dropdown from "components/forms/fields/Dropdown";
 import MdmlabMarkdown from "components/MdmlabMarkdown";
-import CustomLink from "components/CustomLink";
 import Icon from "components/Icon/Icon";
 
 import QueryTableColumns from "./QueryTableColumns";

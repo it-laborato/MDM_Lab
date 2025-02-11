@@ -3,7 +3,6 @@ import React from "react";
 import Modal from "components/Modal";
 import Button from "components/buttons/Button";
 import MdmlabAce from "components/MdmlabAce";
-import CustomLink from "components/CustomLink";
 import Editor from "components/Editor";
 
 const baseClass = "advanced-options-modal";
@@ -51,13 +50,8 @@ const AdvancedOptionsModal = ({
                 maxLines={10}
                 helpText={
                   <>
-                    Software will be installed only if the{" "}
-                    <CustomLink
-                      className={`${baseClass}__table-link`}
-                      text="query returns results"
-                      url="https://mdmlabdm.com/tables"
-                      newTab
-                    />
+                    Software will be installed
+                   
                   </>
                 }
               />

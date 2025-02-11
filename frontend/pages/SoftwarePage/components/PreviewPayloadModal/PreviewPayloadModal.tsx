@@ -6,7 +6,6 @@ import { ISoftwareVulnerability } from "interfaces/software";
 
 import Modal from "components/Modal";
 import Button from "components/buttons/Button";
-import CustomLink from "components/CustomLink";
 
 const baseClass = "preview-data-modal";
 
@@ -77,11 +76,7 @@ const PreviewPayloadModal = ({
       <div className={`${baseClass}__preview-modal`}>
         <p>
           Want to learn more about how automations in Mdmlab work?{" "}
-          <CustomLink
-            url="https://mdmlabdm.com/docs/using-mdmlab/automations"
-            text="Check out the Mdmlab documentation"
-            newTab
-          />
+         
         </p>
         <div className={`${baseClass}__payload-request-preview`}>
           <pre>POST https://server.com/example</pre>

@@ -14,7 +14,6 @@ import teamsAPI, { ILoadTeamResponse } from "services/entities/teams";
 import configAPI from "services/entities/config";
 
 import Button from "components/buttons/Button";
-import CustomLink from "components/CustomLink";
 import Checkbox from "components/forms/fields/Checkbox";
 import PremiumFeatureMessage from "components/PremiumFeatureMessage";
 import Spinner from "components/Spinner";

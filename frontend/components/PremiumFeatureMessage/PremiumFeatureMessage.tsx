@@ -1,7 +1,6 @@
 import React from "react";
 import classnames from "classnames";
 
-import CustomLink from "components/CustomLink";
 import Icon from "components/Icon";
 
 interface IPremiumFeatureMessage {
@@ -30,11 +29,7 @@ const PremiumFeatureMessage = ({
         <Icon name="premium-feature" />
         <p>This feature is included in Mdmlab Premium.</p>
         <div className="external-link-and-icon">
-          <CustomLink
-            url="https://mdmlabdm.com/upgrade"
-            text="Learn more"
-            newTab
-          />
+         
         </div>
       </div>
     </div>
