@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -33,7 +34,9 @@ func main() {
 	// 		tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
 	// 	},
 	// }
-
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{
+		InsecureSkipVerify: true,
+	}
 	server := &http.Server{
 		Addr: ":8080",
 		// TLSConfig: tlsConfig,
