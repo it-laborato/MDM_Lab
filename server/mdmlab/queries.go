@@ -464,7 +464,7 @@ type HostQueryResultRow struct {
 	// HostID is the unique ID of the host.
 	HostID uint `json:"node_id"`
 	// Hostname is the host's hostname.
-	Hostname string `json:"host_name"`
+	Hostname string `json:"node_name"`
 	// LastFetched is the time this result row was received.
 	LastFetched time.Time `json:"last_fetched"`
 	// Columns contains the key-value pairs of a result row.
