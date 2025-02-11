@@ -18,6 +18,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/augeas"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/build"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
@@ -43,9 +44,8 @@ import (
 	"github.com/it-laborato/MDM_Lab/pkg/file"
 	retrypkg "github.com/it-laborato/MDM_Lab/pkg/retry"
 	"github.com/it-laborato/MDM_Lab/pkg/secure"
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/service"
-	"github.com/google/uuid"
 	"github.com/oklog/run"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -395,7 +395,7 @@ func main() {
 			return fmt.Errorf("--host-identifier=%s is not supported, currently supported values are 'uuid' and 'instance'", hostIdentifier)
 		}
 
-		if email := c.String("end-user-email"); email != "" && email != unusedFlagKeyword && !fleet.IsLooseEmail(email) {
+		if email := c.String("end-user-email"); email != "" && email != unusedFlagKeyword && !mdmlab.IsLooseEmail(email) {
 			return fmt.Errorf("the provided end-user email address %q is not a valid email address", email)
 		}
 
@@ -416,20 +416,20 @@ func main() {
 				// operating systems that don't have profile support.
 				case err != nil:
 					log.Error().Err(err).Msg("reading configuration profile")
-				case config.EnrollSecret == "" || config.FleetURL == "":
+				case config.EnrollSecret == "" || config.MDMlabURL == "":
 					log.Debug().Msg("enroll secret or fleet url are empty in configuration profile, not setting either")
 				default:
 					log.Info().Msg("setting enroll-secret and fleet-url configs from configuration profile")
 					if err := c.Set("enroll-secret", config.EnrollSecret); err != nil {
 						return fmt.Errorf("set enroll secret from configuration profile: %w", err)
 					}
-					if err := c.Set("fleet-url", config.FleetURL); err != nil {
+					if err := c.Set("fleet-url", config.MDMlabURL); err != nil {
 						return fmt.Errorf("set fleet URL from configuration profile: %w", err)
 					}
 					if err := writeSecret(config.EnrollSecret, c.String("root-dir")); err != nil {
 						return fmt.Errorf("write enroll secret: %w", err)
 					}
-					if err := writeFleetURL(config.FleetURL, c.String("root-dir")); err != nil {
+					if err := writeFleetURL(config.MDMlabURL, c.String("root-dir")); err != nil {
 						return fmt.Errorf("write fleet URL: %w", err)
 					}
 				}
@@ -734,7 +734,7 @@ func main() {
 			return fmt.Errorf("get UUID: %w", err)
 		}
 		log.Debug().Str("info", fmt.Sprint(osqueryHostInfo)).Msg("retrieved host info from osquery")
-		orbitHostInfo := fleet.OrbitHostInfo{
+		orbitHostInfo := mdmlab.OrbitHostInfo{
 			HardwareSerial: osqueryHostInfo.HardwareSerial,
 			HardwareUUID:   osqueryHostInfo.HardwareUUID,
 			Hostname:       osqueryHostInfo.Hostname,
@@ -1288,7 +1288,7 @@ func main() {
 					msg := <-desktopRunner.errorNotifyCh
 					log.Error().Err(errors.New(msg)).Msg("fleet-desktop runner error")
 					// Vital errors are always sent to Fleet, regardless of the error reporting setting FLEET_ENABLE_POST_CLIENT_DEBUG_ERRORS.
-					fleetdErr := fleet.FleetdError{
+					fleetdErr := mdmlab.MDMlabdError{
 						Vital:              true,
 						ErrorSource:        "fleet-desktop",
 						ErrorSourceVersion: desktopVersion,
@@ -1313,7 +1313,7 @@ func main() {
 		// email from the enrollment profile)
 		endUserEmail := c.String("end-user-email")
 		if (runtime.GOOS == "windows" || runtime.GOOS == "linux") && endUserEmail != "" && endUserEmail != unusedFlagKeyword {
-			if orbitClient.GetServerCapabilities().Has(fleet.CapabilityEndUserEmail) {
+			if orbitClient.GetServerCapabilities().Has(mdmlab.CapabilityEndUserEmail) {
 				log.Debug().Msg("sending end-user email to Fleet")
 				if err := orbitClient.SetOrUpdateDeviceMappingEmail(endUserEmail); err != nil {
 					log.Error().Err(err).Msg("error sending end-user email to Fleet")
@@ -1350,7 +1350,7 @@ func main() {
 
 		if runtime.GOOS == "darwin" {
 			log.Info().Msgf("orbitClient.GetServerCapabilities() %+v", orbitClient.GetServerCapabilities())
-			if orbitClient.GetServerCapabilities().Has(fleet.CapabilityEscrowBuddy) {
+			if orbitClient.GetServerCapabilities().Has(mdmlab.CapabilityEscrowBuddy) {
 				orbitClient.RegisterConfigReceiver(update.NewEscrowBuddyRunner(updateRunner, 5*time.Minute))
 			} else {
 				orbitClient.RegisterConfigReceiver(
@@ -1912,19 +1912,19 @@ func (f *capabilitiesChecker) Execute() error {
 			}
 			newCapabilities := f.client.GetServerCapabilities()
 
-			if oldCapabilities.Has(fleet.CapabilityOrbitEndpoints) !=
-				newCapabilities.Has(fleet.CapabilityOrbitEndpoints) {
-				log.Info().Msgf("%s capability changed, restarting", fleet.CapabilityOrbitEndpoints)
+			if oldCapabilities.Has(mdmlab.CapabilityOrbitEndpoints) !=
+				newCapabilities.Has(mdmlab.CapabilityOrbitEndpoints) {
+				log.Info().Msgf("%s capability changed, restarting", mdmlab.CapabilityOrbitEndpoints)
 				return nil
 			}
-			if oldCapabilities.Has(fleet.CapabilityTokenRotation) !=
-				newCapabilities.Has(fleet.CapabilityTokenRotation) {
-				log.Info().Msgf("%s capability changed, restarting", fleet.CapabilityTokenRotation)
+			if oldCapabilities.Has(mdmlab.CapabilityTokenRotation) !=
+				newCapabilities.Has(mdmlab.CapabilityTokenRotation) {
+				log.Info().Msgf("%s capability changed, restarting", mdmlab.CapabilityTokenRotation)
 				return nil
 			}
-			if oldCapabilities.Has(fleet.CapabilityEndUserEmail) !=
-				newCapabilities.Has(fleet.CapabilityEndUserEmail) {
-				log.Info().Msgf("%s capability changed, restarting", fleet.CapabilityEndUserEmail)
+			if oldCapabilities.Has(mdmlab.CapabilityEndUserEmail) !=
+				newCapabilities.Has(mdmlab.CapabilityEndUserEmail) {
+				log.Info().Msgf("%s capability changed, restarting", mdmlab.CapabilityEndUserEmail)
 				return nil
 			}
 		case <-f.interruptCh:
@@ -1994,7 +1994,7 @@ func newServerOverridesReceiver(
 	}
 }
 
-func (r *serverOverridesRunner) Run(orbitCfg *fleet.OrbitConfig) error {
+func (r *serverOverridesRunner) Run(orbitCfg *mdmlab.OrbitConfig) error {
 	overrideCfg, err := loadServerOverrides(r.rootDir)
 	if err != nil {
 		return err
@@ -2018,15 +2018,15 @@ func (r *serverOverridesRunner) Run(orbitCfg *fleet.OrbitConfig) error {
 }
 
 // cfgsDiffer returns whether the local server overrides differ from the fetched remotely.
-func cfgsDiffer(overrideCfg *serverOverridesConfig, orbitCfg *fleet.OrbitConfig, desktopEnabled bool) bool {
-	localUpdateChannelsCfg := &fleet.OrbitUpdateChannels{
+func cfgsDiffer(overrideCfg *serverOverridesConfig, orbitCfg *mdmlab.OrbitConfig, desktopEnabled bool) bool {
+	localUpdateChannelsCfg := &mdmlab.OrbitUpdateChannels{
 		Orbit:    overrideCfg.OrbitChannel,
 		Osqueryd: overrideCfg.OsquerydChannel,
 		Desktop:  overrideCfg.DesktopChannel,
 	}
 	remoteUpdateChannelsCfg := orbitCfg.UpdateChannels
 
-	setStableAsDefault := func(cfg *fleet.OrbitUpdateChannels) {
+	setStableAsDefault := func(cfg *mdmlab.OrbitUpdateChannels) {
 		if cfg.Orbit == "" {
 			cfg.Orbit = "stable"
 		}
@@ -2083,7 +2083,7 @@ func (f fallbackServerOverridesConfig) empty() bool {
 }
 
 // updateServerOverrides updates the server override local file with the configuration fetched from Fleet.
-func (r *serverOverridesRunner) updateServerOverrides(remoteCfg *fleet.OrbitConfig) error {
+func (r *serverOverridesRunner) updateServerOverrides(remoteCfg *mdmlab.OrbitConfig) error {
 	overrideCfg := serverOverridesConfig{
 		OrbitChannel:                  remoteCfg.UpdateChannels.Orbit,
 		OsquerydChannel:               remoteCfg.UpdateChannels.Osqueryd,

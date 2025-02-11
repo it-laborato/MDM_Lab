@@ -14,9 +14,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/google/uuid"
 	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
 	"github.com/it-laborato/MDM_Lab/server/mdmlab"
-	"github.com/google/uuid"
 )
 
 var errInvalidScheme = errors.New("address must start with https:// for remote connections")
@@ -196,9 +196,10 @@ type bodyHandler interface {
 }
 
 type FileResponse struct {
-	DestPath     string
-	DestFile     string
-	destFilePath string
+	DestPath      string
+	DestFile      string
+	destFilePath  string
+	SkipMediaType bool
 }
 
 func (f *FileResponse) Handle(resp *http.Response) error {
