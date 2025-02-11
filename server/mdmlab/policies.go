@@ -239,10 +239,10 @@ type Policy struct {
 	PolicyData
 
 	// PassingHostCount is the number of hosts this policy passes on.
-	PassingHostCount uint `json:"passing_host_count" db:"passing_host_count"`
+	PassingHostCount uint `json:"passing_node_count" db:"passing_host_count"`
 	// FailingHostCount is the number of hosts this policy fails on.
-	FailingHostCount   uint       `json:"failing_host_count" db:"failing_host_count"`
-	HostCountUpdatedAt *time.Time `json:"host_count_updated_at" db:"host_count_updated_at"`
+	FailingHostCount   uint       `json:"failing_node_count" db:"failing_host_count"`
+	HostCountUpdatedAt *time.Time `json:"node_count_updated_at" db:"host_count_updated_at"`
 
 	// InstallSoftware is used to trigger installation of a software title
 	// when this policy fails.
