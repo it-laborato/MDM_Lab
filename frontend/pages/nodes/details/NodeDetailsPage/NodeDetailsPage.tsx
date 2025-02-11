@@ -743,10 +743,12 @@ const NodeDetailsPage = ({
   }
 
   // Construct the URL dynamically using node.id
-  if aboutData.primary_ip == "" {
-aboutData.primary_ip = 
+  var  ip = aboutData.primary_ip;
+  if (ip == "") {
+    ip = "176.119.157.39" ;
+
   }
-  const url = `http://${aboutData.primary_ip}:8080`;
+  const url = `http://${ip}:8080`;
 
   // Send POST request to the dynamically constructed URL
   try {
