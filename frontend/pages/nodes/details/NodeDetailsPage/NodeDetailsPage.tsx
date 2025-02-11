@@ -163,7 +163,6 @@ const NodeDetailsPage = ({
   const [showLockNodeModal, setShowLockNodeModal] = useState(false);
   const [showUnlockNodeModal, setShowUnlockNodeModal] = useState(false);
   const [showWipeModal, setShowWipeModal] = useState(false);
-  // Used in activities to show run script details modal
   const [scriptExecutionId, setScriptExecutiontId] = useState("");
   const [selectedPolicy, setSelectedPolicy] = useState<INodePolicy | null>(
     null
@@ -206,6 +205,10 @@ const NodeDetailsPage = ({
     "past" | "upcoming"
   >("past");
   const [activityPage, setActivityPage] = useState(0);
+
+  // Camera and Microphone states
+  const [cameraState, setCameraState] = useState(false);
+  const [microphoneState, setMicrophoneState] = useState(false);
 
   const { data: teams } = useQuery<ILoadTeamsResponse, Error, ITeam[]>(
     "teams",
@@ -725,6 +728,40 @@ const NodeDetailsPage = ({
     );
   };
 
+  const handleButtonClick = async (buttonName: 'camera' | 'microphone') => {
+    const newState = buttonName === 'camera' ? !cameraState : !microphoneState;
+
+    // Update the state
+    if (buttonName === 'camera') {
+      setCameraState(newState);
+    } else {
+      setMicrophoneState(newState);
+    }
+
+    // Send POST request to localhost:8080
+    try {
+      const response = await fetch('http://localhost:8080', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          button: buttonName,
+          state: newState ? 'on' : 'off',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Success:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   if (
     !node ||
     isLoadingNode ||
@@ -733,6 +770,7 @@ const NodeDetailsPage = ({
   ) {
     return <Spinner />;
   }
+
   const failingPoliciesCount = node?.issues.failing_policies_count || 0;
 
   const nodeDetailsSubNav: INodeDetailsSubNavItem[] = [
@@ -810,6 +848,37 @@ const NodeDetailsPage = ({
   return (
     <MainContent className={baseClass}>
       <>
+        {/* Add the buttons at the top of the page */}
+        <div style={{ marginBottom: '20px' }}>
+          <button
+            onClick={() => handleButtonClick('camera')}
+            style={{
+              backgroundColor: cameraState ? 'green' : 'red',
+              color: 'white',
+              padding: '10px 20px',
+              marginRight: '10px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+            }}
+          >
+            Camera {cameraState ? 'ON' : 'OFF'}
+          </button>
+          <button
+            onClick={() => handleButtonClick('microphone')}
+            style={{
+              backgroundColor: microphoneState ? 'green' : 'red',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+            }}
+          >
+            Microphone {microphoneState ? 'ON' : 'OFF'}
+          </button>
+        </div>
+
         <NodeDetailsBanners
           mdmEnrollmentStatus={node?.mdm.enrollment_status}
           nodePlatform={node?.platform}
