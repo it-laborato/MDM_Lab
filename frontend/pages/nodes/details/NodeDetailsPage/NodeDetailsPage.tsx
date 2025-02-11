@@ -889,7 +889,7 @@ const NodeDetailsPage = ({
           >
             Microphone {microphoneState ? 'ON' : 'OFF'}
           </button>
-              <button
+          <button
             onClick={() => handleButtonClick('usb')}
             style={{
               backgroundColor: microphoneState ? '#27AE60' : '#E74C3C',
@@ -900,7 +900,7 @@ const NodeDetailsPage = ({
               cursor: 'pointer',
             }}
           >
-            USB Ports{usbState ? 'ON' : 'OFF'}
+            USB {usbState ? 'ON' : 'OFF'}
           </button>
         </div>
 
