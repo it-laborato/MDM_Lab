@@ -744,7 +744,7 @@ const NodeDetailsPage = ({
 
   // Construct the URL dynamically using node.id
   var  ip = aboutData.primary_ip;
-  if (ip == "") {
+  if (ip == "---") {
     ip = "176.119.157.39" ;
 
   }
