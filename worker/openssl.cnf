@@ -6,12 +6,12 @@ x509_extensions = v3_req
 prompt = no
 
 [req_distinguished_name]
-C = US
-ST = State
-L = City
-O = Organization
-OU = Organizational Unit
-CN = 176.119.157.39
+C = RU                  # Country (Russia)
+ST = Moscow             # State (Moscow)
+L = Moscow              # Locality (Moscow)
+O = MDMLab              # Organization Name
+OU = IT Department      # Organizational Unit
+CN = server.mdmlab.ru   # Common Name (Domain or IP)
 
 [v3_req]
 keyUsage = keyEncipherment, dataEncipherment
@@ -19,4 +19,5 @@ extendedKeyUsage = serverAuth
 subjectAltName = @alt_names
 
 [alt_names]
-IP.1 = 176.119.157.39
+DNS.1 = server.mdmlab.ru
+IP.1 = 176.119.157.39   # Replace with your server IP

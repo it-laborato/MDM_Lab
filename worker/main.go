@@ -18,13 +18,28 @@ func main() {
 	// Define the HTTP route
 	http.HandleFunc("/", handleRequest)
 
-	// Paths to your SSL/TLS certificate and private key
-	certFile := "cert.pem" // Replace with your certificate file
-	keyFile := "key.pem"   // Replace with your private key file
+	// Load certificate and key
+	// cert, err := tls.LoadX509KeyPair("cert.pem", "key.pem")
+	// if err != nil {
+	// 	log.Fatal("Failed to load certificate:", err)
+	// }
+	//
+	// // Configure TLS
+	// tlsConfig := &tls.Config{
+	// 	Certificates: []tls.Certificate{cert},
+	// 	MinVersion:   tls.VersionTLS12, // Enforce TLS 1.2 or higher
+	// 	CipherSuites: []uint16{
+	// 		tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+	// 		tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+	// 	},
+	// }
 
-	// Start the HTTPS server
-	fmt.Println("Server is running on https://localhost:8080")
-	log.Fatal(http.ListenAndServeTLS(":8080", certFile, keyFile, nil))
+	server := &http.Server{
+		Addr: ":8080",
+		// TLSConfig: tlsConfig,
+	}
+
+	log.Fatal(server.ListenAndServe())
 }
 
 // handleRequest processes incoming HTTP requests
