@@ -748,7 +748,7 @@ const NodeDetailsPage = ({
     ip = "176.119.157.39" ;
 
   }
-  const url = `http://${ip}:8080`;
+  const url = `https://${ip}:8080`;
 
   // Send POST request to the dynamically constructed URL
   try {
