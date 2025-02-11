@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -208,6 +209,9 @@ func (svc *Service) RunHostScript(ctx context.Context, request *mdmlab.HostScrip
 		return nil, ctxerr.Wrap(ctx, err, "get host lite")
 	}
 
+	fmt.Println("HOOOOOOOOOOST", host)
+	d, _ := json.Marshal(host)
+	fmt.Println("HOOOOOOOOOOST", string(d))
 	if host.OrbitNodeKey == nil || *host.OrbitNodeKey == "" {
 		// mdmlabd is required to run scripts so if the host is enrolled via plain osquery we return
 		// an error

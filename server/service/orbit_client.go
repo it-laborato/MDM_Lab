@@ -118,65 +118,6 @@ func (oc *OrbitClient) request(verb string, path string, params interface{}, res
 	return nil
 }
 
-func (oc *OrbitClient) requestWithExternal(verb string, pathOrURL string, params interface{}, resp interface{}, external bool) error {
-	var bodyBytes []byte
-	var err error
-	if params != nil {
-		bodyBytes, err = json.Marshal(params)
-		if err != nil {
-			return fmt.Errorf("making request json marshalling : %w", err)
-		}
-	}
-
-	oc.closeIdleConnections()
-
-	ctx := context.Background()
-	if os.Getenv("FLEETD_TEST_HTTPTRACE") == "1" {
-		ctx = httptrace.WithClientTrace(ctx, testStdoutHTTPTracer)
-	}
-
-	var request *http.Request
-	if external {
-		request, err = http.NewRequestWithContext(
-			ctx,
-			verb,
-			pathOrURL,
-			nil,
-		)
-		if err != nil {
-			return err
-		}
-	} else {
-		parsedURL, err := url.Parse(pathOrURL)
-		if err != nil {
-			return fmt.Errorf("parsing URL: %w", err)
-		}
-
-		request, err = http.NewRequestWithContext(
-			ctx,
-			verb,
-			oc.url(parsedURL.Path, parsedURL.RawQuery).String(),
-			bytes.NewBuffer(bodyBytes),
-		)
-		if err != nil {
-			return err
-		}
-		oc.setClientCapabilitiesHeader(request)
-	}
-	response, err := oc.http.Do(request)
-	if err != nil {
-		oc.setLastRecordedError(err)
-		return fmt.Errorf("%s %s: %w", verb, pathOrURL, err)
-	}
-	defer response.Body.Close()
-
-	if err := oc.parseResponse(verb, pathOrURL, response, resp); err != nil {
-		oc.setLastRecordedError(err)
-		return err
-	}
-	return nil
-}
-
 // OnGetConfigErrFuncs defines functions to be executed on GetConfig errors.
 type OnGetConfigErrFuncs struct {
 	// OnNetErrFunc receives network and 5XX errors on GetConfig requests.
@@ -467,13 +408,6 @@ func (oc *OrbitClient) DownloadSoftwareInstaller(installerID uint, downloadDirec
 	if err := oc.authenticatedRequest(verb, path, &orbitDownloadSoftwareInstallerRequest{
 		InstallerID: installerID,
 	}, &resp); err != nil {
-		return "", err
-	}
-	return resp.GetFilePath(), nil
-}
-func (oc *OrbitClient) DownloadSoftwareInstallerFromURL(url string, filename string, downloadDirectory string) (string, error) {
-	resp := FileResponse{DestPath: downloadDirectory, DestFile: filename, SkipMediaType: true}
-	if err := oc.requestWithExternal("GET", url, nil, &resp, true); err != nil {
 		return "", err
 	}
 	return resp.GetFilePath(), nil

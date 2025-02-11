@@ -18,7 +18,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/pkg/file"
 	"github.com/it-laborato/MDM_Lab/pkg/retry"
 	pkgscripts "github.com/it-laborato/MDM_Lab/pkg/scripts"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/osquery/osquery-go"
 	osquery_gen "github.com/osquery/osquery-go/gen/osquery"
@@ -33,10 +33,10 @@ type (
 // Client defines the methods required for the API requests to the server. The
 // fleet.OrbitClient type satisfies this interface.
 type Client interface {
-	GetInstallerDetails(installID string) (*mdmlab.SoftwareInstallDetails, error)
+	GetInstallerDetails(installID string) (*fleet.SoftwareInstallDetails, error)
 	DownloadSoftwareInstaller(installerID uint, downloadDir string) (string, error)
 	DownloadSoftwareInstallerFromURL(url string, filename string, downloadDir string) (string, error)
-	SaveInstallerResult(payload *mdmlab.HostSoftwareInstallResultPayload) error
+	SaveInstallerResult(payload *fleet.HostSoftwareInstallResultPayload) error
 }
 
 type QueryClient interface {
@@ -92,7 +92,7 @@ func NewRunner(client Client, socketPath string, scriptsEnabled func() bool, roo
 	return r
 }
 
-func (r *Runner) Run(config *mdmlab.OrbitConfig) error {
+func (r *Runner) Run(config *fleet.OrbitConfig) error {
 	if runtime.GOOS == "darwin" {
 		if config.Notifications.RunSetupExperience && !update.CanRun(r.rootDirPath, "swiftDialog", update.SwiftDialogMacOSTarget) {
 			log.Debug().Msg("exiting software installer config runner early during setup experience: swiftDialog is not installed")
@@ -128,7 +128,7 @@ func connectOsquery(r *Runner) error {
 	return nil
 }
 
-func (r *Runner) run(ctx context.Context, config *mdmlab.OrbitConfig) error {
+func (r *Runner) run(ctx context.Context, config *fleet.OrbitConfig) error {
 	log.Debug().Msg("starting software installers run")
 	var errs []error
 	for _, installerID := range config.Notifications.PendingSoftwareInstallerIDs {
@@ -194,14 +194,14 @@ func (r *Runner) preConditionCheck(ctx context.Context, query string) (bool, str
 	return true, string(response), nil
 }
 
-func (r *Runner) installSoftware(ctx context.Context, installID string) (*mdmlab.HostSoftwareInstallResultPayload, error) {
+func (r *Runner) installSoftware(ctx context.Context, installID string) (*fleet.HostSoftwareInstallResultPayload, error) {
 	log.Debug().Msgf("about to install software with installer id: %s", installID)
 	installer, err := r.OrbitClient.GetInstallerDetails(installID)
 	if err != nil {
 		return nil, fmt.Errorf("fetching software installer details: %w", err)
 	}
 
-	payload := &mdmlab.HostSoftwareInstallResultPayload{}
+	payload := &fleet.HostSoftwareInstallResultPayload{}
 	payload.InstallUUID = installID
 
 	if installer.PreInstallCondition != "" {

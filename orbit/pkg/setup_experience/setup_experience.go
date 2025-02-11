@@ -8,7 +8,7 @@ import (
 
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/swiftdialog"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/rs/zerolog/log"
 )
 
@@ -16,7 +16,7 @@ const doneMessage = `### Setup is complete\n\nPlease contact your IT Administrat
 
 // Client is the minimal interface needed to communicate with the Fleet server.
 type Client interface {
-	GetSetupExperienceStatus() (*mdmlab.SetupExperienceStatusPayload, error)
+	GetSetupExperienceStatus() (*fleet.SetupExperienceStatusPayload, error)
 }
 
 // SetupExperiencer is the type that manages the Fleet setup experience flow during macOS Setup
@@ -47,7 +47,7 @@ func NewSetupExperiencer(client Client, rootDirPath string) *SetupExperiencer {
 	}
 }
 
-func (s *SetupExperiencer) Run(oc *mdmlab.OrbitConfig) error {
+func (s *SetupExperiencer) Run(oc *fleet.OrbitConfig) error {
 	if !oc.Notifications.RunSetupExperience {
 		log.Debug().Msg("skipping setup experience: notification flag is not set")
 		return nil
@@ -96,7 +96,7 @@ func (s *SetupExperiencer) Run(oc *mdmlab.OrbitConfig) error {
 	// are not terminal
 
 	if payload.BootstrapPackage != nil {
-		if payload.BootstrapPackage.Status != mdmlab.MDMBootstrapPackageFailed && payload.BootstrapPackage.Status != mdmlab.MDMBootstrapPackageInstalled {
+		if payload.BootstrapPackage.Status != fleet.MDMBootstrapPackageFailed && payload.BootstrapPackage.Status != fleet.MDMBootstrapPackageInstalled {
 			return nil
 		}
 	}
@@ -110,9 +110,9 @@ func (s *SetupExperiencer) Run(oc *mdmlab.OrbitConfig) error {
 	s.steps["config_profiles"] = true
 
 	if payload.AccountConfiguration != nil {
-		if payload.AccountConfiguration.Status != mdmlab.MDMAppleStatusAcknowledged &&
-			payload.AccountConfiguration.Status != mdmlab.MDMAppleStatusError &&
-			payload.AccountConfiguration.Status != mdmlab.MDMAppleStatusCommandFormatError {
+		if payload.AccountConfiguration.Status != fleet.MDMAppleStatusAcknowledged &&
+			payload.AccountConfiguration.Status != fleet.MDMAppleStatusError &&
+			payload.AccountConfiguration.Status != fleet.MDMAppleStatusCommandFormatError {
 			return nil
 		}
 	}
@@ -123,7 +123,7 @@ func (s *SetupExperiencer) Run(oc *mdmlab.OrbitConfig) error {
 	if len(payload.Software) > 0 || payload.Script != nil {
 		var stepsDone int
 		var prog uint
-		var steps []*mdmlab.SetupExperienceStatusResult
+		var steps []*fleet.SetupExperienceStatusResult
 		if len(payload.Software) > 0 {
 			steps = payload.Software
 		}
@@ -147,7 +147,7 @@ func (s *SetupExperiencer) Run(oc *mdmlab.OrbitConfig) error {
 				s.steps[step.Name] = false
 			}
 
-			if step.Status == mdmlab.SetupExperienceStatusFailure || step.Status == mdmlab.SetupExperienceStatusSuccess {
+			if step.Status == fleet.SetupExperienceStatusFailure || step.Status == fleet.SetupExperienceStatusSuccess {
 				stepsDone++
 				s.steps[step.Name] = true
 				// The swiftDialog progress bar is out of 100
@@ -211,9 +211,9 @@ func (s *SetupExperiencer) allStepsDone() bool {
 	return true
 }
 
-func anyProfilePending(profiles []*mdmlab.SetupExperienceConfigurationProfileResult) bool {
+func anyProfilePending(profiles []*fleet.SetupExperienceConfigurationProfileResult) bool {
 	for _, p := range profiles {
-		if p.Status == mdmlab.MDMDeliveryPending {
+		if p.Status == fleet.MDMDeliveryPending {
 			return true
 		}
 	}
@@ -271,15 +271,15 @@ func (s *SetupExperiencer) startSwiftDialog(binaryPath, orgLogo string) error {
 	return nil
 }
 
-func resultToListItem(result *mdmlab.SetupExperienceStatusResult) swiftdialog.ListItem {
+func resultToListItem(result *fleet.SetupExperienceStatusResult) swiftdialog.ListItem {
 	statusText := "Pending"
 	status := swiftdialog.StatusWait
 
 	switch result.Status {
-	case mdmlab.SetupExperienceStatusFailure:
+	case fleet.SetupExperienceStatusFailure:
 		status = swiftdialog.StatusFail
 		statusText = "Failed"
-	case mdmlab.SetupExperienceStatusSuccess:
+	case fleet.SetupExperienceStatusSuccess:
 		status = swiftdialog.StatusSuccess
 		statusText = "Installed"
 		if result.IsForScript() {
