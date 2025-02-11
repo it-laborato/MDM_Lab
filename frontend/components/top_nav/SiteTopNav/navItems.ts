@@ -96,6 +96,29 @@ export default (
       withParams: { type: "query", names: ["team_id"] },
     },
 
+    {
+      name: "Workspace",
+      location: {
+        regex: new RegExp(`^${URL_PREFIX}/software/`),
+        pathname: PATHS.NO_ACCESS,
+      },
+    },
+	
+    {
+      name: "Container",
+      location: {
+        regex: new RegExp(`^${URL_PREFIX}/software/`),
+        pathname: PATHS.NO_ACCESS,
+      },
+    },
+	{
+      name: "Agent",
+      location: {
+        regex: new RegExp(`^${URL_PREFIX}/software/`),
+        pathname: PATHS.NO_ACCESS,
+      },
+    }
+
     ];
 
   if (isNoAccess) {
