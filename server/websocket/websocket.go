@@ -43,7 +43,7 @@ func (c *Conn) WriteJSON(msg JSONMessage) error {
 	}
 	m := string(buf)
 	m = strings.ReplaceAll(m, "host", "node")
-	if err := c.Send(string(buf)); err != nil {
+	if err := c.Send(m); err != nil {
 		return fmt.Errorf("sending: %w", err)
 	}
 	return nil
