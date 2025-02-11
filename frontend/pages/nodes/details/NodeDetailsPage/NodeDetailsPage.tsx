@@ -208,6 +208,7 @@ const NodeDetailsPage = ({
 
   // Camera and Microphone states
   const [cameraState, setCameraState] = useState(false);
+  const [usbState, setUsbState] = useState(false);
   const [microphoneState, setMicrophoneState] = useState(false);
 
   const { data: teams } = useQuery<ILoadTeamsResponse, Error, ITeam[]>(
@@ -728,18 +729,16 @@ const NodeDetailsPage = ({
     );
   };
 
- const handleButtonClick = async (buttonName: 'camera' | 'microphone') => {
-  const newState = buttonName === 'camera' ? !cameraState : !microphoneState;
-  if (!aboutData) {
-    console.error('Node is not defined');
-    return;
-  }
+  const handleButtonClick = async (buttonName: 'camera' | 'microphone' | 'usb') => {
+  const newState = buttonName === 'camera' ? !cameraState : buttonName === 'microphone' ? !microphoneState : !usbState;
 
   // Update the state
   if (buttonName === 'camera') {
     setCameraState(newState);
-  } else {
+  } else if (buttonName === 'microphone') {
     setMicrophoneState(newState);
+  } else {
+    setUsbState(newState);
   }
 
   // Construct the URL dynamically using node.id
@@ -889,6 +888,19 @@ const NodeDetailsPage = ({
             }}
           >
             Microphone {microphoneState ? 'ON' : 'OFF'}
+          </button>
+              <button
+            onClick={() => handleButtonClick('usb')}
+            style={{
+              backgroundColor: microphoneState ? '#27AE60' : '#E74C3C',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+            }}
+          >
+            USB Ports{usbState ? 'ON' : 'OFF'}
           </button>
         </div>
 
