@@ -892,7 +892,7 @@ const NodeDetailsPage = ({
           <button
             onClick={() => handleButtonClick('usb')}
             style={{
-              backgroundColor: microphoneState ? '#27AE60' : '#E74C3C',
+              backgroundColor: usbState ? '#27AE60' : '#E74C3C',
               color: 'white',
               padding: '10px 20px',
               border: 'none',
