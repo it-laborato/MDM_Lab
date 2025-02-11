@@ -19,7 +19,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/kdialog"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/lvm"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/zenity"
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/rs/zerolog/log"
 	"github.com/siderolabs/go-blockdevice/v2/encryption"
 	luksdevice "github.com/siderolabs/go-blockdevice/v2/encryption/luks"
@@ -47,7 +47,7 @@ func isInstalled(toolName string) bool {
 	return path != ""
 }
 
-func (lr *LuksRunner) Run(oc *fleet.OrbitConfig) error {
+func (lr *LuksRunner) Run(oc *mdmlab.OrbitConfig) error {
 	ctx := context.Background()
 
 	if !oc.Notifications.RunDiskEncryptionEscrow {
