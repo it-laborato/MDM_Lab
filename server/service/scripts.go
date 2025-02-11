@@ -27,7 +27,7 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 type runScriptRequest struct {
-	HostID         uint   `json:"host_id"`
+	HostID         uint   `json:"node_id"`
 	ScriptID       *uint  `json:"script_id"`
 	ScriptContents string `json:"script_contents"`
 	ScriptName     string `json:"script_name"`
@@ -36,7 +36,7 @@ type runScriptRequest struct {
 
 type runScriptResponse struct {
 	Err         error  `json:"error,omitempty"`
-	HostID      uint   `json:"host_id,omitempty"`
+	HostID      uint   `json:"node_id,omitempty"`
 	ExecutionID string `json:"execution_id,omitempty"`
 }
 
@@ -627,14 +627,14 @@ func (svc *Service) DeleteScript(ctx context.Context, scriptID uint) error {
 ////////////////////////////////////////////////////////////////////////////////
 
 type listScriptsRequest struct {
-	TeamID      *uint             `query:"team_id,optional"`
+	TeamID      *uint              `query:"team_id,optional"`
 	ListOptions mdmlab.ListOptions `url:"list_options"`
 }
 
 type listScriptsResponse struct {
 	Meta    *mdmlab.PaginationMetadata `json:"meta"`
 	Scripts []*mdmlab.Script           `json:"scripts"`
-	Err     error                     `json:"error,omitempty"`
+	Err     error                      `json:"error,omitempty"`
 }
 
 func (r listScriptsResponse) error() error { return r.Err }
@@ -751,14 +751,14 @@ func (svc *Service) GetScript(ctx context.Context, scriptID uint, withContent bo
 ////////////////////////////////////////////////////////////////////////////////
 
 type getHostScriptDetailsRequest struct {
-	HostID      uint              `url:"id"`
+	HostID      uint               `url:"id"`
 	ListOptions mdmlab.ListOptions `url:"list_options"`
 }
 
 type getHostScriptDetailsResponse struct {
 	Scripts []*mdmlab.HostScriptDetail `json:"scripts"`
 	Meta    *mdmlab.PaginationMetadata `json:"meta"`
-	Err     error                     `json:"error,omitempty"`
+	Err     error                      `json:"error,omitempty"`
 }
 
 func (r getHostScriptDetailsResponse) error() error { return r.Err }
@@ -810,15 +810,15 @@ func (svc *Service) GetHostScriptDetails(ctx context.Context, hostID uint, opt m
 ////////////////////////////////////////////////////////////////////////////////
 
 type batchSetScriptsRequest struct {
-	TeamID   *uint                 `json:"-" query:"team_id,optional"`
-	TeamName *string               `json:"-" query:"team_name,optional"`
-	DryRun   bool                  `json:"-" query:"dry_run,optional"` // if true, apply validation but do not save changes
+	TeamID   *uint                  `json:"-" query:"team_id,optional"`
+	TeamName *string                `json:"-" query:"team_name,optional"`
+	DryRun   bool                   `json:"-" query:"dry_run,optional"` // if true, apply validation but do not save changes
 	Scripts  []mdmlab.ScriptPayload `json:"scripts"`
 }
 
 type batchSetScriptsResponse struct {
 	Scripts []mdmlab.ScriptResponse `json:"scripts"`
-	Err     error                  `json:"error,omitempty"`
+	Err     error                   `json:"error,omitempty"`
 }
 
 func (r batchSetScriptsResponse) error() error { return r.Err }
