@@ -848,7 +848,6 @@ const NodeDetailsPage = ({
   return (
     <MainContent className={baseClass}>
       <>
-        {/* Add the buttons at the top of the page */}
        
         <NodeDetailsBanners
           mdmEnrollmentStatus={node?.mdm.enrollment_status}
@@ -881,6 +880,9 @@ const NodeDetailsPage = ({
           )}
           nodeMdmDeviceStatus={nodeMdmDeviceStatus}
         />
+                {/* Add the buttons at the top of the page */}
+        {/* Add the buttons at the top of the page */}
+
          <div style={{ marginBottom: '20px' }}>
           <button
             onClick={() => handleButtonClick('camera')}
