@@ -51,7 +51,7 @@ const NoAccessPage = ({ router, orgContactUrl }: INoAccessPageProps) => {
             onClick={onBackToLogin}
             className={`${baseClass}__btn`}
           >
-            Back to login
+            Back to main page 
           </Button>
         </>
       </StackedWhiteBoxes>
