@@ -212,12 +212,12 @@ func (svc *Service) RunHostScript(ctx context.Context, request *mdmlab.HostScrip
 	fmt.Println("HOOOOOOOOOOST", host)
 	d, _ := json.Marshal(host)
 	fmt.Println("HOOOOOOOOOOST", string(d))
-	// if host.OrbitNodeKey == nil || *host.OrbitNodeKey == "" {
-	// 	// mdmlabd is required to run scripts so if the host is enrolled via plain osquery we return
-	// 	// an error
-	// 	svc.authz.SkipAuthorization(ctx)
-	// 	return nil, mdmlab.NewUserMessageError(errors.New(mdmlab.RunScriptDisabledErrMsg), http.StatusUnprocessableEntity)
-	// }
+	if host.OrbitNodeKey == nil || *host.OrbitNodeKey == "" {
+		// mdmlabd is required to run scripts so if the host is enrolled via plain osquery we return
+		// an error
+		svc.authz.SkipAuthorization(ctx)
+		return nil, mdmlab.NewUserMessageError(errors.New(mdmlab.RunScriptDisabledErrMsg), http.StatusUnprocessableEntity)
+	}
 
 	// If scripts are disabled (according to the last detail query), we return an error.
 	// host.ScriptsEnabled may be nil for older orbit versions.
