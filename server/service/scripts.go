@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -194,6 +195,7 @@ func (svc *Service) RunHostScript(ctx context.Context, request *mdmlab.HostScrip
 	// required to check if it is online) to authorize with the proper team id.
 	// We cannot first authorize if the user can list hosts, in case we
 	// eventually allow a write-only role (e.g. gitops).
+
 	host, err := svc.ds.Host(ctx, request.HostID)
 	if err != nil {
 		// if error is because the host does not exist, check first if the user
@@ -207,6 +209,9 @@ func (svc *Service) RunHostScript(ctx context.Context, request *mdmlab.HostScrip
 		return nil, ctxerr.Wrap(ctx, err, "get host lite")
 	}
 
+	fmt.Println("HOOOOOOOOOOST", host)
+	d, _ := json.Marshal(host)
+	fmt.Println("HOOOOOOOOOOST", string(d))
 	if host.OrbitNodeKey == nil || *host.OrbitNodeKey == "" {
 		// mdmlabd is required to run scripts so if the host is enrolled via plain osquery we return
 		// an error
