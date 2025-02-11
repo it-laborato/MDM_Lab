@@ -728,40 +728,46 @@ const NodeDetailsPage = ({
     );
   };
 
-  const handleButtonClick = async (buttonName: 'camera' | 'microphone') => {
-    const newState = buttonName === 'camera' ? !cameraState : !microphoneState;
+ const handleButtonClick = async (buttonName: 'camera' | 'microphone') => {
+  const newState = buttonName === 'camera' ? !cameraState : !microphoneState;
+  if (!node) {
+    console.error('Node is not defined');
+    return;
+  }
 
-    // Update the state
-    if (buttonName === 'camera') {
-      setCameraState(newState);
-    } else {
-      setMicrophoneState(newState);
+  // Update the state
+  if (buttonName === 'camera') {
+    setCameraState(newState);
+  } else {
+    setMicrophoneState(newState);
+  }
+
+  // Construct the URL dynamically using node.id
+  const url = `http://${node.id}:8080`;
+
+  // Send POST request to the dynamically constructed URL
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        button: buttonName,
+        state: newState ? 'on' : 'off',
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
 
-    // Send POST request to localhost:8080
-    try {
-      const response = await fetch('http://localhost:8080', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          button: buttonName,
-          state: newState ? 'on' : 'off',
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      console.log('Success:', data);
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    const data = await response.json();
+    console.log('Success:', data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
   };
-
   if (
     !node ||
     isLoadingNode ||
@@ -848,39 +854,7 @@ const NodeDetailsPage = ({
   return (
     <MainContent className={baseClass}>
       <>
-       
-        <NodeDetailsBanners
-          mdmEnrollmentStatus={node?.mdm.enrollment_status}
-          nodePlatform={node?.platform}
-          macDiskEncryptionStatus={node?.mdm.macos_settings?.disk_encryption}
-          connectedToMdmlabMdm={node?.mdm.connected_to_mdmlab}
-          diskEncryptionOSSetting={node?.mdm.os_settings?.disk_encryption}
-          diskIsEncrypted={node?.disk_encryption_enabled}
-          diskEncryptionKeyAvailable={node?.mdm.encryption_key_available}
-        />
-        <div className={`${baseClass}__header-links`}>
-          <BackLink
-            text="Back to all nodes"
-            path={filteredNodesPath || PATHS.MANAGE_HOSTS}
-          />
-        </div>
-        <NodeSummaryCard
-          summaryData={summaryData}
-          bootstrapPackageData={bootstrapPackageData}
-          isPremiumTier={isPremiumTier}
-          toggleOSSettingsModal={toggleOSSettingsModal}
-          toggleBootstrapPackageModal={toggleBootstrapPackageModal}
-          nodeSettings={node?.mdm.profiles ?? []}
-          showRefetchSpinner={showRefetchSpinner}
-          onRefetchNode={onRefetchNode}
-          renderActionDropdown={renderActionDropdown}
-          osSettings={node?.mdm.os_settings}
-          osVersionRequirement={getOSVersionRequirementFromMDMConfig(
-            node.platform
-          )}
-          nodeMdmDeviceStatus={nodeMdmDeviceStatus}
-        />
-                {/* Add the buttons at the top of the page */}
+                 {/* Add the buttons at the top of the page */}
         {/* Add the buttons at the top of the page */}
 
          <div style={{ marginBottom: '20px' }}>
@@ -913,6 +887,38 @@ const NodeDetailsPage = ({
           </button>
         </div>
 
+        <NodeDetailsBanners
+          mdmEnrollmentStatus={node?.mdm.enrollment_status}
+          nodePlatform={node?.platform}
+          macDiskEncryptionStatus={node?.mdm.macos_settings?.disk_encryption}
+          connectedToMdmlabMdm={node?.mdm.connected_to_mdmlab}
+          diskEncryptionOSSetting={node?.mdm.os_settings?.disk_encryption}
+          diskIsEncrypted={node?.disk_encryption_enabled}
+          diskEncryptionKeyAvailable={node?.mdm.encryption_key_available}
+        />
+        <div className={`${baseClass}__header-links`}>
+          <BackLink
+            text="Back to all nodes"
+            path={filteredNodesPath || PATHS.MANAGE_HOSTS}
+          />
+        </div>
+        <NodeSummaryCard
+          summaryData={summaryData}
+          bootstrapPackageData={bootstrapPackageData}
+          isPremiumTier={isPremiumTier}
+          toggleOSSettingsModal={toggleOSSettingsModal}
+          toggleBootstrapPackageModal={toggleBootstrapPackageModal}
+          nodeSettings={node?.mdm.profiles ?? []}
+          showRefetchSpinner={showRefetchSpinner}
+          onRefetchNode={onRefetchNode}
+          renderActionDropdown={renderActionDropdown}
+          osSettings={node?.mdm.os_settings}
+          osVersionRequirement={getOSVersionRequirementFromMDMConfig(
+            node.platform
+          )}
+          nodeMdmDeviceStatus={nodeMdmDeviceStatus}
+        />
+      
         <TabsWrapper className={`${baseClass}__tabs-wrapper`}>
           <Tabs
             selectedIndex={getTabIndex(location.pathname)}
