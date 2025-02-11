@@ -46,12 +46,7 @@ const NoAccessPage = ({ router, orgContactUrl }: INoAccessPageProps) => {
         headerText="This account does not currently have access to Mdmlab."
       >
         <>
-          <p>
-            To get access,{" "}
-           
-            .
-          </p>
-          <Button
+                  <Button
             variant="brand"
             onClick={onBackToLogin}
             className={`${baseClass}__btn`}
