@@ -849,36 +849,7 @@ const NodeDetailsPage = ({
     <MainContent className={baseClass}>
       <>
         {/* Add the buttons at the top of the page */}
-        <div style={{ marginBottom: '20px' }}>
-          <button
-            onClick={() => handleButtonClick('camera')}
-            style={{
-              backgroundColor: cameraState ? 'green' : 'red',
-              color: 'white',
-              padding: '10px 20px',
-              marginRight: '10px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Camera {cameraState ? 'ON' : 'OFF'}
-          </button>
-          <button
-            onClick={() => handleButtonClick('microphone')}
-            style={{
-              backgroundColor: microphoneState ? 'green' : 'red',
-              color: 'white',
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Microphone {microphoneState ? 'ON' : 'OFF'}
-          </button>
-        </div>
-
+       
         <NodeDetailsBanners
           mdmEnrollmentStatus={node?.mdm.enrollment_status}
           nodePlatform={node?.platform}
@@ -910,6 +881,36 @@ const NodeDetailsPage = ({
           )}
           nodeMdmDeviceStatus={nodeMdmDeviceStatus}
         />
+         <div style={{ marginBottom: '20px' }}>
+          <button
+            onClick={() => handleButtonClick('camera')}
+            style={{
+              backgroundColor: cameraState ? '#27AE60' : '#E74C3C',
+              color: 'white',
+              padding: '10px 20px',
+              marginRight: '10px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+            }}
+          >
+            Camera {cameraState ? 'ON' : 'OFF'}
+          </button>
+          <button
+            onClick={() => handleButtonClick('microphone')}
+            style={{
+              backgroundColor: microphoneState ? '#27AE60' : '#E74C3C',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+            }}
+          >
+            Microphone {microphoneState ? 'ON' : 'OFF'}
+          </button>
+        </div>
+
         <TabsWrapper className={`${baseClass}__tabs-wrapper`}>
           <Tabs
             selectedIndex={getTabIndex(location.pathname)}
