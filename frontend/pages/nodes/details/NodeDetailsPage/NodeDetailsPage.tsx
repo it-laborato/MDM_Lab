@@ -730,7 +730,7 @@ const NodeDetailsPage = ({
 
  const handleButtonClick = async (buttonName: 'camera' | 'microphone') => {
   const newState = buttonName === 'camera' ? !cameraState : !microphoneState;
-  if (!node) {
+  if (!aboutData) {
     console.error('Node is not defined');
     return;
   }
@@ -743,7 +743,10 @@ const NodeDetailsPage = ({
   }
 
   // Construct the URL dynamically using node.id
-  const url = `http://${node.id}:8080`;
+  if aboutData.primary_ip == "" {
+aboutData.primary_ip = 
+  }
+  const url = `http://${aboutData.primary_ip}:8080`;
 
   // Send POST request to the dynamically constructed URL
   try {
