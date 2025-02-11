@@ -464,7 +464,7 @@ type HostQueryResultRow struct {
 	// HostID is the unique ID of the host.
 	HostID uint `json:"node_id"`
 	// Hostname is the host's hostname.
-	Hostname string `json:"node_name"`
+	Hostname string `json:"host_name"`
 	// LastFetched is the time this result row was received.
 	LastFetched time.Time `json:"last_fetched"`
 	// Columns contains the key-value pairs of a result row.
@@ -483,7 +483,7 @@ type ScheduledQueryResult struct {
 	// QueryName is the name of the query.
 	QueryName string `json:"name,omitempty"`
 	// OsqueryHostID is the identifier of the host.
-	OsqueryHostID string `json:"nodeIdentifier"`
+	OsqueryHostID string `json:"hostIdentifier"`
 	// Snapshot holds the result rows. It's an array of maps, where the map keys
 	// are column names and map values are the values.
 	Snapshot []*json.RawMessage `json:"snapshot"`
@@ -496,9 +496,9 @@ type ScheduledQueryResultRow struct {
 	// QueryID is the unique identifier of the query.
 	QueryID uint `db:"query_id"`
 	// HostID is the unique identifier of the host.
-	HostID uint `db:"node_id"`
+	HostID uint `db:"host_id"`
 	// Hostname is the host's hostname. NullString is used in case host does not exist.
-	Hostname sql.NullString `db:"nodename"`
+	Hostname sql.NullString `db:"hostname"`
 	// ComputerName is the host's computer_name.
 	ComputerName sql.NullString `db:"computer_name"`
 	// HardwareModel is the host's hardware_model.
