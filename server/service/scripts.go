@@ -65,7 +65,7 @@ func runScriptEndpoint(ctx context.Context, request interface{}, svc mdmlab.Serv
 ////////////////////////////////////////////////////////////////////////////////
 
 type runScriptSyncRequest struct {
-	HostID         uint   `json:"host_id"`
+	HostID         uint   `json:"node_id"`
 	ScriptID       *uint  `json:"script_id"`
 	ScriptContents string `json:"script_contents"`
 	ScriptName     string `json:"script_name"`
@@ -75,7 +75,7 @@ type runScriptSyncRequest struct {
 type runScriptSyncResponse struct {
 	Err error `json:"error,omitempty"`
 	*mdmlab.HostScriptResult
-	HostTimeout bool `json:"host_timeout"`
+	HostTimeout bool `json:"node_timeout"`
 }
 
 func (r runScriptSyncResponse) error() error { return r.Err }
@@ -152,10 +152,10 @@ func (svc *Service) RunHostScript(ctx context.Context, request *mdmlab.HostScrip
 		return nil, err
 	}
 
-	if cfg.ServerSettings.ScriptsDisabled {
-		svc.authz.SkipAuthorization(ctx)
-		return nil, mdmlab.NewUserMessageError(errors.New(mdmlab.RunScriptScriptsDisabledGloballyErrMsg), http.StatusForbidden)
-	}
+	// if cfg.ServerSettings.ScriptsDisabled {
+	// 	svc.authz.SkipAuthorization(ctx)
+	// 	return nil, mdmlab.NewUserMessageError(errors.New(mdmlab.RunScriptScriptsDisabledGloballyErrMsg), http.StatusForbidden)
+	// }
 
 	// Must check for presence of mutually exclusive parameters before
 	// authorization, as the permissions are not the same in all cases.

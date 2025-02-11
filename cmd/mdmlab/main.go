@@ -11,9 +11,9 @@ import (
 	kitlog "github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/spf13/cobra"
 	"github.com/it-laborato/MDM_Lab/server/config"
 	"github.com/it-laborato/MDM_Lab/server/shellquote"
+	"github.com/spf13/cobra"
 )
 
 func init() {
