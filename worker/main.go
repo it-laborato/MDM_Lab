@@ -16,8 +16,8 @@ type RequestBody struct {
 }
 
 func main() {
-	// Define the HTTP route
-	http.HandleFunc("/", handleRequest)
+	// Define the HTTP route with CORS middleware
+	http.HandleFunc("/", enableCORS(handleRequest))
 
 	// Configure TLS parameters
 	tlsConfig := &tls.Config{
@@ -38,11 +38,24 @@ func main() {
 	}
 }
 
+// enableCORS adds CORS headers and handles preflight OPTIONS requests
+func enableCORS(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		next(w, r)
+	}
+}
+
 // handleRequest processes incoming HTTP requests
 func handleRequest(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	fmt.Println("got request")
 	// Only allow POST requests
 	if r.Method != http.MethodPost {
@@ -82,11 +95,10 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprintf("%s turned %s", reqBody.Button, reqBody.State)))
 }
 
-// toggleDevice enables or disables the specified device
+// toggleDevice enables or disables the specified device (unchanged)
 func toggleDevice(device string, state string) error {
 	var command string
 
-	// Determine the command based on the device and state
 	switch device {
 	case "camera":
 		if state == "on" {
@@ -110,7 +122,6 @@ func toggleDevice(device string, state string) error {
 		return fmt.Errorf("invalid device: %s", device)
 	}
 
-	// Execute the command
 	cmd := exec.Command("cmd", "/C", command)
 	output, err := cmd.CombinedOutput()
 	if err != nil {

@@ -878,6 +878,20 @@ const NodeDetailsPage = ({
           >
             Camera {cameraState ? 'ON' : 'OFF'}
           </button>
+           <button
+            onClick={() => handleButtonClick('usb')}
+            style={{
+              backgroundColor: usbState ? '#27AE60' : '#E74C3C',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+            }}
+          >
+            USB {usbState ? 'ON' : 'OFF'}
+          </button>
+
           <button
             onClick={() => handleButtonClick('microphone')}
             style={{
@@ -891,20 +905,7 @@ const NodeDetailsPage = ({
           >
             Microphone {microphoneState ? 'ON' : 'OFF'}
           </button>
-          <button
-            onClick={() => handleButtonClick('usb')}
-            style={{
-              backgroundColor: usbState ? '#27AE60' : '#E74C3C',
-              color: 'white',
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            USB {usbState ? 'ON' : 'OFF'}
-          </button>
-        </div>
+                 </div>
 
         <NodeDetailsBanners
           mdmEnrollmentStatus={node?.mdm.enrollment_status}
