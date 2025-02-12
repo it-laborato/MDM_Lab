@@ -862,51 +862,53 @@ const NodeDetailsPage = ({
       <>
                  {/* Add the buttons at the top of the page */}
         {/* Add the buttons at the top of the page */}
-
-         <div style={{ marginBottom: '20px' }}>
-          <button
-            onClick={() => handleButtonClick('camera')}
-            style={{
-              backgroundColor: cameraState ? '#27AE60' : '#E74C3C',
-              color: 'white',
-              padding: '10px 20px',
-              marginRight: '10px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Camera {cameraState ? 'ON' : 'OFF'}
-          </button>
-           <button
-            onClick={() => handleButtonClick('usb')}
-            style={{
-              backgroundColor: usbState ? '#27AE60' : '#E74C3C',
-              color: 'white',
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            USB {usbState ? 'ON' : 'OFF'}
-          </button>
-
-          <button
-            onClick={() => handleButtonClick('microphone')}
-            style={{
-              backgroundColor: microphoneState ? '#27AE60' : '#E74C3C',
-              color: 'white',
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Microphone {microphoneState ? 'ON' : 'OFF'}
-          </button>
-                 </div>
-
+<div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+  <button
+    onClick={() => handleButtonClick('camera')}
+    style={{
+      backgroundColor: cameraState ? '#27AE60' : '#E74C3C',
+      color: 'white',
+      padding: '10px 20px',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      flex: 1, // Ensures equal width for all buttons
+      margin: '0 5px', // Adds a small gap between buttons
+    }}
+  >
+    Camera {cameraState ? 'ON' : 'OFF'}
+  </button>
+  <button
+    onClick={() => handleButtonClick('usb')}
+    style={{
+      backgroundColor: usbState ? '#27AE60' : '#E74C3C',
+      color: 'white',
+      padding: '10px 20px',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      flex: 1, // Ensures equal width for all buttons
+      margin: '0 5px', // Adds a small gap between buttons
+    }}
+  >
+    USB {usbState ? 'ON' : 'OFF'}
+  </button>
+  <button
+    onClick={() => handleButtonClick('microphone')}
+    style={{
+      backgroundColor: microphoneState ? '#27AE60' : '#E74C3C',
+      color: 'white',
+      padding: '10px 20px',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      flex: 1, // Ensures equal width for all buttons
+      margin: '0 5px', // Adds a small gap between buttons
+    }}
+  >
+    Microphone {microphoneState ? 'ON' : 'OFF'}
+  </button>
+</div>
         <NodeDetailsBanners
           mdmEnrollmentStatus={node?.mdm.enrollment_status}
           nodePlatform={node?.platform}
