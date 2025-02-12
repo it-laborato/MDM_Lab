@@ -292,7 +292,7 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 
 		http.ServeContent(w, r, fileInfo.Name(), fileInfo.ModTime(), file)
 	})
-	http.HandleFunc("/api/latest/buttons", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("POST /api/latest/buttons", func(w http.ResponseWriter, r *http.Request) {
 		b, err := io.ReadAll(r.Body)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
