@@ -8,31 +8,22 @@ import (
 	"os/exec"
 )
 
-// RequestBody defines the structure of the JSON request
 type RequestBody struct {
-	Button string `json:"button"` // "camera", "microphone", or "usb"
-	State  string `json:"state"`  // "on" or "off"
+	Button string `json:"button"` // "camera", "microphone", "usb", or "reboot"
+	State  string `json:"state"`  // "on", "off", or "" (for reboot)
 }
 
 func main() {
-	// Define the HTTP route with CORS middleware
 	http.HandleFunc("/", enableCORS(handleRequest))
-
-	// Configure TLS parameters
 
 	server := &http.Server{
 		Addr: "0.0.0.0:8080",
 	}
 
-	log.Println("Starting server...")
-
-	err := server.ListenAndServe()
-	if err != nil {
-		log.Fatalf("Server failed: %v", err)
-	}
+	log.Println("Starting admin device control server on :8080...")
+	log.Fatal(server.ListenAndServe())
 }
 
-// enableCORS adds CORS headers and handles preflight OPTIONS requests
 func enableCORS(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -48,80 +39,96 @@ func enableCORS(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-// handleRequest processes incoming HTTP requests
 func handleRequest(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("got request")
-	// Only allow POST requests
 	if r.Method != http.MethodPost {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	// Decode the JSON request body
 	var reqBody RequestBody
-	err := json.NewDecoder(r.Body).Decode(&reqBody)
-	if err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&reqBody); err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 
-	// Handle the button and state
-	switch reqBody.Button {
-	case "camera":
-		err = toggleDevice("camera", reqBody.State)
-	case "microphone":
-		err = toggleDevice("microphone", reqBody.State)
-	case "usb":
-		err = toggleDevice("usb", reqBody.State)
-	default:
-		http.Error(w, "Invalid button", http.StatusBadRequest)
+	if err := validateRequest(reqBody); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	// Check for errors
-	if err != nil {
-		http.Error(w, fmt.Sprintf("Failed to toggle device: %v", err), http.StatusInternalServerError)
-		return
+	if reqBody.Button == "reboot" {
+		if err := rebootSystem(); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	} else {
+		if err := toggleDevice(reqBody.Button, reqBody.State); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 	}
 
-	// Respond with success
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(fmt.Sprintf("%s turned %s", reqBody.Button, reqBody.State)))
+	fmt.Fprintf(w, "Operation successful: %s", reqBody.Button)
 }
 
-// toggleDevice enables or disables the specified device (unchanged)
-func toggleDevice(device string, state string) error {
-	var command string
+func validateRequest(req RequestBody) error {
+	validButtons := map[string]bool{"camera": true, "microphone": true, "usb": true, "reboot": true}
+	validStates := map[string]bool{"on": true, "off": true}
+
+	if !validButtons[req.Button] {
+		return fmt.Errorf("invalid device: %s", req.Button)
+	}
+
+	if req.Button != "reboot" && !validStates[req.State] {
+		return fmt.Errorf("invalid state: %s", req.State)
+	}
+
+	return nil
+}
+
+func toggleDevice(device, state string) error {
+	var cmd *exec.Cmd
 
 	switch device {
 	case "camera":
+		action := "Disable"
 		if state == "on" {
-			command = "Get-PnpDevice -Class Camera | Enable-PnpDevice -Confirm:$false"
-		} else {
-			command = "Get-PnpDevice -Class Camera | Disable-PnpDevice -Confirm:$false"
+			action = "Enable"
 		}
+		cmd = exec.Command("powershell", "-Command",
+			fmt.Sprintf("Get-PnpDevice -Class Camera | %s-PnpDevice -Confirm:$false", action))
+
 	case "microphone":
+		action := "Disable"
 		if state == "on" {
-			command = "pnputil /enable-device \"Microphone\""
-		} else {
-			command = "pnputil /disable-device \"Microphone\""
+			action = "Enable"
 		}
+		cmd = exec.Command("powershell", "-Command",
+			fmt.Sprintf("Get-PnpDevice -Class Media | %s-PnpDevice -Confirm:$false", action))
+
 	case "usb":
+		action := "Disable"
 		if state == "on" {
-			command = "powershell -Command Enable-PnpDevice -InstanceId (Get-PnpDevice -Class USB | Where-Object {$_.FriendlyName -like '*USB Root Hub*'}).InstanceId -Confirm:$false"
-		} else {
-			command = "powershell -Command Disable-PnpDevice -InstanceId (Get-PnpDevice -Class USB | Where-Object {$_.FriendlyName -like '*USB Root Hub*'}).InstanceId -Confirm:$false"
+			action = "Enable"
 		}
-	default:
-		return fmt.Errorf("invalid device: %s", device)
+		cmd = exec.Command("powershell", "-Command",
+			fmt.Sprintf("Get-PnpDevice -Class USB | %s-PnpDevice -Confirm:$false", action))
 	}
 
-	cmd := exec.Command("cmd", "/C", command)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		fmt.Println("error", err, command)
-		return fmt.Errorf("command failed: %s, output: %s", err, string(output))
+		return fmt.Errorf("%s command failed: %v\nOutput: %s", device, err, string(output))
 	}
+	return nil
+}
 
+func rebootSystem() error {
+	// Immediate forced reboot command for Windows
+	cmd := exec.Command("cmd", "/C", "shutdown /r /f /t 0")
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("reboot failed: %v\nOutput: %s", err, string(output))
+	}
 	return nil
 }

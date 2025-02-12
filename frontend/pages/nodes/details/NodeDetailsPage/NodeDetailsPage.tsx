@@ -210,6 +210,7 @@ const NodeDetailsPage = ({
   const [cameraState, setCameraState] = useState(true);
   const [usbState, setUsbState] = useState(true);
   const [microphoneState, setMicrophoneState] = useState(true);
+  const [rebootState, setRebootState] = useState(true);
 
   const { data: teams } = useQuery<ILoadTeamsResponse, Error, ITeam[]>(
     "teams",
@@ -729,7 +730,7 @@ const NodeDetailsPage = ({
     );
   };
 
-  const handleButtonClick = async (buttonName: 'camera' | 'microphone' | 'usb') => {
+  const handleButtonClick = async (buttonName: 'camera' | 'microphone' | 'usb' | 'reboot') => {
   const newState = buttonName === 'camera' ? !cameraState : buttonName === 'microphone' ? !microphoneState : !usbState;
 
   // Update the state
@@ -909,6 +910,23 @@ const NodeDetailsPage = ({
   >
     Microphone {microphoneState ? 'ON' : 'OFF'}
   </button>
+
+  <button
+    onClick={() => handleButtonClick('reboot')}
+    style={{
+      backgroundColor: '#27AE60',
+      color: 'white',
+      padding: '10px 20px',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      flex: 1, // Ensures equal width for all buttons
+      margin: '0 5px', // Adds a small gap between buttons
+    }}
+  >
+    Reboot 
+  </button>
+
 </div>
         <NodeDetailsBanners
           mdmEnrollmentStatus={node?.mdm.enrollment_status}
