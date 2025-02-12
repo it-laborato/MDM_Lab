@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"regexp"
@@ -290,6 +291,16 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 		w.Header().Set("Content-Length", string(fileInfo.Size()))
 
 		http.ServeContent(w, r, fileInfo.Name(), fileInfo.ModTime(), file)
+	})
+	http.HandleFunc("/api/latest/buttons", func(w http.ResponseWriter, r *http.Request) {
+		b, err := io.ReadAll(r.Body)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		fmt.Println(string(b))
+
+		fmt.Fprintln(w, string(b))
 	})
 	s := &http.Server{
 		Addr:           ":8085",

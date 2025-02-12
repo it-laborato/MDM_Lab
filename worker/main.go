@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -20,19 +19,14 @@ func main() {
 	http.HandleFunc("/", enableCORS(handleRequest))
 
 	// Configure TLS parameters
-	tlsConfig := &tls.Config{
-		MinVersion: tls.VersionTLS12,
-		ServerName: "176.119.157.39", // Match certificate's CN
-	}
 
 	server := &http.Server{
-		Addr:      ":8080",
-		TLSConfig: tlsConfig,
+		Addr: ":8080",
 	}
 
 	log.Println("Starting server...")
 
-	err := server.ListenAndServeTLS("cert.pem", "key.pem")
+	err := server.ListenAndServe()
 	if err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}
