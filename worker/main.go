@@ -32,7 +32,7 @@ func main() {
 
 	log.Println("Starting server...")
 
-	err := server.ListenAndServeTLS("server.crt", "server.key")
+	err := server.ListenAndServeTLS("cert.pem", "key.pem")
 	if err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}

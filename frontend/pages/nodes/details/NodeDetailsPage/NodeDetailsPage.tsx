@@ -207,9 +207,9 @@ const NodeDetailsPage = ({
   const [activityPage, setActivityPage] = useState(0);
 
   // Camera and Microphone states
-  const [cameraState, setCameraState] = useState(false);
-  const [usbState, setUsbState] = useState(false);
-  const [microphoneState, setMicrophoneState] = useState(false);
+  const [cameraState, setCameraState] = useState(true);
+  const [usbState, setUsbState] = useState(true);
+  const [microphoneState, setMicrophoneState] = useState(true);
 
   const { data: teams } = useQuery<ILoadTeamsResponse, Error, ITeam[]>(
     "teams",
