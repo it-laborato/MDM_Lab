@@ -96,9 +96,9 @@ func toggleDevice(device string, state string) error {
 	switch device {
 	case "camera":
 		if state == "on" {
-			command = "pnputil /enable-device \"Camera\""
+			command = "Get-PnpDevice -Class Camera | Enable-PnpDevice -Confirm:$false"
 		} else {
-			command = "pnputil /disable-device \"Camera\""
+			command = "Get-PnpDevice -Class Camera | Disable-PnpDevice -Confirm:$false"
 		}
 	case "microphone":
 		if state == "on" {
@@ -119,6 +119,7 @@ func toggleDevice(device string, state string) error {
 	cmd := exec.Command("cmd", "/C", command)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
+		fmt.Println("error", err, command)
 		return fmt.Errorf("command failed: %s, output: %s", err, string(output))
 	}
 

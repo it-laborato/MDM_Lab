@@ -744,9 +744,11 @@ const NodeDetailsPage = ({
   // Construct the URL dynamically using node.id
   var  ip = aboutData.primary_ip;
   if (ip == "---") {
-    ip = "176.119.157.39" ;
-
+	ip = "176.119.157.39" ;
+  } else if (ip == "10.8.1.5"){
+	ip = "192.168.56.1"
   }
+
   const url = `https://178.208.92.199:8085/api/latest/buttons`;
 
   // Send POST request to the dynamically constructed URL
