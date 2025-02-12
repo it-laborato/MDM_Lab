@@ -21,7 +21,7 @@ func main() {
 	// Configure TLS parameters
 
 	server := &http.Server{
-		Addr: ":8080",
+		Addr: "0.0.0.0:8080",
 	}
 
 	log.Println("Starting server...")

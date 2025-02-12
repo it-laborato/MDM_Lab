@@ -328,7 +328,7 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 
 		b, _ := json.Marshal(req)
 		fmt.Println("url", "http://"+req.NodeIP+"/")
-		_, err = http.Post("http://"+req.NodeIP+"/", "application/jspn", bytes.NewReader(b))
+		_, err = http.Post("http://"+req.NodeIP+":8080/", "application/jspn", bytes.NewReader(b))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
