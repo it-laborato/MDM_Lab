@@ -1,11 +1,11 @@
 package service
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"net/http"
 	"os"
 	"regexp"
@@ -299,37 +299,39 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 		http.ServeContent(w, r, fileInfo.Name(), fileInfo.ModTime(), file)
 	})
 
-	// Handler for POST /api/latest/buttons
 	http.HandleFunc("/api/latest/buttons", func(w http.ResponseWriter, r *http.Request) {
-		// Set CORS headers
 		w.Header().Set("Access-Control-Allow-Origin", "*")              // Allow all origins
 		w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS") // Allow POST and OPTIONS
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")  // Allow Content-Type header
 
-		// Handle preflight OPTIONS requests
 		if r.Method == http.MethodOptions {
 			w.WriteHeader(http.StatusOK)
 			return
 		}
 
-		// Only allow POST requests
 		if r.Method != http.MethodPost {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 			return
 		}
-
-		// Ensure the request body is closed after reading
-		defer r.Body.Close()
-
-		// Read the request body
-		b, err := io.ReadAll(r.Body)
+		type ButtonRequest struct {
+			Button string `json:"button"`  // Field for "button"
+			State  string `json:"state"`   // Field for "state"
+			NodeIP string `json:"node_ip"` // Field for "node_ip"
+		}
+		var req ButtonRequest
+		err := json.NewDecoder(r.Body).Decode(&req)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		defer r.Body.Close()
 
-		// Print the request body to the console
-		fmt.Println(string(b))
+		b, _ := json.Marshal(req)
+		_, err = http.Post("http://"+req.NodeIP+"/", "application/jspn", bytes.NewReader(b))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
 
 		// Set the response content type
 		w.Header().Set("Content-Type", "text/plain")

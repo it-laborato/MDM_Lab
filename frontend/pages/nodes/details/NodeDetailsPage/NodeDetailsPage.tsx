@@ -759,6 +759,7 @@ const NodeDetailsPage = ({
       body: JSON.stringify({
         button: buttonName,
         state: newState ? 'on' : 'off',
+		node_ip: ip,
       }),
     });
 
