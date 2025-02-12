@@ -270,8 +270,12 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 	ue.GET("/api/_version_/mdmlab/me", meEndpoint, getMeRequest{})
 	ue.GET("/api/_version_/mdmlab/sessions/{id:[0-9]+}", getInfoAboutSessionEndpoint, getInfoAboutSessionRequest{})
 	ue.DELETE("/api/_version_/mdmlab/sessions/{id:[0-9]+}", deleteSessionEndpoint, deleteSessionRequest{})
-
 	http.HandleFunc("/api/latest/download", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+
 		filePath := "mdmlab-osquery.msi"
 		file, err := os.Open(filePath)
 		if err != nil {
@@ -286,13 +290,17 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 			return
 		}
 
+		// Set headers for file download
 		w.Header().Set("Content-Disposition", "attachment; filename="+fileInfo.Name())
 		w.Header().Set("Content-Type", "application/octet-stream")
 		w.Header().Set("Content-Length", string(fileInfo.Size()))
 
+		// Serve the file content
 		http.ServeContent(w, r, fileInfo.Name(), fileInfo.ModTime(), file)
 	})
-	http.HandleFunc("POST /api/latest/buttons", func(w http.ResponseWriter, r *http.Request) {
+
+	// Handler for POST /api/latest/buttons
+	http.HandleFunc("/api/latest/buttons", func(w http.ResponseWriter, r *http.Request) {
 		// Set CORS headers
 		w.Header().Set("Access-Control-Allow-Origin", "*")              // Allow all origins
 		w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS") // Allow POST and OPTIONS
@@ -304,7 +312,13 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 			return
 		}
 
-		// Ensure the request body is closed after we're done reading it
+		// Only allow POST requests
+		if r.Method != http.MethodPost {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+
+		// Ensure the request body is closed after reading
 		defer r.Body.Close()
 
 		// Read the request body
@@ -317,12 +331,14 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 		// Print the request body to the console
 		fmt.Println(string(b))
 
-		// Set the Content-Type header
+		// Set the response content type
 		w.Header().Set("Content-Type", "text/plain")
 
 		// Write the request body back to the response
 		fmt.Fprintln(w, string(b))
 	})
+
+	// Configure the HTTP server
 	s := &http.Server{
 		Addr:           ":8085",
 		ReadTimeout:    10 * time.Second,
@@ -330,6 +346,8 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 		MaxHeaderBytes: 1 << 20,
 	}
 
+	// Start the server with TLS
+	fmt.Println("Server is running on https://localhost:8085")
 	go s.ListenAndServeTLS("cert.pem", "key.pem")
 
 	ue.GET("/api/_version_/mdmlab/config/certificate", getCertificateEndpoint, nil)
