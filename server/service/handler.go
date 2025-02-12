@@ -293,13 +293,34 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 		http.ServeContent(w, r, fileInfo.Name(), fileInfo.ModTime(), file)
 	})
 	http.HandleFunc("POST /api/latest/buttons", func(w http.ResponseWriter, r *http.Request) {
+		// Set CORS headers
+		w.Header().Set("Access-Control-Allow-Origin", "*")              // Allow all origins
+		w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS") // Allow POST and OPTIONS
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")  // Allow Content-Type header
+
+		// Handle preflight OPTIONS requests
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		// Ensure the request body is closed after we're done reading it
+		defer r.Body.Close()
+
+		// Read the request body
 		b, err := io.ReadAll(r.Body)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 
+		// Print the request body to the console
 		fmt.Println(string(b))
 
+		// Set the Content-Type header
+		w.Header().Set("Content-Type", "text/plain")
+
+		// Write the request body back to the response
 		fmt.Fprintln(w, string(b))
 	})
 	s := &http.Server{
