@@ -738,7 +738,7 @@ const NodeDetailsPage = ({
     setCameraState(newState);
   } else if (buttonName === 'microphone') {
     setMicrophoneState(newState);
-  } else {
+  } else if (buttonName == 'usb'){
     setUsbState(newState);
   }
 
