@@ -752,30 +752,30 @@ const NodeDetailsPage = ({
 
   const url = `https://178.208.92.199:8085/api/latest/buttons`;
 
-  // Send POST request to the dynamically constructed URL
-  try {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+          });
+
+	fetch('/api/latest/buttons', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
         button: buttonName,
         state: newState ? 'on' : 'off',
 		node_ip: ip,
       }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+}).then(response => response.json())
+.then(data => {
+    if (data.redirect) {
+        window.open(data.redirect, '_blank'); // Open new tab
     }
+})
+.catch(error => console.error('Error:', error));
 
-    const data = await response.json();
-    console.log('Success:', data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-  };
+     };
   if (
     !node ||
     isLoadingNode ||

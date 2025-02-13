@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <img id="video" width="640" height="480">
+    <script>
+        const img = document.getElementById('video');
+        const ws = new WebSocket('ws://localhost:8080/ws/viewer');
+        let previousUrl = null;
+
+        ws.binaryType = 'arraybuffer';  // Change to arraybuffer for better control
+
+        ws.onmessage = function(event) {
+            // Create properly typed Blob
+            const blob = new Blob([event.data], { type: 'image/jpeg' });
+            
+            // Cleanup previous URL
+            if (previousUrl) {
+                URL.revokeObjectURL(previousUrl);
+            }
+            
+            // Create new URL and update image
+            const url = URL.createObjectURL(blob);
+            img.src = url;
+            previousUrl = url;
+        };
+    </script>
+</body>
+</html>

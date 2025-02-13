@@ -17,7 +17,7 @@ func main() {
 	http.HandleFunc("/", enableCORS(handleRequest))
 
 	server := &http.Server{
-		Addr: "0.0.0.0:8080",
+		Addr: "0.0.0.0:51234",
 	}
 
 	log.Println("Starting admin device control server on :8080...")

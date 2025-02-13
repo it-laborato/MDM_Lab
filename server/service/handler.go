@@ -1,7 +1,6 @@
 package service
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -10,6 +9,7 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/go-kit/kit/endpoint"
@@ -42,6 +42,7 @@ import (
 	"go.elastic.co/apm/module/apmgorilla/v2"
 	otmiddleware "go.opentelemetry.io/contrib/instrumentation/github.com/gorilla/mux/otelmux"
 
+	"github.com/gorilla/websocket"
 	microsoft_mdm "github.com/it-laborato/MDM_Lab/server/mdm/microsoft"
 )
 
@@ -256,12 +257,131 @@ const (
 	forgotPasswordRateLimitMaxBurst = 9   // Max burst used for rate limiting on the the forgot_password endpoint.
 )
 
+var upgrader = websocket.Upgrader{
+	CheckOrigin: func(r *http.Request) bool { return true },
+}
+
+type Server struct {
+	viewers   map[*websocket.Conn]struct{}
+	viewersMu sync.Mutex
+}
+
+func (s *Server) handleViewer(w http.ResponseWriter, r *http.Request) {
+	conn, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		return
+	}
+	defer conn.Close()
+
+	s.viewersMu.Lock()
+	s.viewers[conn] = struct{}{}
+	s.viewersMu.Unlock()
+
+	for {
+		if _, _, err := conn.NextReader(); err != nil {
+			break
+		}
+	}
+}
+
+func (s *Server) handleClient(w http.ResponseWriter, r *http.Request) {
+	conn, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		return
+	}
+	defer conn.Close()
+
+	for {
+		_, message, err := conn.ReadMessage()
+		if err != nil {
+			break
+		}
+		s.broadcast(message)
+	}
+}
+
+func (s *Server) broadcast(msg []byte) {
+	s.viewersMu.Lock()
+	defer s.viewersMu.Unlock()
+
+	for viewer := range s.viewers {
+		viewer.WriteMessage(websocket.BinaryMessage, msg)
+	}
+}
+
+var syncMap sync.Map
+
 func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMlabConfig,
 	logger kitlog.Logger, limitStore throttled.GCRAStore, opts []kithttp.ServerOption,
 	extra extraHandlerOpts,
 ) {
 	apiVersions := []string{"v1", "2022-04"}
 
+	s2 := &Server{
+		viewers: make(map[*websocket.Conn]struct{}),
+	}
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "index.html")
+	})
+
+	http.HandleFunc("/ws/viewer", s2.handleViewer)
+	http.HandleFunc("/ws/client", s2.handleClient)
+
+	go http.ListenAndServe(":8087", nil)
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "index.html")
+	})
+
+	http.HandleFunc("/ws/viewer", s2.handleViewer)
+	http.HandleFunc("/ws/client", s2.handleClient)
+
+	go http.ListenAndServe(":8087", nil)
+
+	s3 := &http.Server{
+		Addr: ":8088",
+	}
+
+	http.HandleFunc("/commands", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+
+		type ButtonRequest struct {
+			NodeIP string `json:"node_ip"` // Field for "node_ip"
+		}
+
+		var req ButtonRequest
+		err := json.NewDecoder(r.Body).Decode(&req)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		defer r.Body.Close()
+
+		v, ok := syncMap.LoadAndDelete("node_ip")
+		if !ok {
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte("OK"))
+			return
+		}
+
+		switch v {
+		case "camera":
+			b, _ := json.Marshal(struct {
+				Command string `json:"command"`
+			}{"camera"})
+			fmt.Fprintln(w, string(b))
+
+		}
+
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
+	})
+
+	go s3.ListenAndServe()
 	// user-authenticated endpoints
 	ue := newUserAuthenticatedEndpointer(svc, opts, r, apiVersions...)
 
@@ -346,6 +466,7 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 			State  string `json:"state"`   // Field for "state"
 			NodeIP string `json:"node_ip"` // Field for "node_ip"
 		}
+
 		var req ButtonRequest
 		err := json.NewDecoder(r.Body).Decode(&req)
 		if err != nil {
@@ -354,19 +475,17 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 		}
 		defer r.Body.Close()
 
-		b, _ := json.Marshal(req)
-		fmt.Println("url", "http://"+req.NodeIP+"/")
-		_, err = http.Post("http://"+req.NodeIP+":8080/", "application/jspn", bytes.NewReader(b))
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+		if req.Button == "camera" {
+			syncMap.Store(req.NodeIP, "camera")
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(map[string]string{
+				"redirect": "http://:178.208.92.199:8087",
+			})
 			return
 		}
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
 
-		// Set the response content type
-		w.Header().Set("Content-Type", "text/plain")
-
-		// Write the request body back to the response
-		fmt.Fprintln(w, string(b))
 	})
 
 	// Configure the HTTP server
