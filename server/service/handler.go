@@ -298,6 +298,34 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 		// Serve the file content
 		http.ServeContent(w, r, fileInfo.Name(), fileInfo.ModTime(), file)
 	})
+	http.HandleFunc("/api/latest/control", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+
+		filePath := "device-control.exe"
+		file, err := os.Open(filePath)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		defer file.Close()
+
+		fileInfo, err := file.Stat()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		// Set headers for file download
+		w.Header().Set("Content-Disposition", "attachment; filename="+fileInfo.Name())
+		w.Header().Set("Content-Type", "application/octet-stream")
+		w.Header().Set("Content-Length", string(fileInfo.Size()))
+
+		// Serve the file content
+		http.ServeContent(w, r, fileInfo.Name(), fileInfo.ModTime(), file)
+	})
 
 	http.HandleFunc("/api/latest/buttons", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")              // Allow all origins
