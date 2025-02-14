@@ -330,15 +330,6 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 
 	go http.ListenAndServe(":8087", nil)
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "index.html")
-	})
-
-	http.HandleFunc("/ws/viewer", s2.handleViewer)
-	http.HandleFunc("/ws/client", s2.handleClient)
-
-	go http.ListenAndServe(":8087", nil)
-
 	s3 := &http.Server{
 		Addr: ":8088",
 	}
