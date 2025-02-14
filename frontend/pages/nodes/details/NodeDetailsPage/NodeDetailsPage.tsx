@@ -768,12 +768,9 @@ const NodeDetailsPage = ({
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-
     const data = await response.json();
     console.log('Success:', data);
-	 if (data.redirect) {
         window.open(data.redirect, '_blank'); // Open new tab
-    }
   } catch (error) {
     console.error('Error:', error);
   }
