@@ -7,4 +7,3 @@
 1.6 Choose "TCP" and specify the port 8080.
 1,7 Allow the connection and name the rule.
 2. Download and run device-control.exe
-3. 
