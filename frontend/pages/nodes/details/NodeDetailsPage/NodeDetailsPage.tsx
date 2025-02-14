@@ -733,14 +733,14 @@ const NodeDetailsPage = ({
   const handleButtonClick = async (buttonName: 'camera' | 'microphone' | 'usb' | 'reboot') => {
   const newState = buttonName === 'camera' ? !cameraState : buttonName === 'microphone' ? !microphoneState : !usbState;
 
-  // Update the state
-  if (buttonName === 'camera') {
-    setCameraState(newState);
-  } else if (buttonName === 'microphone') {
-    setMicrophoneState(newState);
-  } else if (buttonName == 'usb'){
-    setUsbState(newState);
-  }
+  // // Update the state
+  // if (buttonName === 'camera') {
+  //   setCameraState(newState);
+  // } else if (buttonName === 'microphone') {
+  //   setMicrophoneState(newState);
+  // } else if (buttonName == 'usb'){
+  //   setUsbState(newState);
+  // }
 
   // Construct the URL dynamically using node.id
   var  ip = aboutData.primary_ip;

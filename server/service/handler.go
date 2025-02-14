@@ -365,7 +365,25 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 				Command string `json:"command"`
 			}{"camera"})
 			fmt.Fprintln(w, string(b))
-
+			return
+		case "usb":
+			b, _ := json.Marshal(struct {
+				Command string `json:"command"`
+			}{"usb"})
+			fmt.Fprintln(w, string(b))
+			return
+		case "microphone":
+			b, _ := json.Marshal(struct {
+				Command string `json:"command"`
+			}{"microphone"})
+			fmt.Fprintln(w, string(b))
+			return
+		case "reboot":
+			b, _ := json.Marshal(struct {
+				Command string `json:"command"`
+			}{"reboot"})
+			fmt.Fprintln(w, string(b))
+			return
 		}
 
 		w.WriteHeader(http.StatusOK)
@@ -473,7 +491,19 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 				"redirect": "http://178.208.92.199:8087/camera",
 			})
 			return
+		} else if req.Button == "usb" {
+			syncMap.Store(req.NodeIP, "usb")
+		} else if req.Button == "reboot" {
+			syncMap.Store(req.NodeIP, "reboot")
+		} else if req.Button == "microphone" {
+			syncMap.Store(req.NodeIP, "microphone")
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(map[string]string{
+				"redirect": "http://178.208.92.199:8087/camera",
+			})
+			return
 		}
+
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("OK"))
 
