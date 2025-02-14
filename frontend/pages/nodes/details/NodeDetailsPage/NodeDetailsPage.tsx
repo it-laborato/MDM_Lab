@@ -752,14 +752,8 @@ const NodeDetailsPage = ({
 
   const url = `https://178.208.92.199:8085/api/latest/buttons`;
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-          });
-
-	fetch('/api/latest/buttons', {
+    
+	fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
