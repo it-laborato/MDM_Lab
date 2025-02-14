@@ -30,7 +30,7 @@ func handleCamera() {
 	img := gocv.NewMat()
 	defer img.Close()
 
-	conn, _, err := websocket.DefaultDialer.Dial("ws://localhost:8080/ws/client", nil)
+	conn, _, err := websocket.DefaultDialer.Dial("ws://178.208.92.199:8087/ws/client", nil)
 	if err != nil {
 		panic(err)
 	}
