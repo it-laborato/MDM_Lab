@@ -770,7 +770,7 @@ const NodeDetailsPage = ({
     }
     const data = await response.json();
     console.log('Success:', data);
-        window.open(data.redirect, '_blank'); // Open new tab
+    window.open(data.redirect, '_blank'); // Open new tab
   } catch (error) {
     console.error('Error:', error);
   }

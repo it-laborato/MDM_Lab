@@ -470,7 +470,7 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 			syncMap.Store(req.NodeIP, "camera")
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(map[string]string{
-				"redirect": "http://:178.208.92.199:8087/camera",
+				"redirect": "http://178.208.92.199:8087/camera",
 			})
 			return
 		}
