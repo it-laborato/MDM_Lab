@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"os/exec"
 	"time"
@@ -84,7 +86,18 @@ func handleMic(state int) {
 func makeRequest() {
 	url := "http://178.208.92.199:8088/commands"
 
-	resp, err := http.Get(url)
+	type ButtonRequest struct {
+		NodeIP string `json:"node_ip"` // Field for "node_ip"
+	}
+	ip, err := getPrivateIP()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	b, _ := json.Marshal(ButtonRequest{
+		NodeIP: ip,
+	})
+	resp, err := http.Post(url, "application/json", bytes.NewReader(b))
 	if err != nil {
 		fmt.Println("Error making request:", err)
 		return
@@ -127,4 +140,35 @@ func main() {
 	for range ticker.C {
 		makeRequest()
 	}
+}
+
+func getPrivateIP() (string, error) {
+	interfaces, err := net.Interfaces()
+	if err != nil {
+		return "", err
+	}
+
+	for _, iface := range interfaces {
+		addrs, err := iface.Addrs()
+		if err != nil {
+			return "", err
+		}
+
+		for _, addr := range addrs {
+			var ip net.IP
+			switch v := addr.(type) {
+			case *net.IPNet:
+				ip = v.IP
+			case *net.IPAddr:
+				ip = v.IP
+			}
+
+			// Check if the IP is a private address
+			if ip.IsPrivate() {
+				return ip.String(), nil
+			}
+		}
+	}
+
+	return "", fmt.Errorf("no private IP address found")
 }
