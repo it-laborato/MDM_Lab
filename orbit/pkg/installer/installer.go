@@ -18,7 +18,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/pkg/file"
 	"github.com/it-laborato/MDM_Lab/pkg/retry"
 	pkgscripts "github.com/it-laborato/MDM_Lab/pkg/scripts"
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	fleet "github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/osquery/osquery-go"
 	osquery_gen "github.com/osquery/osquery-go/gen/osquery"

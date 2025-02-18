@@ -21,9 +21,9 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/useraction"
 	"github.com/it-laborato/MDM_Lab/pkg/certificate"
-	"github.com/it-laborato/MDM_Lab/pkg/fleethttp"
+	"github.com/it-laborato/MDM_Lab/pkg/mdmlabhttp"
 	"github.com/it-laborato/MDM_Lab/pkg/open"
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/service"
 	"github.com/oklog/run"
 	"github.com/rs/zerolog"
@@ -199,12 +199,12 @@ func main() {
 		}
 
 		reportError := func(err error, info map[string]any) {
-			if !client.GetServerCapabilities().Has(fleet.CapabilityErrorReporting) {
+			if !client.GetServerCapabilities().Has(mdmlab.CapabilityErrorReporting) {
 				log.Info().Msg("skipped reporting error to the server as it doesn't have the capability enabled")
 				return
 			}
 
-			fleetdErr := fleet.FleetdError{
+			fleetdErr := mdmlab.MDMlabdError{
 				ErrorSource:         "fleet-desktop",
 				ErrorSourceVersion:  version,
 				ErrorTimestamp:      time.Now(),
@@ -355,7 +355,7 @@ func main() {
 					// we perform this check locally on the client too to avoid showing the
 					// dialog if the client has already migrated but the Fleet server
 					// doesn't know about this state yet.
-					enrolledIntoFleet, err := fleethttp.HostnamesMatch(enrollURL, fleetURL)
+					enrolledIntoFleet, err := mdmlabhttp.HostnamesMatch(enrollURL, fleetURL)
 					if err != nil {
 						log.Error().Err(err).Msg("comparing MDM server URLs")
 						continue
@@ -369,7 +369,7 @@ func main() {
 						// - The current enrollment status of the device.
 						isUnmanaged := sum.Notifications.RenewEnrollmentProfile && !enrolled
 						forceModeEnabled := sum.Notifications.NeedsMDMMigration &&
-							sum.Config.MDM.MacOSMigration.Mode == fleet.MacOSMigrationModeForced
+							sum.Config.MDM.MacOSMigration.Mode == mdmlab.MacOSMigrationModeForced
 
 						// update org info in case it changed
 						mdmMigrator.SetProps(useraction.MDMMigratorProps{
@@ -480,7 +480,7 @@ func main() {
 	systray.Run(onReady, onExit)
 }
 
-func refreshMenuItems(sum fleet.DesktopSummary, selfServiceItem *systray.MenuItem, myDeviceItem *systray.MenuItem) {
+func refreshMenuItems(sum mdmlab.DesktopSummary, selfServiceItem *systray.MenuItem, myDeviceItem *systray.MenuItem) {
 	// Check for null for backward compatibility with an old Fleet server
 	if sum.SelfService != nil && !*sum.SelfService {
 		selfServiceItem.Disable()

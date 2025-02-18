@@ -8,7 +8,7 @@ import (
 
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/swiftdialog"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	fleet "github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/rs/zerolog/log"
 )
 

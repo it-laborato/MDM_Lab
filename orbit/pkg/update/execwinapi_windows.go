@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/sys/windows"
 	"golang.org/x/sys/windows/registry"
@@ -169,8 +169,8 @@ func improveWindowsAPIError(apiFunc, discoURL string, code uintptr, err error) e
 }
 
 func generateWindowsMDMAccessTokenPayload(args WindowsMDMEnrollmentArgs) ([]byte, error) {
-	var pld fleet.WindowsMDMAccessTokenPayload
-	pld.Type = fleet.WindowsMDMProgrammaticEnrollmentType // always programmatic for now
+	var pld mdmlab.WindowsMDMAccessTokenPayload
+	pld.Type = mdmlab.WindowsMDMProgrammaticEnrollmentType // always programmatic for now
 	pld.Payload.OrbitNodeKey = args.OrbitNodeKey
 	return json.Marshal(pld)
 }

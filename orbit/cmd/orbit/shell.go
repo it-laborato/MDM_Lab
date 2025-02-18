@@ -8,12 +8,12 @@ import (
 	"runtime"
 	"strings"
 
+	"github.com/google/uuid"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/osquery"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/update/filestore"
 	"github.com/it-laborato/MDM_Lab/pkg/secure"
-	"github.com/google/uuid"
 	"github.com/oklog/run"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"

@@ -18,6 +18,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/augeas"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/build"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/constant"
@@ -43,9 +44,8 @@ import (
 	"github.com/it-laborato/MDM_Lab/pkg/file"
 	retrypkg "github.com/it-laborato/MDM_Lab/pkg/retry"
 	"github.com/it-laborato/MDM_Lab/pkg/secure"
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	fleet "github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/service"
-	"github.com/google/uuid"
 	"github.com/oklog/run"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"

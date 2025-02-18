@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/it-laborato/MDM_Lab/server/fleet"
 	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
+	fleet "github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/stretchr/testify/require"
 )
@@ -20,13 +20,13 @@ func TestGetFleetdConfig(t *testing.T) {
 	cases := []struct {
 		cmdOut  *string
 		cmdErr  error
-		wantOut *fleet.MDMAppleFleetdConfig
+		wantOut *fleet.MDMAppleMDMlabdConfig
 		wantErr error
 	}{
 		{nil, testErr, nil, testErr},
 		{ptr.String("invalid-xml"), nil, nil, io.EOF},
-		{&emptyOutput, nil, &fleet.MDMAppleFleetdConfig{}, nil},
-		{&withFleetdConfig, nil, &fleet.MDMAppleFleetdConfig{EnrollSecret: "ENROLL_SECRET", FleetURL: "https://test.example.com"}, nil},
+		{&emptyOutput, nil, &fleet.MDMAppleMDMlabdConfig{}, nil},
+		{&withFleetdConfig, nil, &fleet.MDMAppleMDMlabdConfig{EnrollSecret: "ENROLL_SECRET", MDMlabURL: "https://test.example.com"}, nil},
 	}
 
 	origExecProfileCmd := execProfileCmd
@@ -232,7 +232,7 @@ func TestCustomInstallerWorkflow(t *testing.T) {
 		{"happy path", withFleetdConfigAndEnrollment, "user@example.com", nil},
 		{"empty profiles", emptyOutput, "", ErrNotFound},
 		{"no enrollment payload", withFleetdConfig, "", ErrNotFound},
-		{"wrong payload identifier", strings.Replace(withFleetdConfigAndEnrollment, mobileconfig.FleetEnrollmentPayloadIdentifier, "wrong-identifier", 1), "", ErrNotFound},
+		{"wrong payload identifier", strings.Replace(withFleetdConfigAndEnrollment, mobileconfig.MDMlabEnrollmentPayloadIdentifier, "wrong-identifier", 1), "", ErrNotFound},
 		{"no end user email key", strings.Replace(withFleetdConfigAndEnrollment, "EndUserEmail", "WrongKey", 1), "", ErrNotFound},
 	} {
 		t.Run(c.name, func(t *testing.T) {
@@ -474,10 +474,10 @@ func TestGetProfilePayloadContent(t *testing.T) {
 	require.Empty(t, ws.foo)
 
 	// struct type is acceptable and returns the expected value type corresponds to the payload identifier
-	c, err := getProfilePayloadContent[fleet.MDMAppleFleetdConfig]("com.fleetdm.fleetd.config")
+	c, err := getProfilePayloadContent[fleet.MDMAppleMDMlabdConfig]("com.fleetdm.fleetd.config")
 	require.NoError(t, err)
 	require.NotNil(t, c)
-	require.Equal(t, *c, fleet.MDMAppleFleetdConfig{EnrollSecret: "ENROLL_SECRET", FleetURL: "https://test.example.com"})
+	require.Equal(t, *c, fleet.MDMAppleMDMlabdConfig{EnrollSecret: "ENROLL_SECRET", MDMlabURL: "https://test.example.com"})
 
 	// struct type is acceptable and returns the expected value type corresponds to the payload identifier
 	e, err := getProfilePayloadContent[fleet.MDMCustomEnrollmentProfileItem]("com.fleetdm.fleet.mdm.apple.mdm")
