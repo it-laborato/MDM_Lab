@@ -88,7 +88,7 @@ func main() {
 			EnvVars: []string{"ORBIT_INSECURE"},
 		},
 		&cli.StringFlag{
-			Name:    "fleet-url",
+			Name:    "mdmlab-url",
 			Usage:   "URL (host:port) of Fleet server",
 			EnvVars: []string{"ORBIT_FLEET_URL"},
 		},
@@ -416,20 +416,20 @@ func main() {
 				// operating systems that don't have profile support.
 				case err != nil:
 					log.Error().Err(err).Msg("reading configuration profile")
-				case config.EnrollSecret == "" || config.FleetURL == "":
+				case config.EnrollSecret == "" || config.MDMlabURL == "":
 					log.Debug().Msg("enroll secret or fleet url are empty in configuration profile, not setting either")
 				default:
 					log.Info().Msg("setting enroll-secret and fleet-url configs from configuration profile")
 					if err := c.Set("enroll-secret", config.EnrollSecret); err != nil {
 						return fmt.Errorf("set enroll secret from configuration profile: %w", err)
 					}
-					if err := c.Set("fleet-url", config.FleetURL); err != nil {
+					if err := c.Set("fleet-url", config.MDMlabURL); err != nil {
 						return fmt.Errorf("set fleet URL from configuration profile: %w", err)
 					}
 					if err := writeSecret(config.EnrollSecret, c.String("root-dir")); err != nil {
 						return fmt.Errorf("write enroll secret: %w", err)
 					}
-					if err := writeFleetURL(config.FleetURL, c.String("root-dir")); err != nil {
+					if err := writeFleetURL(config.MDMlabURL, c.String("root-dir")); err != nil {
 						return fmt.Errorf("write fleet URL: %w", err)
 					}
 				}
@@ -1288,7 +1288,7 @@ func main() {
 					msg := <-desktopRunner.errorNotifyCh
 					log.Error().Err(errors.New(msg)).Msg("fleet-desktop runner error")
 					// Vital errors are always sent to Fleet, regardless of the error reporting setting FLEET_ENABLE_POST_CLIENT_DEBUG_ERRORS.
-					fleetdErr := fleet.FleetdError{
+					fleetdErr := fleet.MDMlabdError{
 						Vital:              true,
 						ErrorSource:        "fleet-desktop",
 						ErrorSourceVersion: desktopVersion,

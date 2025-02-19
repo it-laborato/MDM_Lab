@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -12,15 +12,15 @@ func TestCfgsDiffer(t *testing.T) {
 	for _, tc := range []struct {
 		name           string
 		overrideCfg    *serverOverridesConfig
-		orbitConfig    *fleet.OrbitConfig
+		orbitConfig    *mdmlab.OrbitConfig
 		desktopEnabled bool
 		expected       bool
 	}{
 		{
 			name:        "initial set of remote configuration",
 			overrideCfg: &serverOverridesConfig{},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{
 					Orbit:    "stable",
 					Osqueryd: "stable",
 					Desktop:  "stable",
@@ -32,8 +32,8 @@ func TestCfgsDiffer(t *testing.T) {
 		{
 			name:        "initial set of remote configuration, omit some channels",
 			overrideCfg: &serverOverridesConfig{},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{
 					Orbit: "stable",
 				},
 			},
@@ -43,8 +43,8 @@ func TestCfgsDiffer(t *testing.T) {
 		{
 			name:        "initial set of remote configuration, change orbit and omit some channels",
 			overrideCfg: &serverOverridesConfig{},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{
 					Orbit: "edge",
 				},
 			},
@@ -54,8 +54,8 @@ func TestCfgsDiffer(t *testing.T) {
 		{
 			name:        "initial set of remote configuration, set desktop when Fleet Desktop disabled",
 			overrideCfg: &serverOverridesConfig{},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{
 					Desktop: "foobar",
 				},
 			},
@@ -65,8 +65,8 @@ func TestCfgsDiffer(t *testing.T) {
 		{
 			name:        "initial set of remote configuration, set desktop with Fleet Desktop enabled",
 			overrideCfg: &serverOverridesConfig{},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{
 					Desktop: "foobar",
 				},
 			},
@@ -78,8 +78,8 @@ func TestCfgsDiffer(t *testing.T) {
 			overrideCfg: &serverOverridesConfig{
 				DesktopChannel: "other",
 			},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{
 					Desktop: "foobar",
 				},
 			},
@@ -91,8 +91,8 @@ func TestCfgsDiffer(t *testing.T) {
 			overrideCfg: &serverOverridesConfig{
 				OrbitChannel: "first",
 			},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{
 					Orbit: "second",
 				},
 			},
@@ -104,8 +104,8 @@ func TestCfgsDiffer(t *testing.T) {
 			overrideCfg: &serverOverridesConfig{
 				OsquerydChannel: "first",
 			},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{
 					Osqueryd: "second",
 				},
 			},
@@ -119,8 +119,8 @@ func TestCfgsDiffer(t *testing.T) {
 				OsquerydChannel: "stable",
 				DesktopChannel:  "stable",
 			},
-			orbitConfig: &fleet.OrbitConfig{
-				UpdateChannels: &fleet.OrbitUpdateChannels{},
+			orbitConfig: &mdmlab.OrbitConfig{
+				UpdateChannels: &mdmlab.OrbitUpdateChannels{},
 			},
 			desktopEnabled: true,
 			expected:       false,

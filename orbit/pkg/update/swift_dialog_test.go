@@ -3,12 +3,12 @@ package update
 import (
 	"testing"
 
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/stretchr/testify/require"
 )
 
 func TestSwiftDialogUpdatesDisabled(t *testing.T) {
-	cfg := &fleet.OrbitConfig{}
+	cfg := &mdmlab.OrbitConfig{}
 	cfg.Notifications.NeedsMDMMigration = true
 	cfg.Notifications.RenewEnrollmentProfile = true
 	r := ApplySwiftDialogDownloaderMiddleware(nil)

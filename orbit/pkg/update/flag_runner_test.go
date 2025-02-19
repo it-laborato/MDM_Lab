@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/stretchr/testify/require"
 )
 
@@ -77,7 +77,7 @@ func touchFile(t *testing.T, name string) {
 	require.NoError(t, file.Close())
 }
 
-// TestDoFlagsUpdateWithEmptyFlags tests the scenario of Fleet flag `command_line_flags`
+// TestDoFlagsUpdateWithEmptyFlags tests the scenario of mdmlab flag `command_line_flags`
 // being set to an empty JSON document `{}` and Orbit osquery.flags file being
 // an empty file. Such scenario should trigger no update of flags.
 func TestDoFlagsUpdateWithEmptyFlags(t *testing.T) {
@@ -85,7 +85,7 @@ func TestDoFlagsUpdateWithEmptyFlags(t *testing.T) {
 	osqueryFlagsFile := filepath.Join(rootDir, "osquery.flags")
 	touchFile(t, osqueryFlagsFile)
 
-	testConfig := &fleet.OrbitConfig{
+	testConfig := &mdmlab.OrbitConfig{
 		Flags: json.RawMessage("{}"),
 	}
 
@@ -100,17 +100,17 @@ func TestDoFlagsUpdateWithEmptyFlags(t *testing.T) {
 	require.NoError(t, err)
 	require.False(t, restartQueued)
 
-	// Non-empty fleet flags and osquery.flags has empty flags.
-	testConfig = &fleet.OrbitConfig{
+	// Non-empty mdmlab flags and osquery.flags has empty flags.
+	testConfig = &mdmlab.OrbitConfig{
 		Flags: json.RawMessage(`{"--verbose": true}`),
 	}
 	err = fr.Run(testConfig)
 	require.NoError(t, err)
 	require.True(t, restartQueued)
 
-	// Empty Fleet flags and osquery.flags has non-empty flags.
+	// Empty mdmlab flags and osquery.flags has non-empty flags.
 	restartQueued = false
-	testConfig = &fleet.OrbitConfig{
+	testConfig = &mdmlab.OrbitConfig{
 		Flags: json.RawMessage("{}"),
 	}
 	err = os.WriteFile(osqueryFlagsFile, []byte("--verbose=true\n"), 0o644)

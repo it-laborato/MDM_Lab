@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/it-laborato/MDM_Lab/pkg/retry"
-	"github.com/it-laborato/MDM_Lab/server/fleet"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	osquery_gen "github.com/osquery/osquery-go/gen/osquery"
 	"github.com/stretchr/testify/assert"
@@ -23,8 +23,8 @@ import (
 type TestOrbitClient struct {
 	downloadInstallerFn        func(uint, string) (string, error)
 	downloadInstallerFromURLFn func(url string, filename string, downloadDir string) (string, error)
-	getInstallerDetailsFn      func(string) (*fleet.SoftwareInstallDetails, error)
-	saveInstallerResultFn      func(*fleet.HostSoftwareInstallResultPayload) error
+	getInstallerDetailsFn      func(string) (*mdmlab.SoftwareInstallDetails, error)
+	saveInstallerResultFn      func(*mdmlab.HostSoftwareInstallResultPayload) error
 }
 
 func (oc *TestOrbitClient) DownloadSoftwareInstallerFromURL(url string, filename string, downloadDir string) (string, error) {
@@ -35,11 +35,11 @@ func (oc *TestOrbitClient) DownloadSoftwareInstaller(installerID uint, downloadD
 	return oc.downloadInstallerFn(installerID, downloadDir)
 }
 
-func (oc *TestOrbitClient) GetInstallerDetails(installId string) (*fleet.SoftwareInstallDetails, error) {
+func (oc *TestOrbitClient) GetInstallerDetails(installId string) (*mdmlab.SoftwareInstallDetails, error) {
 	return oc.getInstallerDetailsFn(installId)
 }
 
-func (oc *TestOrbitClient) SaveInstallerResult(payload *fleet.HostSoftwareInstallResultPayload) error {
+func (oc *TestOrbitClient) SaveInstallerResult(payload *mdmlab.HostSoftwareInstallResultPayload) error {
 	return oc.saveInstallerResultFn(payload)
 }
 
@@ -144,14 +144,14 @@ func TestInstallerRun(t *testing.T) {
 
 	var getInstallerDetailsFnCalled bool
 	var installIdRequested string
-	installDetails := &fleet.SoftwareInstallDetails{
+	installDetails := &mdmlab.SoftwareInstallDetails{
 		ExecutionID:         "exec1",
 		InstallerID:         1337,
 		PreInstallCondition: "SELECT 1",
 		InstallScript:       "script1",
 		PostInstallScript:   "script2",
 	}
-	getInstallerDetailsDefaultFn := func(installID string) (*fleet.SoftwareInstallDetails, error) {
+	getInstallerDetailsDefaultFn := func(installID string) (*mdmlab.SoftwareInstallDetails, error) {
 		getInstallerDetailsFnCalled = true
 		installIdRequested = installID
 		return installDetails, nil
@@ -165,8 +165,8 @@ func TestInstallerRun(t *testing.T) {
 	}
 	oc.downloadInstallerFn = downloadInstallerDefaultFn
 
-	var savedInstallerResult *fleet.HostSoftwareInstallResultPayload
-	oc.saveInstallerResultFn = func(hsirp *fleet.HostSoftwareInstallResultPayload) error {
+	var savedInstallerResult *mdmlab.HostSoftwareInstallResultPayload
+	oc.saveInstallerResultFn = func(hsirp *mdmlab.HostSoftwareInstallResultPayload) error {
 		savedInstallerResult = hsirp
 		return nil
 	}
@@ -175,7 +175,7 @@ func TestInstallerRun(t *testing.T) {
 		getInstallerDetailsFnCalled = false
 		installIdRequested = ""
 		oc.getInstallerDetailsFn = getInstallerDetailsDefaultFn
-		installDetails = &fleet.SoftwareInstallDetails{
+		installDetails = &mdmlab.SoftwareInstallDetails{
 			ExecutionID:         "exec1",
 			InstallerID:         1337,
 			PreInstallCondition: "SELECT 1",
@@ -269,7 +269,7 @@ func TestInstallerRun(t *testing.T) {
 		tmpDir = ""
 	}
 
-	var config fleet.OrbitConfig
+	var config mdmlab.OrbitConfig
 	config.Notifications.PendingSoftwareInstallerIDs = []string{installDetails.ExecutionID}
 
 	resetConfig := func() {
@@ -444,12 +444,12 @@ func TestInstallerRun(t *testing.T) {
 			desc                    string
 			expectedRetries         int
 			expectedErr             string
-			saveInstallerResultFunc func(payload *fleet.HostSoftwareInstallResultPayload) error
+			saveInstallerResultFunc func(payload *mdmlab.HostSoftwareInstallResultPayload) error
 		}{
 			{
 				desc:            "multiple retries, eventual success",
 				expectedRetries: 4,
-				saveInstallerResultFunc: func(payload *fleet.HostSoftwareInstallResultPayload) error {
+				saveInstallerResultFunc: func(payload *mdmlab.HostSoftwareInstallResultPayload) error {
 					retries++
 					if retries != 4 {
 						return errors.New("save results error")
@@ -462,7 +462,7 @@ func TestInstallerRun(t *testing.T) {
 			{
 				desc:            "multiple retries, eventual failure",
 				expectedRetries: 5,
-				saveInstallerResultFunc: func(payload *fleet.HostSoftwareInstallResultPayload) error {
+				saveInstallerResultFunc: func(payload *mdmlab.HostSoftwareInstallResultPayload) error {
 					retries++
 					return errors.New("save results error")
 				},
@@ -491,17 +491,17 @@ func TestInstallerRunWithInstallerFromURL(t *testing.T) {
 
 	var getInstallerDetailsFnCalled bool
 	var installIdRequested string
-	installDetails := &fleet.SoftwareInstallDetails{
+	installDetails := &mdmlab.SoftwareInstallDetails{
 		ExecutionID:       "exec1",
 		InstallerID:       1337,
 		InstallScript:     "script1",
 		PostInstallScript: "script2",
-		SoftwareInstallerURL: &fleet.SoftwareInstallerURL{
+		SoftwareInstallerURL: &mdmlab.SoftwareInstallerURL{
 			URL:      "https://example.com/ABC",
 			Filename: "installer.pkg",
 		},
 	}
-	getInstallerDetailsDefaultFn := func(installID string) (*fleet.SoftwareInstallDetails, error) {
+	getInstallerDetailsDefaultFn := func(installID string) (*mdmlab.SoftwareInstallDetails, error) {
 		getInstallerDetailsFnCalled = true
 		installIdRequested = installID
 		return installDetails, nil
@@ -523,8 +523,8 @@ func TestInstallerRunWithInstallerFromURL(t *testing.T) {
 	}
 	oc.downloadInstallerFn = downloadInstallerDefaultFn
 
-	var savedInstallerResult *fleet.HostSoftwareInstallResultPayload
-	oc.saveInstallerResultFn = func(hsirp *fleet.HostSoftwareInstallResultPayload) error {
+	var savedInstallerResult *mdmlab.HostSoftwareInstallResultPayload
+	oc.saveInstallerResultFn = func(hsirp *mdmlab.HostSoftwareInstallResultPayload) error {
 		savedInstallerResult = hsirp
 		return nil
 	}
@@ -533,12 +533,12 @@ func TestInstallerRunWithInstallerFromURL(t *testing.T) {
 		getInstallerDetailsFnCalled = false
 		installIdRequested = ""
 		oc.getInstallerDetailsFn = getInstallerDetailsDefaultFn
-		installDetails = &fleet.SoftwareInstallDetails{
+		installDetails = &mdmlab.SoftwareInstallDetails{
 			ExecutionID:       "exec1",
 			InstallerID:       1337,
 			InstallScript:     "script1",
 			PostInstallScript: "script2",
-			SoftwareInstallerURL: &fleet.SoftwareInstallerURL{
+			SoftwareInstallerURL: &mdmlab.SoftwareInstallerURL{
 				URL:      "https://example.com/ABC",
 				Filename: "installer.pkg",
 			},
@@ -597,7 +597,7 @@ func TestInstallerRunWithInstallerFromURL(t *testing.T) {
 		tmpDir = ""
 	}
 
-	var config fleet.OrbitConfig
+	var config mdmlab.OrbitConfig
 	config.Notifications.PendingSoftwareInstallerIDs = []string{installDetails.ExecutionID}
 
 	resetConfig := func() {
@@ -707,14 +707,14 @@ func TestScriptsDisabled(t *testing.T) {
 
 	var getInstallerDetailsFnCalled bool
 	var installIdRequested string
-	installDetails := &fleet.SoftwareInstallDetails{
+	installDetails := &mdmlab.SoftwareInstallDetails{
 		ExecutionID:         "exec1",
 		InstallerID:         1337,
 		PreInstallCondition: "SELECT 1",
 		InstallScript:       "script1",
 		PostInstallScript:   "script2",
 	}
-	getInstallerDetailsDefaultFn := func(installID string) (*fleet.SoftwareInstallDetails, error) {
+	getInstallerDetailsDefaultFn := func(installID string) (*mdmlab.SoftwareInstallDetails, error) {
 		getInstallerDetailsFnCalled = true
 		installIdRequested = installID
 		return installDetails, nil
@@ -723,7 +723,7 @@ func TestScriptsDisabled(t *testing.T) {
 
 	out, err := r.installSoftware(context.Background(), "1")
 	require.NoError(t, err)
-	require.EqualValues(t, &fleet.HostSoftwareInstallResultPayload{
+	require.EqualValues(t, &mdmlab.HostSoftwareInstallResultPayload{
 		InstallUUID:               "1",
 		InstallScriptExitCode:     ptr.Int(-2),
 		InstallScriptOutput:       ptr.String("Scripts are disabled"),
