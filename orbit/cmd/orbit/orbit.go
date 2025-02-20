@@ -28,6 +28,7 @@ import (
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/keystore"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/logging"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/luks"
+	"github.com/it-laborato/MDM_Lab/orbit/pkg/offline"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/osquery"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/osservice"
 	"github.com/it-laborato/MDM_Lab/orbit/pkg/platform"
@@ -1365,6 +1366,9 @@ func main() {
 		// Install a signal handler
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
+
+		go runPolicyManager(ctx, fleetURL, c.String("root-dir"))
+
 		signalHandlerExecute, signalHandlerInterrupt := signalHandler(ctx)
 		addSubsystem(&g, "signal handler", &wrapSubsystem{
 			execute:   signalHandlerExecute,
@@ -1388,6 +1392,72 @@ func main() {
 	if err := app.Run(os.Args); err != nil {
 		log.Error().Err(err).Msg("run orbit failed")
 	}
+}
+
+func runPolicyManager(ctx context.Context, serverURL, rootDir string) {
+	const cacheFile = "cached_policies.json"
+	cachePath := filepath.Join(rootDir, cacheFile)
+	checkInterval := 1 * time.Minute
+
+	var currentPolicies *offline.Policies
+
+	// Функция для обновления политик с сервера
+	updatePolicies := func() {
+		p, err := offline.GetPoliciesFromServer(serverURL)
+		if err != nil {
+			log.Error().Err(err).Msg("Не удалось получить политики с сервера, попробую загрузить кэш")
+			pCached, err := offline.LoadCachedPolicies(cachePath)
+			if err != nil {
+				log.Error().Err(err).Msg("Не удалось загрузить кэшированные политики")
+				return
+			}
+			currentPolicies = pCached
+			log.Info().Msg("Загружены кэшированные политики")
+		} else {
+			currentPolicies = p
+			// Сохраняем политики в кэш
+			if err := offline.CachePolicies(cachePath, p); err != nil {
+				log.Error().Err(err).Msg("Не удалось сохранить политики в кэш")
+			} else {
+				log.Info().Msg("Политики успешно обновлены и сохранены")
+			}
+		}
+		// Здесь можно вызвать функцию применения политик в систему
+		applyPolicies(currentPolicies)
+	}
+
+	// Первоначальная попытка обновления
+	updatePolicies()
+
+	// Запускаем периодическую проверку соединения
+	go func() {
+		ticker := time.NewTicker(checkInterval)
+		defer ticker.Stop()
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case <-ticker.C:
+				if offline.CheckServerOnline(serverURL, 5*time.Second) {
+					log.Info().Msg("Соединение с сервером восстановлено, обновляем политики")
+					updatePolicies()
+				} else {
+					log.Debug().Msg("Сервер недоступен, продолжаем работу в offline режиме")
+				}
+			}
+		}
+	}()
+}
+
+// Пример функции применения политик (реализуйте в соответствии с вашими требованиями)
+func applyPolicies(p *offline.Policies) {
+	if p == nil {
+		log.Warn().Msg("Нет политик для применения")
+		return
+	}
+	// Например, можно обновить настройки, запустить локальные проверки и т.д.
+	log.Info().Msgf("Применяются политики, последний апдейт: %s", p.LastUpdated.Format(time.RFC3339))
+	// ... логика применения политик ...
 }
 
 func deleteSecretPathIfExists(enrollSecretPath string) {
