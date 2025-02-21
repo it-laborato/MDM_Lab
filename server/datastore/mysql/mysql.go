@@ -21,9 +21,6 @@ import (
 	"github.com/go-kit/log/level"
 	"github.com/go-sql-driver/mysql"
 	"github.com/hashicorp/go-multierror"
-	"github.com/jmoiron/sqlx"
-	"github.com/mixer/clock"
-	"github.com/ngrok/sqlmw"
 	"github.com/it-laborato/MDM_Lab/server/config"
 	"github.com/it-laborato/MDM_Lab/server/contexts/ctxdb"
 	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
@@ -33,6 +30,9 @@ import (
 	"github.com/it-laborato/MDM_Lab/server/goose"
 	scep_depot "github.com/it-laborato/MDM_Lab/server/mdm/scep/depot"
 	"github.com/it-laborato/MDM_Lab/server/mdmlab"
+	"github.com/jmoiron/sqlx"
+	"github.com/mixer/clock"
+	"github.com/ngrok/sqlmw"
 	semconv "go.opentelemetry.io/otel/semconv/v1.26.0"
 )
 
@@ -100,6 +100,30 @@ type Datastore struct {
 	// This key is used to encrypt sensitive data stored in the MDMlab DB, for example MDM
 	// certificates and keys.
 	serverPrivateKey string
+}
+
+func (ds *Datastore) SetOrUpdateHostGPSModule(ctx context.Context, hostID uint, module *mdmlab.HostGPSModule) error {
+	// Если module == nil, то сбрасываем значения GPS в БД.
+	if module == nil {
+		_, err := ds.writer(ctx).ExecContext(ctx,
+			"UPDATE hosts SET gps_latitude = NULL, gps_longitude = NULL WHERE id = ?",
+			hostID,
+		)
+		if err != nil {
+			return ctxerr.Wrap(ctx, err, "clearing host gps module")
+		}
+		return nil
+	}
+
+	// Обновляем значения gps_latitude и gps_longitude для указанного host.
+	_, err := ds.writer(ctx).ExecContext(ctx,
+		"UPDATE hosts SET gps_latitude = ?, gps_longitude = ? WHERE id = ?",
+		module.Latitude, module.Longitude, hostID,
+	)
+	if err != nil {
+		return ctxerr.Wrap(ctx, err, "updating host gps module")
+	}
+	return nil
 }
 
 // reader returns the DB instance to use for read-only statements, which is the

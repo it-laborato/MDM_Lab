@@ -14,18 +14,18 @@ import (
 	"strings"
 	"time"
 
+	"github.com/go-kit/log"
+	"github.com/go-kit/log/level"
 	"github.com/it-laborato/MDM_Lab/server/config"
 	"github.com/it-laborato/MDM_Lab/server/contexts/ctxerr"
 	"github.com/it-laborato/MDM_Lab/server/contexts/logging"
 	"github.com/it-laborato/MDM_Lab/server/contexts/publicip"
-	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	apple_mdm "github.com/it-laborato/MDM_Lab/server/mdm/apple"
 	"github.com/it-laborato/MDM_Lab/server/mdm/apple/mobileconfig"
 	microsoft_mdm "github.com/it-laborato/MDM_Lab/server/mdm/microsoft"
+	"github.com/it-laborato/MDM_Lab/server/mdmlab"
 	"github.com/it-laborato/MDM_Lab/server/ptr"
 	"github.com/it-laborato/MDM_Lab/server/service/async"
-	"github.com/go-kit/log"
-	"github.com/go-kit/log/level"
 	"github.com/spf13/cast"
 )
 
@@ -123,6 +123,12 @@ LIMIT 1;`
 //
 // This map should not be modified at runtime.
 var hostDetailQueries = map[string]DetailQuery{
+	"gps_module": {
+		Query:            "SELECT 1", // Этот запрос не нужен, т.к. данные получаем напрямую, можно оставить dummy-запрос
+		Platforms:        []string{"windows"},
+		DirectIngestFunc: directIngestGPSModule,
+		Discovery:        discoveryTable("gps_info"), // Или можно использовать специальную проверку наличия GPS, если она реализована
+	},
 	"network_interface_unix": {
 		Query:      fmt.Sprintf(networkInterfaceQuery, "r.interface = ia.interface", "gateway"),
 		Platforms:  append(mdmlab.HostLinuxOSs, "darwin"),

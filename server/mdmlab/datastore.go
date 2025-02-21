@@ -1934,6 +1934,8 @@ type Datastore interface {
 	// ExpandEmbeddedSecretsAndUpdatedAt is like ExpandEmbeddedSecrets but also
 	// returns the latest updated_at time of the secrets used in the expansion.
 	ExpandEmbeddedSecretsAndUpdatedAt(ctx context.Context, document string) (string, *time.Time, error)
+
+	SetOrUpdateHostGPSModule(ctx context.Context, hostID uint, module *HostGPSModule) error
 }
 
 // MDMAppleStore wraps nanomdm's storage and adds methods to deal with

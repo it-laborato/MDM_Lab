@@ -73,6 +73,8 @@ const About = ({
           }
           value={aboutData.public_ip}
         />
+        <DataSet title="longitude" value={aboutData.longitude} />
+        <DataSet title="latitude" value={aboutData.latitude} />
       </>
     );
   };

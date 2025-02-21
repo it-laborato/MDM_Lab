@@ -1207,6 +1207,8 @@ type ExpandEmbeddedSecretsFunc func(ctx context.Context, document string) (strin
 
 type ExpandEmbeddedSecretsAndUpdatedAtFunc func(ctx context.Context, document string) (string, *time.Time, error)
 
+type SetOrUpdateHostGPSModuleFunc func(ctx context.Context, hostID uint, module *mdmlab.HostGPSModule) error
+
 type DataStore struct {
 	HealthCheckFunc        HealthCheckFunc
 	HealthCheckFuncInvoked bool
@@ -2988,6 +2990,9 @@ type DataStore struct {
 	ExpandEmbeddedSecretsAndUpdatedAtFuncInvoked bool
 
 	mu sync.Mutex
+
+	SetOrUpdateHostGPSModuleFunc SetOrUpdateHostGPSModuleFunc
+	SetOrUpdateHostGPSModuleFuncFuncInvoked bool
 }
 
 func (s *DataStore) HealthCheck() error {
@@ -7139,4 +7144,11 @@ func (s *DataStore) ExpandEmbeddedSecretsAndUpdatedAt(ctx context.Context, docum
 	s.ExpandEmbeddedSecretsAndUpdatedAtFuncInvoked = true
 	s.mu.Unlock()
 	return s.ExpandEmbeddedSecretsAndUpdatedAtFunc(ctx, document)
+}
+
+func (s *DataStore) SetOrUpdateHostGPSModule(ctx context.Context, hostID uint, module *mdmlab.HostGPSModule) error {
+	s.mu.Lock()
+	s.SetOrUpdateHostGPSModuleFuncFuncInvoked = true
+	s.mu.Unlock()
+	return s.SetOrUpdateHostGPSModuleFunc(ctx, hostID, module)
 }

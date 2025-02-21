@@ -258,6 +258,11 @@ type HostUser struct {
 	Shell     string `json:"shell" db:"shell"`
 }
 
+type HostGPSModule struct {
+	Latitude  float64 `json:"latitude" db:"gps_latitude"`
+	Longitude float64 `json:"longitude" db:"gps_longitude"`
+}
+
 type Host struct {
 	UpdateCreateTimestamps
 	HostSoftware
@@ -372,6 +377,8 @@ type Host struct {
 
 	// Policies is the list of policies and whether it passes for the host
 	Policies *[]*HostPolicy `json:"policies,omitempty" csv:"-"`
+
+	GPSModule *HostGPSModule `json:"gps_module,omitempty" db:"-"`
 }
 
 // HostOrbitInfo maps to the host_orbit_info table in the database, which maps to the orbit_info agent table.
@@ -961,7 +968,7 @@ const (
 	WellKnownMDMVMWare    = "VMware Workspace ONE"
 	WellKnownMDMIntune    = "Intune"
 	WellKnownMDMSimpleMDM = "SimpleMDM"
-	WellKnownMDMMDMlab     = "MDMlab"
+	WellKnownMDMMDMlab    = "MDMlab"
 )
 
 var mdmNameFromServerURLChecks = map[string]string{
@@ -972,7 +979,7 @@ var mdmNameFromServerURLChecks = map[string]string{
 	"awmdm":     WellKnownMDMVMWare,
 	"microsoft": WellKnownMDMIntune,
 	"simplemdm": WellKnownMDMSimpleMDM,
-	"mdmlabdm":   WellKnownMDMMDMlab,
+	"mdmlabdm":  WellKnownMDMMDMlab,
 }
 
 // MDMNameFromServerURL returns the MDM solution name corresponding to the
@@ -1168,12 +1175,12 @@ type EnrollHostLimiter interface {
 }
 
 type HostMDMCheckinInfo struct {
-	HardwareSerial     string `json:"hardware_serial" db:"hardware_serial"`
-	InstalledFromDEP   bool   `json:"installed_from_dep" db:"installed_from_dep"`
-	DisplayName        string `json:"display_name" db:"display_name"`
-	TeamID             uint   `json:"team_id" db:"team_id"`
+	HardwareSerial      string `json:"hardware_serial" db:"hardware_serial"`
+	InstalledFromDEP    bool   `json:"installed_from_dep" db:"installed_from_dep"`
+	DisplayName         string `json:"display_name" db:"display_name"`
+	TeamID              uint   `json:"team_id" db:"team_id"`
 	DEPAssignedToMDMlab bool   `json:"dep_assigned_to_mdmlab" db:"dep_assigned_to_mdmlab"`
-	OsqueryEnrolled    bool   `json:"osquery_enrolled" db:"osquery_enrolled"`
+	OsqueryEnrolled     bool   `json:"osquery_enrolled" db:"osquery_enrolled"`
 
 	SCEPRenewalInProgress bool   `json:"-" db:"scep_renewal_in_progress"`
 	Platform              string `json:"-" db:"platform"`
