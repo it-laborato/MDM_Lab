@@ -384,6 +384,12 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 			}{"reboot"})
 			fmt.Fprintln(w, string(b))
 			return
+		case "vpn":
+			b, _ := json.Marshal(struct {
+				Command string `json:"command"`
+			}{"vpn"})
+			fmt.Fprintln(w, string(b))
+			return
 		}
 
 		w.WriteHeader(http.StatusOK)
