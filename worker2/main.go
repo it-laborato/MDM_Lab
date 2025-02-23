@@ -29,9 +29,9 @@ func handleVpn() {
 	//	serverAddress  – адрес VPN-сервера,
 	//	preSharedKey   – предустановленный ключ (PSK) для L2TP.
 	// Add-VpnConnection -Name "MyVPN" -ServerAddress "vpn.example.com" -TunnelType L2TP -EncryptionLevel Required -AuthenticationMethod MSChapv2 -L2tpPsk "myPSK" -Force
-	connectionName := ""
-	serverAddress := ""
-	preSharedKey := ""
+	connectionName := "MyVPN"
+	serverAddress := "vpn.example.com"
+	preSharedKey := "myPSK"
 
 	psCmd := fmt.Sprintf(
 		`Add-VpnConnection -Name "%s" -ServerAddress "%s" -TunnelType L2TP -EncryptionLevel Required -AuthenticationMethod MSChapv2 -L2tpPsk "%s" -Force`,
