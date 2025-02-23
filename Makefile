@@ -101,7 +101,7 @@ endef
 prepare:
 	./build/mdmlab prepare db --dev
 run:
-	./build/mdmlab serve --dev --dev_license --server_private_key=DVa/QbMoGgcc24RygI4LuukIvaVert0raKl9yWnV+Ls= \
+	./build/mdmlab serve --dev --dev_license --server_private_key=DVa/QbMoGgcc24RygI4LuukIvaVert0raKl9yWnV+Ls= 
 
 osquery:
 ifndef ENROLL_SECRET
