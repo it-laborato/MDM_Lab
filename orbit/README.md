@@ -74,9 +74,9 @@ go run ./orbit/cmd/orbit \
     --dev-mode \
     --disable-updates \
     --root-dir /tmp/orbit \
-    --fleet-url https://localhost:8084 \
+    --mdmlab-url https://localhost:8084 \
     --insecure \
-    --enroll-secret Pz3zC0NMDdZfb3FtqiLgwoexItojrYh/ \
+    --enroll-secret sKzdpE3uF/KrVCDTqT0rs5KewjCN1/px \
     -- --verbose
 ```
 
