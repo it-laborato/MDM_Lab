@@ -1,0 +1,17 @@
+# github.com/gorilla/websocket v1.5.3
+## explicit; go 1.12
+github.com/gorilla/websocket
+# github.com/lunnik9/rdp v0.0.0-20240716163247-8aa443069308
+## explicit; go 1.18
+github.com/lunnik9/rdp/rdp
+github.com/lunnik9/rdp/rdp/asn1
+github.com/lunnik9/rdp/rdp/ber
+github.com/lunnik9/rdp/rdp/fastpath
+github.com/lunnik9/rdp/rdp/gcc
+github.com/lunnik9/rdp/rdp/headers
+github.com/lunnik9/rdp/rdp/mcs
+github.com/lunnik9/rdp/rdp/pdu
+github.com/lunnik9/rdp/rdp/per
+github.com/lunnik9/rdp/rdp/tpkt
+github.com/lunnik9/rdp/rdp/utf16
+github.com/lunnik9/rdp/rdp/x224

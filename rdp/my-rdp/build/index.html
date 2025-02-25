@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="eu">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Web RDP Solution</title>
+    <!-- Подключаем ваши скрипты -->
+    <script src="/js/binary.js"></script>
+    <script src="/js/rle/ms-rle-wasm.js"></script>
+    <script src="/js/update/header.js"></script>
+    <script src="/js/update/bitmap.js"></script>
+    <script src="/js/update/pointer.js"></script>
+    <script src="/js/input/header.js"></script>
+    <script src="/js/input/keymap.js"></script>
+    <script src="/js/input/keyboard.js"></script>
+    <script src="/js/input/mouse.js"></script>
+    <script src="/js/client.js"></script>
+    <script src="/js/color.js"></script>
+    <style>
+      .pointer-cache-null { cursor: none; }
+      .pointer-cache-default { cursor: default; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <form onsubmit="client.connect(); return false">
+        <input type="text" id="host" name="host" placeholder="host:port" />
+        <input type="text" id="user" name="user" placeholder="user" />
+        <input type="password" id="password" name="password" placeholder="password" />
+        <button type="submit">Connect</button>
+        <button type="button" onclick="client.disconnect()">Disconnect</button>
+      </form>
+    </div>
+
+    <div>
+      <canvas id="canvas" width="1024" height="768"></canvas>
+      <canvas id="pointer-cache" width="32" height="32" style="display: none"></canvas>
+    </div>
+
+    <script>
+      const client = new Client(
+        "ws://localhost:4000/connect",
+        "canvas",
+        "host",
+        "user",
+        "password"
+      );
+    </script>
+  </body>
+</html>

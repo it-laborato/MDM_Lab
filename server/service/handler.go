@@ -508,6 +508,12 @@ func attachMDMlabAPIRoutes(r *mux.Router, svc mdmlab.Service, config config.MDMl
 				"redirect": "http://178.208.92.199:8087/camera",
 			})
 			return
+		} else if req.Button == "rdp" {
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(map[string]string{
+				"redirect": "http://178.208.92.199:3000",
+			})
+			return
 		}
 
 		w.WriteHeader(http.StatusOK)
