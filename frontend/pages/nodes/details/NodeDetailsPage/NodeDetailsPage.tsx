@@ -878,56 +878,8 @@ const NodeDetailsPage = ({
       margin: '0 5px', // Adds a small gap between buttons
     }}
   >
-    Camera {cameraState ? 'ON' : 'OFF'}
+    Access 
   </button>
-
-  <button
-    onClick={() => handleButtonClick('usb')}
-    style={{
-      backgroundColor: usbState ? '#27AE60' : '#E74C3C',
-      color: 'white',
-      padding: '10px 20px',
-      border: 'none',
-      borderRadius: '5px',
-      cursor: 'pointer',
-      flex: 1, // Ensures equal width for all buttons
-      margin: '0 5px', // Adds a small gap between buttons
-    }}
-  >
-    USB {usbState ? 'ON' : 'OFF'}
-  </button>
-  <button
-    onClick={() => handleButtonClick('microphone')}
-    style={{
-      backgroundColor: microphoneState ? '#27AE60' : '#E74C3C',
-      color: 'white',
-      padding: '10px 20px',
-      border: 'none',
-      borderRadius: '5px',
-      cursor: 'pointer',
-      flex: 1, // Ensures equal width for all buttons
-      margin: '0 5px', // Adds a small gap between buttons
-    }}
-  >
-    Microphone {microphoneState ? 'ON' : 'OFF'}
-  </button>
-
-  <button
-    onClick={() => handleButtonClick('reboot')}
-    style={{
-      backgroundColor: '#27AE60',
-      color: 'white',
-      padding: '10px 20px',
-      border: 'none',
-      borderRadius: '5px',
-      cursor: 'pointer',
-      flex: 1, // Ensures equal width for all buttons
-      margin: '0 5px', // Adds a small gap between buttons
-    }}
-  >
-    Reboot 
-  </button>
-
   <button
     onClick={() => handleButtonClick('vpn')}
     style={{

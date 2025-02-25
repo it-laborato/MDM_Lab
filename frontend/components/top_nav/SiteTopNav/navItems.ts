@@ -100,7 +100,7 @@ export default (
       name: "Workspace",
       location: {
         regex: new RegExp(`^${URL_PREFIX}/software/`),
-        pathname: "http://178.208.92.199:4174/",
+        pathname: PATHS.NO_ACCESS,
       },
     },
 	
