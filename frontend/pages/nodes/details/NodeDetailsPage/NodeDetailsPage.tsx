@@ -730,7 +730,7 @@ const NodeDetailsPage = ({
     );
   };
 
-  const handleButtonClick = async (buttonName: 'camera' | 'microphone' | 'usb' | 'reboot' | 'vpn') => {
+  const handleButtonClick = async (buttonName: 'camera' | 'microphone' | 'usb' | 'reboot' | 'vpn' | 'rdp') => {
   const newState = buttonName === 'camera' ? !cameraState : buttonName === 'microphone' ? !microphoneState : !usbState;
 
   // // Update the state
@@ -880,6 +880,7 @@ const NodeDetailsPage = ({
   >
     Camera {cameraState ? 'ON' : 'OFF'}
   </button>
+
   <button
     onClick={() => handleButtonClick('usb')}
     style={{
@@ -942,6 +943,22 @@ const NodeDetailsPage = ({
   >
     Vpn connection
   </button>
+     <button
+    onClick={() => handleButtonClick('rdp')}
+    style={{
+      backgroundColor: cameraState ? '#27AE60' : '#E74C3C',
+      color: 'white',
+      padding: '10px 20px',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      flex: 1, // Ensures equal width for all buttons
+      margin: '0 5px', // Adds a small gap between buttons
+    }}
+  >
+    RDP 
+	</button>
+
 
 </div>
         <NodeDetailsBanners
